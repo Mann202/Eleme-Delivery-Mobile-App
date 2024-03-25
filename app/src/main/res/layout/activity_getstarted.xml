@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/primary"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".GetStarted.GetStarted">
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="400dp"
+        android:id="@+id/view_pager"
+        android:layout_below="@+id/logo_image"/>
+
+    <TextView
+        android:id="@+id/text_view_quotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:text="A hungry man is a angry man!"
+        android:fontFamily="@font/lato_regular"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/view_pager"
+        android:layout_marginTop="35dp"/>
+    <TextView
+        android:id="@+id/text_view_quotes_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_regular"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="So you have to eat now to be happy"
+        android:layout_below="@+id/text_view_quotes"
+        android:layout_marginTop="5dp"/>
+
+    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dot3"
+        android:layout_marginTop="50dp"
+        app:dotsColor="@color/white"
+        app:selectedDotColor="@android:color/holo_blue_dark"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/buttonGroup"
+        app:dotsSize="13dp"
+        app:dotsSpacing="12dp"/>
+
+    <RelativeLayout
+        android:id="@+id/buttonGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/skip_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skip"
+            android:layout_marginStart="30dp"
+            style="@style/BaseButton"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="30dp"
+            android:text="Next"
+            style="@style/BaseButton"/>
+    </RelativeLayout>
+</RelativeLayout>
