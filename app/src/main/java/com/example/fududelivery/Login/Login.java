@@ -42,5 +42,11 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
+
+        findViewById(R.id.signuptext).setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), SignUp.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
     }
 }
