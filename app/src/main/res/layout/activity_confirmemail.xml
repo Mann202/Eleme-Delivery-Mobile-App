@@ -8,30 +8,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".GetStarted.GetStartedSecond">
-
-    <TextView
-        android:id="@+id/header_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FUDUM MUM MUMM!"
-        android:fontFamily="@font/lato_bold"
-        android:textFontWeight="900"
-        android:textSize="30dp"
-        android:layout_marginTop="80dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+    tools:context=".Login.ConfirmEmail">
 
     <ImageView
         android:id="@+id/logo_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher_background"
-        android:layout_below="@id/header_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="100dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -47,13 +32,12 @@
             android:id="@+id/sub_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Happy Meals!"
-            android:gravity="start"
-            android:textColor="@color/lightdark"
-            android:textSize="40dp"
-            android:textFontWeight="900"
             android:fontFamily="@font/lato_bold"
-            />
+            android:gravity="start"
+            android:text="Confirm your email!"
+            android:textColor="@color/lightdark"
+            android:textFontWeight="900"
+            android:textSize="40dp" />
 
         <TextView
             android:id="@+id/descripsion"
@@ -63,7 +47,9 @@
             android:textColor="@color/darkbg"
             android:textSize="20sp"
             android:layout_marginTop="15dp"
-            android:text="Order from your favourite restaurants and takeaways within the matter of seconds."
+            android:text="Please check your inbox for a confirmation
+email. Click the link in the email to confirm
+your email address."
             android:layout_below="@+id/sub_title"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -71,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Get Started"
+            android:text="Re-send confirmation email"
             android:layout_below="@+id/descripsion"
             style="@style/PrimaryButton"/>
     </RelativeLayout>

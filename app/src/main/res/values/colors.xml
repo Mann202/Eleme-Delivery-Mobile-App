@@ -9,4 +9,5 @@
     <color name="darkbg">#2A3738</color>
     <color name="secondarybg">#324B4C</color>
     <color name="whiteedt">#EBEBEB</color>
+    <color name="lightdark">#324B4C</color>
 </resources>
