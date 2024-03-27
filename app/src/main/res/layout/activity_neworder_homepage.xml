@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteedt"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:id="@+id/neworder_notify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rounded_background_white"
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingEnd="25dp">
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="Bin Bin"
+            android:textColor="@color/black"
+            android:textFontWeight="900"
+            android:textSize="16dp" />
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_regular"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txt_name"
+            android:gravity="center"
+            android:text="April 1, 2023"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textFontWeight="900"
+            android:textSize="16dp" />
+        
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:thumb="@drawable/thumb"
+            android:track="@drawable/track"
+            android:checked="true"/>
+    </RelativeLayout>
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/orders"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/neworder_notify"-->
+<!--        android:layout_above="@+id/menubar"-->
+<!--        android:orientation="vertical"-->
+<!--        android:gravity="center">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/txt_noorder"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/lato_regular"-->
+<!--            android:layout_marginEnd="14dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="There is no order here!"-->
+<!--            android:textColor="@color/gray"-->
+<!--            android:textFontWeight="900"-->
+<!--            android:textSize="19dp" />-->
+
+<!--    </RelativeLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/neworder_notify"
+        android:background="@color/whiteedt"
+        android:layout_above="@+id/menubar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_orders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/menubar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_blue_background"
+        android:paddingStart="25dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingEnd="25dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/neworder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:layout_marginEnd="14dp"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_new_order"
+                android:drawableTint="@color/white"
+                android:text="New order"
+                android:textColor="@color/white"
+                android:textFontWeight="900"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/orderhistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:layout_toEndOf="@id/neworder"
+                android:layout_marginStart="14dp"
+                android:gravity="center"
+                android:drawableTop="@drawable/orderhistory_icon"
+                android:text="Order History"
+                android:textColor="@color/white50"
+                android:textFontWeight="900"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:layout_marginEnd="14dp"
+                android:gravity="center"
+                android:layout_toEndOf="@id/orderhistory"
+                android:layout_marginStart="16dp"
+                android:drawableTop="@drawable/income_icon"
+                android:text="Income"
+                android:textColor="@color/white50"
+                android:textFontWeight="900"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:layout_toEndOf="@id/income"
+                android:layout_marginStart="16dp"
+                android:drawableTop="@drawable/baseline_account_circle_24"
+                android:text="Account"
+                android:textColor="@color/white50"
+                android:textFontWeight="900"
+                android:drawableTint="#80FFFFFF"
+                android:textSize="12dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

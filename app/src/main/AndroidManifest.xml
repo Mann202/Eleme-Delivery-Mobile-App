@@ -64,6 +64,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Shipper.NewOrderHomepage"
+            android:exported="true"
+            android:label="NewOrderHomepage"
+            android:theme="@style/Theme.FuduDelivery" />
+
+        <activity
+            android:name=".Shipper.ShipperProfile"
+            android:exported="true"
+            android:label="ShipperProfile"
+            android:theme="@style/Theme.FuduDelivery" />
     </application>
 
 </manifest>

@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.fududelivery.R;
+import com.example.fududelivery.Shipper.NewOrderHomepage;
+import com.example.fududelivery.Shipper.ShipperProfile;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 public class GetStarted extends AppCompatActivity {
@@ -48,7 +50,7 @@ public class GetStarted extends AppCompatActivity {
         findViewById(R.id.skip_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), GetStartedSecond.class);
+                Intent intent = new Intent(v.getContext(), ShipperProfile.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
