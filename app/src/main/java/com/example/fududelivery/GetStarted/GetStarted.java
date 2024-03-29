@@ -44,7 +44,6 @@ public class GetStarted extends AppCompatActivity {
             }
         });
 
-        //Xu li su kien Skip button
         findViewById(R.id.skip_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fududelivery.R;
+import com.example.fududelivery.Restaurant.MainRestaurant;
 
 public class Login extends AppCompatActivity {
 
@@ -45,6 +46,12 @@ public class Login extends AppCompatActivity {
 
         findViewById(R.id.signuptext).setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), SignUp.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+
+        findViewById(R.id.loginBtn).setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), MainRestaurant.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });

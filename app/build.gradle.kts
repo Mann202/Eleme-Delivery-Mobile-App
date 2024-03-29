@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.fududelivery"
-        minSdk = 30
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -69,4 +69,5 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 }
