@@ -7,7 +7,7 @@
     android:background="@color/whiteedt"
     android:gravity="start"
     android:layout_height="match_parent"
-    tools:context=".Login.ForgetPassword">
+    tools:context=".Restaurant.RestaurantDetail.RestaurantDetailItem">
     <TextView
         android:layout_width="wrap_content"
         android:id="@+id/detailTitle"

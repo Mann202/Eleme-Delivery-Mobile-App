@@ -9,10 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.MainRestaurant;
 
-public class RestaurantDetail extends AppCompatActivity {
+public class RestaurantDetailItem extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurantdetail);
+        setContentView(R.layout.item_restaurantprepairing);
+
+        findViewById(R.id.navigateNextBtn).setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), RestaurantDetail.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
     }
 }

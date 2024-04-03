@@ -26,8 +26,8 @@ public class MainRestaurant extends AppCompatActivity {
         ViewPager2 viewPager = findViewById(R.id.viewPager);
 
         TabsAdapter tabsAdapter = new TabsAdapter(this);
-        tabsAdapter.addFragment(new RestaurantMainPreparing(), "Prepairing");
-        tabsAdapter.addFragment(new RestaurantMainDone(), "Done");
+        tabsAdapter.addFragment(new RestaurantMainPreparingFragment(), "Prepairing");
+        tabsAdapter.addFragment(new RestaurantMainDoneFragment(), "Done");
 
         viewPager.setAdapter(tabsAdapter);
 

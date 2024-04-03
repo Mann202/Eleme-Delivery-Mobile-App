@@ -3,6 +3,8 @@ package com.example.fududelivery.Restaurant;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 import org.w3c.dom.Text;
 
 public class itemRestaurant {
@@ -12,6 +14,8 @@ public class itemRestaurant {
     String nameText;
     String totalPriceText;
     String adressText;
+
+    AppCompatButton detailBtn;
 
     public itemRestaurant(int imageView, String dateText, String itemCountText, String nameText, String totalPriceText, String adressText) {
         this.imageView = imageView;
@@ -24,6 +28,13 @@ public class itemRestaurant {
 
     public int getImageView() {
         return imageView;
+    }
+
+    public AppCompatButton getDetailBtn() {
+        return detailBtn;
+    }
+    public void setDetailBtn(AppCompatButton detailBtn) {
+        this.detailBtn = detailBtn;
     }
 
     public void setImageView(int imageView) {

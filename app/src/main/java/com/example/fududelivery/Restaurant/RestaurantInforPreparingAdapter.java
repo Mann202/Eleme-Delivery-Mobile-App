@@ -1,13 +1,18 @@
 package com.example.fududelivery.Restaurant;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.R;
+import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetail;
 
 import java.util.List;
 
@@ -30,10 +35,34 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
         holder.nameText.setText(items.get(position).getNameText());
-        //holder.imageView.setImageResource(items.get(position).getImageView());
         holder.itemCountText.setText(items.get(position).getItemCountText());
         holder.adressText.setText(items.get(position).getAdressText());
         holder.totalPriceText.setText(items.get(position).getTotalPriceText());
+        holder.detailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(context, RestaurantDetail.class);
+                context.startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+
+            private void overridePendingTransition(int slideInRight, int slideOutLeft) {
+                ((Activity) context).overridePendingTransition(slideInRight, slideOutLeft);
+            }
+        });
+
+        holder.navigateNextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(context, RestaurantDetail.class);
+                context.startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+
+            private void overridePendingTransition(int slideInRight, int slideOutLeft) {
+                ((Activity) context).overridePendingTransition(slideInRight, slideOutLeft);
+            }
+        });
     }
 
     @Override
