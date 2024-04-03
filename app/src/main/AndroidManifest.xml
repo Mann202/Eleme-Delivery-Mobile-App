@@ -39,6 +39,15 @@
         </activity>
 
         <activity
+            android:name=".Restaurant.Profile.Profile"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".Login.ForgetPassword"
             android:exported="true" >
             <intent-filter>
