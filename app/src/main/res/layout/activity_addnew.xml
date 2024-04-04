@@ -158,7 +158,7 @@
             style="@style/addMenuBtn"
             android:text="Add Topping"
             android:layout_height="wrap_content" />
-        
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirmButton"
             style="@style/PrimaryButton"
