@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteedt">
+    <TextView
+        android:id="@+id/menuHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add menu"
+        style="@style/headerText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        />
+
+    <TextView
+        android:id="@+id/imagesTitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Images"
+        android:textSize="18sp"
+        android:fontFamily="@font/lato_regular"
+        android:textColor="@color/lightwhite"
+        android:layout_below="@+id/menuHeader"
+        />
+    <LinearLayout
+        android:id="@+id/addImagesLayout"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/imagesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addImages"
+            android:layout_below="@+id/sizeTitle"
+            android:layout_width="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="Add Image"
+            style="@style/addMenuBtn"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/nameTitle"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/lato_regular"
+        android:textColor="@color/lightwhite"
+        android:layout_below="@+id/addImagesLayout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:id="@+id/NameEditText"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameTitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/priceTitle"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:layout_marginTop="30dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/lato_regular"
+        android:textColor="@color/lightwhite"
+        android:layout_below="@+id/NameEditText" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/PriceEditText"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priceTitle"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="10dp"
+            android:inputType="number"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/sizeTitle"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Size"
+        android:layout_marginTop="30dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/lato_regular"
+        android:textColor="@color/lightwhite"
+        android:layout_below="@+id/PriceEditText" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addSizeBtn"
+        android:layout_below="@+id/sizeTitle"
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Add Size"
+        android:layout_marginTop="30dp"
+        style="@style/addMenuBtn"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/toppingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Topping"
+        android:textSize="18sp"
+        android:fontFamily="@font/lato_regular"
+        android:textColor="@color/lightwhite"
+        android:layout_below="@+id/addSizeBtn" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addToppingBtn"
+        android:layout_below="@+id/toppingTitle"
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        style="@style/addMenuBtn"
+        android:text="Add Topping"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirmButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Confirm"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        style="@style/PrimaryButton"/>
+</RelativeLayout>

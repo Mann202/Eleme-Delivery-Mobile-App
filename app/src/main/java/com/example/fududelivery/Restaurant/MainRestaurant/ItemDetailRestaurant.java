@@ -1,13 +1,8 @@
-package com.example.fududelivery.Restaurant;
-
-import android.widget.ImageView;
-import android.widget.TextView;
+package com.example.fududelivery.Restaurant.MainRestaurant;
 
 import androidx.appcompat.widget.AppCompatButton;
 
-import org.w3c.dom.Text;
-
-public class itemRestaurant {
+public class ItemDetailRestaurant {
     int imageView;
     String dateText;
     String itemCountText;
@@ -17,7 +12,7 @@ public class itemRestaurant {
 
     AppCompatButton detailBtn;
 
-    public itemRestaurant(int imageView, String dateText, String itemCountText, String nameText, String totalPriceText, String adressText) {
+    public ItemDetailRestaurant(int imageView, String dateText, String itemCountText, String nameText, String totalPriceText, String adressText) {
         this.imageView = imageView;
         this.dateText = dateText;
         this.itemCountText = itemCountText;

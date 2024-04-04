@@ -24,7 +24,6 @@
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,64 +31,51 @@
         <activity
             android:name=".GetStarted.GetStartedSecond"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
-            android:name=".Restaurant.Profile.Profile"
+            android:name=".Restaurant.Profile.RestaurantProfile"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".Login.ForgetPassword"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".Login.NewPassword"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".Login.SignUp"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
-            android:name=".Restaurant.MainRestaurant"
+            android:name=".Restaurant.MainRestaurant.MainRestaurant"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".Restaurant.RestaurantDetail.RestaurantDetail"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Restaurant.RestaurantMenu.RestaurantMenu"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".Restaurant.RestaurantMenu.CategoryDetail"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".Restaurant.RestaurantMenu.NewMenu"
+            android:exported="true" >
         </activity>
     </application>
 

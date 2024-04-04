@@ -1,10 +1,8 @@
-package com.example.fududelivery.Restaurant;
+package com.example.fududelivery.Restaurant.MainRestaurant;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +14,9 @@ import java.util.List;
 public class RestaurantInforDoneAdapter extends RecyclerView.Adapter<RestaurantViewHolder> {
 
     Context context;
-    List<itemRestaurant> items;
+    List<ItemDetailRestaurant> items;
 
-    public RestaurantInforDoneAdapter(Context context, List<itemRestaurant> items) {
+    public RestaurantInforDoneAdapter(Context context, List<ItemDetailRestaurant> items) {
         this.context = context;
         this.items = items;
     }

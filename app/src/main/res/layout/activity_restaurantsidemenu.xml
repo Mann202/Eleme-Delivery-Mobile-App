@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Restaurant.Profile.Profile">
+    tools:context=".Restaurant.Profile.RestaurantProfile">
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"

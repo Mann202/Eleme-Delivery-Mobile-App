@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context=".Restaurant.RestaurantMainDoneFragment">
+    tools:context=".Restaurant.MainRestaurant.RestaurantMainDoneFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

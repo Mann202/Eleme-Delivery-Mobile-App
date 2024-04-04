@@ -1,4 +1,4 @@
-package com.example.fududelivery.Restaurant;
+package com.example.fududelivery.Restaurant.MainRestaurant;
 
 import android.view.View;
 import android.widget.ImageView;

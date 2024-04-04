@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteedt">
+    <TextView
+        android:id="@+id/CategoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        style="@style/headerText"
+        android:textColor="@color/darkbg"
+        android:layout_centerHorizontal="true"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/SearchBar"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/CategoryTitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/ic_search_icon"
+            android:drawablePadding="10dp"
+            android:inputType="number"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addMenu"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SearchBar"
+        android:layout_centerHorizontal="true"
+        android:drawablePadding="15dp"
+        style="@style/newCategoryBtn"
+        android:text="Add new" />
+
+    <ListView
+        android:id="@+id/categoryListView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/addMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="8dp"/>
+</RelativeLayout>

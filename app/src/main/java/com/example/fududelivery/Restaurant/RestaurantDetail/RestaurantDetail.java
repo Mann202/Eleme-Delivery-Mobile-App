@@ -1,13 +1,11 @@
 package com.example.fududelivery.Restaurant.RestaurantDetail;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.MainRestaurant;
 
 public class RestaurantDetail extends AppCompatActivity {
     @Override

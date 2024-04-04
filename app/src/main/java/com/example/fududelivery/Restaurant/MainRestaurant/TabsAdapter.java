@@ -1,4 +1,4 @@
-package com.example.fududelivery.Restaurant;
+package com.example.fududelivery.Restaurant.MainRestaurant;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -8,7 +8,7 @@
     android:background="@color/whiteedt"
     android:gravity="start"
     android:layout_height="match_parent"
-    tools:context=".Restaurant.MainRestaurant">
+    tools:context=".Restaurant.MainRestaurant.MainRestaurant">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +20,7 @@
             android:id="@+id/layoutHeader">
 
             <TextView
+                android:id="@+id/imageViewMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onMenuClicked"
@@ -67,7 +68,9 @@
                 app:tabMode="fixed"
                 app:tabRippleColor="@color/secondary"
                 app:tabSelectedTextColor="@color/secondary"
-                app:tabTextColor="@color/whiteedt" />
+                app:tabTextColor="@color/darkbg"
+                app:tabTextAppearance="@style/MineCustomTabText"
+                />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
@@ -87,9 +90,8 @@
             app:menu="@menu/menu_restaurant"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
-            app:itemBackground="@drawable/primary_button">
-            <!-- app:itemTextAppearance="@style/NavDrawerTextAppearance"  -->
-            <!-- android:background="@color/nav_background"> -->
+            app:itemBackground="@drawable/primary_button"
+            app:itemTextAppearance="@style/NavDrawerTextAppearance">
         </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>

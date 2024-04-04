@@ -1,4 +1,4 @@
-package com.example.fududelivery.Restaurant;
+package com.example.fududelivery.Restaurant.MainRestaurant;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ import java.util.List;
 public class RestaurantMainPreparingFragment extends Fragment {
     private RecyclerView recyclerView;
     private RestaurantInforPreparingAdapter adapter;
-    private ArrayList<itemRestaurant> restaurantList;
+    private ArrayList<ItemDetailRestaurant> restaurantList;
     public RestaurantMainPreparingFragment() {
         // Required empty public constructor
     }
@@ -28,12 +28,12 @@ public class RestaurantMainPreparingFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<itemRestaurant> restaurantList = new ArrayList<itemRestaurant>();
-        restaurantList.add(new itemRestaurant(1, "28/1", "3" + " items", "Truong Gia Man", "100000", "KTX khu A DHQG TPHCM"));
-        restaurantList.add(new itemRestaurant(2, "30/1", "4" + " items", "le Xuan Quynh", "20000", "KTX khu B DHQG TPHCM"));
-        restaurantList.add(new itemRestaurant(3, "2/2", "8" + " items", "Nguyen Dai Duong", "500000", "KTX khu C DHQG TPHCM"));
-        restaurantList.add(new itemRestaurant(4, "4/8", "1" + " items", "Nguyen Dai Duong", "1000000", "KTX khu D DHQG TPHCM"));
-        restaurantList.add(new itemRestaurant(5, "30/12", "2" + " items", "le Xuan Quynh", "242353264", "KTX khu E DHQG TPHCM"));
+        List<ItemDetailRestaurant> restaurantList = new ArrayList<ItemDetailRestaurant>();
+        restaurantList.add(new ItemDetailRestaurant(1, "28/1", "3" + " items", "Truong Gia Man", "100000", "KTX khu A DHQG TPHCM"));
+        restaurantList.add(new ItemDetailRestaurant(2, "30/1", "4" + " items", "le Xuan Quynh", "20000", "KTX khu B DHQG TPHCM"));
+        restaurantList.add(new ItemDetailRestaurant(3, "2/2", "8" + " items", "Nguyen Dai Duong", "500000", "KTX khu C DHQG TPHCM"));
+        restaurantList.add(new ItemDetailRestaurant(4, "4/8", "1" + " items", "Nguyen Dai Duong", "1000000", "KTX khu D DHQG TPHCM"));
+        restaurantList.add(new ItemDetailRestaurant(5, "30/12", "2" + " items", "le Xuan Quynh", "242353264", "KTX khu E DHQG TPHCM"));
 
         adapter = new RestaurantInforPreparingAdapter(getActivity(), restaurantList);
         recyclerView.setAdapter(adapter);

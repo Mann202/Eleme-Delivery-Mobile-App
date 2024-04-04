@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.MainRestaurant;
 
 public class RestaurantDetailItem extends AppCompatActivity {
     @Override

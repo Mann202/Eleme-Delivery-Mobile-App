@@ -1,4 +1,4 @@
-package com.example.fududelivery.Restaurant;
+package com.example.fududelivery.Restaurant.MainRestaurant;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,9 +18,9 @@ import java.util.List;
 public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<RestaurantViewHolder> {
 
     Context context;
-    List<itemRestaurant> items;
+    List<ItemDetailRestaurant> items;
 
-    public RestaurantInforPreparingAdapter(Context context, List<itemRestaurant> items) {
+    public RestaurantInforPreparingAdapter(Context context, List<ItemDetailRestaurant> items) {
         this.context = context;
         this.items = items;
     }

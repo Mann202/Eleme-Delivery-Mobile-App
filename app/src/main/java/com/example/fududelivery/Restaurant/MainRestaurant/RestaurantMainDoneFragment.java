@@ -1,6 +1,5 @@
-package com.example.fududelivery.Restaurant;
+package com.example.fududelivery.Restaurant.MainRestaurant;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetail;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RestaurantMainDoneFragment extends Fragment {
     private RecyclerView recyclerView;
     private RestaurantInforDoneAdapter adapter;
-    private ArrayList<itemRestaurant> restaurantList;
+    private ArrayList<ItemDetailRestaurant> restaurantList;
 
     public RestaurantMainDoneFragment() {
     }
@@ -36,7 +33,7 @@ public class RestaurantMainDoneFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         restaurantList = new ArrayList<>();
-        restaurantList.add(new itemRestaurant(1, "28/1", "3" + " items", "Truong Gia Man", "100000", "KTX khu A DHQG TPHCM"));
+        restaurantList.add(new ItemDetailRestaurant(1, "28/1", "3" + " items", "Truong Gia Man", "100000", "KTX khu A DHQG TPHCM"));
 
         adapter = new RestaurantInforDoneAdapter(getActivity(), restaurantList);
         recyclerView.setAdapter(adapter);

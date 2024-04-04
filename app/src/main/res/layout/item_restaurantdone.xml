@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:paddingVertical="3dp"
+    android:paddingVertical="10dp"
     android:background="@drawable/item_recycler_restaurant"
     >
 
@@ -17,6 +17,7 @@
         android:src="@drawable/starbucks_corporation_logo_2011"/>
 
     <RelativeLayout
+        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/logo"
