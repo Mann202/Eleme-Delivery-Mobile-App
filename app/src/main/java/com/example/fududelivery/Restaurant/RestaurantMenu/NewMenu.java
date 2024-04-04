@@ -24,8 +24,8 @@ public class NewMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent resultIntent = new Intent();
-                String nameMenu = nameMenuEditText.getEditText().toString();
-                String priceMenu = priceMenuEditText.getEditText().toString();
+                String nameMenu = nameMenuEditText.getEditText().getText().toString();
+                String priceMenu = priceMenuEditText.getEditText().getText().toString();
                 resultIntent.putExtra("nameMenu", nameMenu);
                 resultIntent.putExtra("priceMenu", priceMenu);
                 setResult(RESULT_OK, resultIntent);

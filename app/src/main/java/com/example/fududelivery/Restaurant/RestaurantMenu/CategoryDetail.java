@@ -2,7 +2,14 @@ package com.example.fududelivery.Restaurant.RestaurantMenu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResult;
@@ -14,7 +21,14 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.fududelivery.R;
 
+import java.util.ArrayList;
+
 public class CategoryDetail extends AppCompatActivity {
+
+    private ListView menuListView;
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> categories;
+
     private ActivityResultLauncher<Intent> startForResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -25,7 +39,8 @@ public class CategoryDetail extends AppCompatActivity {
                         if (data != null) {
                             String nameMenu = data.getStringExtra("nameMenu");
                             String priceMenu = data.getStringExtra("priceMenu");
-
+                            categories.add(nameMenu);
+                            adapter.notifyDataSetChanged();
                         }
                     }
                 }
@@ -53,5 +68,24 @@ public class CategoryDetail extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+
+        categories = new ArrayList<>();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, categories)
+        {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_menu, parent, false);
+                }
+
+                TextView textView = convertView.findViewById(R.id.text1);
+                textView.setText(categories.get(position));
+
+                return convertView;
+            }
+        };
+
+        menuListView = findViewById(R.id.menuListView);
+        menuListView.setAdapter(adapter);
     }
 }
