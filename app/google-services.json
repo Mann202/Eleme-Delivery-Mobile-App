@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "23209393665",
+    "project_id": "eleme-database",
+    "storage_bucket": "eleme-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23209393665:android:90ae19eacca7c7efe98a00",
+        "android_client_info": {
+          "package_name": "com.example.fududelivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj06TAPX7_Gsj776mfT1JZBZClxTQL1Sg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
