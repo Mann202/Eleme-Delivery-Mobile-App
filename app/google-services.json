@@ -12,7 +12,20 @@
           "package_name": "com.example.fududelivery"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "23209393665-fpjp4i099hgtuq3mqk0j65ni4qfo7gqa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fududelivery",
+            "certificate_hash": "95df2c3bfb67249c6aa49db1cd0869fab837ac03"
+          }
+        },
+        {
+          "client_id": "23209393665-9ml2662fsia935p4b0a2nkdu3ru4p9j3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDj06TAPX7_Gsj776mfT1JZBZClxTQL1Sg"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23209393665-9ml2662fsia935p4b0a2nkdu3ru4p9j3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

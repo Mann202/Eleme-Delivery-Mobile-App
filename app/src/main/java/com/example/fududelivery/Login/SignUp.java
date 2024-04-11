@@ -2,10 +2,12 @@ package com.example.fududelivery.Login;
 
 import static com.example.fududelivery.HelperFirebase.FirebaseHelper.getFirestoreInstance;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -42,6 +44,9 @@ public class SignUp extends AppCompatActivity {
 
         AppCompatButton buttonSubmit = findViewById(R.id.confirmBtn);
         AppCompatButton nextBtn = findViewById(R.id.nextBtn);
+        AppCompatButton submitNameBtn = findViewById(R.id.submitNameBtn);
+        AppCompatButton submitPasswordBtn = findViewById(R.id.submitPassword);
+
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +54,7 @@ public class SignUp extends AppCompatActivity {
                 FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 TextInputEditText emailField = findViewById(R.id.emailField);
                 String email = emailField.getText().toString();
-                String password = "manlun0902";
+                String password = ".......";
 
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener((task -> {
                     if(task.isSuccessful()) {
@@ -59,9 +64,14 @@ public class SignUp extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()) {
-                                    Toast.makeText(SignUp.this, "Registered successfully. Please verify your email!", Toast.LENGTH_SHORT).show();
+                                    findViewById(R.id.email).setVisibility(View.GONE);
                                     findViewById(R.id.confirmBtn).setVisibility(View.GONE);
-                                    findViewById(R.id.nextBtn).setVisibility(View.VISIBLE);
+
+                                    findViewById(R.id.name).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.submitNameBtn).setVisibility(View.VISIBLE);
+
+                                    TextView textView = (TextView) findViewById(R.id.signupdescription);
+                                    textView.setText("Hello! What is your name?");
                                 } else {
                                     Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                     Log.v("Debug", task.getException().toString());
@@ -76,31 +86,48 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
+        submitNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                final FirebaseUser userCheck = firebaseAuth.getCurrentUser();
-                if (userCheck != null) {
-                    userCheck.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                if (userCheck.isEmailVerified()) {
-                                    Log.v("Debug", "Verified");
-                                } else {
-                                    Toast.makeText(SignUp.this, "Please verify your email!", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Log.e("Debug", "Failed to reload user: " + task.getException().getMessage());
-                            }
-                        }
-                    });
-                } else {
-                    Log.e("Debug", "No user signed in");
-                }
+                findViewById(R.id.submitNameBtn).setVisibility(View.GONE);
+                findViewById(R.id.submitPassword).setVisibility(View.VISIBLE);
+                TextView textView = (TextView) findViewById(R.id.signupdescription);
+                textView.setText("Password length is at least 6 characters");
+                findViewById(R.id.password).setVisibility(View.VISIBLE);
+                findViewById(R.id.repassword).setVisibility(View.VISIBLE);
+                findViewById(R.id.name).setVisibility(View.GONE);
             }
         });
 
+        submitPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Send Intent
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                TextInputEditText passwordField = findViewById(R.id.passwordField);
+                TextInputEditText repasswordField = findViewById(R.id.repasswordField);
+
+                String repassword = repasswordField.getText().toString();
+                String password = passwordField.getText().toString();
+
+                if(repassword.equals(password)) {
+                    user.updatePassword(password)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("Debug", "User password updated.");
+                                        Intent intent = new Intent(SignUp.this, VerifyEmail.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Log.d("Debug", "Failed to reload user");
+                                    }
+                                }
+                            });
+                } else {
+                    Toast.makeText(SignUp.this, "Check your re-enter password!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 }

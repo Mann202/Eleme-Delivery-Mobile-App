@@ -8,140 +8,70 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.fududelivery.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ForgetPassword extends AppCompatActivity {
 
-    private TextView timerTextView;
-    private Button resendButton;
-    private CountDownTimer countDownTimer;
-    private boolean timerRunning;
-    private long timeLeftInMillis = 30000;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgetpassword);
 
-        TextInputLayout phoneNumberTextInputLayout = findViewById(R.id.phonenumber);
-        Button sendButton = findViewById(R.id.getstartedbtn);
-        TextInputEditText phoneNumberEditText = findViewById(R.id.phonenumbertextinput);
+        TextInputEditText emailField = findViewById(R.id.emailField);
         TextView forgetpassworddescription = findViewById(R.id.forgetpassworddescription);
-        LinearLayout verificationCodeContainer = findViewById(R.id.verificationCodeContainer);
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
+        AppCompatButton sendEmailBtn = findViewById(R.id.sendEmailBtn);
+
+        sendEmailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phoneNumberTextInputLayout.setVisibility(View.GONE);
-
-                String phoneNumber = phoneNumberEditText.getText().toString();
-                String message = "Verification code sent to: " + phoneNumber;
-                forgetpassworddescription.setText(message);
-
-                verificationCodeContainer.setVisibility(View.VISIBLE);
-
-                List<EditText> editTexts = new ArrayList<>();
-                editTexts.add(findViewById(R.id.editText1));
-                editTexts.add(findViewById(R.id.editText2));
-                editTexts.add(findViewById(R.id.editText3));
-                editTexts.add(findViewById(R.id.editText4));
-                editTexts.add(findViewById(R.id.editText5));
-                editTexts.add(findViewById(R.id.editText6));
-
-                for (int i = 0; i < editTexts.size(); i++) {
-                    EditText currentEditText = editTexts.get(i);
-                    currentEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                    currentEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
-                    final int finalI = i;
-                    currentEditText.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            if (!TextUtils.isEmpty(s) && s.length() == 1) {
-                                if (finalI < editTexts.size() - 1) {
-                                    editTexts.get(finalI + 1).requestFocus();
+                String email = emailField.getText().toString();
+                FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d("Debug", "Email sent.");
+                                    forgetpassworddescription.setText("Your verification email has been sent to your email address. Please check your email and change your new password. If you don't receive any email from us. Please re-check again your email submission.");
+                                    sendEmailBtn.setText("Re-send email");
                                 }
-                            }
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                        }
-                    });
-                }
-
-                timerTextView = findViewById(R.id.timerTextView);
-                resendButton = findViewById(R.id.resendButton);
-
-                timerTextView.setVisibility(View.VISIBLE);
-                timerTextView.setTypeface(null, Typeface.BOLD); // Set text to bold
-
-                startTimer();
-
-                resendButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!timerRunning) {
-                            startTimer();
-                            resendButton.setVisibility(View.GONE); // Hide resend button when clicked
-                        }
-                    }
-                });
+                            }});
             }
         });
-    }
 
-    private void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+        emailField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onFinish() {
-                timerRunning = false;
-                timerTextView.setText("00:00");
-                resendButton.setEnabled(true);
-                resendButton.setVisibility(View.VISIBLE); // Show resend button when timer finishes
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                sendEmailBtn.setText("Send");
             }
-        }.start();
 
-        timerRunning = true;
-        resendButton.setEnabled(false);
-    }
-
-    private void updateCountDownText() {
-        int seconds = (int) (timeLeftInMillis / 1000);
-        int minutes = seconds / 60;
-        seconds = seconds % 60;
-        String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
-        timerTextView.setText("Resend verification code: " + timeLeftFormatted);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 }

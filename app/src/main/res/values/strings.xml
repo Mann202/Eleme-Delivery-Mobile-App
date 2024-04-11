@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">FuduDelivery</string>
+    <string name="app_name">Emele Delivery App</string>
     <string name="title_activity_login">Login</string>
+    <string name="default_web_client_id">23209393665-9ml2662fsia935p4b0a2nkdu3ru4p9j3.apps.googleusercontent.com</string>
 </resources>

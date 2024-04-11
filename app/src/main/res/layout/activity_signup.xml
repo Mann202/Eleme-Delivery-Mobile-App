@@ -61,6 +61,83 @@ a new account"
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/name"
+        android:visibility="gone"
+        android:layout_below="@id/signupdescription"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditTextLogin"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/happy"
+            android:drawableTint="#C2CECE"
+            android:inputType="text"
+            android:textColorHint="@color/whiteedt"
+            android:textColor="@color/black"
+            android:hint="Name" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/password"
+        android:visibility="gone"
+        android:layout_below="@id/signupdescription"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:passwordToggleEnabled="true"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditTextLogin"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawableTint="#C2CECE"
+            android:inputType="textPassword"
+            android:textColorHint="@color/whiteedt"
+            android:textColor="@color/black"
+            android:hint="Password" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:id="@+id/repassword"
+        android:layout_below="@id/password"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:passwordToggleEnabled="true"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/repasswordField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditTextLogin"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawableTint="#C2CECE"
+            android:inputType="textPassword"
+            android:textColorHint="@color/whiteedt"
+            android:textColor="@color/black"
+            android:hint="Re-enter password" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:id="@+id/verificationCodeContainer"
         android:layout_width="match_parent"
@@ -163,6 +240,32 @@ a new account"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="Next"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        style="@style/PrimaryButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitNameBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Continue"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        style="@style/PrimaryButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Continue"
         android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"

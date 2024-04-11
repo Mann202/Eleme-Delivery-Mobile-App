@@ -38,7 +38,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:id="@+id/phonenumber"
+        android:id="@+id/emailLayout"
         android:layout_height="wrap_content"
         android:layout_below="@id/spinner"
         android:layout_marginStart="20dp"
@@ -46,7 +46,7 @@
         android:layout_marginEnd="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneNumberField"
+            android:id="@+id/emailField"
             style="@style/EditTextLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -54,8 +54,8 @@
             android:drawableStart="@drawable/baseline_phone_24"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="Phone Number"
-            android:inputType="number"
+            android:hint="Email"
+            android:inputType="text"
             android:textColorHighlight="@color/primary"
             android:textColorHint="@color/whiteedt"
             android:textColorLink="@color/primary" />
@@ -65,7 +65,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:id="@+id/password"
-        android:layout_below="@id/phonenumber"
+        android:layout_below="@id/emailLayout"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
@@ -82,7 +82,7 @@
             android:drawableTint="#C2CECE"
             android:inputType="textPassword"
             android:textColorHint="@color/whiteedt"
-            android:textColor="@color/whiteedt"
+            android:textColor="@color/black"
             android:hint="Password" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -100,9 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-
             android:buttonTint="@color/secondary"
-            android:checked="true"
             android:fontFamily="@font/lato_regular"
             android:text="Remember me"
             android:textSize="18sp" />
@@ -160,6 +158,7 @@
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/continueText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signuptext"
@@ -201,6 +200,51 @@
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/continueText"
+        >
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/phoneLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_phone_24" />
+
+            <ImageView
+                android:id="@+id/XLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/phoneLogo"
+                android:src="@drawable/twitter_x" />
+
+            <ImageView
+                android:id="@+id/googleLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/XLogo"
+                android:src="@drawable/_google" />
+
+            <ImageView
+                android:id="@+id/facebookLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/googleLogo"
+                android:src="@drawable/_facebook" />
+        </RelativeLayout>
+    </RelativeLayout>
+
 
 
 </RelativeLayout>
