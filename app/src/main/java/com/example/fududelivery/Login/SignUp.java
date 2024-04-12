@@ -119,6 +119,21 @@ public class SignUp extends AppCompatActivity {
                                         Log.d("Debug", "User password updated.");
                                         Intent intent = new Intent(SignUp.this, VerifyEmail.class);
                                         startActivity(intent);
+
+                                        //Luu Uid vao firestore
+                                        String userUid = user.getUid();
+                                        firestoreInstance.collection("Users").add(userUid).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentReference documentReference) {
+                                                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w(TAG, "Error adding document", e);
+                                                    }
+                                                });
                                     } else {
                                         Log.d("Debug", "Failed to reload user");
                                     }

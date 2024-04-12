@@ -16,10 +16,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.fududelivery.HelperFirebase.FirebaseHelper;
 import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -33,6 +39,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         FirebaseFirestore firestoreInstance = FirebaseFirestore.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
 
         AppCompatButton loginBtn = findViewById(R.id.loginBtn);
         ImageView googleLogin = findViewById(R.id.googleLogo);
@@ -59,39 +67,20 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                TextInputEditText passwordField = findViewById(R.id.passwordField);
-                TextInputEditText phoneNumberField = findViewById(R.id.emailField);
-
-                String password = passwordField.getText().toString();
-                String passwordHashed = PasswordHash.hashPassword(passwordField.getText().toString());
-                String phoneNumber = phoneNumberField.getText().toString();
-
-                if (isValidPhoneNumber(phoneNumber)) {
-                    if (isValidPassword(password)) {
-                        Toast.makeText(Login.this, "Login successfully!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Login.this, "Password must contain 8 characters!", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(Login.this, "Phone number must contain 8 characters!", Toast.LENGTH_SHORT).show();
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                if(currentUser != null){
+                    currentUser.reload();
                 }
 
-                firestoreInstance.collection("Users")
-                        .whereEqualTo("phone", phoneNumber)
-                        .whereEqualTo("password", passwordHashed)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        Log.d("Login", document.getId() + " => " + document.getData());
-                                    }
-                                } else {
-                                    Log.d("Login", "Error getting documents: ", task.getException());
-                                }
-                            }
-                        });
+                TextInputEditText passwordField = findViewById(R.id.passwordField);
+                TextInputEditText emailField = findViewById(R.id.emailField);
+
+                String password = passwordField.getText().toString();
+                String email = emailField.getText().toString();
+
+                LoginManager loginManager = new LoginManager(Login.this);
+                loginManager.signInWithEmailAndPassword(email, password);
+
             }
         });
 
@@ -124,13 +113,9 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private boolean isValidPhoneNumber(String phoneNumber) {
-        String phoneNumberRegex = "\\d{8}";
-        return !TextUtils.isEmpty(phoneNumber) && phoneNumber.matches(phoneNumberRegex);
-    }
+    private void reload() { }
 
-    private boolean isValidPassword(String password) {
-        String passwordRegex = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-        return !TextUtils.isEmpty(password) && password.matches(passwordRegex);
+    private void updateUI(FirebaseUser user) {
+
     }
 }
