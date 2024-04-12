@@ -8,21 +8,24 @@
 
     <ImageView
         android:id="@+id/img_map"
-        android:layout_width="340dp"
-        android:layout_height="175dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/order_info_card"
         android:src="@drawable/img_map" />
 
     <RelativeLayout
         android:id="@+id/order_info_card"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_above="@+id/money"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_bg_white"
         android:elevation="5dp"
         android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:padding="20dp"
         android:translationZ="3dp">
 
@@ -83,10 +86,11 @@
     <RelativeLayout
         android:id="@+id/money"
         android:layout_above="@+id/accept_button"
-        android:layout_width="340dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/rounded_bg_white"
         android:elevation="5dp"
         android:orientation="vertical"
@@ -210,9 +214,12 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/accept_button"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Accept this order"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         style="@style/PrimaryButton"/>

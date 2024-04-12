@@ -18,7 +18,6 @@ public class ShipperProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipper_account);
 
-        // Code xử lý cho Activity Login
         //Spinner language
         String[] languages = {"English", "Vietnamese"};
         Spinner spinner_language = findViewById(R.id.sn_language_shipper);

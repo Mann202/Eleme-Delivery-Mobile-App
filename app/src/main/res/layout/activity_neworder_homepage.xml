@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/whiteedt"
     android:orientation="vertical"
     android:gravity="center">
@@ -91,83 +91,97 @@
             android:layout_marginTop="20dp"/>
     </RelativeLayout>
 
-
-    <RelativeLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menubar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rounded_blue_background"
-        android:paddingStart="25dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:paddingEnd="25dp">
+        app:itemRippleColor="@color/transparent"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingVertical="5dp"
+        app:itemTextColor="@color/black"
+        app:itemBackground="@color/transparent"
+        app:itemIconTint="@color/black"
+        app:menu="@menu/bottom_navmenu"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/menubar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="@drawable/rounded_blue_background"-->
+<!--        android:paddingStart="25dp"-->
+<!--        android:paddingTop="20dp"-->
+<!--        android:paddingBottom="20dp"-->
+<!--        android:paddingEnd="25dp">-->
 
-            <TextView
-                android:id="@+id/neworder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_bold"
-                android:layout_marginEnd="14dp"
-                android:gravity="center"
-                android:drawableTop="@drawable/ic_new_order"
-                android:drawableTint="@color/white"
-                android:text="New order"
-                android:textColor="@color/white"
-                android:textFontWeight="900"
-                android:textSize="12dp" />
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_horizontal">-->
 
-            <TextView
-                android:id="@+id/orderhistory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_bold"
-                android:layout_toEndOf="@id/neworder"
-                android:layout_marginStart="14dp"
-                android:gravity="center"
-                android:drawableTop="@drawable/orderhistory_icon"
-                android:text="Order History"
-                android:textColor="@color/white50"
-                android:textFontWeight="900"
-                android:textSize="12dp" />
+<!--            <TextView-->
+<!--                android:id="@+id/neworder"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/lato_bold"-->
+<!--                android:layout_marginEnd="14dp"-->
+<!--                android:gravity="center"-->
+<!--                android:drawableTop="@drawable/ic_new_order"-->
+<!--                android:drawableTint="@color/white"-->
+<!--                android:text="New order"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textFontWeight="900"-->
+<!--                android:textSize="12dp" />-->
 
-            <TextView
-                android:id="@+id/income"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_bold"
-                android:layout_marginEnd="14dp"
-                android:gravity="center"
-                android:layout_toEndOf="@id/orderhistory"
-                android:layout_marginStart="16dp"
-                android:drawableTop="@drawable/income_icon"
-                android:text="Income"
-                android:textColor="@color/white50"
-                android:textFontWeight="900"
-                android:textSize="12dp" />
+<!--            <TextView-->
+<!--                android:id="@+id/orderhistory"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/lato_bold"-->
+<!--                android:layout_toEndOf="@id/neworder"-->
+<!--                android:layout_marginStart="14dp"-->
+<!--                android:gravity="center"-->
+<!--                android:drawableTop="@drawable/orderhistory_icon"-->
+<!--                android:text="Order History"-->
+<!--                android:textColor="@color/white50"-->
+<!--                android:textFontWeight="900"-->
+<!--                android:textSize="12dp" />-->
 
-            <TextView
-                android:id="@+id/account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_bold"
-                android:layout_marginEnd="16dp"
-                android:gravity="center"
-                android:layout_toEndOf="@id/income"
-                android:layout_marginStart="16dp"
-                android:drawableTop="@drawable/baseline_account_circle_24"
-                android:text="Account"
-                android:textColor="@color/white50"
-                android:textFontWeight="900"
-                android:drawableTint="#80FFFFFF"
-                android:textSize="12dp" />
-        </RelativeLayout>
-    </RelativeLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/income"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/lato_bold"-->
+<!--                android:layout_marginEnd="14dp"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_toEndOf="@id/orderhistory"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:drawableTop="@drawable/income_icon"-->
+<!--                android:text="Income"-->
+<!--                android:textColor="@color/white50"-->
+<!--                android:textFontWeight="900"-->
+<!--                android:textSize="12dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/account"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/lato_bold"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_toEndOf="@id/income"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:drawableTop="@drawable/baseline_account_circle_24"-->
+<!--                android:text="Account"-->
+<!--                android:textColor="@color/white50"-->
+<!--                android:textFontWeight="900"-->
+<!--                android:drawableTint="#80FFFFFF"-->
+<!--                android:textSize="12dp" />-->
+<!--        </RelativeLayout>-->
+<!--    </RelativeLayout>-->
 
 </RelativeLayout>
