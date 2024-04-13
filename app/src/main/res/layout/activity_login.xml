@@ -131,37 +131,44 @@
         style="@style/LoginBtn"
         />
 
-    <TextView
-        android:id="@+id/textView_forget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Don’t have an account?"
-        android:layout_below="@id/loginBtn"
-        android:textSize="19sp"
-        android:fontFamily="@font/lato_regular"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="70dp"
-        />
+    <RelativeLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/signUpLayout"
+        android:layout_below="@id/loginBtn">
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+            <TextView
+                android:id="@+id/textView_forget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don’t have an account?"
+                android:textSize="19sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginTop="40dp"
+                />
 
-    <TextView
-        android:id="@+id/signuptext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign up"
-        android:textColor="@color/secondary"
-        android:layout_below="@id/loginBtn"
-        android:layout_toEndOf="@id/textView_forget"
-        android:textSize="19sp"
-        android:fontFamily="@font/lato_regular"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="5dp"
-        />
+            <TextView
+                android:id="@+id/signuptext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign up"
+                android:textColor="@color/secondary"
+                android:layout_toEndOf="@id/textView_forget"
+                android:textSize="19sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="5dp"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/continueText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signuptext"
+        android:layout_below="@+id/signUpLayout"
         android:layout_marginTop="50dp">
 
         <View
