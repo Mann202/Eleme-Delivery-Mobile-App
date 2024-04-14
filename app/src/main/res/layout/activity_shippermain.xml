@@ -25,7 +25,7 @@
         android:paddingVertical="5dp"
         app:itemTextColor="@color/black"
         app:itemBackground="@color/transparent"
-        app:itemIconTint="@color/black"
+        app:itemIconTint="@color/white"
         app:menu="@menu/bottom_navmenu"/>
 
 </RelativeLayout>
