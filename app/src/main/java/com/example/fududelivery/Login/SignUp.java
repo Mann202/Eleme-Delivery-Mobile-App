@@ -127,23 +127,31 @@ public class SignUp extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Log.d("Debug", "User password updated.");
-                                        Intent intent = new Intent(SignUp.this, VerifyEmail.class);
-                                        startActivity(intent);
 
-                                        //Luu Uid vao firestore
                                         String userUid = user.getUid();
-                                        firestoreInstance.collection("Users").add(userUid).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+                                        Map<String, Object> userData = new HashMap<>();
+                                        userData.put("userUid", userUid);
+                                        userData.put("Role", 1);
+
+                                        firestoreInstance.collection("Users").add(userData)
+                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                     @Override
                                                     public void onSuccess(DocumentReference documentReference) {
-                                                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                                        Log.d("Debug", "DocumentSnapshot written with ID: " + documentReference.getId());
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-                                                        Log.w(TAG, "Error adding document", e);
+                                                        Log.w("Debug", "Error adding document", e);
                                                     }
                                                 });
+
+
+                                        Intent intent = new Intent(SignUp.this, VerifyEmail.class);
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                                     } else {
                                         Log.d("Debug", "Failed to reload user");
                                     }

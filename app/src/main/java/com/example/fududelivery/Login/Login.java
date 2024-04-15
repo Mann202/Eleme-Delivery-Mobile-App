@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.fududelivery.R;
+import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -99,7 +100,7 @@ public class Login extends AppCompatActivity {
                                         updateUI(user);
                                         Toast.makeText(Login.this, "Login successfully.",
                                                 Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(Login.this, VerifyEmail.class);
+                                        Intent intent = new Intent(Login.this, MainRestaurant.class);
                                         startActivity(intent);
                                         overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                                     } else {
