@@ -30,6 +30,7 @@ public class LoginManager {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("Debug", "signInWithEmail:success");
+                            Toast.makeText(mActivity, "Login with google successfully", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {
                             Log.w("Debug", "signInWithEmail:failure", task.getException());

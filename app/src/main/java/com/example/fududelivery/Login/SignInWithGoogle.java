@@ -71,9 +71,10 @@ public class SignInWithGoogle {
                         FirebaseUser user = mAuth.getCurrentUser();
                         Toast.makeText(mActivity, "Sign in with Google successful", Toast.LENGTH_SHORT).show();
 
-                        //Thay activity
+                        //Thay activity sau khi dang nhap thanh cong
                         Intent intent = new Intent(mActivity, VerifyEmail.class);
                         mActivity.startActivity(intent);
+                        mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } else {
                         Log.d("Debug", "signInWithCredential:failure", task.getException());
                         Toast.makeText(mActivity, "Sign in with Google failed", Toast.LENGTH_SHORT).show();

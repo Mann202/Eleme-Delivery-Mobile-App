@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,15 @@ public class SignUp extends AppCompatActivity {
         AppCompatButton nextBtn = findViewById(R.id.nextBtn);
         AppCompatButton submitNameBtn = findViewById(R.id.submitNameBtn);
         AppCompatButton submitPasswordBtn = findViewById(R.id.submitPassword);
+
+        ImageView backwardBtn = findViewById(R.id.backward);
+
+        backwardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

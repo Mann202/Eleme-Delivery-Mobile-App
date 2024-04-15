@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:drawableStart="@drawable/baseline_phone_24"
+            android:drawableStart="@drawable/baseline_email_24"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
             android:hint="Email"

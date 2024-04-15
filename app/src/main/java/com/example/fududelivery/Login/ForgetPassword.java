@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,8 +40,16 @@ public class ForgetPassword extends AppCompatActivity {
 
         TextInputEditText emailField = findViewById(R.id.emailField);
         TextView forgetpassworddescription = findViewById(R.id.forgetpassworddescription);
+        ImageView backwardBtn = findViewById(R.id.backward);
 
         AppCompatButton sendEmailBtn = findViewById(R.id.sendEmailBtn);
+
+        backwardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         sendEmailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +61,7 @@ public class ForgetPassword extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Log.d("Debug", "Email sent.");
-                                    forgetpassworddescription.setText("Your verification email has been sent to your email address. Please check your email and change your new password. If you don't receive any email from us. Please re-check again your email submission.");
+                                    forgetpassworddescription.setText("Your verification email has been sent to your email address. Please check your email and change your new password. If you don't receive any email from us. Please re-check again your email address submission.");
                                     sendEmailBtn.setText("Re-send email");
                                 }
                             }});

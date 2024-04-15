@@ -32,7 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FacebookAuthProvider;
-import com.google.firebase.firestore.FirebaseFirestore;
+//import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 
@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        FirebaseFirestore firestoreInstance = FirebaseFirestore.getInstance();
+        //FirebaseFirestore firestoreInstance = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
         FacebookSdk.setApplicationId("283740247620840");
@@ -70,7 +70,7 @@ public class Login extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
+                //String selectedItem = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -78,6 +78,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Nguoi dung login bang phuong phap thu cong
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,16 +92,24 @@ public class Login extends AppCompatActivity {
                             .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
+                                    //Them activity sau khi nguoi dung dang nhap thanh cong
                                     if (task.isSuccessful()) {
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         updateUI(user);
+                                        Toast.makeText(Login.this, "Login successfully.",
+                                                Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(Login.this, VerifyEmail.class);
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                                     } else {
-                                        Toast.makeText(Login.this, "Authentication failed.",
+                                        Toast.makeText(Login.this, "Authentication failed. Please check your password or email again.",
                                                 Toast.LENGTH_SHORT).show();
                                         updateUI(null);
                                     }
                                 }
                             });
+                } else {
+                    Toast.makeText(Login.this, "Please enter your password and email.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
