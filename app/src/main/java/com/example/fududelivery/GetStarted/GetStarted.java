@@ -26,7 +26,7 @@ public class GetStarted extends AppCompatActivity {
         setContentView(R.layout.activity_getstarted);
 
         // For Splash Screen
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        /* SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         boolean firstRun = pref.getBoolean("firstRun", true);
         SharedPreferences.Editor editor= pref.edit();
         if(firstRun) {
@@ -37,7 +37,7 @@ public class GetStarted extends AppCompatActivity {
             Log.i("debug: ","firstRunApp = false");
             Intent intent = new Intent(getApplicationContext(), MainRestaurant.class);
             startActivity(intent);
-        }
+        }  */
         //End splash screen
 
 

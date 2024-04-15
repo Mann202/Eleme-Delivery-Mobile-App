@@ -32,6 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
@@ -46,7 +47,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //FirebaseFirestore firestoreInstance = FirebaseFirestore.getInstance();
+        FirebaseFirestore firestoreInstance = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
         FacebookSdk.setApplicationId("283740247620840");
