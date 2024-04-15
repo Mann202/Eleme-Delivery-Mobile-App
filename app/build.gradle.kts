@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services")
 }
 
 android {
@@ -10,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.fududelivery"
-        minSdk = 29
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -75,4 +74,6 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.3.1")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation("com.facebook.android:facebook-android-sdk:[8,9)")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation ("com.google.android.material:material:1.11.0")
 }

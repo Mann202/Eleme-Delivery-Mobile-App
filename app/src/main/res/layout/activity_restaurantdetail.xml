@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/whiteedt"
+    android:gravity="start"
+    android:layout_height="match_parent"
+    tools:context=".Restaurant.RestaurantDetail.RestaurantDetailItem">
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/detailTitle"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Detail"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/lato_bold"
+        android:textSize="25sp"
+        android:textColor="@color/black"/>
+
+    <RelativeLayout
+        android:id="@+id/priceinformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_recycler_restaurant"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/detailTitle"
+        >
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/lightwhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order detail"
+            android:id="@+id/orderdetailtitle"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="17sp"/>
+        <RelativeLayout
+            android:id="@+id/pricelayout"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderdetailtitle"
+            >
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtotal"
+                android:layout_marginStart="10dp"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/lato_regular"/>
+
+            <TextView
+                android:id="@+id/subtotalprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="40000"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/lato_regular"/>
+
+            <TextView
+                android:id="@+id/servicetitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service fee"
+                android:layout_below="@+id/subtitle"
+                android:layout_marginStart="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/lato_regular"/>
+
+            <TextView
+                android:id="@+id/serviceprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5000"
+                android:layout_below="@+id/subtitle"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/lato_regular"/>
+
+            <TextView
+                android:id="@+id/totaltitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/servicetitle"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/lato_bold"/>
+
+            <TextView
+                android:id="@+id/totalprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="45000"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/serviceprice"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/lato_bold"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_below="@+id/pricelayout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment by"
+                android:textSize="19sp"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Momo wallet"
+                android:textSize="19sp"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/black"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/buyerinformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_recycler_restaurant"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/priceinformation"
+        >
+        <RelativeLayout
+            android:id="@+id/buyertitlelayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp">
+            <TextView
+                android:id="@+id/ordertitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order"
+                android:textSize="16sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/lightwhite"
+                />
+
+            <TextView
+                android:id="@+id/nametitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="16sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@+id/ordertitle"
+                android:textColor="@color/lightwhite"
+                />
+
+            <TextView
+                android:id="@+id/phonenumbertitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone number"
+                android:textSize="16sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@+id/nametitle"
+                android:textColor="@color/lightwhite"
+                />
+
+            <TextView
+                android:id="@+id/addresstitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textSize="16sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_below="@+id/phonenumbertitle"
+                android:textColor="@color/lightwhite"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/buyertitlelayout"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp">
+            <TextView
+                android:id="@+id/order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#2321312"
+                android:textSize="16sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/lightwhite"
+                />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Truong Gia Man"
+                android:textSize="16sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@+id/order"
+                android:textColor="@color/lightwhite"
+                />
+
+            <TextView
+                android:id="@+id/phonenumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0123456789"
+                android:textSize="16sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@+id/name"
+                android:textColor="@color/lightwhite"
+                />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KTX Khu A DHQG THPHCM"
+                android:textSize="16sp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_below="@+id/phonenumber"
+                android:textColor="@color/lightwhite"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/shipperinformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buyerinformation"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/item_recycler_restaurant"
+        >
+        <ImageView
+            android:id="@+id/shipperAvatar"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/starbucks_corporation_logo_2011" />
+
+        <RelativeLayout
+            android:id="@+id/shipperInfor"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/shipperAvatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/shipperTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:text="Shipper information"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/nameShipper"
+                android:layout_below="@+id/shipperTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Le Xuan Quynh"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/lightwhite"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/phoneShipper"
+                android:layout_below="@+id/nameShipper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0123456789"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/lightwhite"
+                android:textSize="16sp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/shipperVehicle"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="3dp"
+            android:layout_toEndOf="@+id/shipperInfor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/vehicleLicense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MMM C300"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/lightwhite"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/vehiclePlates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vehicleLicense"
+                android:text="59X3 - 91176"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/lightwhite"
+                android:textSize="15sp"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

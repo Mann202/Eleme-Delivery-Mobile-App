@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/whiteedt"
+    android:gravity="start"
+    android:layout_height="match_parent"
+    tools:context=".Restaurant.Profile.RestaurantProfile">
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/informationTitle"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Information"
+        android:layout_marginTop="20dp"
+        style="@style/headerText"/>
+
+    <ImageView
+        android:id="@+id/informationProfilePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/informationTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/baseline_person_24"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/nameRestaurant"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/informationProfilePicture"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="#C2CECE"
+            android:hint="Name"
+            android:inputType="text"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/startingDate"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameRestaurant"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="#C2CECE"
+            android:hint="Starting Date"
+            android:inputType="text"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/address"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startingDate"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="#C2CECE"
+            android:hint="Address"
+            android:inputType="text"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/email"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/address"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="#C2CECE"
+            android:hint="Email"
+            android:inputType="text"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Confirm"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            style="@style/PrimaryButton"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cofirmBtn"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Log out"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            style="@style/LogoutButton"/>
+    </RelativeLayout>
+</RelativeLayout>

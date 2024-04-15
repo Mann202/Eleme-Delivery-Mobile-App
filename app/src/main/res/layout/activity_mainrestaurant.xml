@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/whiteedt"
+    android:gravity="start"
+    android:layout_height="match_parent"
+    tools:context=".Restaurant.MainRestaurant.MainRestaurant">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:id="@+id/layoutHeader">
+
+            <TextView
+                android:id="@+id/imageViewMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onMenuClicked"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/baseline_menu_24"
+                android:textSize="30sp"
+                android:scaleX="2"
+                />
+
+            <Switch
+                android:id="@+id/switchExample"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                android:layout_alignParentEnd="true"
+                android:thumb="@drawable/ic_thumb"
+                android:track="@drawable/bg_track"
+                android:scaleX="2"
+                android:scaleY="2"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/layout"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/layoutHeader"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_background"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/secondary"
+                app:tabMode="fixed"
+                app:tabRippleColor="@color/secondary"
+                app:tabSelectedTextColor="@color/secondary"
+                app:tabTextColor="@color/darkbg"
+                app:tabTextAppearance="@style/MineCustomTabText"
+                />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:menu="@menu/menu_restaurant"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:itemBackground="@drawable/primary_button"
+            app:itemTextAppearance="@style/NavDrawerTextAppearance">
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+

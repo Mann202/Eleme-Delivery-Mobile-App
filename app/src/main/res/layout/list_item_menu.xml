@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:background="@drawable/parentcategoryitem"
+    android:layout_marginEnd="20dp">
+
+    <RelativeLayout
+        android:id="@+id/childCategoryLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        style="@style/categoryItem">
+
+        <TextView
+            android:text="hello"
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/categoryItemText"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:gravity="center_vertical"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/ItemCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 item"
+            android:textColor="@color/lightwhite"
+            android:textSize="14sp"
+            android:fontFamily="@font/lato_bold"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/deleteImageView"
+            android:visibility="gone"
+            />
+
+        <ImageView
+            android:id="@+id/deleteImageView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_recycle_bin"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+</RelativeLayout>
