@@ -81,6 +81,25 @@
             android:name=".Restaurant.RestaurantMenu.NewMenu"
             android:exported="true" >
         </activity>
+
+        <activity
+            android:name=".Shipper.NewOrderHomepage"
+            android:exported="true"
+            android:label="NewOrderHomepage"
+            android:theme="@style/Theme.FuduDelivery" />
+
+        <activity
+            android:name=".Shipper.ShipperMain"
+            android:exported="true"
+            android:label="ShipperMain"
+            android:theme="@style/Theme.FuduDelivery" />
+
+        <activity
+            android:name=".Shipper.ShipperProfile"
+            android:exported="true"
+            android:label="ShipperProfile"
+            android:theme="@style/Theme.FuduDelivery" />
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

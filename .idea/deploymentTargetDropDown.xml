@@ -2,6 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="MainRestaurant">
+        <State />
+      </entry>
+      <entry key="NewOrderHomepage">
+        <State />
+      </entry>
+      <entry key="ShipperMain">
+        <State />
+      </entry>
+      <entry key="ShipperProfile">
+        <State />
+      </entry>
+      <entry key="app">
       <entry key="app">
         <State />
       </entry>

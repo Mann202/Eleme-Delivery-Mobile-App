@@ -64,6 +64,10 @@ public class Login extends AppCompatActivity {
         signInWithGoogle = new SignInWithGoogle(this);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.item, android.R.layout.simple_spinner_item);
+        // Code xử lý cho Activity Login
+        String[] languages = {"Customer", "Restaurant", "Shipper"};
+        Spinner spinner = findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
@@ -71,7 +75,7 @@ public class Login extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //String selectedItem = parent.getItemAtPosition(position).toString();
+                String selectedItem = parent.getItemAtPosition(position).toString();
             }
 
             @Override
