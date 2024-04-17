@@ -12,6 +12,8 @@ import android.widget.Button;
 
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
+import com.example.fududelivery.Shipper.NewOrderHomepage;
+import com.example.fududelivery.Shipper.ShipperProfile;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 public class GetStarted extends AppCompatActivity {
@@ -63,6 +65,7 @@ public class GetStarted extends AppCompatActivity {
             }
         });
 
+        //Xu li su kien Skip button
         findViewById(R.id.skip_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

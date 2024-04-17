@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteedt"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".Shipper.NewOrder">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/neworder_notify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rounded_background_white"
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingEnd="25dp">
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="Bin Bin New Order"
+            android:textColor="@color/black"
+            android:textFontWeight="900"
+            android:textSize="16dp" />
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_regular"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txt_name"
+            android:gravity="center"
+            android:text="April 1, 2023"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textFontWeight="900"
+            android:textSize="16dp" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:thumb="@drawable/thumb"
+            android:track="@drawable/track"
+            android:checked="true"/>
+    </RelativeLayout>
+
+    <!--    <RelativeLayout-->
+    <!--        android:id="@+id/orders"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@+id/neworder_notify"-->
+    <!--        android:layout_above="@+id/menubar"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:gravity="center">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/txt_noorder"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:fontFamily="@font/lato_regular"-->
+    <!--            android:layout_marginEnd="14dp"-->
+    <!--            android:gravity="center"-->
+    <!--            android:text="There is no order here!"-->
+    <!--            android:textColor="@color/gray"-->
+    <!--            android:textFontWeight="900"-->
+    <!--            android:textSize="19dp" />-->
+
+    <!--    </RelativeLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/neworder_notify"
+        android:background="@color/whiteedt">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_orders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
