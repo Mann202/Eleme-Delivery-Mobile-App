@@ -26,6 +26,8 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
@@ -34,9 +36,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 //import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
@@ -80,7 +85,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        //Nguoi dung login bang phuong phap thu cong
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,15 +98,44 @@ public class Login extends AppCompatActivity {
                             .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    //Them activity sau khi nguoi dung dang nhap thanh cong
                                     if (task.isSuccessful()) {
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         updateUI(user);
-                                        Toast.makeText(Login.this, "Login successfully.",
-                                                Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(Login.this, MainRestaurant.class);
-                                        startActivity(intent);
-                                        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+                                        String Uid = user.getUid();
+                                        Log.v("Debug", Uid);
+                                        firestoreInstance.collection("Users").whereEqualTo("userUid", Uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                                    String roleID = document.getString("roleID");
+                                                    if (roleID != null) {
+                                                        Log.d("Debug", "Role ID: " + roleID);
+
+                                                        switch (roleID) {
+                                                            case "1":
+                                                                Intent intent = new Intent(Login.this, MainRestaurant.class);
+                                                                startActivity(intent);
+                                                                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+                                                                break;
+                                                            case "2":
+                                                                // Xử lý khi roleID là "2"
+                                                                break;
+                                                            default:
+                                                                // Xử lý khi roleID không phù hợp với các trường hợp trên
+                                                        }
+                                                    } else {
+                                                        Log.d("Debug", "roleID is null");
+                                                    }
+                                                    Toast.makeText(Login.this, "Login successfully.",
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w("Debug", "Error getting documents.", e);
+                                            }
+                                        });
                                     } else {
                                         Toast.makeText(Login.this, "Authentication failed. Please check your password or email again.",
                                                 Toast.LENGTH_SHORT).show();
