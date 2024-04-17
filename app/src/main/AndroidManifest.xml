@@ -85,20 +85,17 @@
         <activity
             android:name=".Shipper.NewOrderHomepage"
             android:exported="true"
-            android:label="NewOrderHomepage"
-            android:theme="@style/Theme.FuduDelivery" />
+            android:label="NewOrderHomepage" />
 
         <activity
             android:name=".Shipper.ShipperMain"
             android:exported="true"
-            android:label="ShipperMain"
-            android:theme="@style/Theme.FuduDelivery" />
+            android:label="ShipperMain" />
 
         <activity
             android:name=".Shipper.ShipperProfile"
             android:exported="true"
-            android:label="ShipperProfile"
-            android:theme="@style/Theme.FuduDelivery" />
+            android:label="ShipperProfile" />
 
     </application>
     <uses-permission android:name="android.permission.INTERNET" />

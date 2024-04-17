@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "23209393665-fpjp4i099hgtuq3mqk0j65ni4qfo7gqa.apps.googleusercontent.com",
+          "client_id": "23209393665-2n9v3fs0enmt7sd9jlbk99he9jfjohts.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.fududelivery",
-            "certificate_hash": "95df2c3bfb67249c6aa49db1cd0869fab837ac03"
+            "certificate_hash": "104c6bac04ee573222a47fb877c3b173a925a8a3"
           }
         },
         {

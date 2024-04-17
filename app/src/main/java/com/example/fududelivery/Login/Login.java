@@ -17,6 +17,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
+import com.example.fududelivery.Shipper.ShipperMain;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -107,18 +108,20 @@ public class Login extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                                 for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                                    String roleID = document.getString("roleID");
+                                                    String roleID = document.getString("role_id");
                                                     if (roleID != null) {
                                                         Log.d("Debug", "Role ID: " + roleID);
 
                                                         switch (roleID) {
                                                             case "1":
-                                                                Intent intent = new Intent(Login.this, MainRestaurant.class);
-                                                                startActivity(intent);
+                                                                Intent intentRestaurant = new Intent(Login.this, MainRestaurant.class);
+                                                                startActivity(intentRestaurant);
                                                                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                                                                 break;
-                                                            case "2":
-                                                                // Xử lý khi roleID là "2"
+                                                            case "3":
+                                                                Intent intentShipper = new Intent(Login.this, ShipperMain.class);
+                                                                startActivity(intentShipper);
+                                                                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                                                                 break;
                                                             default:
                                                                 // Xử lý khi roleID không phù hợp với các trường hợp trên
