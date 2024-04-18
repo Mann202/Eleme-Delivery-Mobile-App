@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteedt"
+    android:gravity="start">
+
+    <ImageView
+        android:id="@+id/backIcon"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:layout_marginTop="53dp"
+        android:layout_marginStart="30dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/AdressTitle"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="New address"
+        android:layout_toRightOf="@id/backIcon"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/lightdark"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="46dp"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:textSize="30sp"
+        style="@style/headerText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/NameTitle"
+        android:layout_below="@id/AdressTitle"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:text="Name"
+        android:textSize="@dimen/text_h5"
+        android:textColor="#828282"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ProfileName"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/NameTitle"
+        android:layout_marginTop="-5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            
+            android:paddingRight="@dimen/padding_small"
+            android:drawablePadding="10dp"
+            android:drawableTint="#C2CECE"
+            android:hint="Nguyen Van A"
+            android:inputType="text"
+            
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--    Phone -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/PhoneTitle"
+        android:layout_below="@id/ProfileName"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:text="Phone number"
+        android:textSize="@dimen/text_h5"
+        android:textColor="#828282"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ProfilePhone"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/PhoneTitle"
+        android:layout_marginTop="-5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:drawablePadding="10dp"
+            android:drawableTint="#C2CECE"
+            android:hint="0999"
+            android:inputType="text"
+            
+            android:paddingRight="@dimen/padding_small"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <!--City-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/CityTitle"
+        android:layout_below="@id/ProfilePhone"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:text="City"
+        android:textSize="@dimen/text_h5"
+        android:textColor="#828282"
+        />
+
+    <Spinner
+        android:id="@+id/sn_city"
+        style="@style/SpinnerStyle"
+        android:popupBackground="@drawable/spinner_background"
+        android:popupTheme="@style/AppTheme.PopupOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/CityTitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp" />
+
+    <!--District-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DistrictTitle"
+        android:layout_below="@id/sn_city"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:text="District"
+        android:textSize="@dimen/text_h5"
+        android:textColor="#828282"
+        />
+
+    <Spinner
+        android:id="@+id/sn_district"
+        style="@style/SpinnerStyle"
+        android:popupBackground="@drawable/spinner_background"
+        android:popupTheme="@style/AppTheme.PopupOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DistrictTitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp" />
+
+    <!--Ward-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/WardTitle"
+        android:layout_below="@id/sn_district"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:text="Ward"
+        android:textSize="@dimen/text_h5"
+        android:textColor="#828282"
+        />
+
+    <Spinner
+        android:id="@+id/sn_ward"
+        style="@style/SpinnerStyle"
+        android:popupBackground="@drawable/spinner_background"
+        android:popupTheme="@style/AppTheme.PopupOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/WardTitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp" />
+    <!--Street-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/StreetTitle"
+        android:layout_below="@id/sn_ward"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:text="Street"
+        android:textSize="@dimen/text_h5"
+        android:textColor="#828282"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/StreetInput"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/StreetTitle"
+        android:layout_marginTop="-5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/EditTextLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+       
+            android:drawablePadding="10dp"
+            android:drawableTint="#C2CECE"
+            android:hint="ABCXYZ"
+            android:inputType="text"
+            
+            android:paddingRight="@dimen/padding_small"
+            android:textColorHighlight="@color/primary"
+            android:textColorHint="@color/whiteedt"
+            android:textColorLink="@color/primary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/defaultAddressCheckBox"
+        android:layout_below="@id/StreetInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:fontFamily="@font/lato_regular"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="Set as Default Address"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/white"
+        android:layout_marginStart="20dp"
+        
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true"
+        style="@style/SaveButton"/>
+</RelativeLayout>
