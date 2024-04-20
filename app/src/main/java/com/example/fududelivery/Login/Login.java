@@ -109,12 +109,17 @@ public class Login extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                                 for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                                    String roleID = document.getString("role_id");
+                                                    String roleID = document.getString("roleID");
                                                     if (roleID != null) {
                                                         Log.d("Debug", "Role ID: " + roleID);
 
                                                         switch (roleID) {
                                                             case "1":
+                                                                Intent intentCustomer = new Intent(Login.this, Customer.class);
+                                                                startActivity(intentCustomer);
+                                                                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+                                                                break;
+                                                            case "2":
                                                                 Intent intentRestaurant = new Intent(Login.this, MainRestaurant.class);
                                                                 startActivity(intentRestaurant);
                                                                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
@@ -125,7 +130,7 @@ public class Login extends AppCompatActivity {
                                                                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                                                                 break;
                                                             default:
-                                                                // Xử lý khi roleID không phù hợp với các trường hợp trên
+                                                                Toast.makeText(Login.this, "Login failed. Please try again or contact us!", Toast.LENGTH_SHORT).show();
                                                         }
                                                     } else {
                                                         Log.d("Debug", "roleID is null");

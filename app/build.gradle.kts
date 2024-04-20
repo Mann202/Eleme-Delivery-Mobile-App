@@ -77,7 +77,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.viewpager:viewpager:1.0.0")
     implementation("com.tbuonomo:dotsindicator:5.0")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.03.00"))
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.04.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
