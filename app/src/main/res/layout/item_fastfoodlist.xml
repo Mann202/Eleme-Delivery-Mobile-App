@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical">
+    <!--<TextView
+        android:id="@+id/tv_name_fastfood"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Popular in your area"
+        android:layout_marginStart="20dp"
+        android:textSize="22sp"
+        android:textFontWeight="900"
+        android:textColor="@color/black"
+        android:fontFamily="@font/lato_regular"/>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_fastfood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"/>
+</LinearLayout>

@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Emele Delivery App</string>
     <string name="title_activity_login">Login</string>
+    <string name="_22_duong_so_147_phuoc_long_b_quan_9_thanh_pho_ho_chi_minh">22, Duong so 147, Phuoc Long B, Quan 9, Thanh Pho Ho Chi Minh</string>
+    <string name="sort_by"> Sort by:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="facebook_app_id">283740247620840</string>
     <string name="default_web_client_id">23209393665-9ml2662fsia935p4b0a2nkdu3ru4p9j3.apps.googleusercontent.com</string>
     <!-- TODO: Remove or change this placeholder text -->
