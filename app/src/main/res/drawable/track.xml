@@ -1,0 +1,27 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/primary"/>
+            <size android:height="8dp"/>
+            <corners android:radius="30dp"/>
+        </shape>
+    </item>
+
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/lightgray"/>
+            <size android:height="8dp"/>
+            <corners android:radius="30dp"/>
+        </shape>
+    </item>
+
+<!--    <item-->
+<!--        android:state_checked="true"-->
+<!--        android:drawable="@drawable/track_accept">-->
+<!--    </item>-->
+<!--    <item-->
+<!--        android:state_checked="false"-->
+<!--        android:drawable="@drawable/track_stopped">-->
+<!--    </item>-->
+
+</selector>

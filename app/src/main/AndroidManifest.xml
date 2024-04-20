@@ -3,20 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FuduDelivery"
+        android:theme="@style/AppTheme"
         tools:targetApi="31" >
-
-        <activity
-            android:name=".Login.Login"
-            android:exported="false"
-            android:label="@string/title_activity_login"
-            android:theme="@style/Theme.FuduDelivery" />
 
         <activity
             android:name=".GetStarted.GetStarted"
@@ -28,40 +23,79 @@
         </activity>
 
         <activity
+            android:name=".Login.Login"
+            android:exported="true" />
+
+        <activity
             android:name=".GetStarted.GetStartedSecond"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Restaurant.Profile.RestaurantProfile"
+            android:exported="true" >
         </activity>
 
         <activity
             android:name=".Login.ForgetPassword"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".Login.NewPassword"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".Login.SignUp"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Login.VerifyEmail"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".Restaurant.MainRestaurant.MainRestaurant"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".Restaurant.RestaurantDetail.RestaurantDetail"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".Restaurant.RestaurantMenu.RestaurantMenu"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".Restaurant.RestaurantMenu.CategoryDetail"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".Restaurant.RestaurantMenu.NewMenu"
+            android:exported="true" >
+        </activity>
+
+        <activity
+            android:name=".Shipper.NewOrderHomepage"
+            android:exported="true"
+            android:label="NewOrderHomepage" />
+
+        <activity
+            android:name=".Shipper.ShipperMain"
+            android:exported="true"
+            android:label="ShipperMain" />
+
+        <activity
+            android:name=".Shipper.ShipperProfile"
+            android:exported="true"
+            android:label="ShipperProfile" />
+
 
         <activity
             android:name=".Home.Customer"
@@ -83,5 +117,6 @@
 
 
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

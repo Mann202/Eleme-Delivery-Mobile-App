@@ -8,9 +8,15 @@
     <color name="fourthary">#E6F4F1</color>
     <color name="darkbg">#2A3738</color>
     <color name="secondarybg">#324B4C</color>
+    <color name="lightwhite">#828282</color>
     <color name="whiteedt">#EBEBEB</color>
+    <color name="white50">#80FFFFFF</color>
     <color name="lightdark">#324B4C</color>
     <color name="skyblue">#5FDEE2</color>
     <color name="darkgrey">#8F8E72</color>
     <color name="sortby">#9FFFFF</color>
+    <color name="gray">#828282</color>
+    <color name="lightgray">#D7D7D7</color>
+    <color name="transparent">#00000000</color>
+    <color name="red">#FF0000</color>
 </resources>

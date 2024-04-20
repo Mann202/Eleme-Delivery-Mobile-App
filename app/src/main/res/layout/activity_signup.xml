@@ -8,6 +8,19 @@
     android:gravity="start"
     android:layout_height="match_parent"
     tools:context=".Login.SignUp">
+
+    <ImageView
+        android:id="@+id/backward"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:id="@+id/signuptitle"
@@ -31,13 +44,13 @@
         android:textSize="18sp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Please enter your phone number to register
+        android:text="Please enter your email address to register
 a new account"
         />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:id="@+id/phonenumber"
+        android:id="@+id/email"
         android:layout_height="wrap_content"
         android:layout_below="@id/signupdescription"
         android:layout_marginStart="20dp"
@@ -45,20 +58,182 @@ a new account"
         android:layout_marginEnd="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailField"
             style="@style/EditTextLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:drawableStart="@drawable/baseline_phone_24"
+            android:drawableStart="@drawable/baseline_email_24"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="Phone Number"
-            android:inputType="number"
+            android:hint="Email address"
+            android:inputType="text"
             android:textColorHighlight="@color/primary"
             android:textColorHint="@color/whiteedt"
             android:textColorLink="@color/primary" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/name"
+        android:visibility="gone"
+        android:layout_below="@id/signupdescription"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditTextLogin"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/happy"
+            android:drawableTint="#C2CECE"
+            android:inputType="text"
+            android:textColorHint="@color/whiteedt"
+            android:textColor="@color/black"
+            android:hint="Name" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/password"
+        android:visibility="gone"
+        android:layout_below="@id/signupdescription"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:passwordToggleEnabled="true"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditTextLogin"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawableTint="#C2CECE"
+            android:inputType="textPassword"
+            android:textColorHint="@color/whiteedt"
+            android:textColor="@color/black"
+            android:hint="Password" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:id="@+id/repassword"
+        android:layout_below="@id/password"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:passwordToggleEnabled="true"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/repasswordField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditTextLogin"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawableTint="#C2CECE"
+            android:inputType="textPassword"
+            android:textColorHint="@color/whiteedt"
+            android:textColor="@color/black"
+            android:hint="Re-enter password" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/verificationCodeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/email"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editText1"
+            style="@style/TextVerrification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:maxEms="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/editText2"
+            style="@style/TextVerrification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:maxEms="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/editText3"
+            style="@style/TextVerrification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:maxEms="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/editText4"
+            style="@style/TextVerrification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:maxEms="1"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/editText5"
+            style="@style/TextVerrification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:maxEms="1"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/editText6"
+            style="@style/TextVerrification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxEms="1"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1" />
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/confirmBtn"
@@ -66,6 +241,45 @@ a new account"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="Send"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        style="@style/PrimaryButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/nextBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Next"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        style="@style/PrimaryButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitNameBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Continue"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        style="@style/PrimaryButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Continue"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"

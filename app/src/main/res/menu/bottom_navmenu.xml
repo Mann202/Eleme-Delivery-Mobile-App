@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="New order"
+        android:icon="@drawable/ic_new_order"
+        android:id="@+id/mnneworder"/>
+    <item
+        android:title="Order History"
+        android:icon="@drawable/orderhistory_icon"
+        android:id="@+id/mnorderhistory"/>
+    <item
+        android:title="Income"
+        android:icon="@drawable/income_icon"
+        android:id="@+id/mnincome"/>
+    <item
+        android:title="Account"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:id="@+id/mnaccount"/>
+</menu>

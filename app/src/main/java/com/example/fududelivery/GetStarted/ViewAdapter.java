@@ -17,7 +17,7 @@ public class ViewAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer[] images={R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background};
+    private Integer[] images={R.drawable.food_delivery_restaurant_review_stars,R.drawable.shipping_truck_fast,R.drawable.ic_certificate,R.drawable.streamlinehq_money_cash_bill_1____________line_48_ico_yfoicjymrxa88emm};
 
     private String[] quotes = {"Delicious Food", "Fast Shipping", "Certificate Food", "Payment Online"};
 
