@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="318dp"
+    android:layout_height="350dp"
+    android:background="@drawable/dialog_background"
+    android:gravity="start">
+
+    <ImageView
+        android:id="@+id/sadIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_sadicon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/contextText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cancelorderPopup"
+        android:textAlignment="center"
+        android:textColor="@color/secondary"
+        android:fontFamily="@font/lato_bold"
+        android:textFontWeight="900"
+        android:textSize="25sp"
+        android:layout_below="@id/sadIcon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/improvementText"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cancelordermsg"
+        android:textColor="@color/lightwhite"
+        android:fontFamily="@font/lato_regular"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:layout_below="@id/contextText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_button"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/white"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        style="@style/SaveButton"/>
+
+</RelativeLayout>
