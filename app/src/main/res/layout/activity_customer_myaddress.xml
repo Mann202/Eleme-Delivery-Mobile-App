@@ -5,13 +5,22 @@
     android:layout_gravity="start"
     android:background="@color/whiteedt">
 
+    <LinearLayout
+        android:id="@+id/backwardGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp"
+        android:padding="16dp">
     <ImageView
-        android:id="@+id/backIcon"
+        android:id="@+id/backward"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:src="@drawable/baseline_arrow_back_ios_24"
-        android:layout_marginTop="73dp"
-        android:layout_marginStart="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="20dp"
         android:scaleX="1.2"
         android:scaleY="1.2"
         />
@@ -19,21 +28,34 @@
         android:layout_width="wrap_content"
         android:id="@+id/ProfileTitle"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="My address"
+        android:layout_marginStart="@dimen/margin_large"
+        android:text="My Address"
         android:fontFamily="@font/lato_bold"
-        android:textColor="@color/lightdark"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="63dp"
+        android:textColor="@color/black"
+        android:textFontWeight="900"
         android:textSize="35sp"
+        android:layout_gravity="center_vertical"
         style="@style/headerText"/>
+    </LinearLayout>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/AddressList"
+        android:layout_below="@id/backwardGroup"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_small"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/black"
+        android:text="Address"
+        android:textSize="18sp"/>
 
     <RelativeLayout
         android:id="@+id/AddressItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ProfileTitle"
-        android:layout_marginTop="@dimen/margin_extra_large"
+        android:layout_below="@id/AddressList"
+        android:layout_marginTop="@dimen/margin_small"
         android:padding="16dp">
 
         <ImageView
