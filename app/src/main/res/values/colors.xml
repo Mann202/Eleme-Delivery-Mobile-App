@@ -10,4 +10,7 @@
     <color name="secondarybg">#324B4C</color>
     <color name="whiteedt">#EBEBEB</color>
     <color name="lightdark">#324B4C</color>
+    <color name="skyblue">#5FDEE2</color>
+    <color name="darkgrey">#8F8E72</color>
+    <color name="sortby">#9FFFFF</color>
 </resources>

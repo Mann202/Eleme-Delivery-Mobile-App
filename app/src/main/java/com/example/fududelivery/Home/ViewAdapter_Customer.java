@@ -17,7 +17,7 @@ public class ViewAdapter_Customer extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer[] images={R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background};
+    private Integer[] images={R.drawable.img_9,R.drawable.img_10,R.drawable.img_11,R.drawable.img_12, R.drawable.img_13};
 
     public ViewAdapter_Customer(Context context)
     {

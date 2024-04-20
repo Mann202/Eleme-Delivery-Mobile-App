@@ -1,20 +1,21 @@
 package com.example.fududelivery.ExploreTitle;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.fududelivery.R;
-
 import java.util.List;
 
 public class ViewAdapter_Title extends RecyclerView.Adapter<ViewAdapter_Title.TitleViewHolder> {
     private List<Title> mTitles;
-
     public void setData(List<Title> list) {
         this.mTitles = list;
         notifyDataSetChanged();

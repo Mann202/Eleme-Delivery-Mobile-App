@@ -1,6 +1,7 @@
 package com.example.fududelivery.Home;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -19,6 +21,7 @@ import com.example.fududelivery.ExploreTitle.Title;
 import com.example.fududelivery.Food.Food;
 import com.example.fududelivery.FoodList.FoodList;
 import com.example.fududelivery.FoodList.ViewAdapter_FoodList;
+import com.example.fududelivery.Home.FastFood.FastFood;
 import com.example.fududelivery.R;
 
 import java.util.ArrayList;
@@ -31,8 +34,9 @@ public class Customer extends AppCompatActivity {
     ViewAdapter_Customer viewAdapter;
     RecyclerView rcvExploreList;
     ViewAdapter_ExploreList viewAdapterExploreList;
-
     GridLayout mainGrid;
+    RecyclerView expRCV;
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +87,7 @@ public class Customer extends AppCompatActivity {
         listFood.add(new Food(R.drawable.dishes_03, "Food 03"));
         listFood.add(new Food(R.drawable.dishes_04, "Food 04"));
 
-        FoodList.add(new FoodList("Popular in your area", listFood));
+        FoodList.add(new FoodList("", listFood));
         return FoodList;
     }
 private List<ExploreList> getListExplore() {

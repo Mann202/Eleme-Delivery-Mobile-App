@@ -42,7 +42,7 @@ public class ViewAdapter_ExploreList extends RecyclerView.Adapter<ViewAdapter_Ex
         if(exploreList == null) {
             return;
         }
-        holder.tvExploreMore.setText(exploreList .getNameExploreList());
+        holder.tvExploreMore.setText(exploreList.getNameExploreList());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager (mContext, RecyclerView.HORIZONTAL, false);
         holder.rcvTitle.setLayoutManager(linearLayoutManager);
         ViewAdapter_Title titleAdapter = new ViewAdapter_Title();
