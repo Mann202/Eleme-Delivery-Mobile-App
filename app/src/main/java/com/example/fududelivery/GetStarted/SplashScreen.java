@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.Login.Login;
+import com.example.fududelivery.Login.LoginCaseManager;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
@@ -22,26 +23,13 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         UserSessionManager sessionManager = new UserSessionManager(getApplicationContext());
+        LoginCaseManager loginCaseManager = new LoginCaseManager(getApplicationContext());
 
         if(sessionManager.isLoggedIn()) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    switch (sessionManager.getUserRole()){
-                        case "1":
-                            Intent intentCustomer = new Intent(SplashScreen.this, Customer.class);
-                            startActivity(intentCustomer);
-                            break;
-                        case "2":
-                            Intent intentRestaurant = new Intent(SplashScreen.this, MainRestaurant.class);
-                            startActivity(intentRestaurant);
-                            break;
-                        case "3":
-                            Intent intentShipper = new Intent(SplashScreen.this, ShipperMain.class);
-                            startActivity(intentShipper);
-                            break;
-                        default:
-                    }
+                    loginCaseManager.loginWithRoleID(sessionManager.getUserRole());
                     finish();
                 }
             }, 3000);

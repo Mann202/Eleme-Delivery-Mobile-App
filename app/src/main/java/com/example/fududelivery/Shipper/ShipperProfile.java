@@ -9,7 +9,10 @@ import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.fududelivery.Login.Login;
+import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 
 public class ShipperProfile extends AppCompatActivity {
@@ -18,6 +21,9 @@ public class ShipperProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipper_account);
 
+        UserSessionManager userSessionManager = new UserSessionManager(getApplicationContext());
+
+        AppCompatButton logoutBtn = findViewById(R.id.logout_button);
         //Spinner language
         String[] languages = {"English", "Vietnamese"};
         Spinner spinner_language = findViewById(R.id.sn_language_shipper);
@@ -51,6 +57,17 @@ public class ShipperProfile extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userSessionManager.logoutUser();
+                Intent loginIntent = new Intent(ShipperProfile.this, Login.class);
+                startActivity(loginIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finishAffinity();
             }
         });
     }

@@ -51,6 +51,8 @@ public class UserSessionManager {
     // Method logout
     public void logoutUser() {
         editor.putBoolean(KEY_IS_LOGGED_IN, false);
+        editor.putString(USER_ROLE, "");
+        editor.putString(USER_INFOR, "");
         editor.commit();
     }
 }

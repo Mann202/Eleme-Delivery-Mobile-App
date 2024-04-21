@@ -36,12 +36,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class SignInWithGoogle {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     protected static final int RC_SIGN_IN = 9001;
     private Activity mActivity;
+    private String name;
 
     public SignInWithGoogle(Activity activity) {
         mAuth = FirebaseAuth.getInstance();
@@ -70,6 +72,7 @@ public class SignInWithGoogle {
                     try {
                         GoogleSignInAccount account = task.getResult(ApiException.class);
                         firebaseAuthWithGoogle(account.getIdToken());
+                        name = account.getDisplayName();
                     } catch (ApiException e) {
                         Log.d("Debug", "Google sign in failed", e);
                         Toast.makeText(mActivity, "Google sign in failed", Toast.LENGTH_SHORT).show();
@@ -82,8 +85,11 @@ public class SignInWithGoogle {
 
     private void firebaseAuthWithGoogle(String idToken) {
         Log.d("Debug", "firebaseAuthWithGoole");
+        LoginCaseManager loginCaseManager = new LoginCaseManager(mActivity);
+        UserSessionManager userSessionManager = new UserSessionManager(mActivity);
         FirebaseFirestore firestoreInstance = getFirestoreInstance(mActivity);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -91,86 +97,53 @@ public class SignInWithGoogle {
                         Toast.makeText(mActivity, "Sign in with Google successful", Toast.LENGTH_SHORT).show();
 
                         String userUid = user.getUid();
-
-                        firestoreInstance.collection("Users").document(userUid)
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            DocumentSnapshot document = task.getResult();
-                                            if (document.exists()) {
-                                                //Neu user da ton tai, query role id de chuyen vao intent
-                                                firestoreInstance.collection("Users").whereEqualTo("userUid", userUid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                    @Override
-                                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                                            String roleID = document.getString("role_id");
-                                                            if (roleID != null) {
-                                                                Log.d("Debug", "Role ID: " + roleID);
-
-                                                                switch (roleID) {
-                                                                    case "1":
-                                                                        Intent intentRestaurant = new Intent(mActivity, MainRestaurant.class);
-                                                                        mActivity.startActivity(intentRestaurant);
-                                                                        mActivity.overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                                                                        break;
-                                                                    case "3":
-                                                                        Intent intentShipper = new Intent(mActivity, ShipperMain.class);
-                                                                        mActivity.startActivity(intentShipper);
-                                                                        mActivity.overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                                                                        break;
-                                                                    default:
-                                                                        // Xử lý khi roleID không phù hợp với các trường hợp trên
-                                                                }
-                                                            } else {
-                                                                Log.d("Debug", "roleID is null");
-                                                            }
-                                                            Toast.makeText(mActivity, "Login successfully.",
-                                                                    Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Log.w("Debug", "Error getting documents.", e);
-                                                    }
-                                                });
+                        firestoreInstance.collection("Users").whereEqualTo("userUid", userUid).get()
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        QuerySnapshot querySnapshot = task1.getResult();
+                                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                            Log.v("Debug", "Document exists");
+                                            DocumentSnapshot document = querySnapshot.getDocuments().get(0);
+                                            String roleId = document.getString("roleId");
+                                            if (roleId != null && !roleId.isEmpty()) {
+                                                loginCaseManager.loginWithRoleID(roleId);
+                                                userSessionManager.loginUserRole(roleId);
+                                                userSessionManager.loginUserState();
+                                                userSessionManager.loginUserInformation(userUid);
                                             } else {
-                                                //User khong ton tai, them user moi vao firestore
-                                                String name = "Sign-in Google";
-                                                Map<String, Object> userData = new HashMap<>();
-                                                userData.put("userUid", userUid);
-                                                userData.put("name", name);
-                                                userData.put("roleID", 1);
-
-                                                firestoreInstance.collection("Users").add(userData)
-                                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                            @Override
-                                                            public void onSuccess(DocumentReference documentReference) {
-                                                                Log.d("Debug", "DocumentSnapshot written with ID: " + documentReference.getId());
-                                                            }
-                                                        })
-                                                        .addOnFailureListener(new OnFailureListener() {
-                                                            @Override
-                                                            public void onFailure(@NonNull Exception e) {
-                                                                Log.w("Debug", "Error adding document", e);
-                                                            }
-                                                        });
+                                                Toast.makeText(mActivity, "Error log-in with Google. Please contact us for further information!", Toast.LENGTH_SHORT).show();
                                             }
                                         } else {
-                                            Toast.makeText(mActivity, "Sign-in with Google failed. Please try again later", Toast.LENGTH_SHORT).show();
+                                            Log.v("Debug", "Document does not exist");
+                                            Map<String, Object> userData = new HashMap<>();
+                                            userData.put("userUid", userUid);
+                                            userData.put("name", name);
+                                            userData.put("roleId", "1");
+
+                                            firestoreInstance.collection("Users").add(userData)
+                                                    .addOnSuccessListener(documentReference -> {
+                                                        Log.d("Debug", "DocumentSnapshot written with ID: " + documentReference.getId());
+                                                        loginCaseManager.loginWithRoleID("1");
+                                                        userSessionManager.loginUserRole("1");
+                                                        userSessionManager.loginUserState();
+                                                        userSessionManager.loginUserInformation(userUid);
+                                                    })
+                                                    .addOnFailureListener(e1 -> {
+                                                        Log.w("Debug", "Error adding document", e1);
+                                                    });
                                         }
+                                    } else {
+                                        Log.d("Debug", "Error getting documents: ", task1.getException());
                                     }
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.v("Debug", e.toString());
                                 });
-                        //Thay activity sau khi dang nhap thanh cong
-                        Intent intent = new Intent(mActivity, MainRestaurant.class);
-                        mActivity.startActivity(intent);
-                        mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } else {
                         Log.d("Debug", "signInWithCredential:failure", task.getException());
                         Toast.makeText(mActivity, "Sign in with Google failed", Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 }

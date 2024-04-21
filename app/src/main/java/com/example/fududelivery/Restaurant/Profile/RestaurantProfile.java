@@ -1,6 +1,7 @@
 package com.example.fududelivery.Restaurant.Profile;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.fududelivery.Customer.CustomerProfile;
+import com.example.fududelivery.Login.Login;
+import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 
 public class RestaurantProfile extends AppCompatActivity {
@@ -16,6 +20,7 @@ public class RestaurantProfile extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actitivity_restaurantprofile);
+        UserSessionManager userSessionManager = new UserSessionManager(getApplicationContext());
 
         Button logoutBtn = findViewById(R.id.logoutBtn);
 
@@ -24,7 +29,11 @@ public class RestaurantProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Show the logout confirmation popup
-                showLogoutConfirmation();
+                userSessionManager.logoutUser();
+                Intent loginIntent = new Intent(RestaurantProfile.this, Login.class);
+                startActivity(loginIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finishAffinity();
             }
         });
     }
@@ -35,8 +44,7 @@ public class RestaurantProfile extends AppCompatActivity {
                 .setMessage("Are you sure you want to log out?") // Set the message to show in the dialog
                 .setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // User clicked the "Log Out" button, add your logout logic here
-                        //logoutUser(); // This is a placeholder, replace with your actual logout method
+
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -45,7 +53,7 @@ public class RestaurantProfile extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 })
-                .setIcon(android.R.drawable.ic_dialog_alert) // Set an icon for the dialog
+                .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
 }

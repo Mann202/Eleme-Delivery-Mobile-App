@@ -66,6 +66,7 @@ public class Login extends AppCompatActivity {
         FirebaseFirestore firestoreInstance = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         UserSessionManager sessionManager = new UserSessionManager(getApplicationContext());
+        LoginCaseManager loginCaseManager = new LoginCaseManager(getApplicationContext());
 
         FacebookSdk.setApplicationId("283740247620840");
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -110,72 +111,51 @@ public class Login extends AppCompatActivity {
                 String password = passwordField.getText().toString();
                 String email = emailField.getText().toString();
 
-                if (!password.isEmpty() && !email.isEmpty()) {
-                    mAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        updateUI(user);
-                                        String Uid = user.getUid();
-                                        Log.v("Debug", Uid);
 
-                                        sessionManager.loginUserState();
-                                        sessionManager.loginUserInformation(Uid);
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                    String Uid = user.getUid();
+                                    Log.v("Debug", Uid);
 
-                                        firestoreInstance.collection("Users").whereEqualTo("userUid", Uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                                    String roleID = document.getString("roleID");
+                                    sessionManager.loginUserState();
+                                    sessionManager.loginUserInformation(Uid);
 
-                                                    if (roleID != null) {
-                                                        Log.d("Debug", "Role ID: " + roleID);
-                                                        sessionManager.loginUserRole(roleID);
+                                    firestoreInstance.collection("Users").whereEqualTo("userUid", Uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                                String roleID = document.getString("roleID");
 
-                                                        switch (roleID) {
-                                                            case "1":
-                                                                Intent intentCustomer = new Intent(Login.this, Customer.class);
-                                                                startActivity(intentCustomer);
-                                                                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                                                                break;
-                                                            case "2":
-                                                                Intent intentRestaurant = new Intent(Login.this, MainRestaurant.class);
-                                                                startActivity(intentRestaurant);
-                                                                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                                                                break;
-                                                            case "3":
-                                                                Intent intentShipper = new Intent(Login.this, ShipperMain.class);
-                                                                startActivity(intentShipper);
-                                                                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                                                                break;
-                                                            default:
-                                                                Toast.makeText(Login.this, "Login failed. Please try again or contact us!", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    } else {
-                                                        Log.d("Debug", "roleID is null");
-                                                    }
-                                                    Toast.makeText(Login.this, "Login successfully.",
-                                                            Toast.LENGTH_SHORT).show();
+                                                if (roleID != null) {
+                                                    Log.d("Debug", "Role ID: " + roleID);
+                                                    sessionManager.loginUserRole(roleID);
+                                                    loginCaseManager.loginWithRoleID(roleID);
+                                                } else {
+                                                    Log.d("Debug", "roleID is null");
                                                 }
+                                                Toast.makeText(Login.this, "Login successfully.",
+                                                        Toast.LENGTH_SHORT).show();
                                             }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w("Debug", "Error getting documents.", e);
-                                            }
-                                        });
-                                    } else {
-                                        Toast.makeText(Login.this, "Authentication failed. Please check your password or email again.",
-                                                Toast.LENGTH_SHORT).show();
-                                        updateUI(null);
-                                    }
+                                            finishAffinity();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w("Debug", "Error getting documents.", e);
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(Login.this, "Authentication failed. Please check your password or email again.",
+                                            Toast.LENGTH_SHORT).show();
+                                    updateUI(null);
                                 }
-                            });
-                } else {
-                    Toast.makeText(Login.this, "Please enter your password and email.", Toast.LENGTH_SHORT).show();
-                }
+                            }
+                        });
             }
         });
 
@@ -254,14 +234,13 @@ public class Login extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            // Check if email and password meet the conditions
             boolean isEmailValid = emailField.getText().toString().length() > 10;
             boolean isPasswordValid = passwordField.getText().toString().length() >= 8;
 
-            // Enable or disable login button based on conditions
             loginButton.setEnabled(isEmailValid && isPasswordValid);
-            loginButton.setTextColor(ContextCompat.getColor(Login.this, R.color.white));
-
+            if(loginButton.isEnabled()) {
+                loginButton.setTextColor(ContextCompat.getColor(Login.this, R.color.white));
+            }
         }
 
         @Override

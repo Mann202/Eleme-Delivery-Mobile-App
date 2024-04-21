@@ -21,6 +21,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.fududelivery.Customer.CustomerProfile;
 import com.example.fududelivery.Customer.MainOrder;
+import com.example.fududelivery.Customer.MyFavorite;
+import com.example.fududelivery.Customer.SavedPlaces;
 import com.example.fududelivery.Customer.TermAndCondition;
 import com.example.fududelivery.ExploreList.ExploreList;
 import com.example.fududelivery.ExploreList.ViewAdapter_ExploreList;
@@ -85,31 +87,31 @@ public class Customer extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.myOrder) {
-                    Intent myOrderIntent = new Intent(Customer.this, MainOrder.class);
-                    startActivity(myOrderIntent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                } else if (item.getItemId() == R.id.termAndCondition) {
-                    Intent termAndConditionIntent = new Intent(Customer.this, TermAndCondition.class);
-                    startActivity(termAndConditionIntent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                } else if (item.getItemId() == R.id.myFavorites) {
-                    Intent myFavoritesIntent = new Intent(Customer.this, MainOrder.class);
-                    startActivity(myFavoritesIntent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                } else if (item.getItemId() == R.id.savePlaces) {
-                    Intent savePlacesIntent = new Intent(Customer.this, MainOrder.class);
-                    startActivity(savePlacesIntent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                } else if (item.getItemId() == R.id.savePlaces) {
-                    Intent paymentManagementIntent = new Intent(Customer.this, MainOrder.class);
-                    startActivity(paymentManagementIntent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                } else if (item.getItemId() == R.id.myAccount) {
-                    Intent paymentManagementIntent = new Intent(Customer.this, CustomerProfile.class);
-                    startActivity(paymentManagementIntent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                Intent intent = null;
+                int transitionIn = R.anim.slide_in_right;
+                int transitionOut = R.anim.slide_out_left;
+
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.myOrder) {
+                    intent = new Intent(Customer.this, MainOrder.class);
+                } else if (itemId == R.id.termAndCondition) {
+                    intent = new Intent(Customer.this, TermAndCondition.class);
+                } else if (itemId == R.id.myFavorites) {
+                    intent = new Intent(Customer.this, MyFavorite.class);
+                } else if (itemId == R.id.savePlaces) {
+                    intent = new Intent(Customer.this, SavedPlaces.class);
+                } else if (itemId == R.id.paymentManagement) {
+                    intent = new Intent(Customer.this, MainOrder.class);
+                } else if (itemId == R.id.myAccount) {
+                    intent = new Intent(Customer.this, CustomerProfile.class);
                 }
+
+                if (intent != null) {
+                    startActivity(intent);
+                    overridePendingTransition(transitionIn, transitionOut);
+                }
+
                 drawer.closeDrawer(GravityCompat.END);
                 return true;
             }
