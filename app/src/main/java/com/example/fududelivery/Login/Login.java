@@ -1,7 +1,11 @@
 package com.example.fududelivery.Login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 
 import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.R;
@@ -48,6 +53,9 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
 
     private SignInWithGoogle signInWithGoogle;
+    AppCompatButton loginButton;
+    TextInputEditText passwordField;
+    TextInputEditText emailField;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
 
@@ -57,6 +65,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         FirebaseFirestore firestoreInstance = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        UserSessionManager sessionManager = new UserSessionManager(getApplicationContext());
 
         FacebookSdk.setApplicationId("283740247620840");
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -68,6 +77,12 @@ public class Login extends AppCompatActivity {
         ImageView facebookLogin = findViewById(R.id.facebookLogo);
         ImageView xLogin = findViewById(R.id.XLogo);
         ImageView phoneLogin = findViewById(R.id.phoneLogo);
+
+        passwordField = findViewById(R.id.passwordField);
+        emailField = findViewById(R.id.emailField);
+        loginButton = findViewById(R.id.loginBtn);
+        emailField.addTextChangedListener(textWatcher);
+        passwordField.addTextChangedListener(textWatcher);
 
         signInWithGoogle = new SignInWithGoogle(this);
 
@@ -105,13 +120,19 @@ public class Login extends AppCompatActivity {
                                         updateUI(user);
                                         String Uid = user.getUid();
                                         Log.v("Debug", Uid);
+
+                                        sessionManager.loginUserState();
+                                        sessionManager.loginUserInformation(Uid);
+
                                         firestoreInstance.collection("Users").whereEqualTo("userUid", Uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                             @Override
                                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                                 for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                                     String roleID = document.getString("roleID");
+
                                                     if (roleID != null) {
                                                         Log.d("Debug", "Role ID: " + roleID);
+                                                        sessionManager.loginUserRole(roleID);
 
                                                         switch (roleID) {
                                                             case "1":
@@ -224,6 +245,30 @@ public class Login extends AppCompatActivity {
             signInWithGoogle.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // Unused
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // Check if email and password meet the conditions
+            boolean isEmailValid = emailField.getText().toString().length() > 10;
+            boolean isPasswordValid = passwordField.getText().toString().length() >= 8;
+
+            // Enable or disable login button based on conditions
+            loginButton.setEnabled(isEmailValid && isPasswordValid);
+            loginButton.setTextColor(ContextCompat.getColor(Login.this, R.color.white));
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // Unused
+        }
+    };
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d("FacebookLogin", "handleFacebookAccessToken:" + token);
