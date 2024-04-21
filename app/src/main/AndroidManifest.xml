@@ -28,7 +28,15 @@
 
         <activity
             android:name=".GetStarted.GetStartedSecond"
-            android:exported="true" >
+            android:exported="true"
+            >
+        </activity>
+
+        <activity
+            android:name=".GetStarted.SplashScreen"
+            android:exported="true"
+            android:theme="@style/AppThemeWhite"
+            >
         </activity>
 
         <activity
@@ -125,6 +133,11 @@
 
         <activity
             android:name=".Customer.MainOrder"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Customer.CustomerProfile"
             android:exported="true">
         </activity>
 

@@ -43,57 +43,19 @@ public class GetStarted extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         // For Splash Screen
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        boolean firstRun = pref.getBoolean("firstRun", true);
-        SharedPreferences.Editor editor = pref.edit();
-        if (firstRun) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        if (isFirstTime) {
             Log.i("debug:", "firstRunApp = true");
-            editor.putBoolean("firstRun", false);
+            editor.putBoolean("isFirstTime", false);
             editor.apply();
         } else {
             Log.i("debug:", "firstRunApp = false");
-            if (user == null) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
-            } else {
-                String userUid = user.getUid();
-                firestoreInstance.collection("Users").whereEqualTo("userUid", userUid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            String roleID = document.getString("role_id");
-                            if (roleID != null) {
-                                Log.d("Debug", "Role ID: " + roleID);
-
-                                switch (roleID) {
-                                    case "1":
-                                        Intent intentRestaurant = new Intent(getApplicationContext(), MainRestaurant.class);
-                                        startActivity(intentRestaurant);
-                                        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                                        return;
-                                    case "3":
-                                        Intent intentShipper = new Intent(getApplicationContext(), ShipperMain.class);
-                                        startActivity(intentShipper);
-                                        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                                        return;
-                                    default:
-                                        // Xử lý khi roleID không phù hợp với các trường hợp trên
-                                        break;
-                                }
-                            } else {
-                                Log.d("Debug", "roleID is null");
-                            }
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Debug", "Error getting documents.", e);
-                    }
-                });
-            }
+            startActivity(new Intent(GetStarted.this, SplashScreen.class));
+            finish();
         }
-
         //End splash screen
 
         viewPager = findViewById(R.id.view_pager);

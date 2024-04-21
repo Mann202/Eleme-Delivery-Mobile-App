@@ -15,11 +15,11 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.fududelivery.Customer.CustomerProfile;
 import com.example.fududelivery.Customer.MainOrder;
 import com.example.fududelivery.Customer.TermAndCondition;
 import com.example.fududelivery.ExploreList.ExploreList;
@@ -30,9 +30,6 @@ import com.example.fududelivery.FoodList.FoodList;
 import com.example.fududelivery.FoodList.ViewAdapter_FoodList;
 import com.example.fududelivery.Home.FastFood.FastFood;
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
-import com.example.fududelivery.Restaurant.Profile.RestaurantProfile;
-import com.example.fududelivery.Restaurant.RestaurantMenu.RestaurantMenu;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -106,6 +103,10 @@ public class Customer extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 } else if (item.getItemId() == R.id.savePlaces) {
                     Intent paymentManagementIntent = new Intent(Customer.this, MainOrder.class);
+                    startActivity(paymentManagementIntent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                } else if (item.getItemId() == R.id.myAccount) {
+                    Intent paymentManagementIntent = new Intent(Customer.this, CustomerProfile.class);
                     startActivity(paymentManagementIntent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
