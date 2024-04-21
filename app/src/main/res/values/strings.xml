@@ -7,4 +7,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cancelordermsg">We will continue to improve our service and satisfy you on the next order.</string>
     <string name="cancelorderPopup">We are so sad about your cancellation</string>
+    <string name="name_hint">Nguyen Van A</string>
+    <string name="phonenumber_hint">0999123456</string>
+    <string name="txtEditAddress">Edit Address</string>
+    <string name="TxtViewName">Name</string>
+    <string name="txtPhoneNumber">Phone number</string>
+    <string name="txtCity">City</string>
+    <string name="txtDistrict">District</string>
+    <string name="txtWard">Ward</string>
+    <string name="txtStreet">Street</string>
+    <string name="edtStreet">12 Phan Dinh Phung</string>
+    <string name="txtcheckbox">Set as Default Address</string>
 </resources>
