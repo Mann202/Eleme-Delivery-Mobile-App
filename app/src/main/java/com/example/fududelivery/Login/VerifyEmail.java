@@ -1,5 +1,6 @@
 package com.example.fududelivery.Login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,7 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.R;
+import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -82,7 +85,9 @@ public class VerifyEmail extends AppCompatActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Chuyen vao trong app
+                Intent intent = new Intent(VerifyEmail.this, Customer.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
             }
         });
     }

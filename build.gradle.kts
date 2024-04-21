@@ -4,7 +4,6 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.9.0" apply false
     id("com.google.gms.google-services") version "4.4.1" apply false
 }
-
 buildscript { repositories { mavenCentral() }
     dependencies {
         classpath("com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3")

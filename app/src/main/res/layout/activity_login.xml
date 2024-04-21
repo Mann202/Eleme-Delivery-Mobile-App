@@ -129,6 +129,7 @@
         android:layout_height="wrap_content"
         android:text="Login"
         style="@style/LoginBtn"
+        android:enabled="false"
         />
 
     <RelativeLayout android:layout_height="wrap_content"

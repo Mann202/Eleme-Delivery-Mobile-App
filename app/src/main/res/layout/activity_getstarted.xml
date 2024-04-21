@@ -14,7 +14,7 @@
         android:id="@+id/logo_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/eleme_type"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
 
