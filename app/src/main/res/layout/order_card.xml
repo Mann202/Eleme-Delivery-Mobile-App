@@ -76,7 +76,7 @@
         android:textColor="@color/primary" />
 
     <ImageView
-        android:id="@+id/img_arrow_forward"
+        android:id="@+id/nav_orderdetail"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_alignParentRight="true"

@@ -20,7 +20,7 @@
         android:paddingEnd="25dp">
 
         <ImageView
-            android:id="@+id/img_arrow_back"
+            android:id="@+id/nav_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
@@ -43,7 +43,7 @@
             android:text="Order detail"
             android:textColor="@color/black"
             android:textFontWeight="900"
-            android:layout_toEndOf="@+id/img_arrow_back"
+            android:layout_toEndOf="@+id/nav_back"
             android:textSize="24sp" />
 
     </RelativeLayout>

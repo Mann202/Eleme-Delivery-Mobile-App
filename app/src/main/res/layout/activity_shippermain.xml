@@ -23,7 +23,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:paddingVertical="5dp"
-        app:itemTextColor="@color/black"
+        app:itemTextColor="@color/white"
         app:itemBackground="@color/transparent"
         app:itemIconTint="@color/white"
         app:menu="@menu/bottom_navmenu"/>

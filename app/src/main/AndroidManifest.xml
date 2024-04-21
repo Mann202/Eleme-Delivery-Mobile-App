@@ -97,6 +97,11 @@
             android:exported="true"
             android:label="ShipperProfile" />
 
+        <activity
+            android:name=".Shipper.OrderDetail"
+            android:exported="true"
+            android:label="ShipperDetail" />
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

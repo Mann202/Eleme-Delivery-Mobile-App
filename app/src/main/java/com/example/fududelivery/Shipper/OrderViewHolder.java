@@ -15,7 +15,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
     TextView txtCusName;
     TextView txtCusAddress;
     TextView txtTotal;
-    ImageView imgArrowForward;
+    ImageView nav_orderdetail;
 
     public OrderViewHolder(View itemView){
         super(itemView);
@@ -25,7 +25,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
         txtCusName = itemView.findViewById(R.id.txt_cusname_card);
         txtCusAddress = itemView.findViewById(R.id.txt_cusaddress_card);
         txtTotal = itemView.findViewById(R.id.txt_custotal_card);
-        imgArrowForward = itemView.findViewById(R.id.img_arrow_forward);
+        nav_orderdetail = itemView.findViewById(R.id.nav_orderdetail);
     }
 
     public void bind(Order order) {
