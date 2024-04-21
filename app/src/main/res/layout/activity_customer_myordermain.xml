@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteedt"
+    android:gravity="start">
+
+    <LinearLayout
+        android:id="@+id/backwardGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="47dp"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/backIcon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/titleMyorder"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="My Orders"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/black"
+            android:textFontWeight="900"
+            android:textSize="35sp"
+            android:gravity="center"
+            style="@style/headerText"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backwardGroup"
+        android:orientation="vertical">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/margin_medium"/>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabLayout"
+        android:layout_marginTop="8dp"
+        />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

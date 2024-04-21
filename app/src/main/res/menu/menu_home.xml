@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group_0">
+        <item android:id="@+id/myAccount"
+            android:title="My Account"/>
+    </group>
+    <group android:id="@+id/group_1">
+        <item android:id="@+id/myOrder"
+            android:title="My Order" />
+        <item android:id="@+id/myFavorites"
+            android:title="My Favorites" />
+        <item android:id="@+id/savePlaces"
+            android:title="Save Places" />
+    </group>
+    <group android:id="@+id/group_2">
+        <item android:id="@+id/paymentManagement"
+            android:title="Payment Management" />
+        <item android:id="@+id/termAndCondition"
+            android:title="Term And Condition" />
+    </group>
+
+</menu>

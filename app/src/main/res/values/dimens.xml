@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="text_h1">40sp</dimen>
+    <dimen name="text_h2">32sp</dimen>
+    <dimen name="text_h3">24sp</dimen>
+    <dimen name="text_h4">20sp</dimen>
+    <dimen name="text_h5">16sp</dimen>
+    <dimen name="text_h6">14sp</dimen>
+    <dimen name="text_h7">12sp</dimen>
+    <dimen name="text_h8">10sp</dimen>
+
+    <dimen name="padding_extra_large">48dp</dimen>
+    <dimen name="padding_large">32dp</dimen>
+    <dimen name="padding_medium">24dp</dimen>
+    <dimen name="padding_standard">20dp</dimen>
+    <dimen name="padding_small">16dp</dimen>
+    <dimen name="padding_extra_small">8dp</dimen>
+    <dimen name="padding_extra_extra_small">4dp</dimen>
+
+    <dimen name="margin_extra_extra_extra_large">84dp</dimen>
+    <dimen name="margin_extra_extra_large">64dp</dimen>
+    <dimen name="margin_extra_large">32dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_standard">20dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
+    <dimen name="margin_extra_extra_small">2dp</dimen>
+</resources>

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -84,7 +85,7 @@ public class VerifyEmail extends AppCompatActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VerifyEmail.this, MainRestaurant.class);
+                Intent intent = new Intent(VerifyEmail.this, Customer.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
             }
