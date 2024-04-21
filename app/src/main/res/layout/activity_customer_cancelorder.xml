@@ -13,7 +13,7 @@
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="47dp"
         android:padding="16dp">
 
         <ImageView
@@ -34,6 +34,7 @@
             android:textSize="35sp"
             android:fontFamily="@font/lato_bold"
             android:textColor="@color/black"
+            android:textFontWeight="900"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_gravity="center_vertical"
             />
