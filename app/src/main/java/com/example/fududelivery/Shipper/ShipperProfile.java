@@ -2,9 +2,11 @@ package com.example.fududelivery.Shipper;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
@@ -14,6 +16,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
+import com.example.fududelivery.Restaurant.Profile.RestaurantProfile;
 
 public class ShipperProfile extends AppCompatActivity {
     @Override
@@ -23,18 +26,21 @@ public class ShipperProfile extends AppCompatActivity {
 
         UserSessionManager userSessionManager = new UserSessionManager(getApplicationContext());
 
-        AppCompatButton logoutBtn = findViewById(R.id.logout_button);
-        //Spinner language
+        AppCompatButton logOutBtn = findViewById(R.id.logoutButton);
+        // Spinner language
         String[] languages = {"English", "Vietnamese"};
-        Spinner spinner_language = findViewById(R.id.sn_language_shipper);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_language.setAdapter(adapter);
+        Spinner spinnerLanguage = findViewById(R.id.sn_language_shipper);
+        ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, languages);
+        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLanguage.setAdapter(languageAdapter);
 
-        spinner_language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
+                String selectedLanguage = parent.getItemAtPosition(position).toString();
+                if (selectedLanguage.equals("English")) {
+                } else if (selectedLanguage.equals("Vietnamese")) {
+                }
             }
 
             @Override
@@ -42,17 +48,23 @@ public class ShipperProfile extends AppCompatActivity {
             }
         });
 
-        //Spinner theme
+        // Spinner theme
         String[] themes = {"Light", "Dark"};
-        Spinner spinner_theme = findViewById(R.id.sn_theme_shipper);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, themes);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_theme.setAdapter(adapter2);
+        Spinner spinnerTheme = findViewById(R.id.sn_theme_shipper);
+        ArrayAdapter<String> themeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, themes);
+        themeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTheme.setAdapter(themeAdapter);
 
-        spinner_theme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerTheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
+                String selectedTheme = parent.getItemAtPosition(position).toString();
+                // Thực hiện logic tương ứng với việc chọn chủ đề
+                if (selectedTheme.equals("Light")) {
+                    // Chọn chủ đề sáng
+                } else if (selectedTheme.equals("Dark")) {
+                    // Chọn chủ đề tối
+                }
             }
 
             @Override
@@ -60,9 +72,10 @@ public class ShipperProfile extends AppCompatActivity {
             }
         });
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Show the logout confirmation popup
                 userSessionManager.logoutUser();
                 Intent loginIntent = new Intent(ShipperProfile.this, Login.class);
                 startActivity(loginIntent);

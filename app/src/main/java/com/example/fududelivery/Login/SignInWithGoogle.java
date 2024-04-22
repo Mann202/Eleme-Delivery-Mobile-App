@@ -102,6 +102,7 @@ public class SignInWithGoogle {
                                                 userSessionManager.loginUserRole(roleId);
                                                 userSessionManager.loginUserState();
                                                 userSessionManager.loginUserInformation(userUid);
+                                                mActivity.finishAffinity();
                                             } else {
                                                 //role-id don't exits, make toast.
                                                 Toast.makeText(mActivity, "Error log-in with Google. Please contact us for further information!", Toast.LENGTH_SHORT).show();
