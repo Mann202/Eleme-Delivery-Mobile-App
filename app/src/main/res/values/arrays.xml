@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string-array name="item">
-        <item android:drawable="@drawable/baseline_lock_24">Customer</item>
+        <item>Customer</item>
         <item>Restaurant</item>
         <item>Shipper</item>
+    </string-array>
+
+    <string-array name="language">
+        <item>English</item>
+        <item>Vietnamese</item>
+        <item>Chinese</item>
     </string-array>
 </resources>

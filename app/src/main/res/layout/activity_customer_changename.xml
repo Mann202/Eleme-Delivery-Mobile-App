@@ -40,7 +40,8 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:text="Name"
-        android:textSize="@dimen/text_h5"
+        android:fontFamily="@font/lato_regular"
+        android:textSize="20sp"
         android:textColor="#828282"
         />
 
@@ -54,13 +55,13 @@
 
         <com.google.android.material.textfield.TextInputEditText
             style="@style/EditTextLogin"
+            android:id="@+id/editNameField"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:paddingRight="@dimen/padding_small"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="Nguyen Van A"
             android:inputType="text"
             android:drawableEnd="@drawable/ic_cancel"
             android:textColorHighlight="@color/primary"
@@ -71,16 +72,16 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_button"
+        style="@style/SaveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:fontFamily="@font/lato_bold"
-        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
-        android:layout_alignParentBottom="true"
-        style="@style/SaveButton"/>
+        android:layout_marginBottom="42dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Save"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

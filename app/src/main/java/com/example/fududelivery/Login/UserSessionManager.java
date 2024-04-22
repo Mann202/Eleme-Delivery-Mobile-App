@@ -9,6 +9,9 @@ public class UserSessionManager {
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
     public static final String USER_ROLE = "UserRole";
     private static final String USER_INFOR = "UserInformation";
+    private static final String USER_NAME = "UserName";
+    private static final String USER_PHONE = "UserPhone";
+    private static final String USER_GMAIL = "UserGmail";
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private Context context;
@@ -35,17 +38,48 @@ public class UserSessionManager {
         editor.commit();
     }
 
+    public void loginUserGmail(String gmail) {
+        String gmailValue = (gmail != null) ? gmail : "";
+        editor.putString(USER_GMAIL, gmailValue);
+        editor.commit();
+    }
+
+    public void loginUserPhone(String phone) {
+        String phoneValue = (phone != null) ? phone : "";
+        editor.putString(USER_PHONE, phoneValue);
+        editor.commit();
+    }
+
+
+    public void loginUserName(String name) {
+        String nameValue = (name != null) ? name : "";
+        editor.putString(USER_NAME, nameValue);
+        editor.commit();
+    }
+
     // Method check user's logging
     public boolean isLoggedIn() {
         return pref.getBoolean(KEY_IS_LOGGED_IN, false);
     }
 
     public String getUserInformation() {
-        return pref.getString(USER_INFOR, ".");
+        return pref.getString(USER_INFOR, "");
     }
 
     public String getUserRole() {
-        return pref.getString(USER_ROLE, "1");
+        return pref.getString(USER_ROLE, "");
+    }
+
+    public String getUserName() {
+        return pref.getString(USER_NAME, "");
+    }
+
+    public String getUserGmail() {
+        return pref.getString(USER_GMAIL, "");
+    }
+
+    public String getUserPhone() {
+        return pref.getString(USER_PHONE, "");
     }
 
     // Method logout
@@ -53,6 +87,10 @@ public class UserSessionManager {
         editor.putBoolean(KEY_IS_LOGGED_IN, false);
         editor.putString(USER_ROLE, "");
         editor.putString(USER_INFOR, "");
+        editor.putInt(USER_PHONE, 0);
+        editor.putString(USER_NAME, "");
+        editor.putString(USER_GMAIL, "");
+
         editor.commit();
     }
 }

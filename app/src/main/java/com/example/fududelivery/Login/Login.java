@@ -131,7 +131,15 @@ public class Login extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                                String roleID = document.getString("roleID");
+                                                Log.v("Debug", document.toString());
+                                                String roleID = document.getString("roleId");
+                                                String name = document.getString("name");
+                                                String email = document.getString("email");
+                                                String phone = document.getString("phone");
+
+                                                sessionManager.loginUserGmail(email);
+                                                sessionManager.loginUserName(name);
+                                                sessionManager.loginUserPhone(phone);
 
                                                 if (roleID != null) {
                                                     Log.d("Debug", "Role ID: " + roleID);
