@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -58,6 +60,8 @@ public class Login extends AppCompatActivity {
     TextInputEditText emailField;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
+    private String email;
+    private String password;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class Login extends AppCompatActivity {
         ImageView facebookLogin = findViewById(R.id.facebookLogo);
         ImageView xLogin = findViewById(R.id.XLogo);
         ImageView phoneLogin = findViewById(R.id.phoneLogo);
+        CheckBox rememberMeBox = findViewById(R.id.checkbox_remember_me);
 
         passwordField = findViewById(R.id.passwordField);
         emailField = findViewById(R.id.emailField);
@@ -91,6 +96,7 @@ public class Login extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -106,10 +112,8 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextInputEditText passwordField = findViewById(R.id.passwordField);
-                TextInputEditText emailField = findViewById(R.id.emailField);
-                String password = passwordField.getText().toString();
-                String email = emailField.getText().toString();
+                password = passwordField.getText().toString();
+                email = emailField.getText().toString();
 
 
                 mAuth.signInWithEmailAndPassword(email, password)

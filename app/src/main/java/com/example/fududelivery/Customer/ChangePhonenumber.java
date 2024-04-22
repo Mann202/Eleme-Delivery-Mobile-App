@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +46,16 @@ public class ChangePhonenumber extends AppCompatActivity {
         TextView changephonenumberdescription = findViewById(R.id.changephonenumberdescription);
         LinearLayout verificationCodeContainer = findViewById(R.id.verificationCodeContainer);
 
+<<<<<<< Updated upstream
         sendButton.setOnClickListener(new View.OnClickListener() {
+=======
+        AppCompatEditText phoneEditText = findViewById(R.id.editPhoneText);
+        phoneEditText.setText(userSessionManager.getUserPhone());
+        saveButton = findViewById(R.id.save_button);
+        ImageView backwardBtn = findViewById(R.id.backward);
+
+        backwardBtn.setOnClickListener(new View.OnClickListener() {
+>>>>>>> Stashed changes
             @Override
             public void onClick(View v) {
                 phoneNumberTextInputLayout.setVisibility(View.GONE);
@@ -117,6 +127,7 @@ public class ChangePhonenumber extends AppCompatActivity {
                 timeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
             }
+<<<<<<< Updated upstream
 
             @Override
             public void onFinish() {
@@ -147,3 +158,34 @@ public class ChangePhonenumber extends AppCompatActivity {
         }
     }
 }
+=======
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newPhone = phoneEditText.getText().toString().trim();
+                firestoreInstance.collection("Users")
+                        .whereEqualTo("userUid", userSessionManager.getUserInformation())
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            if (!queryDocumentSnapshots.isEmpty()) {
+                                queryDocumentSnapshots.getDocuments().get(0).getReference()
+                                        .update("phone", newPhone)
+                                        .addOnSuccessListener(aVoid -> {
+                                            Toast.makeText(ChangePhonenumber.this, "Phone number saved: " + newPhone, Toast.LENGTH_SHORT).show();
+                                            userSessionManager.loginUserName(newPhone);
+                                            setResult(RESULT_OK);
+                                            finish();
+                                        })
+                                        .addOnFailureListener(e -> Toast.makeText(ChangePhonenumber.this, "Failed to update phone", Toast.LENGTH_SHORT).show());
+                            } else {
+                                Toast.makeText(ChangePhonenumber.this, "User not found", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(e -> Toast.makeText(ChangePhonenumber.this, e.toString(), Toast.LENGTH_SHORT).show());
+
+            }
+        });
+    }}
+>>>>>>> Stashed changes
