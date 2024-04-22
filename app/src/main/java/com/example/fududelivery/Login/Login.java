@@ -42,6 +42,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -72,6 +73,7 @@ public class Login extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         mCallbackManager = CallbackManager.Factory.create();
+        OAuthProvider.Builder provider = OAuthProvider.newBuilder("twitter.com");
 
         AppCompatButton loginBtn = findViewById(R.id.loginBtn);
         ImageView googleLogin = findViewById(R.id.googleLogo);
@@ -212,7 +214,54 @@ public class Login extends AppCompatActivity {
         xLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Code for X login
+                Task<AuthResult> pendingResultTask = mAuth.getPendingAuthResult();
+                if (pendingResultTask != null) {
+                    pendingResultTask
+                            .addOnSuccessListener(
+                                    new OnSuccessListener<AuthResult>() {
+                                        @Override
+                                        public void onSuccess(AuthResult authResult) {
+                                            // User is signed in.
+                                            // IdP data available in
+                                            // authResult.getAdditionalUserInfo().getProfile().
+                                            Log.v("Debug", authResult.getAdditionalUserInfo().getProfile().toString());
+                                            // The OAuth access token can also be retrieved:
+                                            // ((OAuthCredential)authResult.getCredential()).getAccessToken().
+                                            // The OAuth secret can be retrieved by calling:
+                                            // ((OAuthCredential)authResult.getCredential()).getSecret().
+                                        }
+                                    })
+                            .addOnFailureListener(
+                                    new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.v("Debug", "failed sign-in with X");
+                                        }
+                                    });
+                } else {
+                    mAuth
+                            .startActivityForSignInWithProvider(/* activity= */ Login.this, provider.build())
+                            .addOnSuccessListener(
+                                    new OnSuccessListener<AuthResult>() {
+                                        @Override
+                                        public void onSuccess(AuthResult authResult) {
+                                            // User is signed in.
+                                            // IdP data available in
+                                            Log.v("Debug", authResult.getAdditionalUserInfo().getProfile().toString());
+                                            // The OAuth access token can also be retrieved:
+                                            // ((OAuthCredential)authResult.getCredential()).getAccessToken().
+                                            // The OAuth secret can be retrieved by calling:
+                                            // ((OAuthCredential)authResult.getCredential()).getSecret().
+                                        }
+                                    })
+                            .addOnFailureListener(
+                                    new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.v("Debug", "Sign in X failed");
+                                        }
+                                    });
+                }
             }
         });
     }

@@ -1,7 +1,5 @@
 package com.example.fududelivery.Login;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import static com.example.fududelivery.HelperFirebase.FirebaseHelper.getFirestoreInstance;
 
 import android.app.Activity;
@@ -12,31 +10,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
-import com.example.fududelivery.Shipper.ShipperMain;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class SignInWithGoogle {
     private FirebaseAuth mAuth;
@@ -101,19 +91,23 @@ public class SignInWithGoogle {
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         QuerySnapshot querySnapshot = task1.getResult();
+                                        //If document exits, continue to get roleId.
                                         if (querySnapshot != null && !querySnapshot.isEmpty()) {
                                             Log.v("Debug", "Document exists");
                                             DocumentSnapshot document = querySnapshot.getDocuments().get(0);
                                             String roleId = document.getString("roleId");
+                                            //role-id exits, continue to app.
                                             if (roleId != null && !roleId.isEmpty()) {
                                                 loginCaseManager.loginWithRoleID(roleId);
                                                 userSessionManager.loginUserRole(roleId);
                                                 userSessionManager.loginUserState();
                                                 userSessionManager.loginUserInformation(userUid);
                                             } else {
+                                                //role-id don't exits, make toast.
                                                 Toast.makeText(mActivity, "Error log-in with Google. Please contact us for further information!", Toast.LENGTH_SHORT).show();
                                             }
                                         } else {
+                                            //If document don't exits, create new document with new user.
                                             Log.v("Debug", "Document does not exist");
                                             Map<String, Object> userData = new HashMap<>();
                                             userData.put("userUid", userUid);
