@@ -129,7 +129,7 @@
         android:layout_alignParentBottom="true"
         >
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/logoutBtn"
+            android:id="@+id/cofirmBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -140,7 +140,7 @@
             style="@style/PrimaryButton"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/cofirmBtn"
+            android:id="@+id/logoutBtn"
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

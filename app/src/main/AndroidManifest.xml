@@ -117,14 +117,12 @@
         <activity
             android:name=".Customer.ChangeName"
             android:exported="true"
-            android:label="ChangeName"
-            android:theme="@style/Theme.FuduDelivery" />
+            android:label="ChangeName" />
 
         <activity
             android:name=".Customer.EditAddress"
             android:exported="true"
-            android:label="EditAddress"
-            android:theme="@style/Theme.FuduDelivery" />
+            android:label="EditAddress" />
 
         <activity
             android:name=".Customer.TermAndCondition"
@@ -138,6 +136,21 @@
 
         <activity
             android:name=".Customer.CustomerProfile"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Customer.ChangeEmail"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Customer.ChangePassword"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Customer.ChangePhonenumber"
             android:exported="true">
         </activity>
 
