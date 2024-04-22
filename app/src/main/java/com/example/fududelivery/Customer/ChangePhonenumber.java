@@ -1,19 +1,8 @@
 package com.example.fududelivery.Customer;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.InputType;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -23,14 +12,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 
 public class ChangePhonenumber extends AppCompatActivity {
     private AppCompatButton saveButton;
@@ -49,67 +31,11 @@ public class ChangePhonenumber extends AppCompatActivity {
         ImageView backwardBtn = findViewById(R.id.backward);
 
         backwardBtn.setOnClickListener(new View.OnClickListener() {
-        AppCompatEditText phoneEditText = findViewById(R.id.editPhoneText);
-        phoneEditText.setText(userSessionManager.getUserPhone());
-        saveButton = findViewById(R.id.save_button);
-        ImageView backwardBtn = findViewById(R.id.backward);
-
-        backwardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
                 setResult(RESULT_CANCELED);
             }
-        });
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }}
-    }
-
-    private void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-            }
-<<<<<<< Updated upstream
-
-            @Override
-            public void onFinish() {
-                timerRunning = false;
-                timerTextView.setText("00:00");
-                resendButton.setEnabled(true);
-                resendButton.setVisibility(View.VISIBLE); // Show resend button when timer finishes
-            }
-        }.start();
-
-        timerRunning = true;
-        resendButton.setEnabled(false);
-    }
-
-    private void updateCountDownText() {
-        int seconds = (int) (timeLeftInMillis / 1000);
-        int minutes = seconds / 60;
-        seconds = seconds % 60;
-        String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
-        timerTextView.setText("Resend verification code: " + timeLeftFormatted);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
-    }
-}
-=======
         });
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -138,5 +64,5 @@ public class ChangePhonenumber extends AppCompatActivity {
 
             }
         });
-    }}
->>>>>>> Stashed changes
+    }
+}

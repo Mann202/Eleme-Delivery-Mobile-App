@@ -39,11 +39,6 @@ public class UserSessionManager {
         editor.putString(USER_ROLE, roleID);
         editor.commit();
     }
-    public void loginUserGmail(String gmail) {
-        String gmailValue = (gmail != null) ? gmail : "";
-        editor.putString(USER_GMAIL, gmailValue);
-        editor.commit();
-    }
 
     public void loginUserPhone(String phone) {
         String phoneValue = (phone != null) ? phone : "";
@@ -73,18 +68,6 @@ public class UserSessionManager {
         editor.commit();
     }
 
-    public void loginUserPhone(String phone) {
-        String phoneValue = (phone != null) ? phone : "";
-        editor.putString(USER_PHONE, phoneValue);
-        editor.commit();
-    }
-
-
-    public void loginUserName(String name) {
-        String nameValue = (name != null) ? name : "";
-        editor.putString(USER_NAME, nameValue);
-        editor.commit();
-    }
 
     // Method check user's logging
     public boolean isLoggedIn() {
