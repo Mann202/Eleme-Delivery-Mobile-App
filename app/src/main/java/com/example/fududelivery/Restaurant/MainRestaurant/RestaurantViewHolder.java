@@ -27,4 +27,5 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder {
         detailBtn = itemView.findViewById(R.id.detailBtn);
         cancelBtn = itemView.findViewById(R.id.cancelBtn);
     }
+
 }

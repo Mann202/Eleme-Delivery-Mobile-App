@@ -9,21 +9,35 @@ public class ItemDetailRestaurant {
     String nameText;
     String totalPriceText;
     String adressText;
+    String orderID;
+    String cusID;
+    String shipperID;
 
     AppCompatButton detailBtn;
 
-    public ItemDetailRestaurant(int imageView, String dateText, String itemCountText, String nameText, String totalPriceText, String adressText) {
+    public ItemDetailRestaurant(int imageView, String dateText, String itemCountText, String nameText, String totalPriceText, String adressText, String orderID, String cusID, String shipperID) {
         this.imageView = imageView;
         this.dateText = dateText;
         this.itemCountText = itemCountText;
         this.nameText = nameText;
         this.totalPriceText = totalPriceText;
         this.adressText = adressText;
+        this.orderID = orderID;
+        this.cusID = cusID;
+        this.shipperID = shipperID;
     }
 
     public int getImageView() {
         return imageView;
     }
+    public String getShipperID() {return shipperID;}
+    public void setShipperID(String shipperID) {this.shipperID = shipperID;}
+
+    public String getCusID() {return cusID;}
+    public void setCusID(String cusID) {this.cusID = cusID;}
+
+    public void setOrderID(String orderID) {this.orderID = orderID;}
+    public String getOrderID() {return orderID;}
 
     public AppCompatButton getDetailBtn() {
         return detailBtn;

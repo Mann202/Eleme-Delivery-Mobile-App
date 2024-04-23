@@ -7,13 +7,14 @@ public class UserSessionManager {
     // Tên của SharedPreferences
     private static final String PREF_NAME = "UserSession";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
+    private static final String USER_STARTING_DATE = "UserStartingDate";
+    private static final String USER_ADDRESS = "UserAddress";
     public static final String USER_ROLE = "UserRole";
     private static final String USER_INFOR = "UserInformation";
     private static final String USER_NAME = "UserName";
     private static final String USER_PHONE = "UserPhone";
     private static final String USER_GMAIL = "UserGmail";
-    private static final String USER_GMAIL_REMEMBER = "UserGmailRemember";
-    private static final String USER_PASSWORD_REMEMBER = "UserPasswordRemember";
+    private static final String USER_VEHICLE = "UserVehicle";
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private Context context;
@@ -46,13 +47,15 @@ public class UserSessionManager {
         editor.commit();
     }
 
-    public void setUserGmailRemember(String gmail) {
-        editor.putString(USER_GMAIL_REMEMBER, gmail);
+    public void setStartingDate(String startingDate) {
+        String startingValue = (startingDate != null) ? startingDate : "";
+        editor.putString(USER_STARTING_DATE, startingValue);
         editor.commit();
     }
 
-    public void setUserPasswordRemember(String pasword) {
-        editor.putString(USER_PASSWORD_REMEMBER, pasword);
+    public void setAddress(String address) {
+        String addressValue = (address != null) ? address : "";
+        editor.putString(USER_ADDRESS, addressValue);
         editor.commit();
     }
 
@@ -65,6 +68,12 @@ public class UserSessionManager {
     public void loginUserGmail(String gmail) {
         String gmailValue = (gmail != null) ? gmail : "";
         editor.putString(USER_GMAIL, gmailValue);
+        editor.commit();
+    }
+
+    public void setVehicleInformation(String vehicleInformation) {
+        String vehicleValue = (vehicleInformation != null) ? vehicleInformation : "";
+        editor.putString(USER_VEHICLE, vehicleValue);
         editor.commit();
     }
 
@@ -94,6 +103,9 @@ public class UserSessionManager {
         return pref.getString(USER_PHONE, "");
     }
 
+    public String getUserAddress() { return pref.getString(USER_ADDRESS, ""); }
+    public String getUserStartingDate() { return pref.getString(USER_STARTING_DATE, ""); }
+
     // Method logout
     public void logoutUser() {
         editor.putBoolean(KEY_IS_LOGGED_IN, false);
@@ -102,7 +114,14 @@ public class UserSessionManager {
         editor.putInt(USER_PHONE, 0);
         editor.putString(USER_NAME, "");
         editor.putString(USER_GMAIL, "");
+        editor.putString(USER_ADDRESS, "");
+        editor.putString(USER_STARTING_DATE, "");
+        editor.putString(USER_VEHICLE, "");
 
         editor.commit();
+    }
+
+    public String getUserVehicle() {
+        return pref.getString(USER_VEHICLE, "");
     }
 }

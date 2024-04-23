@@ -52,6 +52,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
 
@@ -144,6 +145,21 @@ public class Login extends AppCompatActivity {
                                                 sessionManager.loginUserGmail(email);
                                                 sessionManager.loginUserName(name);
                                                 sessionManager.loginUserPhone(phone);
+
+                                                if(Objects.equals(roleID, "2")) {
+                                                    String startingDate = document.getString("startingDate");
+                                                    String address = document.getString("address");
+
+                                                    sessionManager.setStartingDate(startingDate);
+                                                    sessionManager.setAddress(address);
+                                                }
+
+                                                if(Objects.equals(roleID, "3")) {
+                                                    String vehicleInformation = document.getString("vehicleInformation");
+                                                    Log.v("Debug", vehicleInformation);
+
+                                                    sessionManager.setVehicleInformation(vehicleInformation);
+                                                }
 
                                                 if (roleID != null) {
                                                     Log.d("Debug", "Role ID: " + roleID);
