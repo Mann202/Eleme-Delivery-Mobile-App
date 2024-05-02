@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:paddingVertical="12dp"
+    android:layout_marginEnd="10dp"
+    >
+    <TextView
+        android:id="@+id/itemQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2x"
+        android:layout_marginStart="5dp"
+        android:layout_centerVertical="true"
+        android:textSize="20sp"
+        android:fontFamily="@font/lato_bold"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/itemQuantity"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        >
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shaking Beef Tri-Tip"
+            android:layout_marginStart="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_bold"
+            />
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30.000VND"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_bold"
+            />
+
+        <TextView
+            android:id="@+id/itemDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Spicy, Add Acunolues"
+            android:layout_below="@+id/itemName"
+            android:textSize="15sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/lato_regular"
+            />
+    </RelativeLayout>
+</RelativeLayout>

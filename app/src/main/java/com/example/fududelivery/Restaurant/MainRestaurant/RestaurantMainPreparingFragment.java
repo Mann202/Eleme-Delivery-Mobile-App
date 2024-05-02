@@ -86,7 +86,6 @@ public class RestaurantMainPreparingFragment extends Fragment {
                                             for (QueryDocumentSnapshot orderDetailDoc : orderDetailSnapshots) {
                                                 Double quantity = orderDetailDoc.getDouble("Quantity");
                                                 Double orderTotal = document.getDouble("OrderTotal");
-                                                Double
                                                 String formattedOrderTotal = String.format("%,.0f", orderTotal);
                                                 String orderTotalWithCurrency = formattedOrderTotal + "VND";
 
@@ -96,7 +95,10 @@ public class RestaurantMainPreparingFragment extends Fragment {
                                                         quantity.toString() + " items",
                                                         document.getString("name"),
                                                         orderTotalWithCurrency,
-                                                        document.getString("address")
+                                                        document.getString("address"),
+                                                        document.getString("OrderID"),
+                                                        document.getString("CusID"),
+                                                        document.getString("ShipperID")
                                                 ));
 
                                             }

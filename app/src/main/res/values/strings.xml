@@ -17,4 +17,9 @@
     <string name="email_title">Email</string>
     <string name="language_title">Language</string>
     <string name="InformationHeader">Information</string>
+    <string name="orderTitleMainRestaurant">Order</string>
+    <string name="nameTitleRestaurant">Name</string>
+    <string name="phoneNumberTitleRestaurant">Phone number</string>
+    <string name="addressTitleRestaurant">Address</string>
+    <string name="shipping_fee">Shipping Fee</string>
 </resources>
