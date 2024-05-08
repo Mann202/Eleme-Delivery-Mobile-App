@@ -141,6 +141,16 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".Customer.AddAddressActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".Customer.NewAddress"
+            android:exported="true">
+        </activity>
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
