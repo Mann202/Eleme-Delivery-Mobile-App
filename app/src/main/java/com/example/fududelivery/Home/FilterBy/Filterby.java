@@ -1,4 +1,4 @@
-package com.example.fududelivery.Home.FastFood;
+package com.example.fududelivery.Home.FilterBy;
 
 public class Filterby {
     private String title;

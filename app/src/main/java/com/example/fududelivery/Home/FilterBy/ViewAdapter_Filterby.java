@@ -1,7 +1,6 @@
-package com.example.fududelivery.Home.FastFood;
+package com.example.fududelivery.Home.FilterBy;
 
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

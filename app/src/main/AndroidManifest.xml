@@ -113,7 +113,34 @@
             android:name=".Home.FastFood.FastFood"
             android:exported="true">
         </activity>
-
+        <activity
+            android:name=".Home.Drink.Drink"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Home.Vegetable.Vegetable"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Home.Noodle.Noodle"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Home.SeaFood.SeaFood"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Home.Bakery.Bakery"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Home.Fruit.Fruit"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Home.Dessert.Dessert"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".Customer.ChangeName"
             android:exported="true"

@@ -1,4 +1,4 @@
-package com.example.fududelivery.Home.FastFood;
+package com.example.fududelivery.Home.FilterBy;
 
 
 import android.content.Context;
@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fududelivery.ExploreList.ExploreList;
-import com.example.fududelivery.ExploreTitle.ViewAdapter_Title;
 import com.example.fududelivery.R;
 
 import java.util.List;

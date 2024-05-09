@@ -1,7 +1,4 @@
-package com.example.fududelivery.Home.FastFood;
-
-import com.example.fududelivery.ExploreTitle.Title;
-import com.example.fududelivery.Food.Food;
+package com.example.fududelivery.Home.FilterBy;
 
 import java.util.List;
 

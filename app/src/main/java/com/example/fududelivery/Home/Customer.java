@@ -30,7 +30,14 @@ import com.example.fududelivery.ExploreTitle.Title;
 import com.example.fududelivery.Food.Food;
 import com.example.fududelivery.FoodList.FoodList;
 import com.example.fududelivery.FoodList.ViewAdapter_FoodList;
+import com.example.fududelivery.Home.Bakery.Bakery;
+import com.example.fududelivery.Home.Dessert.Dessert;
+import com.example.fududelivery.Home.Drink.Drink;
 import com.example.fududelivery.Home.FastFood.FastFood;
+import com.example.fududelivery.Home.Fruit.Fruit;
+import com.example.fududelivery.Home.Noodle.Noodle;
+import com.example.fududelivery.Home.SeaFood.SeaFood;
+import com.example.fududelivery.Home.Vegetable.Vegetable;
 import com.example.fududelivery.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,13 +47,13 @@ import java.util.List;
 public class Customer extends AppCompatActivity {
     RecyclerView rcvFoodList;
     ViewAdapter_FoodList viewAdapterFoodList;
+    ViewAdapter_FoodList viewAdapterDrinkList;
     ViewPager viewPager;
     ViewAdapter_Customer viewAdapter;
     RecyclerView rcvExploreList;
     ViewAdapter_ExploreList viewAdapterExploreList;
     GridLayout mainGrid;
     private DrawerLayout drawer;
-    RecyclerView expRCV;
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +135,29 @@ public class Customer extends AppCompatActivity {
                     if (finalI == 0) {
                         Intent intent = new Intent(Customer.this, FastFood.class);
                         startActivity(intent);
-                    } else {
+                    } else if (finalI == 1) {
+                        Intent intent = new Intent(Customer.this, Drink.class);
+                        startActivity(intent);
+                    } else if (finalI == 2) {
+                        Intent intent = new Intent(Customer.this, Vegetable.class);
+                        startActivity(intent);
+                    } else if (finalI == 3) {
+                        Intent intent = new Intent(Customer.this, Noodle.class);
+                        startActivity(intent);
+                    } else if (finalI == 4) {
+                        Intent intent = new Intent(Customer.this, SeaFood.class);
+                        startActivity(intent);
+                    } else if(finalI == 5) {
+                        Intent intent = new Intent(Customer.this, Bakery.class);
+                        startActivity(intent);
+                    } else if(finalI == 6) {
+                        Intent intent = new Intent(Customer.this, Fruit.class);
+                        startActivity(intent);
+                    } else if(finalI == 7) {
+                        Intent intent = new Intent(Customer.this, Dessert.class);
+                        startActivity(intent);
+                    }
+                    else {
                         Toast.makeText(Customer.this, "No items", Toast.LENGTH_SHORT).show();
                     }
 
