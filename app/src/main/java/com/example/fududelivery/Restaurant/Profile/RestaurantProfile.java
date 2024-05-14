@@ -23,22 +23,33 @@ import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class RestaurantProfile extends AppCompatActivity {
+    ImageView informationProfilePicturel;
+    StorageReference storageReference;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actitivity_restaurantprofile);
 
         FirebaseFirestore firestoreInstance = FirebaseFirestore.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
         UserSessionManager userSessionManager = new UserSessionManager(getApplicationContext());
+
+        String imagePath = "IMG_1070.jpeg";
+        informationProfilePicturel = findViewById(R.id.informationProfilePicture);
+        loadImageFromFirestore(imagePath);
 
         Button logoutBtn = findViewById(R.id.logoutBtn);
         ImageView backward = findViewById(R.id.backIcon);
         AppCompatEditText emailField = findViewById(R.id.emailFieldRestaurant);
         emailField.setText(userSessionManager.getUserGmail());
         emailField.setEnabled(false);
-        Log.v("Debug", userSessionManager.getUserAddress());
 
         AppCompatEditText nameField = findViewById(R.id.nameFieldRestaurant);
         nameField.setText(userSessionManager.getUserName());
@@ -101,6 +112,17 @@ public class RestaurantProfile extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finishAffinity();
             }
+        });
+
+    }
+
+    private void loadImageFromFirestore(String path) {
+        StorageReference imageRef = storageReference.child(path);
+
+        imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            Picasso.get().load(uri).into(informationProfilePicturel);
+        }).addOnFailureListener(exception -> {
+            exception.printStackTrace();
         });
     }
 }

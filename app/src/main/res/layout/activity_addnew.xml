@@ -70,6 +70,7 @@
             android:layout_marginTop="30dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameEditTextField"
                 style="@style/EditTextLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -102,6 +103,7 @@
             android:layout_marginEnd="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/priceTextField"
                 style="@style/EditTextLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
