@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
+import com.example.fududelivery.Reference.ChangeCurrency;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -77,43 +78,23 @@ public class RestaurantMainPreparingFragment extends Fragment {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             String orderId = document.getId();
-                            firestoreInstance.collection("OrderDetail")
-                                    .whereEqualTo("OrderID", orderId)
-                                    .get()
-                                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onSuccess(QuerySnapshot orderDetailSnapshots) {
-                                            for (QueryDocumentSnapshot orderDetailDoc : orderDetailSnapshots) {
-                                                Double quantity = orderDetailDoc.getDouble("Quantity");
-                                                Double orderTotal = document.getDouble("OrderTotal");
-                                                String formattedOrderTotal = String.format("%,.0f", orderTotal);
-                                                String orderTotalWithCurrency = formattedOrderTotal + "VND";
 
-                                                restaurantList.add(new ItemDetailRestaurant(
-                                                        1,
-                                                        document.getString("Date"),
-                                                        quantity.toString() + " items",
-                                                        document.getString("name"),
-                                                        orderTotalWithCurrency,
-                                                        document.getString("address"),
-                                                        document.getString("OrderID"),
-                                                        document.getString("CusID"),
-                                                        document.getString("ShipperID")
-                                                ));
+                            restaurantList.add(new ItemDetailRestaurant(
+                                    1,
+                                    document.getString("Date"),
+                                    document.getString("TotalQuantity") + " items",
+                                    document.getString("name"),
+                                    ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")),
+                                    document.getString("address"),
+                                    orderId,
+                                    document.getString("CusID"),
+                                    document.getString("ShipperID")
+                            ));
 
-                                            }
-                                            adapter.notifyDataSetChanged();
-                                            view.findViewById(R.id.loadingPreparingRestaurant).setVisibility(View.GONE);
-                                            view.findViewById(R.id.refreshLayoutPreparingRestaurant).setVisibility(View.VISIBLE);
-                                            swipeRefreshLayout.setRefreshing(false);
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w("Debug", "Error getting OrderDetail documents.", e);
-                                        }
-                                    });
+                            adapter.notifyDataSetChanged();
+                            view.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
+                            swipeRefreshLayout.setVisibility(View.VISIBLE);
+                            swipeRefreshLayout.setRefreshing(false);
                         }
                     }
                 })
