@@ -114,7 +114,7 @@ public class RestaurantDetail extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            item.add(new ItemRestaurantOrder(document.getString("ItemQuantity" + "x"), document.getString("FoodName"), ChangeCurrency.formatPrice(document.getDouble("TotalPrice")), document.getString("Description")));
+                            item.add(new ItemRestaurantOrder(document.getString("ItemQuantity") + "x", document.getString("FoodName"), ChangeCurrency.formatPrice(document.getDouble("TotalPrice")), document.getString("Description")));
                         }
                         // Notify adapter that the data set has changed
                         adapter.notifyDataSetChanged();

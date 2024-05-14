@@ -12,8 +12,13 @@ import com.example.fududelivery.R;
 
 public class RestaurantViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView, navigateNextBtn;
-    TextView dateText, itemCountText,nameText, adressText, totalPriceText;
-    AppCompatButton detailBtn, cancelBtn;
+    TextView dateText;
+    public TextView itemCountText;
+    public TextView nameText;
+    public TextView adressText;
+    public TextView totalPriceText;
+    public AppCompatButton detailBtn;
+    AppCompatButton cancelBtn;
 
     public RestaurantViewHolder(@NonNull View itemView) {
         super(itemView);

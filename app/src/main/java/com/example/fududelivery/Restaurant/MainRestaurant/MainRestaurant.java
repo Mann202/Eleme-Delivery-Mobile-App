@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.fududelivery.R;
+import com.example.fududelivery.Restaurant.History.RestaurantHistory;
 import com.example.fududelivery.Restaurant.Profile.RestaurantProfile;
 import com.example.fududelivery.Restaurant.RestaurantMenu.RestaurantMenu;
 import com.google.android.material.navigation.NavigationView;
@@ -55,6 +56,10 @@ public class MainRestaurant extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.profile) {
                     Intent profileIntent = new Intent(MainRestaurant.this, RestaurantProfile.class);
                     startActivity(profileIntent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                } else if(item.getItemId() == R.id.history) {
+                    Intent historyIntent = new Intent(MainRestaurant.this, RestaurantHistory.class);
+                    startActivity(historyIntent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
                 drawer.closeDrawer(GravityCompat.START);
