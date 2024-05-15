@@ -8,6 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/whiteedt">
+        
+        <ImageView
+            android:id="@+id/backwardButton"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="20dp"/>
 
         <TextView
             android:id="@+id/menuHeader"
@@ -127,9 +137,18 @@
             android:textColor="@color/lightwhite"
             android:layout_below="@+id/PriceEditText" />
 
+        <ListView
+            android:id="@+id/sizeListView"
+            android:layout_below="@+id/sizeTitle"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addSizeBtn"
-            android:layout_below="@+id/sizeTitle"
+            android:layout_below="@+id/sizeListView"
             android:layout_width="match_parent"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -150,9 +169,18 @@
             android:textColor="@color/lightwhite"
             android:layout_below="@+id/addSizeBtn" />
 
+        <ListView
+            android:id="@+id/additionListView"
+            android:layout_below="@+id/toppingTitle"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addToppingBtn"
-            android:layout_below="@+id/toppingTitle"
+            android:layout_below="@+id/additionListView"
             android:layout_width="match_parent"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -162,7 +190,7 @@
             android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/confirmButton"
+            android:id="@+id/confirmButtonMenu"
             style="@style/PrimaryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

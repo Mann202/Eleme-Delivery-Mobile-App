@@ -3,6 +3,7 @@ package com.example.fududelivery.Restaurant.RestaurantDetail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -126,5 +127,12 @@ public class RestaurantDetail extends AppCompatActivity {
                         Log.w("Debug", "Error getting Orders documents.", e);
                     }
                 });
+
+        findViewById(R.id.backwardButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
