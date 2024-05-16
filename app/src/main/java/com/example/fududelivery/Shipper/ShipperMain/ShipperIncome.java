@@ -1,4 +1,4 @@
-package com.example.fududelivery.Shipper;
+package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.os.Bundle;
 

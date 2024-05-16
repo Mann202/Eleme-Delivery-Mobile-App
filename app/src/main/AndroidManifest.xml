@@ -90,7 +90,7 @@
         </activity>
 
         <activity
-            android:name=".Shipper.ShipperMain"
+            android:name=".Shipper.ShipperMain.ShipperMain"
             android:exported="true"
             android:label="ShipperMain" />
 
@@ -144,7 +144,7 @@
         </activity>
 
         <activity
-            android:name=".Shipper.OrderDetail"
+            android:name=".Shipper.ShipperOrderDetail.OrderDetail"
             android:exported="true"
             android:label="ShipperDetail" />
 

@@ -1,26 +1,22 @@
-package com.example.fududelivery.Shipper;
+package com.example.fududelivery.Shipper.ShipperOrderDetail;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.fududelivery.GetStarted.GetStartedSecond;
 import com.example.fududelivery.R;
-import com.google.android.material.navigation.NavigationBarView;
+import com.example.fududelivery.Shipper.ShipperMain.ShipperMain;
 
 public class OrderDetail extends AppCompatActivity {
     ImageView navback;
-    TextView CusName, CusAddress;
+    TextView CusName;
+    TextView CusAddress;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.example.fududelivery.Shipper;
+package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -7,8 +7,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.R;
-
-import java.text.SimpleDateFormat;
+import com.example.fududelivery.Shipper.Model.Order;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder {
     ImageView imgOrder;
@@ -50,8 +49,8 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
             txtItems.setText(order.getTotalQuantity() + " item");
         }  else txtItems.setText("0");
 
-        if (order.getOrderTotal() != null) {
-            txtTotal.setText(order.getOrderTotal());
+        if (order.getOrderTotal() != 0.0f) {
+            txtTotal.setText(String.valueOf(order.getOrderTotal()));
         } else txtTotal.setText("0");
 
     }

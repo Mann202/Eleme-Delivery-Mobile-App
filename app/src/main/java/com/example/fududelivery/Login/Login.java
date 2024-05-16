@@ -1,8 +1,6 @@
 package com.example.fududelivery.Login;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,10 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 
-import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
-import com.example.fududelivery.Shipper.ShipperMain;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -49,7 +44,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 //import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public class Login extends AppCompatActivity {
 

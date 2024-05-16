@@ -1,4 +1,4 @@
-package com.example.fududelivery.Shipper;
+package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.os.Bundle;
 
@@ -14,24 +14,22 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.example.fududelivery.R;
+import com.example.fududelivery.Shipper.Model.Order;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.play.core.integrity.r;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NewOrder#newInstance} factory method to
+ * Use the {@link OrderHistory#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewOrder extends Fragment {
+public class OrderHistory extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,14 +39,14 @@ public class NewOrder extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     final ArrayList<Order> orders = new ArrayList<Order>();
     private OrderAdapter adapter;
     RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
     static FirebaseFirestore firestoreInstance;
     RelativeLayout NoOrder;
-
-    public NewOrder() {
+    public OrderHistory() {
         // Required empty public constructor
     }
 
@@ -58,12 +56,11 @@ public class NewOrder extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NewOrder.
+     * @return A new instance of fragment OrderHistory.
      */
     // TODO: Rename and change types and number of parameters
-    public static NewOrder newInstance(String param1, String param2) {
-//        firestoreInstance = FirebaseFirestore.getInstance();
-        NewOrder fragment = new NewOrder();
+    public static OrderHistory newInstance(String param1, String param2) {
+        OrderHistory fragment = new OrderHistory();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -85,19 +82,24 @@ public class NewOrder extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_new_order, container, false);
-
-//        for (int i = 0; i < 3; i++) {
-//            Order order = new Order("Nguyen", "Thu Duc", new Date().toString(), 2, 10000);
-//            orders.add(order);
-//        }
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_order_history, container, false);
 
         CollectionReference orderCollection = firestoreInstance.collection("Orders");
-        orderCollection.get()
+        orderCollection.whereEqualTo("OrderStatusID", 2)
+                .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        System.out.println("Query Orders Success ");
+                        System.out.println("Query Orders History Success ");
+                        System.out.println(queryDocumentSnapshots.isEmpty());
+                        NoOrder = rootView.findViewById(R.id.no_orders);
+                        if (queryDocumentSnapshots.isEmpty()){
+                            rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
+                            swipeRefreshLayout.setVisibility(View.GONE);
+                            swipeRefreshLayout.setRefreshing(false);
+                            NoOrder.setVisibility(View.VISIBLE);
+                        }
                         // Xử lý dữ liệu trả về
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             // Lấy dữ liệu từ mỗi tài liệu Order
@@ -105,7 +107,7 @@ public class NewOrder extends Fragment {
                             String documentId = documentSnapshot.getId();
 //                            SimpleDateFormat format = new SimpleDateFormat("d MMM, HH:mm");
 //                            String formatDate = format.format(order.getDate());
-//                            Order saveOrder = new Order(documentId, order.getName(), order.getAddress(), order.getDate(), order.getTotalQuantity(), order.getOrderTotal());
+                            Order saveOrder = new Order(documentId, order.getName(), order.getAddress(), order.getDate(), order.getTotalQuantity(), order.getOrderTotal());
                             System.out.println("Query Order: " + order);
 
                             // TODO: Xử lý dữ liệu Order ở đây
@@ -119,6 +121,7 @@ public class NewOrder extends Fragment {
                             rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
                             swipeRefreshLayout.setVisibility(View.VISIBLE);
                             swipeRefreshLayout.setRefreshing(false);
+
                         }
                     }
                 })
@@ -128,9 +131,11 @@ public class NewOrder extends Fragment {
                         // Xử lý khi truy vấn thất bại
                     }
                 });
+
         for(Order order : orders){
             System.out.println("Order:" + order);
         }
+
         recyclerView = rootView.findViewById(R.id.rv_orders);
         adapter = new OrderAdapter(requireActivity(), orders);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -141,6 +146,12 @@ public class NewOrder extends Fragment {
                 getResources().getColor(R.color.primary)
         );
 
+        NoOrder = rootView.findViewById(R.id.no_orders);
+        if (orders.isEmpty()){
+            NoOrder.setVisibility(View.GONE);
+        }
+
         return rootView;
+//        return inflater.inflate(R.layout.fragment_order_history, container, false);
     }
 }

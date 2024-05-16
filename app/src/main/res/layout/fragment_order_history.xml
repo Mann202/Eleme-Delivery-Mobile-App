@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/whiteedt"
     android:orientation="vertical"
-    tools:context=".Shipper.OrderHistory">
+    tools:context=".Shipper.ShipperMain.OrderHistory">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -57,7 +57,7 @@
     <RelativeLayout
         android:id="@+id/no_orders"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/neworder_notify"
         android:visibility="gone"
         android:orientation="vertical"

@@ -1,11 +1,10 @@
-package com.example.fududelivery.Shipper;
+package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +16,6 @@ import android.widget.Spinner;
 import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
-
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.

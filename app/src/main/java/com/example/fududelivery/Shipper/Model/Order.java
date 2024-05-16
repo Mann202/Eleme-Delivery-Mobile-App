@@ -1,4 +1,4 @@
-package com.example.fududelivery.Shipper;
+package com.example.fududelivery.Shipper.Model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,12 +11,12 @@ public class Order {
     String address;
     String Date;
     String TotalQuantity;
-    String OrderTotal;
+    float OrderTotal;
 
     public Order() {
     }
 
-    public Order(String id, String cusname, String cusaddress, String orderdate, String quantity, String total) {
+    public Order(String id, String cusname, String cusaddress, String orderdate, String quantity, float total) {
         this.OrderID = id;
         this.name = cusname;
         this.address = cusaddress;
@@ -87,19 +87,19 @@ public class Order {
         Date = date;
     }
 
+    public float getOrderTotal() {
+        return OrderTotal;
+    }
+
+    public void setOrderTotal(float orderTotal) {
+        OrderTotal = orderTotal;
+    }
+
     public String getTotalQuantity() {
         return TotalQuantity;
     }
 
     public void setTotalQuantity(String totalQuantity) {
         TotalQuantity = totalQuantity;
-    }
-
-    public String getOrderTotal() {
-        return OrderTotal;
-    }
-
-    public void setOrderTotal(String orderTotal) {
-        OrderTotal = orderTotal;
     }
 }

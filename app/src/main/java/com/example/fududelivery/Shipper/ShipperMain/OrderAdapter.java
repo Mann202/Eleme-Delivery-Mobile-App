@@ -1,4 +1,4 @@
-package com.example.fududelivery.Shipper;
+package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetail;
+import com.example.fududelivery.Shipper.Model.Order;
+import com.example.fududelivery.Shipper.ShipperOrderDetail.OrderDetail;
 
 import java.util.ArrayList;
 
