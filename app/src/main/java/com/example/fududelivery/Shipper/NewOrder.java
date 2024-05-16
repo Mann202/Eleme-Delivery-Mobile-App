@@ -2,16 +2,27 @@ package com.example.fududelivery.Shipper;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.fududelivery.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.play.core.integrity.r;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -33,6 +44,9 @@ public class NewOrder extends Fragment {
     final ArrayList<Order> orders = new ArrayList<Order>();
     private OrderAdapter adapter;
     RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    static FirebaseFirestore firestoreInstance;
+    RelativeLayout NoOrder;
 
     public NewOrder() {
         // Required empty public constructor
@@ -48,6 +62,7 @@ public class NewOrder extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static NewOrder newInstance(String param1, String param2) {
+//        firestoreInstance = FirebaseFirestore.getInstance();
         NewOrder fragment = new NewOrder();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -59,6 +74,8 @@ public class NewOrder extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firestoreInstance = FirebaseFirestore.getInstance();
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -70,15 +87,59 @@ public class NewOrder extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_new_order, container, false);
 
-        for (int i = 0; i < 10; i++) {
-            Order order = new Order("Nguyen", "Thu Duc", new Date(), i, (i + 1) * 10.0f);
-            orders.add(order);
-        }
+//        for (int i = 0; i < 3; i++) {
+//            Order order = new Order("Nguyen", "Thu Duc", new Date().toString(), 2, 10000);
+//            orders.add(order);
+//        }
 
+        CollectionReference orderCollection = firestoreInstance.collection("Orders");
+        orderCollection.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        System.out.println("Query Orders Success ");
+                        // Xử lý dữ liệu trả về
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            // Lấy dữ liệu từ mỗi tài liệu Order
+                            Order order = documentSnapshot.toObject(Order.class);
+                            String documentId = documentSnapshot.getId();
+//                            SimpleDateFormat format = new SimpleDateFormat("d MMM, HH:mm");
+//                            String formatDate = format.format(order.getDate());
+//                            Order saveOrder = new Order(documentId, order.getName(), order.getAddress(), order.getDate(), order.getTotalQuantity(), order.getOrderTotal());
+                            System.out.println("Query Order: " + order);
+
+                            // TODO: Xử lý dữ liệu Order ở đây
+                            orders.add(order);
+
+                            recyclerView = rootView.findViewById(R.id.rv_orders);
+                            adapter = new OrderAdapter(requireActivity(), orders);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+                            recyclerView.setAdapter(adapter);
+
+                            rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
+                            swipeRefreshLayout.setVisibility(View.VISIBLE);
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Xử lý khi truy vấn thất bại
+                    }
+                });
+        for(Order order : orders){
+            System.out.println("Order:" + order);
+        }
         recyclerView = rootView.findViewById(R.id.rv_orders);
         adapter = new OrderAdapter(requireActivity(), orders);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
+
+        swipeRefreshLayout = rootView.findViewById(R.id.refreshLayoutDoneRestaurant);
+        swipeRefreshLayout.setColorSchemeColors(
+                getResources().getColor(R.color.primary)
+        );
 
         return rootView;
     }

@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/whiteedt"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".Shipper.NewOrder">
 
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:id="@+id/neworder_notify"
         android:layout_width="match_parent"
@@ -78,19 +76,51 @@
 
     <!--    </RelativeLayout>-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/neworder_notify"
-        android:background="@color/whiteedt">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/neworder_notify"-->
+<!--        android:background="@color/whiteedt">-->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_orders"
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_orders"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="20dp"/>-->
+<!--    </RelativeLayout>-->
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayoutDoneRestaurant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/neworder_notify"
+            android:background="@color/whiteedt"
+            android:visibility="gone"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/neworder_notify"
+                android:background="@color/whiteedt">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_orders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"/>
+            </RelativeLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/loadingDoneRestaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
-
-    </RelativeLayout>
+            android:layout_marginTop="500dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

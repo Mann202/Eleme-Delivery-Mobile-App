@@ -36,6 +36,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder>{
             @Override
             public void onClick(View view) {
                 Intent intent =  new Intent(context, OrderDetail.class);
+
+                intent.putExtra("Name", order.getName());
+                intent.putExtra("Address", order.getAddress());
+                intent.putExtra("Date", order.getDate());
+                intent.putExtra("TotalQuantity", order.getTotalQuantity());
+                intent.putExtra("OrderTotal", order.getOrderTotal());
+
                 context.startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

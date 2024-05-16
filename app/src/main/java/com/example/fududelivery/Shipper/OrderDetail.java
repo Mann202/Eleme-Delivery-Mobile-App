@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,13 +20,23 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class OrderDetail extends AppCompatActivity {
     ImageView navback;
+    TextView CusName, CusAddress;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orderdetail);
 
+        CusName = findViewById(R.id.tv_ordername);
+        CusAddress = findViewById(R.id.tv_orderaddress);
         navback = findViewById(R.id.nav_back);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            CusName.setText(bundle.getString("Name"));
+            CusAddress.setText(bundle.getString("Address"));
+        }
+
         navback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

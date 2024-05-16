@@ -327,81 +327,81 @@
 
     </RelativeLayout>
 
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/order_restaurant_info"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/order_cus_info"-->
-<!--        android:background="@drawable/rounded_bg_white"-->
-<!--        android:elevation="5dp"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        android:padding="20dp"-->
-<!--        android:translationZ="3dp">-->
+    <RelativeLayout
+        android:id="@+id/order_restaurant_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_cus_info"
+        android:background="@drawable/rounded_bg_white"
+        android:elevation="5dp"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:padding="20dp"
+        android:translationZ="3dp">
 
-<!--        <TextView-->
-<!--            android:id="@+id/lb_restaurant"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Restaurant detail"-->
-<!--            android:fontFamily="@font/lato_bold"-->
-<!--            android:textSize="13dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:layout_marginEnd="70dp"-->
-<!--            android:textColor="@color/black" />-->
+        <TextView
+            android:id="@+id/lb_restaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restaurant detail"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="13dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="70dp"
+            android:textColor="@color/black" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/lb_restaurant_name"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Name"-->
-<!--            android:fontFamily="@font/lato_regular"-->
-<!--            android:textSize="13dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:layout_marginEnd="70dp"-->
-<!--            android:layout_below="@id/lb_restaurant"-->
-<!--            android:textColor="@color/gray" />-->
+        <TextView
+            android:id="@+id/lb_restaurant_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="13dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="70dp"
+            android:layout_below="@id/lb_restaurant"
+            android:textColor="@color/gray" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_restaurant_name"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="BinBin Noodles"-->
-<!--            android:fontFamily="@font/lato_regular"-->
-<!--            android:textSize="13dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:layout_toEndOf="@+id/lb_restaurant_name"-->
-<!--            android:layout_below="@+id/lb_restaurant"-->
-<!--            android:textColor="@color/gray" />-->
+        <TextView
+            android:id="@+id/tv_restaurant_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BinBin Noodles"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="13dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/lb_restaurant_name"
+            android:layout_below="@+id/lb_restaurant"
+            android:textColor="@color/gray" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/lb_restaurant_address"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Address"-->
-<!--            android:fontFamily="@font/lato_regular"-->
-<!--            android:textSize="13dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:layout_marginEnd="50dp"-->
-<!--            android:layout_below="@+id/lb_restaurant_name"-->
-<!--            android:textColor="@color/gray" />-->
+        <TextView
+            android:id="@+id/lb_restaurant_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="13dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="50dp"
+            android:layout_below="@+id/lb_restaurant_name"
+            android:textColor="@color/gray" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_restaurant_address"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="10 alley 30, 8th street, Linh Xuan ward,-->
-<!--            Thu Duc District, HCMC, Vietnam"-->
-<!--            android:fontFamily="@font/lato_regular"-->
-<!--            android:textSize="13dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:layout_below="@+id/tv_restaurant_name"-->
-<!--            android:layout_toEndOf="@+id/lb_restaurant_name"-->
-<!--            android:textColor="@color/gray" />-->
+        <TextView
+            android:id="@+id/tv_restaurant_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 alley 30, 8th street, Linh Xuan ward,
+            Thu Duc District, HCMC, Vietnam"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="13dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/tv_restaurant_name"
+            android:layout_toEndOf="@+id/lb_restaurant_name"
+            android:textColor="@color/gray" />
 
-<!--    </RelativeLayout>-->
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/start_button"
