@@ -23,6 +23,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -86,7 +88,9 @@ public class OrderHistory extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_order_history, container, false);
 
         CollectionReference orderCollection = firestoreInstance.collection("Orders");
-        orderCollection.whereEqualTo("OrderStatusID", 2)
+//        List<String> statusList = Arrays.asList("Ready", "Start");
+        orderCollection
+                .whereEqualTo("ShippingStatus", "Finish")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -107,7 +111,8 @@ public class OrderHistory extends Fragment {
                             String documentId = documentSnapshot.getId();
 //                            SimpleDateFormat format = new SimpleDateFormat("d MMM, HH:mm");
 //                            String formatDate = format.format(order.getDate());
-                            Order saveOrder = new Order(documentId, order.getName(), order.getAddress(), order.getDate(), order.getTotalQuantity(), order.getOrderTotal());
+//                            Order saveOrder = new Order(documentId, order.getName(), order.getAddress(), order.getDate(), order.getTotalQuantity(), order.getOrderTotal());
+                            order.setOrderID(documentId);
                             System.out.println("Query Order: " + order);
 
                             // TODO: Xử lý dữ liệu Order ở đây

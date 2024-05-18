@@ -14,4 +14,15 @@ public class ChangeCurrency {
 
         return formattedPrice;
     }
+    public static String formatPrice(float price) {
+        NumberFormat formatter = NumberFormat.getInstance(Locale.getDefault());
+        formatter.setMaximumFractionDigits(0);
+
+        String formattedPrice = formatter.format(price);
+
+        formattedPrice += "VND";
+
+        return formattedPrice;
+    }
+
 }

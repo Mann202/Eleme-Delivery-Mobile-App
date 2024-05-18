@@ -11,29 +11,48 @@ public class Order {
     String address;
     String Date;
     String TotalQuantity;
+    String Phone;
     float OrderTotal;
+    float ShippingFee;
+    float ServiceFee;
+    float SubTotal;
+    String ResID;
+    String ShippingStatus;
 
     public Order() {
     }
 
-    public Order(String id, String cusname, String cusaddress, String orderdate, String quantity, float total) {
-        this.OrderID = id;
-        this.name = cusname;
-        this.address = cusaddress;
-        this.Date = orderdate;
-        this.TotalQuantity = quantity;
-        this.OrderTotal = total;
+    public Order(String orderID, String name, String address, String date, String totalQuantity, String phone,
+                 float orderTotal, float shippingFee, float serviceFee, float subTotal, String resID, String shippingStatus) {
+        OrderID = orderID;
+        this.name = name;
+        this.address = address;
+        Date = date;
+        TotalQuantity = totalQuantity;
+        Phone = phone;
+        OrderTotal = orderTotal;
+        ShippingFee = shippingFee;
+        ServiceFee = serviceFee;
+        SubTotal = subTotal;
+        ResID = resID;
+        ShippingStatus = shippingStatus;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "id='" + OrderID + '\'' +
-                "name='" + name + '\'' +
+                "OrderID='" + OrderID + '\'' +
+                ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", date='" + Date + '\'' +
-                ", quantity=" + TotalQuantity + '\'' +
-                ", total=" + OrderTotal + '\'' +
+                ", Date='" + Date + '\'' +
+                ", TotalQuantity='" + TotalQuantity + '\'' +
+                ", Phone='" + Phone + '\'' +
+                ", OrderTotal=" + OrderTotal +
+                ", ShippingFee=" + ShippingFee +
+                ", ServiceFee=" + ServiceFee +
+                ", SubTotal=" + SubTotal +
+                ", ResID=" + ResID +
+                ", ShippingStatus=" + ShippingStatus +
                 '}';
     }
 
@@ -101,5 +120,53 @@ public class Order {
 
     public void setTotalQuantity(String totalQuantity) {
         TotalQuantity = totalQuantity;
+    }
+
+    public float getShippingFee() {
+        return ShippingFee;
+    }
+
+    public void setShippingFee(float shippingFee) {
+        ShippingFee = shippingFee;
+    }
+
+    public float getServiceFee() {
+        return ServiceFee;
+    }
+
+    public void setServiceFee(float serviceFee) {
+        ServiceFee = serviceFee;
+    }
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
+
+    public float getSubTotal() {
+        return SubTotal;
+    }
+
+    public void setSubTotal(float subTotal) {
+        SubTotal = subTotal;
+    }
+
+    public String getResID() {
+        return ResID;
+    }
+
+    public void setResID(String resID) {
+        ResID = resID;
+    }
+
+    public String getShippingStatus() {
+        return ShippingStatus;
+    }
+
+    public void setShippingStatus(String shippingStatus) {
+        ShippingStatus = shippingStatus;
     }
 }

@@ -23,6 +23,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,13 +87,11 @@ public class NewOrder extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_new_order, container, false);
 
-//        for (int i = 0; i < 3; i++) {
-//            Order order = new Order("Nguyen", "Thu Duc", new Date().toString(), 2, 10000);
-//            orders.add(order);
-//        }
-
         CollectionReference orderCollection = firestoreInstance.collection("Orders");
-        orderCollection.get()
+        List<String> statusList = Arrays.asList("Ready", "Start");
+        orderCollection
+                .whereIn("ShippingStatus", statusList)
+                .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -112,6 +112,7 @@ public class NewOrder extends Fragment {
 //                            SimpleDateFormat format = new SimpleDateFormat("d MMM, HH:mm");
 //                            String formatDate = format.format(order.getDate());
 //                            Order saveOrder = new Order(documentId, order.getName(), order.getAddress(), order.getDate(), order.getTotalQuantity(), order.getOrderTotal());
+                            order.setOrderID(documentId);
                             System.out.println("Query Order: " + order);
 
                             // TODO: Xử lý dữ liệu Order ở đây
@@ -137,6 +138,7 @@ public class NewOrder extends Fragment {
         for(Order order : orders){
             System.out.println("Order:" + order);
         }
+
         recyclerView = rootView.findViewById(R.id.rv_orders);
         adapter = new OrderAdapter(requireActivity(), orders);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -146,6 +148,11 @@ public class NewOrder extends Fragment {
         swipeRefreshLayout.setColorSchemeColors(
                 getResources().getColor(R.color.primary)
         );
+
+        NoOrder = rootView.findViewById(R.id.no_orders);
+        if (orders.isEmpty()){
+            NoOrder.setVisibility(View.GONE);
+        }
 
         return rootView;
     }

@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:gravity="center">
-
+    android:gravity="center"
+    android:paddingBottom="20dp">
     <RelativeLayout
         android:id="@+id/neworder_notify"
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             app:tint="@color/primary" />
 
         <TextView
-            android:id="@+id/txt_name"
+            android:id="@+id/txt_shipper_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_bold"
@@ -47,373 +47,385 @@
             android:textSize="24sp" />
 
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/img_map"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/neworder_notify"
-        android:src="@drawable/img_map" />
-
-    <RelativeLayout
-        android:id="@+id/order_info_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/img_map"
-        android:background="@drawable/rounded_bg_white"
-        android:elevation="5dp"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:padding="20dp"
-        android:translationZ="3dp">
-
-        <TextView
-            android:id="@+id/txt_order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order detail"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/gray" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_order_item"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/neworder_notify">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_order"/>
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/neworder_notify"
+                android:src="@drawable/img_map" />
 
-        <TextView
-            android:id="@+id/txt_subtotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Subtotal"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black"
-            android:layout_below="@+id/rv_order_item"/>
+            <RelativeLayout
+                android:id="@+id/order_info_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_map"
+                android:background="@drawable/rounded_bg_white"
+                android:elevation="5dp"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:padding="20dp"
+                android:translationZ="3dp">
 
-        <TextView
-            android:id="@+id/txt_subtotal_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="90.000 VND"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:layout_below="@+id/rv_order_item"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/txt_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order detail"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/gray" />
 
-        <TextView
-            android:id="@+id/txt_subtotal_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/txt_subtotal"
-            android:layout_marginLeft="5dp"
-            android:text="(4 items)"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:layout_below="@+id/rv_order_item"
-            android:textColor="@color/black" />
+                <ListView
+                    android:id="@+id/rv_order_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/txt_order"/>
 
-        <TextView
-            android:id="@+id/txt_servicefees"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_subtotal"
-            android:layout_marginTop="5dp"
-            android:text="Service fees:"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/txt_subtotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Subtotal"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:layout_below="@+id/rv_order_item"/>
 
-        <TextView
-            android:id="@+id/txt_servicefees_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/txt_subtotal_money"
-            android:text="5.000 VND"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/txt_subtotal_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="90.000 VND"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="14dp"
+                    android:layout_below="@+id/rv_order_item"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/txt_deliveryfees"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/txt_servicefees"
-            android:text="Delivery fees:"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/txt_subtotal_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/txt_subtotal"
+                    android:layout_marginLeft="5dp"
+                    android:text="(4 items)"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="14dp"
+                    android:layout_below="@+id/rv_order_item"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/txt_deliveryfees_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/txt_servicefees_money"
-            android:text="30.000 VND"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/txt_servicefees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_subtotal"
+                    android:layout_marginTop="5dp"
+                    android:text="Service fees:"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="14dp"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/txt_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_deliveryfees"
-            android:layout_marginTop="15dp"
-            android:text="Total"
-            android:fontFamily="@font/lato_bold"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/txt_servicefees_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/txt_subtotal_money"
+                    android:text="5.000 VND"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="14dp"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/txt_total_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/txt_deliveryfees_money"
-            android:text="125.000 VND"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/lato_bold"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/txt_deliveryfees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/txt_servicefees"
+                    android:text="Delivery fees:"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="14dp"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/txt_paymentbylabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_total"
-            android:layout_marginTop="15dp"
-            android:text="Payment by"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/txt_deliveryfees_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/txt_servicefees_money"
+                    android:text="30.000 VND"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="14dp"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/txt_paymentby"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/txt_total_money"
-            android:text="MoMo wallet"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/txt_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_deliveryfees"
+                    android:layout_marginTop="15dp"
+                    android:text="Total"
+                    android:fontFamily="@font/lato_bold"
+                    android:textSize="14dp"
+                    android:textColor="@color/black" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/txt_total_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/txt_deliveryfees_money"
+                    android:text="125.000 VND"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:textSize="14dp"
+                    android:textColor="@color/black" />
 
-    <RelativeLayout
-        android:id="@+id/order_cus_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/order_info_card"
-        android:background="@drawable/rounded_bg_white"
-        android:elevation="5dp"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:padding="20dp"
-        android:translationZ="3dp">
+                <TextView
+                    android:id="@+id/txt_paymentbylabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_total"
+                    android:layout_marginTop="15dp"
+                    android:text="Payment by"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="14dp"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tv_orderid_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="70dp"
-            android:textColor="@color/gray" />
+                <TextView
+                    android:id="@+id/txt_paymentby"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/txt_total_money"
+                    android:text="MoMo wallet"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="14dp"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tv_orderid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="#2321312"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@+id/tv_orderid_label"
-            android:textColor="@color/gray" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_ordername_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="50dp"
-            android:layout_below="@+id/tv_orderid_label"
-            android:textColor="@color/gray" />
+            <RelativeLayout
+                android:id="@+id/order_cus_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/order_info_card"
+                android:background="@drawable/rounded_bg_white"
+                android:elevation="5dp"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:padding="20dp"
+                android:translationZ="3dp">
 
-        <TextView
-            android:id="@+id/tv_ordername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Huynh Tien Thinh"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/tv_orderid"
-            android:layout_toEndOf="@+id/tv_orderid_label"
-            android:textColor="@color/gray" />
+                <TextView
+                    android:id="@+id/tv_orderid_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="70dp"
+                    android:textColor="@color/gray" />
 
-        <TextView
-            android:id="@+id/tv_orderphone_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone number"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="50dp"
-            android:layout_below="@+id/tv_ordername_label"
-            android:textColor="@color/gray" />
+                <TextView
+                    android:id="@+id/tv_orderid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#2321312"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toEndOf="@+id/tv_orderid_label"
+                    android:textColor="@color/gray" />
 
-        <TextView
-            android:id="@+id/tv_orderphone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0359086355"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/tv_ordername"
-            android:layout_toEndOf="@+id/tv_orderid_label"
-            android:textColor="@color/gray" />
+                <TextView
+                    android:id="@+id/tv_ordername_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_below="@+id/tv_orderid_label"
+                    android:textColor="@color/gray" />
 
-        <TextView
-            android:id="@+id/tv_orderaddress_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Address"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="50dp"
-            android:layout_below="@+id/tv_orderphone_label"
-            android:textColor="@color/gray" />
+                <TextView
+                    android:id="@+id/tv_ordername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Huynh Tien Thinh"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/tv_orderid"
+                    android:layout_toEndOf="@+id/tv_orderid_label"
+                    android:textColor="@color/gray" />
 
-        <TextView
-            android:id="@+id/tv_orderaddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10 alley 30, 8th street, Linh Xuan ward,
-            Thu Duc District, HCMC, Vietnam"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/tv_orderphone"
-            android:layout_toEndOf="@+id/tv_orderid_label"
-            android:textColor="@color/gray" />
+                <TextView
+                    android:id="@+id/tv_orderphone_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone number"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_below="@+id/tv_ordername_label"
+                    android:textColor="@color/gray" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_orderphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0359086355"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/tv_ordername"
+                    android:layout_toEndOf="@+id/tv_orderid_label"
+                    android:textColor="@color/gray" />
 
-    <RelativeLayout
-        android:id="@+id/order_restaurant_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/order_cus_info"
-        android:background="@drawable/rounded_bg_white"
-        android:elevation="5dp"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:padding="20dp"
-        android:translationZ="3dp">
+                <TextView
+                    android:id="@+id/tv_orderaddress_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_below="@+id/tv_orderphone_label"
+                    android:textColor="@color/gray" />
 
-        <TextView
-            android:id="@+id/lb_restaurant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Restaurant detail"
-            android:fontFamily="@font/lato_bold"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="70dp"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/tv_orderaddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10 alley 30, 8th street, Linh Xuan ward,
+                Thu Duc District, HCMC, Vietnam"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/tv_orderphone"
+                    android:layout_toEndOf="@+id/tv_orderid_label"
+                    android:textColor="@color/gray" />
 
-        <TextView
-            android:id="@+id/lb_restaurant_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="70dp"
-            android:layout_below="@id/lb_restaurant"
-            android:textColor="@color/gray" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_restaurant_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BinBin Noodles"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@+id/lb_restaurant_name"
-            android:layout_below="@+id/lb_restaurant"
-            android:textColor="@color/gray" />
+            <RelativeLayout
+                android:id="@+id/order_restaurant_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/order_cus_info"
+                android:background="@drawable/rounded_bg_white"
+                android:elevation="5dp"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:padding="20dp"
+                android:translationZ="3dp">
 
-        <TextView
-            android:id="@+id/lb_restaurant_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Address"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="50dp"
-            android:layout_below="@+id/lb_restaurant_name"
-            android:textColor="@color/gray" />
+                <TextView
+                    android:id="@+id/lb_restaurant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Restaurant detail"
+                    android:fontFamily="@font/lato_bold"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="70dp"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tv_restaurant_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10 alley 30, 8th street, Linh Xuan ward,
-            Thu Duc District, HCMC, Vietnam"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/tv_restaurant_name"
-            android:layout_toEndOf="@+id/lb_restaurant_name"
-            android:textColor="@color/gray" />
+                <TextView
+                    android:id="@+id/lb_restaurant_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="70dp"
+                    android:layout_below="@id/lb_restaurant"
+                    android:textColor="@color/gray" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_restaurant_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BinBin Noodles"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toEndOf="@+id/lb_restaurant_name"
+                    android:layout_below="@+id/lb_restaurant"
+                    android:textColor="@color/gray" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/start_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start delivery"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
-        style="@style/PrimaryButton"/>
+                <TextView
+                    android:id="@+id/lb_restaurant_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_below="@+id/lb_restaurant_name"
+                    android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_restaurant_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10 alley 30, 8th street, Linh Xuan ward,
+                Thu Duc District, HCMC, Vietnam"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/tv_restaurant_name"
+                    android:layout_toEndOf="@+id/lb_restaurant_name"
+                    android:textColor="@color/gray" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/start_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start delivery"
+                android:visibility="visible"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/order_restaurant_info"
+                style="@style/PrimaryButton"/>
+        </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

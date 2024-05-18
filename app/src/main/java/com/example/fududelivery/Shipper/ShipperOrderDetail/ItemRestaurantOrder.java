@@ -6,6 +6,16 @@ public class ItemRestaurantOrder {
     private String itemPrice;
     private String itemDescription;
 
+    @Override
+    public String toString() {
+        return "ItemRestaurantOrder{" +
+                "itemQuantity='" + itemQuantity + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", itemPrice='" + itemPrice + '\'' +
+                ", itemDescription='" + itemDescription + '\'' +
+                '}';
+    }
+
     // Constructor
     public ItemRestaurantOrder(String itemQuantity, String itemName, String itemPrice, String itemDescription) {
         this.itemQuantity = itemQuantity;
