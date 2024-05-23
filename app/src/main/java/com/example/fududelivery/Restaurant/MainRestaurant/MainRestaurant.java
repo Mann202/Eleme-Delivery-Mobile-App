@@ -2,11 +2,9 @@ package com.example.fududelivery.Restaurant.MainRestaurant;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,44 +14,25 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.fududelivery.Login.RestaurantSessionManager;
-import com.example.fududelivery.Login.UserSessionManager;
-import com.example.fududelivery.Notification.RestaurantNotificationService;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.History.RestaurantHistory;
 import com.example.fududelivery.Restaurant.Profile.RestaurantProfile;
 import com.example.fududelivery.Restaurant.RestaurantMenu.RestaurantMenu;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainRestaurant extends AppCompatActivity {
     private DrawerLayout drawer;
     private TextView imageViewMenu;
-    private RestaurantSessionManager restaurantSessionManager;
-    private FirebaseFirestore db;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainrestaurant);
-        restaurantSessionManager = new RestaurantSessionManager(getApplicationContext());
-        db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager2 viewPager = findViewById(R.id.viewPager);
-        Switch switchButton = findViewById(R.id.switchExample);
-        switchButton.setChecked(restaurantSessionManager.isActive());
-
-        Intent serviceIntent = new Intent(this, RestaurantNotificationService.class);
-        startService(serviceIntent);
 
         TabsAdapter tabsAdapter = new TabsAdapter(this);
         tabsAdapter.addFragment(new RestaurantMainPreparingFragment(), "Prepairing");
@@ -98,33 +77,5 @@ public class MainRestaurant extends AppCompatActivity {
                 }
             }
         });
-
-        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                String userUid = mAuth.getUid();
-
-                db.collection("Users").whereEqualTo("userUid", userUid)
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
-                                    if (snapshot.exists()) {
-                                        db.collection("Users").document(snapshot.getId())
-                                                .update("isGettingNewOrder", isChecked)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        restaurantSessionManager.setIsActive(false);
-                                                    }
-                                                });
-                                    }
-                                }
-                            }
-                        });
-            }
-        });
-
     }
 }

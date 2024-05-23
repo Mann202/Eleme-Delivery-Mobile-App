@@ -1,6 +1,5 @@
 package com.example.fududelivery.Restaurant.RestaurantMenu;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -70,9 +69,6 @@ public class MenuItemAdapter extends ArrayAdapter<Menu> {
                 Intent menuDetailItent = new Intent(getContext(), MenuDetail.class);
                 menuDetailItent.putExtra("menuID", menuID);
                 getContext().startActivity(menuDetailItent);
-                if (getContext() instanceof Activity) {
-                    ((Activity) getContext()).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }
             }
         });
 

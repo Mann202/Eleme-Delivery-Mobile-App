@@ -51,7 +51,6 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
         holder.nameText.setText(items.get(position).getNameText());
         holder.itemCountText.setText(items.get(position).getItemCountText());
         holder.adressText.setText(items.get(position).getAdressText());
-        holder.dateText.setText(items.get(position).getDateText());
         holder.totalPriceText.setText(items.get(position).getTotalPriceText());
         holder.detailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
