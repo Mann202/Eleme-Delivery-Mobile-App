@@ -28,7 +28,6 @@ public class ChangeEmail extends AppCompatActivity {
         setContentView(R.layout.activity_customer_changeemail);
         UserSessionManager userSessionManager = new UserSessionManager(getApplicationContext());
         FirebaseFirestore firestoreInstance = FirebaseFirestore.getInstance();
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         AppCompatEditText emailField = findViewById(R.id.changeEmailField);
 
