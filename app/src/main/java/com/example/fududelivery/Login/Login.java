@@ -73,6 +73,7 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         UserSessionManager sessionManager = new UserSessionManager(getApplicationContext());
         LoginCaseManager loginCaseManager = new LoginCaseManager(getApplicationContext());
+        RestaurantSessionManager restaurantSessionManager = new RestaurantSessionManager(getApplicationContext());
 
         FacebookSdk.setApplicationId("283740247620840");
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -149,7 +150,9 @@ public class Login extends AppCompatActivity {
                                                 if(Objects.equals(roleID, "2")) {
                                                     String startingDate = document.getString("startingDate");
                                                     String address = document.getString("address");
+                                                    Boolean isActive = document.getBoolean("isGettingNewOrder");
 
+                                                    restaurantSessionManager.setIsActive(isActive);
                                                     sessionManager.setStartingDate(startingDate);
                                                     sessionManager.setAddress(address);
                                                 }
