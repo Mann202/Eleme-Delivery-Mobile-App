@@ -65,6 +65,7 @@ public class ShipperAccount extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
+                // Xử lý khi một mục được chọn trong Spinner language
             }
 
             @Override

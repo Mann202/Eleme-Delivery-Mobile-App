@@ -1,4 +1,4 @@
-package com.example.fududelivery.Shipper;
+package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.R;
+import com.example.fududelivery.Shipper.Model.Order;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder {
     ImageView imgOrder;
@@ -29,25 +30,28 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Order order) {
-        if (order.getCusname()!=null) {
-            txtCusName.setText(order.getCusname());
+        if (order.getName()!=null) {
+            txtCusName.setText(order.getName());
         }  else txtCusName.setText("");
 
-        if (order.getCusaddress()!=null) {
-            txtCusAddress.setText(order.getCusaddress());
+        if (order.getAddress()!=null) {
+            txtCusAddress.setText(order.getAddress());
         }  else txtCusAddress.setText("");
 
-//        if (order.getOrderdate()!=null) {
-//            txtDate.setText(order.getOrderdate().toString());
-//        }  else txtDate.setText("");
-//
-//        if (order.getQuantity()!=0) {
-//            txtItems.setText(order.getQuantity());
-//        }  else txtItems.setText("");
-//
-//        if (order.getTotal() != 0.0f) {
-//            txtTotal.setText(String.valueOf(order.getTotal()));
-//        } else txtTotal.setText("");
+        if (order.getDate()!=null) {
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//            String formatDate = format.format(order.getDate());
+//            txtDate.setText(formatDate);
+            txtDate.setText(order.getDate().toString());
+        }  else txtDate.setText("3 Jun, 09:41");
+
+        if (order.getTotalQuantity()!=null) {
+            txtItems.setText(order.getTotalQuantity() + " item");
+        }  else txtItems.setText("0");
+
+        if (order.getOrderTotal() != 0.0f) {
+            txtTotal.setText(String.valueOf(order.getOrderTotal()));
+        } else txtTotal.setText("0");
 
     }
 

@@ -90,20 +90,9 @@
         </activity>
 
         <activity
-            android:name=".Shipper.NewOrderHomepage"
-            android:exported="true"
-            android:label="NewOrderHomepage" />
-
-        <activity
-            android:name=".Shipper.ShipperMain"
+            android:name=".Shipper.ShipperMain.ShipperMain"
             android:exported="true"
             android:label="ShipperMain" />
-
-        <activity
-            android:name=".Shipper.ShipperProfile"
-            android:exported="true"
-            android:label="ShipperProfile" />
-
 
         <activity
             android:name=".Home.Customer"
@@ -155,7 +144,7 @@
         </activity>
 
         <activity
-            android:name=".Shipper.OrderDetail"
+            android:name=".Shipper.ShipperOrderDetail.OrderDetail"
             android:exported="true"
             android:label="ShipperDetail" />
 

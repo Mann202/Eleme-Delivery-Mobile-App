@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/whiteedt"
-    tools:context=".Shipper.ShipperAccount">
+    tools:context=".Shipper.ShipperMain.ShipperAccount">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView

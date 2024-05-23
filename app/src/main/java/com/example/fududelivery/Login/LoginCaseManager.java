@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.fududelivery.GetStarted.SplashScreen;
 import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
-import com.example.fududelivery.Shipper.ShipperMain;
+import com.example.fududelivery.Shipper.ShipperMain.ShipperMain;
 
 public class LoginCaseManager {
     private Context context;

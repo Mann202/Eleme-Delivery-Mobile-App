@@ -7,13 +7,10 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.LoginCaseManager;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
-import com.example.fududelivery.Shipper.ShipperMain;
 
 public class SplashScreen extends AppCompatActivity {
     private SharedPreferences pref;

@@ -77,8 +77,8 @@
 
     <ImageView
         android:id="@+id/nav_orderdetail"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:src="@drawable/baseline_arrow_forward_ios_15"
