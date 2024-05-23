@@ -1,5 +1,6 @@
 package com.example.fududelivery.Restaurant.RestaurantMenu;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -91,6 +92,9 @@ public class CategoryItemAdapter extends ArrayAdapter<Category> {
                                     MenuIntent.putExtra("nameMenu", currentItem.getName());
                                     MenuIntent.putExtra("cateID", cateID);
                                     getContext().startActivity(MenuIntent);
+                                    if (getContext() instanceof Activity) {
+                                        ((Activity) getContext()).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    }
                                 }
                             }
                         });

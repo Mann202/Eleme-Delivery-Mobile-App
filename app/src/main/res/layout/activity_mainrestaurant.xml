@@ -35,16 +35,14 @@
                 android:id="@+id/switchExample"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:layout_alignParentEnd="true"
-                android:thumb="@drawable/ic_thumb"
-                android:track="@drawable/bg_track"
                 android:scaleX="2"
                 android:scaleY="2"
-                />
+                android:thumb="@drawable/ic_thumb"
+                android:track="@drawable/bg_track" />
 
         </RelativeLayout>
 
