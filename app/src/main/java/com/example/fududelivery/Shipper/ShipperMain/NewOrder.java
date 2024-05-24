@@ -1,6 +1,7 @@
 package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.example.fududelivery.Service.GeocodeCallback;
 import com.example.fududelivery.Service.GeocodeTask;
 import com.example.fududelivery.Service.Geocoding;
 import com.example.fududelivery.Service.LocationHelper;
+import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.example.fududelivery.Shipper.Model.Order;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -92,6 +94,9 @@ public class NewOrder extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_new_order, container, false);
 
+        Intent serviceIntent = new Intent(getContext(), RestaurantNotificationService.class);
+        rootView.getContext().startService(serviceIntent);
+
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
             locationHelper = new LocationHelper(getContext());
@@ -148,10 +153,17 @@ public class NewOrder extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
 
-        swipeRefreshLayout = rootView.findViewById(R.id.refreshLayoutDoneRestaurant);
+        swipeRefreshLayout = rootView.findViewById(R.id.refreshLayoutShipperOrder);
         swipeRefreshLayout.setColorSchemeColors(
                 getResources().getColor(R.color.primary)
         );
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Them code
+            }
+        });
 
         NoOrder = rootView.findViewById(R.id.no_orders);
         if (orders.isEmpty()){
@@ -203,6 +215,7 @@ public class NewOrder extends Fragment {
                     double latitude = coordinates[0];
                     double longitude = coordinates[1];
                     double distance = Geocoding.calculateDistance(shipperLocation[0], shipperLocation[1], latitude, longitude);
+                    Log.v("Debug", String.valueOf(distance));
                     if (distance < 10.0) {
                         orders.add(order);
                         adapter.notifyDataSetChanged();

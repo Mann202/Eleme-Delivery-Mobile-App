@@ -55,7 +55,6 @@ public class RestaurantNotificationService extends Service {
                                 String userUid = userSessionManager.getUserInformation();
 
                                 if (userUidInDoc != null && userUidInDoc.equals(userUid)) {
-                                    System.out.println("Document with matching userUid added: " + doc.getId());
                                     showNotification("New Order From Customer", "A new order has been add to your order list, please refresh your order app!");
                                 }
                                 break;

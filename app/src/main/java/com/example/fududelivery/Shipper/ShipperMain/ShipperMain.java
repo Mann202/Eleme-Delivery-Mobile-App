@@ -1,5 +1,8 @@
 package com.example.fududelivery.Shipper.ShipperMain;
 
+import static androidx.test.InstrumentationRegistry.getContext;
+
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -17,6 +20,8 @@ import com.example.fududelivery.GetStarted.ViewAdapter;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Service.Geocoding;
 import com.example.fududelivery.Service.LocationHelper;
+import com.example.fududelivery.Service.RestaurantNotificationService;
+import com.example.fududelivery.Service.ShipperNotification;
 import com.example.fududelivery.Shipper.ShipperAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -35,6 +40,9 @@ public class ShipperMain extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shippermain);
+
+        Intent serviceIntent = new Intent(this, ShipperNotification.class);
+        startService(serviceIntent);
 
         locationHelper = new LocationHelper(this);
         locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
