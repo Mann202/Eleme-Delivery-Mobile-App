@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.fududelivery.GetStarted.ViewAdapter;
 import com.example.fududelivery.R;
+import com.example.fududelivery.Shipper.ShipperAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

@@ -25,7 +25,6 @@ import androidx.core.content.ContextCompat;
 import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
-import com.example.fududelivery.Shipper.ShipperMain;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;

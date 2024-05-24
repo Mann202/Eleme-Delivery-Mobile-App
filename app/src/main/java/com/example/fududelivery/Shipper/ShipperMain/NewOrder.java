@@ -1,8 +1,11 @@
 package com.example.fududelivery.Shipper.ShipperMain;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.fududelivery.Manifest;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Shipper.Model.Order;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -115,7 +119,6 @@ public class NewOrder extends Fragment {
                             order.setOrderID(documentId);
                             System.out.println("Query Order: " + order);
 
-                            // TODO: Xử lý dữ liệu Order ở đây
                             orders.add(order);
 
                             recyclerView = rootView.findViewById(R.id.rv_orders);

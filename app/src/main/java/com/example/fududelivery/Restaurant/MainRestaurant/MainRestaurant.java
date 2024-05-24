@@ -2,7 +2,6 @@ package com.example.fududelivery.Restaurant.MainRestaurant;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -17,8 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.fududelivery.Login.RestaurantSessionManager;
-import com.example.fududelivery.Login.UserSessionManager;
-import com.example.fududelivery.Notification.RestaurantNotificationService;
+import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.History.RestaurantHistory;
 import com.example.fududelivery.Restaurant.Profile.RestaurantProfile;

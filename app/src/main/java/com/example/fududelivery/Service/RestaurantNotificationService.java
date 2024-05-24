@@ -1,4 +1,4 @@
-package com.example.fududelivery.Notification;
+package com.example.fududelivery.Service;
 
 import android.Manifest;
 import android.app.NotificationChannel;
@@ -8,14 +8,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.fududelivery.Login.RestaurantSessionManager;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.google.firebase.firestore.*;

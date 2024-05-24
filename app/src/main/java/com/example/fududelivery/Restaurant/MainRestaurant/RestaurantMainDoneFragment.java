@@ -20,8 +20,6 @@ import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Reference.ChangeCurrency;
 import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetail;
-import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetailItem;
-import com.example.fududelivery.Shipper.OrderDetail;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
