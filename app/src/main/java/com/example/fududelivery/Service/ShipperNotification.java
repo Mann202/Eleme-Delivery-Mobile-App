@@ -1,6 +1,8 @@
 package com.example.fududelivery.Service;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
@@ -36,16 +38,26 @@ public class ShipperNotification extends Service {
         return null;
     }
 
+    @SuppressLint("ForegroundServiceType")
     @Override
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
+        startForeground(1, getSilentNotification());
+    }
+
+    private Notification getSilentNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SHIPPING_CHANNEL_ID")
+                .setSmallIcon(R.drawable.logo_eleme)
+                .setPriority(NotificationCompat.PRIORITY_MIN)
+                .setSilent(true);
+
+        return builder.build();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startFirestoreListener();
-        Log.v("Debug", "onStartCommand");
         return START_STICKY;
     }
 
@@ -72,7 +84,7 @@ public class ShipperNotification extends Service {
                                 String shipperID = doc.getString("ShipperID");
                                 String shippingStatus = doc.getString("ShippingStatus");
 
-                                if (shipperID.equals("") && shippingStatus.equals("Ready")) {
+                                if (shipperID != null && shipperID.equals("") && shippingStatus != null && shippingStatus.equals("Ready")) {
                                     showNotification("New Shipping Order", "New shipping orders, please refresh your orders list!");
                                 }
                                 break;
@@ -82,6 +94,7 @@ public class ShipperNotification extends Service {
             }
         });
     }
+
 
     private void showNotification(String title, String content) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "SHIPPING_CHANNEL_ID")

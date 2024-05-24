@@ -22,4 +22,9 @@
     <string name="phoneNumberTitleRestaurant">Phone number</string>
     <string name="addressTitleRestaurant">Address</string>
     <string name="shipping_fee">Shipping Fee</string>
+    <string name="addressRestaurantProfile">Address</string>
+    <string name="confirmRestaurantProfile">Confirm</string>
+    <string name="logOutRestaurantProfile">Log out</string>
+    <string name="nameTitleRestaurantProfile">Name</string>
+    <string name="orderTitleAcceptOrder">Order</string>
 </resources>

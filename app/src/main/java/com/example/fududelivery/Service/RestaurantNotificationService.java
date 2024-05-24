@@ -1,6 +1,8 @@
 package com.example.fududelivery.Service;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
@@ -86,10 +88,21 @@ public class RestaurantNotificationService extends Service {
         return null;
     }
 
+    @SuppressLint("ForegroundServiceType")
     @Override
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
+        startForeground(1, getSilentNotification());
+    }
+
+    private Notification getSilentNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SHIPPING_CHANNEL_ID")
+                .setSmallIcon(R.drawable.logo_eleme)
+                .setPriority(NotificationCompat.PRIORITY_MIN)
+                .setSilent(true);
+
+        return builder.build();
     }
 
     private void createNotificationChannel() {
