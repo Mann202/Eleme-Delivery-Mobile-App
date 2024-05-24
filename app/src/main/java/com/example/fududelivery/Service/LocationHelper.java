@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -15,7 +17,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 public class LocationHelper {
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    public static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private FusedLocationProviderClient fusedLocationClient;
     private LocationCallback locationCallback;
     private LocationListener locationListener;
@@ -28,14 +30,6 @@ public class LocationHelper {
 
     public void startLocationUpdates(LocationListener listener) {
         this.locationListener = listener;
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
-        } else {
-            requestLocationUpdates();
-        }
-
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
@@ -47,6 +41,13 @@ public class LocationHelper {
                 }
             }
         };
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+        } else {
+            requestLocationUpdates();
+        }
     }
 
     private void requestLocationUpdates() {

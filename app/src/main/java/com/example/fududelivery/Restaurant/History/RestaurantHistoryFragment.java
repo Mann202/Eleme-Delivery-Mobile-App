@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Reference.ChangeCurrency;
@@ -28,7 +26,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class RestaurantHistoryFragment extends Fragment {
     private RecyclerView recyclerView;

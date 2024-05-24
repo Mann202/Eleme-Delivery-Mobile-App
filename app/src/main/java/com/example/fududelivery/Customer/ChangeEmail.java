@@ -81,7 +81,6 @@ public class ChangeEmail extends AppCompatActivity {
                                 }
                             });
                 } else {
-                    // Hiển thị thông báo lỗi hoặc yêu cầu người dùng nhập email
                     Toast.makeText(ChangeEmail.this, "Please enter your email", Toast.LENGTH_SHORT).show();
                 }
             }
