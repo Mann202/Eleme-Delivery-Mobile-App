@@ -1,45 +1,40 @@
 # Eleme Delivery Mobile
 
 ## 1. Introduction
-Museverse is not just a website; it's a meticulously designed digital haven tailored for music enthusiasts and creators alike. Imagine a platform intricately woven into the fabric of your musical passion, where creativity meets technology seamlessly. Much like a conductor guiding an orchestra, Museverse serves as your gateway to an unparalleled musical experience. Museverse is not merely a platform; it's a time-saving, cost-effective solution for musicians and enthusiasts alike. By streamlining the musical discovery process, we're not just saving time; we're enhancing the way people experience music. Join us in this harmonious adventure, where Museverse is not just a name – it's the beginning of your musical symphony.
-## 2. Research Object
-## 3. Members of Group 3
+In today's fast-paced world, the demand for convenient food delivery services has surged, leading to the rise of platforms like Grab and Shopee Food. Our project aims to develop a comprehensive food delivery application that caters to the needs of modern consumers by providing a seamless and efficient user experience.
+
+The app will connect users with a variety of local restaurants, offering a wide range of cuisines and dishes. Key features will include real-time order tracking, multiple payment options, user reviews and ratings, and promotional offers. The objective is to create a reliable and user-friendly platform that not only facilitates the ordering process but also enhances customer satisfaction through timely and accurate deliveries.
+
+Our approach involves leveraging the latest technologies in mobile app development to ensure the app is scalable, secure, and responsive. We will also integrate advanced features such as AI-based recommendations and delivery route optimization to improve efficiency and user engagement. By focusing on both the user and restaurant perspectives, our app will streamline operations and contribute to the growth of local food businesses.
+
+This project will be executed in phases, starting with market research and requirement analysis, followed by design, development, testing, and deployment. Through this systematic approach, we aim to deliver a high-quality food delivery application that meets the expectations of both consumers and restaurant partners.
+## 3. Members of Group 
 |    ID    |       Name       |         Email          |
 |:--------:|:----------------:|:----------------------:|
-| 19520646 | Vo Hoang Duc Khoa  | 19520646@gm.uit.edu.vn |
 | 21520430 |  Le Xuan Quynh   | 21520430@gm.uit.edu.vn |
 | 21520756 | Nguyen Dai Duong | 21520756@gm.uit.edu.vn |
 | 21521115 |  Truong Gia Man | 21521115@gm.uit.edu.vn |
 | 21522391 | Nguyen Binh Nguyen  | 21522391@gm.uit.edu.vn |
-| 21522413 | Dang Quang Nhat  | 21522413@gm.uit.edu.vn |
-## 4. Technology Used
-- HTML5, CSS3
-- ReactJS v18.2.0
-- Tailwind CSS v3.0
-- Boostrap v5.0
-- PHP v8.2.12
-- Laravel v10.32.1
-- Environment: Node.JS
+## 4. Technology and Tools Used
+- Java
+- Android Studio
+- Firebase Cloud
+- Google Payment API
+- Maps API
 ## 5. How to run
-###  5.1 Front-end side
-    - Install NodeJS (Recommend for most user) from [NodeJS](https://nodejs.org/en)
-    - Login Spotify Premium account in Spotify 
-        User: 21521115@gm.uit.edu.vn
-        Password: Truonggiaman.3012
-    - Clone the GitHub repository through the link or unzip the packaged web.
-    - After cloning or unzip, use Visual Code Studio and run the following commands:
-        cd museverse
-        npm install
-        npm install react
-        npm run start
-###  5.2 Back-end side
-    - Instal PHP, Xampp and Composer from [Composer](https://getcomposer.org/download/)
-    - Create database in MyPHPAdmin with name "Museverse"
-    - Run database script
-    - Clone the GitHub repository through the link or unzip the packaged web.
-    - After cloning or unzip, use Visual Code Studio and run the following commands:
-        cd Backend
-        composer install
-        php artisan serve
+- Clone project from GitHub or download ZIP at [GitHub](https://github.com/Mann202/Eleme-Delivery-Mobile-App)
+- Sync dependency list in build.gradle.kts (Module: App)
+- Run AVD (With minSDK at least 28 and at lest Android 11 (Android R))
+- Run application and login using difference role:
+  - For restaurant role: 
+    + Username: manlun0902@gmail.com
+    + Password: Mannn.312
+  - For customer role: 
+    + Username:
+    + Password:
+  - For shipper role: 
+    + Username: 21521115@gm.uit.edu.vn
+    + Password: Mannn.312
+- Note: Enable notification and location services when first launching app is highliy recommended for better support.
 ## 6. Timeline
-[Timeline notion Museverse](https://www.notion.so/ad5b313aa02e42219e42bbe3beb1e92e?v=e014cc3f9bac4941a116c8fc60e393c5&pvs=4)
+[Timeline notion Eleme Delivery App](https://www.notion.so/ad5b313aa02e42219e42bbe3beb1e92e?v=e014cc3f9bac4941a116c8fc60e393c5&pvs=4)
