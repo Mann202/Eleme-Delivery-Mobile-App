@@ -1,9 +1,11 @@
 package com.example.fududelivery.ExploreTitle;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,9 +18,10 @@ import java.util.List;
 
 public class ViewAdapter_Title extends RecyclerView.Adapter<ViewAdapter_Title.TitleViewHolder> {
     private List<Title> mTitles;
-    public void setData(List<Title> list) {
+    private Context context;
+    public ViewAdapter_Title(List<Title> list, Context context) {
         this.mTitles = list;
-        notifyDataSetChanged();
+        this.context = context;
     }
     @NonNull
     @Override
@@ -29,13 +32,12 @@ public class ViewAdapter_Title extends RecyclerView.Adapter<ViewAdapter_Title.Ti
 
     @Override
     public void onBindViewHolder(@NonNull TitleViewHolder holder, int position) {
-        Title title = mTitles.get(position);
+        final Title title = mTitles.get(position);
         if (title==null) {
             return;
         }
         holder.tvTitle.setText(title.getTitle());
     }
-
     @Override
     public int getItemCount() {
         if (mTitles != null) {
@@ -51,4 +53,5 @@ public class ViewAdapter_Title extends RecyclerView.Adapter<ViewAdapter_Title.Ti
             tvTitle = itemView.findViewById(R.id.tv_title);
         }
     }
+
 }

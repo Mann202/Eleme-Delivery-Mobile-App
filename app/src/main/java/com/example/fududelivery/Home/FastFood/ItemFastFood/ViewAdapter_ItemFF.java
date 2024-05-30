@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fududelivery.Food.Food;
 import com.example.fududelivery.R;
 
 import java.util.List;

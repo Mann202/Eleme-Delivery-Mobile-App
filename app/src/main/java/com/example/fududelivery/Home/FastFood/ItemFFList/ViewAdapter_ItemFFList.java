@@ -4,14 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fududelivery.Food.ViewAdapter_Food;
-import com.example.fududelivery.FoodList.FoodList;
 import com.example.fududelivery.Home.FastFood.ItemFastFood.ViewAdapter_ItemFF;
 import com.example.fududelivery.R;
 

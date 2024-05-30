@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,12 +25,10 @@ import com.example.fududelivery.Customer.MainOrder;
 import com.example.fududelivery.Customer.MyFavorite;
 import com.example.fududelivery.Customer.SavedPlaces;
 import com.example.fududelivery.Customer.TermAndCondition;
-import com.example.fududelivery.ExploreList.ExploreList;
-import com.example.fududelivery.ExploreList.ViewAdapter_ExploreList;
 import com.example.fududelivery.ExploreTitle.Title;
-import com.example.fududelivery.Food.Food;
-import com.example.fududelivery.FoodList.FoodList;
-import com.example.fududelivery.FoodList.ViewAdapter_FoodList;
+import com.example.fududelivery.ExploreTitle.ViewAdapter_Title;
+import com.example.fududelivery.Restaurant_Home.Restaurant_Home;
+import com.example.fududelivery.Restaurant_Home.ViewAdapter_RestaurantHome;
 import com.example.fududelivery.Home.Bakery.Bakery;
 import com.example.fududelivery.Home.Dessert.Dessert;
 import com.example.fududelivery.Home.Drink.Drink;
@@ -37,50 +36,129 @@ import com.example.fududelivery.Home.FastFood.FastFood;
 import com.example.fududelivery.Home.Fruit.Fruit;
 import com.example.fududelivery.Home.Noodle.Noodle;
 import com.example.fududelivery.Home.SeaFood.SeaFood;
+import com.example.fududelivery.Home.Search.Search_Main;
+import com.example.fududelivery.Home.Seemore.Seemore_Main;
 import com.example.fududelivery.Home.Vegetable.Vegetable;
 import com.example.fududelivery.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Customer extends AppCompatActivity {
+public class Customer extends AppCompatActivity implements View.OnClickListener {
     RecyclerView rcvFoodList;
-    ViewAdapter_FoodList viewAdapterFoodList;
-    ViewAdapter_FoodList viewAdapterDrinkList;
     ViewPager viewPager;
     ViewAdapter_Customer viewAdapter;
+    ViewAdapter_RestaurantHome viewAdapter_RH;
     RecyclerView rcvExploreList;
-    ViewAdapter_ExploreList viewAdapterExploreList;
+    ArrayList<Title> mTitles;
+    ArrayList<Restaurant_Home> mFoods;
     GridLayout mainGrid;
     private DrawerLayout drawer;
+    FirebaseFirestore dbroot;
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainhome);
-
         AppCompatButton settingButton = findViewById(R.id.settingButton);
-
+        TextView seemore = findViewById(R.id.seemore_restaurant);
+        TextInputLayout searchInputLayout = findViewById(R.id.findrestaurant);
+        TextInputEditText searchEditText = findViewById(R.id.findrestauranttextinput);
         viewPager = findViewById(R.id.banner);
         viewAdapter = new ViewAdapter_Customer(this);
         viewPager.setAdapter(viewAdapter);
         rcvFoodList = findViewById(R.id.rcv_foodlist);
-        viewAdapterFoodList = new ViewAdapter_FoodList(this);
         rcvExploreList = findViewById(R.id.rcv_titlelist);
-        viewAdapterExploreList = new ViewAdapter_ExploreList(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        mFoods = new ArrayList<Restaurant_Home>();
+        mTitles = new ArrayList<Title>();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         rcvFoodList.setLayoutManager(linearLayoutManager);
+        rcvFoodList.setHasFixedSize(true);
         drawer = findViewById(R.id.drawer_layout);
-        viewAdapterFoodList.setData(getListFood());
-        rcvFoodList.setAdapter(viewAdapterFoodList);
         rcvExploreList.setLayoutManager(linearLayoutManager1);
-        viewAdapterExploreList.setData(getListExplore());
-        rcvExploreList.setAdapter(viewAdapterExploreList);
+        rcvExploreList.setHasFixedSize(true);
+        viewAdapter_RH = new ViewAdapter_RestaurantHome(mFoods, this);
+        rcvFoodList.setAdapter(viewAdapter_RH);
         mainGrid = findViewById(R.id.category_list);
+        dbroot = FirebaseFirestore.getInstance();
+//        DocumentReference document_Restaurant = dbroot.collection("Restaurant").document("uPprI6AnbvPqpby4TdtL");
+//        document_Restaurant.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                if (documentSnapshot.exists()) {
+//                    mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), addressName));
+//                    mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), addressName));
+//                    mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), addressName));
+//                    mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), addressName));
+//                    mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), addressName));
+//                    mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), addressName));
+//                    mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), addressName));
+//                    mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), addressName));
+//                }
+//                viewAdapter_RH.notifyDataSetChanged();
+//            }
+//        });
+        DocumentReference document_Address = dbroot.collection("Address").document("xIXBN6yU11nIoNRkJLP8");
+        document_Address.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    String addressName = documentSnapshot.getString("Street");
+                    // Get the address document using the addressID
+                    dbroot.collection("Restaurant").document("uPprI6AnbvPqpby4TdtL").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot restaurantDocument) {
+                            if (restaurantDocument.exists()) {
+                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
+                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
+                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
+                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
+                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
+                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
+                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
+                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
+                            }
+                            viewAdapter_RH.notifyDataSetChanged();
+                        }
+                    });
+                }
+            }
+        });
         setSingleEvent(mainGrid);
+        mTitles.add(new Title("Food 1"));
+        mTitles.add(new Title("Food 1"));
+        mTitles.add(new Title("Food 1"));
+        mTitles.add(new Title("Food 1"));
+        mTitles.add(new Title("Food 1"));
+        mTitles.add(new Title("Food 1"));
 
+        ViewAdapter_Title viewadapter_title;
+        viewadapter_title = new ViewAdapter_Title(mTitles, this);
+        rcvExploreList.setAdapter(viewadapter_title);
+
+
+        searchEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Customer.this, Search_Main.class);
+                startActivity(intent);
+            }
+        });
+
+        seemore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Customer.this, Seemore_Main.class);
+                startActivity(intent);
+            }
+        });
         settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +167,6 @@ public class Customer extends AppCompatActivity {
                 }
             }
         });
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -165,33 +242,12 @@ public class Customer extends AppCompatActivity {
             });
         }
     }
-    private List<FoodList> getListFood() {
-        List<FoodList> FoodList = new ArrayList<>();
 
-        List<Food> listFood = new ArrayList<>();
-        listFood.add(new Food(R.drawable.dishes_01, "Food 01"));
-        listFood.add(new Food(R.drawable.dishes_02, "Food 02"));
-        listFood.add(new Food(R.drawable.dishes_03, "Food 03"));
-        listFood.add(new Food(R.drawable.dishes_04, "Food 04"));
+    @Override
+    public void onClick(View v) {
 
-        FoodList.add(new FoodList("", listFood));
-        return FoodList;
     }
-private List<ExploreList> getListExplore() {
-    List<ExploreList> ExploreList = new ArrayList<>();
 
-    List<Title> listTitle = new ArrayList<>();
-    listTitle.add(new Title("Food 01"));
-    listTitle.add(new Title("Food 02"));
-    listTitle.add(new Title("Food 04"));
-    listTitle.add(new Title("Food 05"));
-    listTitle.add(new Title("Food 01"));
-    listTitle.add(new Title("Food 02"));
-    listTitle.add(new Title("Food 04"));
-    listTitle.add(new Title("Food 05"));
-    ExploreList.add(new ExploreList("Explore more ", listTitle));
-    return ExploreList;
-}
 
 }
 

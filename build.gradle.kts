@@ -7,5 +7,6 @@ plugins {
 buildscript { repositories { mavenCentral() }
     dependencies {
         classpath("com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3")
+        classpath("com.google.gms:google-services:4.4.1")
     }
 }
