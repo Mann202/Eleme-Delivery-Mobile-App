@@ -15,7 +15,7 @@ import com.example.fududelivery.R;
 
 import java.util.List;
 
-public class ViewAdapter_ItemNoodle  extends RecyclerView.Adapter<ViewAdapter_ItemNoodle.ItemNoodleViewHolder> {
+public class ViewAdapter_ItemNoodle extends RecyclerView.Adapter<ViewAdapter_ItemNoodle.ItemNoodleViewHolder> {
     private List<ItemNoodle> mNoodles;
 
     public void setData(List<ItemNoodle> list) {

@@ -20,7 +20,7 @@
                 android:layout_height="match_parent">
 
                 <RelativeLayout
-                    android:id="@+id/top_panel"
+                    android:id="@+id/top_panel_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -43,6 +43,7 @@
                             android:padding="11dp"/>
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/finddetail"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginStart="65dp"
@@ -50,6 +51,7 @@
                             android:layout_marginEnd="20dp">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/finddetailtextinput"
                                 style="@style/EditTextLogin"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -60,7 +62,6 @@
                                 android:textColorHint="@color/whiteedt"
                                 android:textColorLink="@color/primary" />
                         </com.google.android.material.textfield.TextInputLayout>
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -73,6 +74,13 @@
                             android:textSize="17sp" />
                     </RelativeLayout>
                 </RelativeLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rcv_searchlist"
+                    android:paddingStart="20dp"
+                    android:layout_below="@+id/top_panel_search">
+                </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>

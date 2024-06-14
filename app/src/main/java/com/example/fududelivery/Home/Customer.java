@@ -105,32 +105,28 @@ public class Customer extends AppCompatActivity implements View.OnClickListener 
 //                viewAdapter_RH.notifyDataSetChanged();
 //            }
 //        });
-        DocumentReference document_Address = dbroot.collection("Address").document("xIXBN6yU11nIoNRkJLP8");
-        document_Address.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        //DocumentReference document_Address = dbroot.collection("Address").document("xIXBN6yU11nIoNRkJLP8");
+        DocumentReference document_Restaurant = dbroot.collection("Restaurant").document("uPprI6AnbvPqpby4TdtL");
+        document_Restaurant.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
-                    String addressName = documentSnapshot.getString("Street");
+                    //String addressName = documentSnapshot.getString("Street");
                     // Get the address document using the addressID
-                    dbroot.collection("Restaurant").document("uPprI6AnbvPqpby4TdtL").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot restaurantDocument) {
-                            if (restaurantDocument.exists()) {
-                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
-                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
-                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
-                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
-                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
-                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
-                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
-                                mFoods.add(new Restaurant_Home(restaurantDocument.getString("ImageID"),restaurantDocument.getString("AddressID"),restaurantDocument.getString("Description"),restaurantDocument.getString("ResID"),restaurantDocument.getString("ResName"), addressName));
+                    //dbroot.collection("Restaurant").document("uPprI6AnbvPqpby4TdtL").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        //@Override
+                        //public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            //if (restaurantDocument.exists()) {
+                                mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), "hello"));
+                                mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), "hello"));
+                                mFoods.add(new Restaurant_Home(documentSnapshot.getString("ImageID"),documentSnapshot.getString("AddressID"),documentSnapshot.getString("Description"),documentSnapshot.getString("ResID"),documentSnapshot.getString("ResName"), "hello"));
                             }
                             viewAdapter_RH.notifyDataSetChanged();
                         }
                     });
-                }
-            }
-        });
+                //}
+            //}
+        //});
         setSingleEvent(mainGrid);
         mTitles.add(new Title("Food 1"));
         mTitles.add(new Title("Food 1"));

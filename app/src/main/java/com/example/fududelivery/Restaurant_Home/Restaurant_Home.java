@@ -8,7 +8,6 @@ public class Restaurant_Home implements Serializable {
     private String Des;
     private String ResID;
     private String ResName;
-
     private String AddressName;
 
     public Restaurant_Home(String resourceId, String addressID, String des, String resID, String resName, String addressName) {

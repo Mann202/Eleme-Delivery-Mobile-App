@@ -16,7 +16,7 @@ import com.example.fududelivery.R;
 
 import java.util.List;
 
-public class ViewAdapter_ItemFruitList extends RecyclerView.Adapter<ViewAdapter_ItemFruitList.VegetableListViewHolder> {
+public class ViewAdapter_ItemFruitList extends RecyclerView.Adapter<ViewAdapter_ItemFruitList.FruitListViewHolder> {
 
     private final Context mContext;
     private List<ItemFruitList> mListFruit;
@@ -30,14 +30,14 @@ public class ViewAdapter_ItemFruitList extends RecyclerView.Adapter<ViewAdapter_
     @NonNull
 
     @Override
-    public ViewAdapter_ItemFruitList.VegetableListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewAdapter_ItemFruitList.FruitListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fruitlist, parent, false);
-        return new ViewAdapter_ItemFruitList.VegetableListViewHolder(view);
+        return new ViewAdapter_ItemFruitList.FruitListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewAdapter_ItemFruitList.VegetableListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewAdapter_ItemFruitList.FruitListViewHolder holder, int position) {
         ItemFruitList Fruitlist = mListFruit.get(position);
         if(Fruitlist == null) {
             return;
@@ -57,10 +57,10 @@ public class ViewAdapter_ItemFruitList extends RecyclerView.Adapter<ViewAdapter_
         return 0;
     }
 
-    public class VegetableListViewHolder extends RecyclerView.ViewHolder {
+    public class FruitListViewHolder extends RecyclerView.ViewHolder {
 
         private RecyclerView rcvFruit;
-        public VegetableListViewHolder(@NonNull View itemView) {
+        public FruitListViewHolder(@NonNull View itemView) {
             super(itemView);
             rcvFruit = itemView.findViewById(R.id.rcv_fruit);
         }
