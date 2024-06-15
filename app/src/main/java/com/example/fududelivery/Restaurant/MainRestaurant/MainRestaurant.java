@@ -15,6 +15,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.fududelivery.Chat.ChatActivity;
 import com.example.fududelivery.Login.RestaurantSessionManager;
 import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.example.fududelivery.R;
@@ -58,6 +59,15 @@ public class MainRestaurant extends AppCompatActivity {
         tabsAdapter.addFragment(new RestaurantMainDoneFragment(), "Done");
 
         viewPager.setAdapter(tabsAdapter);
+
+        findViewById(R.id.imv_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainRestaurant.this, ChatActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(tabsAdapter.getPageTitle(position))

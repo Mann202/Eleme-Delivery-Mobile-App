@@ -1,7 +1,9 @@
 package com.example.fududelivery.Service;
 
 import android.content.Context;
+import android.provider.SyncStateContract;
 
+import com.example.fududelivery.R;
 import com.google.android.gms.wallet.PaymentsClient;
 import com.google.android.gms.wallet.Wallet;
 
@@ -58,11 +60,11 @@ public class PaymentUtils {
                 .put("tokenizationSpecification", getGatewayTokenizationSpecification());
     }
 
-    public static PaymentsClient createPaymentsClient(Context context) {
-        Wallet.WalletOptions walletOptions =
-                new Wallet.WalletOptions.Builder().setEnvironment(Wallet.TEST).build();
-        return Wallet.getPaymentsClient(context, walletOptions);
-    }
+    //public static PaymentsClient createPaymentsClient(Context context) {
+        //Wallet.WalletOptions walletOptions =
+                //new Wallet.WalletOptions.Builder().setEnvironment(Wallet.TEST).build();
+        //eturn Wallet.getPaymentsClient(context, walletOptions);
+    //}
 
     public static JSONObject getIsReadyToPayRequest() {
         try {
@@ -77,8 +79,8 @@ public class PaymentUtils {
         return new JSONObject()
                 .put("totalPrice", price)
                 .put("totalPriceStatus", "FINAL")
-                .put("countryCode", Constants.COUNTRY_CODE)
-                .put("currencyCode", Constants.CURRENCY_CODE)
+                .put("countryCode", SyncStateContract.Constants.CONTENT_DIRECTORY)
+                //.put("currencyCode", Constants.CURRENCY_CODE)
                 .put("checkoutOption", "COMPLETE_IMMEDIATE_PURCHASE");
     }
 
