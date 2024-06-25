@@ -37,15 +37,15 @@ public class UpdateAddAddressActivity extends AppCompatActivity {
         initToolbar();
 
         if (mode.equals("add - default")) {
-            binding.updateComplete.setText("Complete");
+            binding.save_button.setText("Complete");
             binding.setDefault.setChecked(true);
             binding.setDefault.setEnabled(false);
         }
         else if (mode.equals("add - non-default")) {
-            binding.updateComplete.setText("Complete");
+            binding.save_button.setText("Complete");
         }
         else if (mode.equals("update")) {
-            binding.updateComplete.setText("Update");
+            binding.save_button.setText("Update");
 
             FirebaseDatabase.getInstance().getReference().child("Address").child(userId).child(GlobalConfig.updateAddressId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -70,11 +70,11 @@ public class UpdateAddAddressActivity extends AppCompatActivity {
             });
         }
 
-        binding.updateComplete.setOnClickListener(new View.OnClickListener() {
+        binding.save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validateAddressInfo()) {
-                    if (binding.updateComplete.getText().equals("Complete")) {
+                    if (binding.save_button.getText().equals("Complete")) {
                         // Add default address
                         if (binding.setDefault.isChecked()) {
                             String addressId = FirebaseDatabase.getInstance().getReference().push().getKey();

@@ -14,6 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.fududelivery.Customer.GlobalConfig.GlobalConfig;
+import com.example.fududelivery.Customer.Interfaces.IAddressAdapterListener;
+import com.example.fududelivery.Customer.Model.Address;
+import com.example.fududelivery.Customer.databinding.ActivityChangeAddressBinding;
+import com.example.fududelivery.Customer.AddressAdapter;
 import com.example.fududelivery.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,13 +76,13 @@ public class EditAddress extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.getChildrenCount() == 0) {
-                            Intent intent = new Intent(ChangeAddressActivity.this, UpdateAddAddressActivity.class);
+                            Intent intent = new Intent(EditAddress.this, UpdateAddAddressActivity.class);
                             intent.putExtra("userId", userId);
                             intent.putExtra("mode", "add - default");
                             updateAddAddressLauncher.launch(intent);
                         }
                         else {
-                            Intent intent = new Intent(ChangeAddressActivity.this, UpdateAddAddressActivity.class);
+                            Intent intent = new Intent(EditAddress.this, UpdateAddAddressActivity.class);
                             intent.putExtra("userId", userId);
                             intent.putExtra("mode", "add - non-default");
                             updateAddAddressLauncher.launch(intent);

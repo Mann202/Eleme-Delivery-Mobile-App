@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteedt"
@@ -38,6 +41,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             style="@style/EditTextLogin"
+            android:id="@+id/full_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingRight="@dimen/padding_small"
@@ -76,24 +80,26 @@
 
         <com.google.android.material.textfield.TextInputEditText
             style="@style/EditTextLogin"
+            android:id="@+id/phone_number"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
             android:hint="@string/_0999"
-            android:inputType="text"
+            android:inputType="phone"
             android:paddingRight="@dimen/padding_small"
             android:textColorHighlight="@color/primary"
             android:textColorHint="@color/whiteedt"
             android:textColorLink="@color/primary" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
     <!--Address-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ProfilePhone"
+        android:layout_below="@id/phone_number"
         android:text="Detail address"
         android:textSize="16sp"
         android:layout_marginTop="15dp"
@@ -102,7 +108,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:id="@+id/detail_address"
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_detail_address"
         android:layout_marginTop="-5dp"
@@ -111,6 +116,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             style="@style/EditTextLogin"
+            android:id="@+id/detail_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
@@ -166,4 +172,5 @@
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         style="@style/SaveButton"/>
-</RelativeLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,28 +36,27 @@ public final class ActivityUpdateAddAddressBinding implements ViewBinding {
   @NonNull
   public final SwitchCompat setDefault;
 
-
-
+  @NonNull
+  public final Toolbar toolbar;
   @NonNull
   public final TextView txtDetailAddress;
 
   @NonNull
-  public final Button updateComplete;
+  public final Button save_button;
 
   private ActivityUpdateAddAddressBinding(@NonNull LinearLayoutCompat rootView,
-      @NonNull TextInputEditText detailAddress,
-      @NonNull TextInputEditText fullName, @NonNull TextInputEditText phoneNumber,
-      @NonNull SwitchCompat setDefault,
-      @NonNull TextView txtDetailAddress, @NonNull Button updateComplete) {
+                                          @NonNull TextInputEditText detailAddress,
+                                          @NonNull TextInputEditText fullName, @NonNull TextInputEditText phoneNumber,
+                                          @NonNull SwitchCompat setDefault, @NonNull Toolbar toolbar,
+                                          @NonNull TextView txtDetailAddress, @NonNull Button save_button)  {
     this.rootView = rootView;
-
     this.detailAddress = detailAddress;
     this.fullName = fullName;
     this.phoneNumber = phoneNumber;
     this.setDefault = setDefault;
-
+    this.toolbar = toolbar;
     this.txtDetailAddress = txtDetailAddress;
-    this.updateComplete = updateComplete;
+    this.save_button = save_button;
   }
 
   @Override
@@ -93,13 +93,13 @@ public final class ActivityUpdateAddAddressBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.ProfileName;
+      id = R.id.full_name;;
       TextInputEditText fullName = ViewBindings.findChildViewById(rootView, id);
       if (fullName == null) {
         break missingId;
       }
 
-      id = R.id.ProfilePhone;
+      id = R.id.phone_number;
       TextInputEditText phoneNumber = ViewBindings.findChildViewById(rootView, id);
       if (phoneNumber == null) {
         break missingId;
@@ -111,6 +111,11 @@ public final class ActivityUpdateAddAddressBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.toolbar;
+      Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
+      if (toolbar == null) {
+        break missingId;
+      }
 
       id = R.id.txt_detail_address;
       TextView txtDetailAddress = ViewBindings.findChildViewById(rootView, id);
@@ -119,14 +124,14 @@ public final class ActivityUpdateAddAddressBinding implements ViewBinding {
       }
 
       id = R.id.save_button;
-      Button updateComplete = ViewBindings.findChildViewById(rootView, id);
-      if (updateComplete == null) {
+      Button save_button = ViewBindings.findChildViewById(rootView, id);
+      if (save_button == null) {
         break missingId;
       }
 
       return new ActivityUpdateAddAddressBinding((LinearLayoutCompat) rootView,
-          detailAddress, fullName, phoneNumber, setDefault, txtDetailAddress,
-          updateComplete);
+              detailAddress, fullName, phoneNumber, setDefault, toolbar, txtDetailAddress,
+              save_button);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
