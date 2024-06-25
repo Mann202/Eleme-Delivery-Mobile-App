@@ -56,7 +56,6 @@ android {
 }
 
 dependencies {
-    implementation("com.google.firebase:firebase-database:21.0.0")
     val fragment_version = "1.6.2"
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -84,11 +83,19 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("androidx.fragment:fragment:$fragment_version")
-    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-firestore")
-    implementation("com.google.firebase:firebase-auth:22.3.1")
+    implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation ("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-database:20.2.2")
+    implementation ("com.google.firebase:firebase-storage:20.2.1")
+    implementation ("com.google.firebase:firebase-storage-ktx:20.2.1")
+    implementation ("com.google.firebase:firebase-database-ktx:20.2.2")
+    implementation ("com.google.firebase:firebase-auth-ktx:22.0.0")
     implementation("com.facebook.android:facebook-android-sdk:[8,9)")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation ("com.google.android.material:material:1.11.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-messaging:24.0.0")
 }
