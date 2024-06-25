@@ -79,6 +79,7 @@
             android:layout_height="wrap_content"
             android:text="@string/waiting_for_long_time"
             android:textSize="17sp"
+            android:paddingStart="10dp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/black"
             android:button="@drawable/radio_button_background"/>
@@ -90,6 +91,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/unable_to_contact_driver"
             android:textSize="17sp"
+            android:paddingStart="10dp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/black"
             android:button="@drawable/radio_button_background"/>
@@ -101,6 +103,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/driver_denied_to_go_to_destination"
             android:textSize="17sp"
+            android:paddingStart="10dp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/black"
             android:button="@drawable/radio_button_background"/>
@@ -112,6 +115,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/driver_denied_to_come_to_pickup"
             android:textSize="17sp"
+            android:paddingStart="10dp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/black"
             android:button="@drawable/radio_button_background"/>
@@ -122,6 +126,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/wrong_address_shown"
             android:textSize="17sp"
+            android:paddingStart="10dp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/black"
             android:button="@drawable/radio_button_background"/>
@@ -132,6 +137,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/i_want_to_order_another_restaurant"
             android:textSize="17sp"
+            android:paddingStart="10dp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/black"
             android:button="@drawable/radio_button_background"/>
@@ -142,6 +148,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/i_just_want_to_cancel"
             android:textSize="17sp"
+            android:paddingStart="10dp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/black"
             android:button="@drawable/radio_button_background"/>
@@ -151,6 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/others"
+            android:paddingStart="10dp"
             android:textSize="17sp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/black"

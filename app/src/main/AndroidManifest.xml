@@ -132,7 +132,7 @@
         </activity>
 
         <activity
-            android:name=".Customer.MainOrder"
+            android:name=".Customer.MyOrder.MainOrder"
             android:exported="true">
         </activity>
 
@@ -147,9 +147,11 @@
         </activity>
 
         <activity
-            android:name=".Customer.NewAddress"
+            android:name=".Customer.UpdateAddAddressActivity"
             android:exported="true">
         </activity>
+
+
 
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
