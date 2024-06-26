@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder>{
     Activity context;
-    ArrayList<Order> orders = new ArrayList<>();
+    ArrayList<Order> orders;
     private OnItemClickListener itemClickListener;
 
     public OrderAdapter(Activity context, ArrayList<Order> orders) {

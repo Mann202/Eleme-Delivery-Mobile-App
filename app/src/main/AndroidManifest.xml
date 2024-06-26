@@ -144,6 +144,11 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".Customer.MyCart.Cart"
+            android:exported="true">
+        </activity>
+
 
 
     </application>

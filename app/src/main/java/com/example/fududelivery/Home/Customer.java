@@ -96,13 +96,13 @@ public class Customer extends AppCompatActivity {
                 } else if (itemId == R.id.termAndCondition) {
                     intent = new Intent(Customer.this, TermAndCondition.class);
                 } else if (itemId == R.id.myFavorites) {
-                    intent = new Intent(Customer.this, MyFavorite.class);
+//                    intent = new Intent(Customer.this, MyFavorite.class);
                 } else if (itemId == R.id.savePlaces) {
-                    intent = new Intent(Customer.this, SavedPlaces.class);
+//                    intent = new Intent(Customer.this, SavedPlaces.class);
                 } else if (itemId == R.id.paymentManagement) {
                     intent = new Intent(Customer.this, MainOrder.class);
                 } else if (itemId == R.id.myAccount) {
-                    intent = new Intent(Customer.this, CustomerProfile.class);
+//                    intent = new Intent(Customer.this, CustomerProfile.class);
                 }
 
                 if (intent != null) {

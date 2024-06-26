@@ -45,7 +45,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/Pin_alt"
+                android:src="@drawable/pin_alt"
                 android:layout_marginStart="10dp" />
 
             <TextView
