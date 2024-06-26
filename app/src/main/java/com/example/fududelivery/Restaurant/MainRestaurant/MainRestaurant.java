@@ -60,14 +60,6 @@ public class MainRestaurant extends AppCompatActivity {
 
         viewPager.setAdapter(tabsAdapter);
 
-        findViewById(R.id.imv_test).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainRestaurant.this, ChatActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(tabsAdapter.getPageTitle(position))

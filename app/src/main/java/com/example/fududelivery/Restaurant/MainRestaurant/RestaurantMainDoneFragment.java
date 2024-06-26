@@ -92,7 +92,7 @@ public class RestaurantMainDoneFragment extends Fragment {
     private void loadData() {
         firestoreInstance.collection("Orders")
                 .whereEqualTo("ResID", userSessionManager.getUserInformation())
-                .whereEqualTo("DeliveryStatus", "Done")
+                .whereEqualTo("ResStatus", "Done")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

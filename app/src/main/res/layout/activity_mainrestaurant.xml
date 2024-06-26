@@ -31,12 +31,6 @@
                 android:scaleX="2"
                 />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imv_test"
-                android:layout_width="wrap_content"
-                app:srcCompat="@drawable/ic_forward"
-                android:layout_height="wrap_content" />
-
             <Switch
                 android:id="@+id/switchExample"
                 android:layout_width="wrap_content"

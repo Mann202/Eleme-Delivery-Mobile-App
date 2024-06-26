@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,45 +64,62 @@ public class CategoryItemAdapter extends ArrayAdapter<Category> {
         TextView categoryNameText = convertView.findViewById(R.id.categoryNameText);
         EditText categoryEditText = convertView.findViewById(R.id.categoryEditText);
         ImageView deleteImage = convertView.findViewById(R.id.deleteImageView);
+        RelativeLayout rlContainer = convertView.findViewById(R.id.childCategoryLayout);
+        EditText newCategoryEditText = convertView.findViewById(R.id.newCategoryEditText);
 
-        categoryEditText.setVisibility(View.GONE);
-        categoryNameText.setText(currentItem.getName());
-        categoryNameText.setVisibility(View.VISIBLE);
-
-        categoryNameText.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                categoryNameText.setVisibility(View.GONE);
-                categoryEditText.setVisibility(View.VISIBLE);
-                categoryEditText.setText(currentItem.getName());
-                return false;
-            }
-        });
+        if (currentItem.getName().isEmpty()) {
+            newCategoryEditText.setVisibility(View.GONE);
+        } else {
+            categoryNameText.setText(currentItem.getName());
+            categoryNameText.setVisibility(View.VISIBLE);
+            categoryEditText.setVisibility(View.GONE);
+            newCategoryEditText.setVisibility(View.GONE);
+        }
 
         categoryNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseFirestore.collection("Catelogy")
-                        .whereEqualTo("CateName", currentItem.getName())
-                        .whereEqualTo("userUid", userSessionManager.getUserInformation()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                for(DocumentSnapshot documentSnapshot : task.getResult()) {
-                                    cateID = documentSnapshot.getId();
-
-                                    Intent MenuIntent = new Intent(getContext(), CategoryDetail.class);
-                                    MenuIntent.putExtra("nameMenu", currentItem.getName());
-                                    MenuIntent.putExtra("cateID", cateID);
-                                    getContext().startActivity(MenuIntent);
-                                    if (getContext() instanceof Activity) {
-                                        ((Activity) getContext()).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                    }
-                                }
-                            }
-                        });
+                categoryNameText.setVisibility(View.GONE);
+                newCategoryEditText.setVisibility(View.VISIBLE);
+                newCategoryEditText.setText(currentItem.getName());
             }
         });
 
+        firebaseFirestore.collection("Catelogy").whereEqualTo("CateName", currentItem.getName()).whereEqualTo("userUid", userSessionManager.getUserInformation()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                    cateID = documentSnapshot.getId();
+
+                    Intent MenuIntent = new Intent(getContext(), CategoryDetail.class);
+                    MenuIntent.putExtra("nameMenu", currentItem.getName());
+                    MenuIntent.putExtra("cateID", cateID);
+                }
+            }
+        });
+
+        rlContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseFirestore.collection("Catelogy").whereEqualTo("CateName", currentItem.getName()).whereEqualTo("userUid", userSessionManager.getUserInformation()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                            cateID = documentSnapshot.getId();
+
+                            Intent MenuIntent = new Intent(getContext(), CategoryDetail.class);
+                            MenuIntent.putExtra("nameMenu", currentItem.getName());
+                            MenuIntent.putExtra("cateID", cateID);
+                            getContext().startActivity(MenuIntent);
+                            if (getContext() instanceof Activity) {
+                                ((Activity) getContext()).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                ((Activity) getContext()).finish();
+                            }
+                        }
+                    }
+                });
+            }
+        });
 
         deleteImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,95 +128,67 @@ public class CategoryItemAdapter extends ArrayAdapter<Category> {
             }
         });
 
-
-        categoryEditText.setOnKeyListener(new View.OnKeyListener() {
+        categoryEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    String newCategoryName = categoryEditText.getText().toString();
-                    if (!newCategoryName.equals(currentItem.getName())) {
-                        firebaseFirestore.collection("Catelogy")
-                                .whereEqualTo("CateName", currentItem.getName())
-                                .whereEqualTo("userUid", userSessionManager.getUserInformation())
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            QuerySnapshot queryDocumentSnapshots = task.getResult();
-                                            if (queryDocumentSnapshots != null && !queryDocumentSnapshots.isEmpty()) {
-                                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                                    String docId = documentSnapshot.getId();
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    categoryEditText.setVisibility(View.GONE);
+                    categoryNameText.setText(categoryEditText.getText().toString());
+                    categoryNameText.setVisibility(View.VISIBLE);
 
-                                                    Map<String, Object> updates = new HashMap<>();
-                                                    updates.put("CateName", newCategoryName);
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("CateName", categoryEditText.getText().toString());
+                    data.put("userUid", userSessionManager.getUserInformation());
+                    firebaseFirestore.collection("Catelogy").add(data);
 
-                                                    firebaseFirestore.collection("Catelogy")
-                                                            .document(docId)
-                                                            .update(updates)
-                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                @Override
-                                                                public void onSuccess(Void aVoid) {
-                                                                    Log.d("CategoryDetail", "DocumentSnapshot successfully updated!");
-                                                                    currentItem.setName(newCategoryName); // Update the currentItem name
-                                                                    categoryNameText.setText(newCategoryName); // Update the displayed name
-                                                                }
-                                                            })
-                                                            .addOnFailureListener(new OnFailureListener() {
-                                                                @Override
-                                                                public void onFailure(@NonNull Exception e) {
-                                                                    Log.e("CategoryDetail", "Error updating document", e);
-                                                                }
-                                                            });
-                                                }
-                                            } else {
-                                                Log.d("CategoryDetail", "No matching documents found");
-                                            }
-                                        } else {
-                                            Log.e("CategoryDetail", "Error getting documents: ", task.getException());
-                                        }
-                                        categoryEditText.setVisibility(View.GONE);
-                                        categoryNameText.setVisibility(View.VISIBLE);
-                                    }
-                                });
-                    } else {
-                        categoryEditText.setVisibility(View.GONE);
-                        categoryNameText.setVisibility(View.VISIBLE);
-                    }
+                    firebaseFirestore.collection("Catelogy").whereEqualTo("CateName", currentItem.getName()).whereEqualTo("userUid", userSessionManager.getUserInformation()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                cateID = documentSnapshot.getId();
+                            }
+                        }
+                    });
+                    currentItem.setName(categoryEditText.getText().toString());
+                    notifyDataSetChanged();
                     return true;
                 }
                 return false;
             }
         });
 
+        newCategoryEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    newCategoryEditText.setVisibility(View.GONE);
+                    categoryNameText.setText(newCategoryEditText.getText().toString());
+                    categoryNameText.setVisibility(View.VISIBLE);
+
+                    firebaseFirestore.collection("Catelogy").document(cateID).update("CateName", newCategoryEditText.getText().toString());;
+                    currentItem.setName(newCategoryEditText.getText().toString());
+                    notifyDataSetChanged();
+                    return true;
+                }
+                return false;
+            }
+        });
         return convertView;
     }
 
     private void showDeleteDialog(String cateID, Category currentItem) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle("Cancel")
-                    .setMessage("Do you really want to delete this category folder and all the menu inside it?")
-                    .setPositiveButton("OK", (dialog, which) -> {
-                        // Code to execute when OK is clicked
-                        // For example, finish the activity or close the fragment
-                        firebaseFirestore.collection("Catelogy").document(cateID)
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Log.d("Debug", "DocumentSnapshot successfully deleted!");
-                                        remove(currentItem);
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w("Debug", "Error deleting document", e);
-                                    }
-                                });
-                    })
-                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                    .create()
-                    .show();
+        new AlertDialog.Builder(getContext()).setTitle("Cancel").setMessage("Do you really want to delete this category folder and all the menu inside it?").setPositiveButton("OK", (dialog, which) -> {
+            firebaseFirestore.collection("Catelogy").document(cateID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    remove(currentItem);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w("Debug", "Error deleting document", e);
+                }
+            });
+        }).setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()).create().show();
     }
 }

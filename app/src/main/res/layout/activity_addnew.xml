@@ -9,46 +9,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/whiteedt">
-        
+
         <ImageView
             android:id="@+id/backwardButton"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_arrow_back_ios_24"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
-            android:layout_marginStart="20dp"/>
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:src="@drawable/baseline_arrow_back_ios_24" />
 
         <TextView
             android:id="@+id/menuHeader"
             style="@style/headerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/msg_add_menu"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="40dp"
+            android:text="@string/msg_add_menu" />
 
         <TextView
             android:id="@+id/imagesTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/msg_images"
-            android:textSize="18sp"
-            android:fontFamily="@font/lato_regular"
-            android:textColor="@color/lightwhite"
             android:layout_below="@id/menuHeader"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/lato_regular"
+            android:text="@string/msg_images"
+            android:textColor="@color/lightwhite"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:id="@+id/addImagesLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/imagesTitle"
+            android:layout_below="@id/displayImage"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addImages"
@@ -59,17 +59,25 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/displayImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="50dp"
+            android:layout_below="@+id/imagesTitle"
+            android:layout_marginTop="30dp" />
+
         <TextView
             android:id="@+id/nameTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/msg_name"
-            android:textSize="18sp"
-            android:fontFamily="@font/lato_regular"
-            android:textColor="@color/lightwhite"
             android:layout_below="@id/addImagesLayout"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/lato_regular"
+            android:text="@string/msg_name"
+            android:textColor="@color/lightwhite"
+            android:textSize="18sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/NameEditText"
@@ -77,8 +85,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/nameTitle"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameEditTextField"
@@ -94,23 +102,23 @@
 
         <TextView
             android:id="@+id/priceTitle"
-            android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/msg_price"
+            android:layout_below="@+id/NameEditText"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
-            android:textSize="18sp"
             android:fontFamily="@font/lato_regular"
+            android:text="@string/msg_price"
             android:textColor="@color/lightwhite"
-            android:layout_below="@+id/NameEditText" />
+            android:textSize="18sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
             android:id="@+id/PriceEditText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/priceTitle"
-            android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -126,81 +134,18 @@
                 android:textColorLink="@color/primary" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/sizeTitle"
-            android:layout_marginStart="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/msg_size"
-            android:layout_marginTop="30dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/lato_regular"
-            android:textColor="@color/lightwhite"
-            android:layout_below="@+id/PriceEditText" />
-
-        <ListView
-            android:id="@+id/sizeListView"
-            android:layout_below="@+id/sizeTitle"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addSizeBtn"
-            android:layout_below="@+id/sizeListView"
-            android:layout_width="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="Add Size"
-            android:layout_marginTop="30dp"
-            style="@style/addMenuBtn"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/toppingTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:text="Topping"
-            android:textSize="18sp"
-            android:fontFamily="@font/lato_regular"
-            android:textColor="@color/lightwhite"
-            android:layout_below="@+id/addSizeBtn" />
-
-        <ListView
-            android:id="@+id/additionListView"
-            android:layout_below="@+id/toppingTitle"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addToppingBtn"
-            android:layout_below="@+id/additionListView"
-            android:layout_width="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="30dp"
-            style="@style/addMenuBtn"
-            android:text="@string/msg_add_topping"
-            android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirmButtonMenu"
             style="@style/PrimaryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/msg_confirm"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="25dp" />
+            android:text="@string/msg_confirm" />
 
     </RelativeLayout>
 </ScrollView>

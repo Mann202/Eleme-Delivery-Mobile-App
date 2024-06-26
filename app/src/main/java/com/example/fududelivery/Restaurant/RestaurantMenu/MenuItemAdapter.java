@@ -3,12 +3,13 @@ package com.example.fududelivery.Restaurant.RestaurantMenu;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class MenuItemAdapter extends ArrayAdapter<Menu> {
     private UserSessionManager userSessionManager;
     private int mResource;
     private String menuID;
+
     public MenuItemAdapter(Context context, int resource, ArrayList<Menu> objects) {
         super(context, resource, objects);
         mContext = context;
@@ -41,16 +43,6 @@ public class MenuItemAdapter extends ArrayAdapter<Menu> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Menu currentItem = getItem(position);
 
-        firebaseFirestore.collection("Food").whereEqualTo("ResID", userSessionManager.getUserInformation())
-                .whereEqualTo("FoodName", currentItem.getName()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for(DocumentSnapshot documentSnapshot : task.getResult()) {
-                            menuID = documentSnapshot.getId();
-                        }
-                    }
-                });
-
         if (currentItem == null) {
             return convertView;
         }
@@ -61,18 +53,27 @@ public class MenuItemAdapter extends ArrayAdapter<Menu> {
         }
 
         TextView menuName = convertView.findViewById(R.id.menuName);
+        RelativeLayout rlContainter = convertView.findViewById(R.id.childCategoryLayout);
         ImageView deleteMenu = convertView.findViewById(R.id.deleteImageView);
         menuName.setText(currentItem.getName());
 
-        menuName.setOnClickListener(new View.OnClickListener() {
+        rlContainter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent menuDetailItent = new Intent(getContext(), MenuDetail.class);
-                menuDetailItent.putExtra("menuID", menuID);
-                getContext().startActivity(menuDetailItent);
-                if (getContext() instanceof Activity) {
-                    ((Activity) getContext()).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }
+                firebaseFirestore.collection("Food").whereEqualTo("ResID", userSessionManager.getUserInformation()).whereEqualTo("FoodName", currentItem.getName()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                            menuID = documentSnapshot.getId();
+                            Intent menuDetailItent = new Intent(getContext(), MenuDetail.class);
+                            menuDetailItent.putExtra("menuID", menuID);
+                            getContext().startActivity(menuDetailItent);
+                            if (getContext() instanceof Activity) {
+                                ((Activity) getContext()).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            }
+                        }
+                    }
+                });
             }
         });
 
