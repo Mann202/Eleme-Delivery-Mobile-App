@@ -25,7 +25,7 @@
             style="@style/headerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add menu"
+            android:text="@string/msg_add_menu"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp" />
 
@@ -33,7 +33,7 @@
             android:id="@+id/imagesTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Images"
+            android:text="@string/msg_images"
             android:textSize="18sp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/lightwhite"
@@ -55,7 +55,7 @@
                 style="@style/addMenuBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Image" />
+                android:text="@string/msg_add_image" />
 
         </LinearLayout>
 
@@ -63,7 +63,7 @@
             android:id="@+id/nameTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/msg_name"
             android:textSize="18sp"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/lightwhite"
@@ -97,7 +97,7 @@
             android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price"
+            android:text="@string/msg_price"
             android:layout_marginTop="30dp"
             android:textSize="18sp"
             android:fontFamily="@font/lato_regular"
@@ -131,7 +131,7 @@
             android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Size"
+            android:text="@string/msg_size"
             android:layout_marginTop="30dp"
             android:textSize="18sp"
             android:fontFamily="@font/lato_regular"
@@ -187,7 +187,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="30dp"
             style="@style/addMenuBtn"
-            android:text="Add Topping"
+            android:text="@string/msg_add_topping"
             android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -195,7 +195,7 @@
             style="@style/PrimaryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirm"
+            android:text="@string/msg_confirm"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"

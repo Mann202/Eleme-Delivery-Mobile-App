@@ -14,7 +14,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Near you"
+            android:text="@string/msg_near_you"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:padding="5dp"/>

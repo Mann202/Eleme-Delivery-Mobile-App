@@ -43,7 +43,7 @@
         android:layout_centerHorizontal="true"
         android:drawablePadding="15dp"
         style="@style/newCategoryBtn"
-        android:text="Add new" />
+        android:text="@string/msg_add_new" />
 
     <ListView
         android:id="@+id/menuListView"

@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_bold"
             android:gravity="start"
-            android:text="Confirm your email!"
+            android:text="@string/msg_confirm_your_email"
             android:textColor="@color/lightdark"
             android:textFontWeight="900"
             android:textSize="40dp" />
@@ -47,9 +47,7 @@
             android:textColor="@color/darkbg"
             android:textSize="20sp"
             android:layout_marginTop="15dp"
-            android:text="Please check your inbox for a confirmation
-email. Click the link in the email to confirm
-your email address."
+            android:text="@string/msg_please_check_your_inbox_for_a_confirmation_email_click_the_link_in_the_email_to_confirm_your_email_address"
             android:layout_below="@+id/sub_title"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -57,7 +55,7 @@ your email address."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Re-send confirmation email"
+            android:text="@string/msg_re_send_confirmation_email"
             android:layout_below="@+id/descripsion"
             style="@style/PrimaryButton"/>
     </RelativeLayout>

@@ -21,7 +21,7 @@
             android:textColor="@color/darkbg"
             android:fontFamily="@font/lato_bold"
             android:textSize="20sp"
-            android:hint="Enter category name"
+            android:hint="@string/msg_enter_category_name"
             android:padding="8dp"
             android:textColorHint="@color/lightwhite" />
 

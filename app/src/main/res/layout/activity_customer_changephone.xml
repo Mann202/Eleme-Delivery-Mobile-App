@@ -22,7 +22,7 @@
         android:id="@+id/changephonenumbertitle"
         android:layout_below="@id/backward"
         android:layout_height="wrap_content"
-        android:text="Change phone number"
+        android:text="@string/msg_change_phone_number"
         android:textStyle="bold"
         android:textFontWeight="900"
         android:textColor="@color/black"
@@ -41,7 +41,7 @@
         android:textSize="18sp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Please enter your phone number to receive a verification code"
+        android:text="@string/msg_please_enter_your_phone_number_to_receive_a_verification_code"
         />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -62,7 +62,7 @@
             android:drawableStart="@drawable/baseline_phone_24"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="Phone Number"
+            android:hint="@string/msg_phone_number"
             android:inputType="number"
             android:textColorHighlight="@color/primary"
             android:textColorHint="@color/whiteedt"
@@ -164,7 +164,7 @@
         android:visibility="gone"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Resend verification code: "
+        android:text="@string/msg_resend_verification_code"
         />
 
     <Button
@@ -174,7 +174,7 @@
         android:layout_below="@id/verificationCodeContainer"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:text="Resend"
+        android:text="@string/msg_resend"
         android:layout_marginEnd="20dp"
         android:visibility="gone" />
 
@@ -188,7 +188,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="47dp"
-        android:text="Save"
+        android:text="@string/msg_save"
         android:textColor="@color/white" />
 
 </RelativeLayout>
