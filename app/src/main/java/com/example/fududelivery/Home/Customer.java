@@ -20,9 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.fududelivery.Customer.CustomerProfile;
-import com.example.fududelivery.Customer.MainOrder;
-import com.example.fududelivery.Customer.MyFavorite;
-import com.example.fududelivery.Customer.SavedPlaces;
+import com.example.fududelivery.Customer.MyOrder.MainOrder;
 import com.example.fududelivery.Customer.TermAndCondition;
 import com.example.fududelivery.ExploreList.ExploreList;
 import com.example.fududelivery.ExploreList.ViewAdapter_ExploreList;

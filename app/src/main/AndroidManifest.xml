@@ -90,9 +90,20 @@
         </activity>
 
         <activity
-            android:name=".Shipper.ShipperMain.ShipperMain"
+            android:name=".Shipper.NewOrderHomepage"
+            android:exported="true"
+            android:label="NewOrderHomepage" />
+
+        <activity
+            android:name=".Shipper.ShipperMain"
             android:exported="true"
             android:label="ShipperMain" />
+
+        <activity
+            android:name=".Shipper.ShipperProfile"
+            android:exported="true"
+            android:label="ShipperProfile" />
+
 
         <activity
             android:name=".Home.Customer"
@@ -119,7 +130,7 @@
         </activity>
 
         <activity
-            android:name=".Customer.MainOrder"
+            android:name=".Customer.MyOrder.MainOrder"
             android:exported="true">
         </activity>
 
@@ -129,24 +140,11 @@
         </activity>
 
         <activity
-            android:name=".Customer.ChangeEmail"
+            android:name=".Customer.UpdateAddAddressActivity"
             android:exported="true">
         </activity>
 
-        <activity
-            android:name=".Customer.ChangePassword"
-            android:exported="true">
-        </activity>
 
-        <activity
-            android:name=".Customer.ChangePhonenumber"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".Shipper.ShipperOrderDetail.OrderDetail"
-            android:exported="true"
-            android:label="ShipperDetail" />
 
     </application>
     <uses-permission android:name="android.permission.INTERNET" />

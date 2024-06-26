@@ -2,21 +2,36 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="app">
+      <entry key="AddAddressActivity">
+        <State />
+      </entry>
+      <entry key="EditAddress">
+        <State />
+      </entry>
+      <entry key="MainOrder">
         <State>
-          <runningDeviceTargetSelectedWithDropDown>
+          <targetSelectedWithDropDown>
             <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
+              <type value="QUICK_BOOT_TARGET" />
               <deviceKey>
                 <Key>
-                  <type value="SERIAL_NUMBER" />
-                  <value value="adb-R58N12GBEAJ-AuyQ1E._adb-tls-connect._tcp" />
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\Admin\.android\avd\Pixel_Edited_API_34.avd" />
                 </Key>
               </deviceKey>
             </Target>
-          </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-05-18T07:55:06.735214300Z" />
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-05-20T14:21:20.388132900Z" />
         </State>
+      </entry>
+      <entry key="MainRestaurant">
+        <State />
+      </entry>
+      <entry key="UpdateAddAddressActivity">
+        <State />
+      </entry>
+      <entry key="app">
+        <State />
       </entry>
     </value>
   </component>

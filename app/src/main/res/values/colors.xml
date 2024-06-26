@@ -19,4 +19,7 @@
     <color name="lightgray">#D7D7D7</color>
     <color name="transparent">#00000000</color>
     <color name="red">#FF0000</color>
+    <color name="green">#2C842A</color>
+    <color name="blue">#22629E</color>
+    <color name="lightgray2">#C9C9C9</color>
 </resources>

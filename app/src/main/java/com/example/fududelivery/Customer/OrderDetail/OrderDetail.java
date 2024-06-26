@@ -1,4 +1,4 @@
-package com.example.fududelivery.Customer;
+package com.example.fududelivery.Customer.OrderDetail;
 
 import android.os.Bundle;
 
@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fududelivery.R;
 
-public class MainOrder extends AppCompatActivity {
+public class OrderDetail extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_myordermain);
+        setContentView(R.layout.activity_customer_orderdetail);
     }
 }
