@@ -238,44 +238,17 @@
 
     </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/order_info_card"
-            android:orientation="horizontal"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_payment"
-                android:contentDescription="Payment Icon"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="10dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Payment method"
-                android:fontFamily="@font/lato_regular"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_marginEnd="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Choose"
-                android:fontFamily="@font/lato_bold"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:clickable="true"
-                android:layout_gravity="center_vertical"
-                android:onClick="onChoosePaymentMethodClicked"
-                android:layout_weight="1"
-                android:gravity="right"/>
-        </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place order"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/white"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        style="@style/SaveButton"/>
 
 </RelativeLayout>

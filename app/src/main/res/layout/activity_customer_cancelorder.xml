@@ -180,7 +180,7 @@
             android:id="@+id/otherReasonInput"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:hint="@string/other_reasons"
             android:inputType="text"
             android:gravity="top"

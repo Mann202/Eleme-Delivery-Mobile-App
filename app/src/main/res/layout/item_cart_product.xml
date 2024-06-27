@@ -95,7 +95,7 @@
                 android:layout_centerVertical="true"
                 android:paddingHorizontal="10dp">
                 <TextView
-                    android:id="@+id/tv_minus"
+                    android:id="@+id/minus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -107,14 +107,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/black"
-                    android:layout_toEndOf="@+id/tv_minus"
-                    android:layout_toStartOf="@+id/tv_plus"
+                    android:layout_toEndOf="@+id/minus"
+                    android:layout_toStartOf="@+id/add"
                     android:textAlignment="center"
                     android:text="0"
                     />
 
                 <TextView
-                    android:id="@+id/tv_plus"
+                    android:id="@+id/add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/primary"
