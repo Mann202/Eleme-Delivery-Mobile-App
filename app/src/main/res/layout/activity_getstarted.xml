@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="20dp"
-        android:text="A hungry man is a angry man!"
+        android:text="@string/msg_a_hungry_man_is_a_angry_man"
         android:fontFamily="@font/lato_regular"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/view_pager"
@@ -44,7 +44,7 @@
         android:textColor="@color/white"
         android:textSize="20dp"
         android:layout_centerHorizontal="true"
-        android:text="So you have to eat now to be happy"
+        android:text="@string/msg_so_you_have_to_eat_now_to_be_happy"
         android:layout_below="@+id/text_view_quotes"
         android:layout_marginTop="5dp"/>
 
@@ -73,7 +73,7 @@
             android:id="@+id/skip_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Skip"
+            android:text="@string/msg_skip"
             android:layout_marginStart="30dp"
             style="@style/BaseButton"/>
 
@@ -84,7 +84,7 @@
             android:layout_marginStart="20dp"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="30dp"
-            android:text="Next"
+            android:text="@string/msg_next"
             style="@style/BaseButton"/>
     </RelativeLayout>
 </RelativeLayout>

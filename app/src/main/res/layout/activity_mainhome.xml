@@ -427,7 +427,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Popular in your area"
+                        android:text="@string/msg_popular_in_your_area"
                         android:layout_marginStart="20dp"
                         android:textSize="22sp"
                         android:textColor="@color/black"
@@ -436,7 +436,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="See more"
+                        android:text="@string/msg_see_more"
                         android:layout_marginStart="-106dp"
                         android:textSize="18sp"
                         android:textColor="@color/skyblue"

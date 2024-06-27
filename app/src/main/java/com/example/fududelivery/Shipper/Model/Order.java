@@ -10,6 +10,7 @@ public class Order {
     String name;
     String address;
     String Date;
+    String ResAddress;
     String TotalQuantity;
     String Phone;
     float OrderTotal;
@@ -23,7 +24,7 @@ public class Order {
     }
 
     public Order(String orderID, String name, String address, String date, String totalQuantity, String phone,
-                 float orderTotal, float shippingFee, float serviceFee, float subTotal, String resID, String shippingStatus) {
+                 float orderTotal, float shippingFee, float serviceFee, float subTotal, String resID, String shippingStatus, String resAddress) {
         OrderID = orderID;
         this.name = name;
         this.address = address;
@@ -36,6 +37,7 @@ public class Order {
         SubTotal = subTotal;
         ResID = resID;
         ShippingStatus = shippingStatus;
+        ResAddress = resAddress;
     }
 
     @Override
@@ -58,6 +60,12 @@ public class Order {
 
     public String getOrderID() {
         return OrderID;
+    }
+    public String getResAddress() {
+        return ResAddress;
+    }
+    public void setResAddress(String resAddress) {
+        ResAddress = resAddress;
     }
 
     public void setOrderID(String orderID) {

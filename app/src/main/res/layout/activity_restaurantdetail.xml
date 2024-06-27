@@ -8,6 +8,17 @@
     android:gravity="start"
     android:layout_height="match_parent"
     tools:context=".Restaurant.RestaurantDetail.RestaurantDetailItem">
+
+    <ImageView
+        android:id="@+id/backwardButton"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:id="@+id/detailTitle"
@@ -16,7 +27,7 @@
         android:text="Detail"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
-        android:textSize="25sp"
+        android:textSize="28sp"
         android:textColor="@color/black"/>
 
     <RelativeLayout
@@ -38,23 +49,32 @@
             android:text="Order detail"
             android:id="@+id/orderdetailtitle"
             android:fontFamily="@font/lato_regular"
-            android:textSize="17sp"/>
+            android:textSize="19sp"/>
+
+        <ListView
+            android:id="@+id/listViewItem"
+            android:layout_below="@+id/orderdetailtitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <RelativeLayout
             android:id="@+id/pricelayout"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/orderdetailtitle"
+            android:layout_below="@+id/listViewItem"
             >
             <TextView
                 android:id="@+id/subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subtotal"
+                android:text="@string/msg_subtotal"
                 android:layout_marginStart="10dp"
-                android:textSize="19sp"
+                android:textSize="20sp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/lato_regular"/>
+                android:fontFamily="@font/lato_bold"/>
 
             <TextView
                 android:id="@+id/subtotalprice"
@@ -74,6 +94,7 @@
                 android:text="Service fee"
                 android:layout_below="@+id/subtitle"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/lato_regular"/>
@@ -86,6 +107,32 @@
                 android:layout_below="@+id/subtitle"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/lato_regular"/>
+
+            <TextView
+                android:id="@+id/shippingFeeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shipping_fee"
+                android:layout_below="@+id/serviceprice"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/lato_regular"/>
+
+            <TextView
+                android:id="@+id/shippingFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5000"
+                android:layout_below="@+id/serviceprice"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/lato_regular"/>
@@ -94,11 +141,11 @@
                 android:id="@+id/totaltitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total"
+                android:text="@string/msg_total"
                 android:layout_marginTop="20dp"
-                android:layout_below="@+id/servicetitle"
+                android:layout_below="@+id/shippingFeeTitle"
                 android:layout_marginStart="10dp"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/lato_bold"/>
 
@@ -108,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:text="45000"
                 android:layout_marginTop="20dp"
-                android:layout_below="@+id/serviceprice"
+                android:layout_below="@+id/shippingFee"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
                 android:textSize="20sp"
@@ -167,8 +214,8 @@
                 android:id="@+id/ordertitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order"
-                android:textSize="16sp"
+                android:text="@string/orderTitleMainRestaurant"
+                android:textSize="18sp"
                 android:fontFamily="@font/lato_regular"
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/lightwhite"
@@ -178,8 +225,8 @@
                 android:id="@+id/nametitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="16sp"
+                android:text="@string/nameTitleRestaurant"
+                android:textSize="18sp"
                 android:fontFamily="@font/lato_regular"
                 android:layout_marginBottom="5dp"
                 android:layout_below="@+id/ordertitle"
@@ -190,8 +237,8 @@
                 android:id="@+id/phonenumbertitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phone number"
-                android:textSize="16sp"
+                android:text="@string/phoneNumberTitleRestaurant"
+                android:textSize="18sp"
                 android:fontFamily="@font/lato_regular"
                 android:layout_marginBottom="5dp"
                 android:layout_below="@+id/nametitle"
@@ -202,8 +249,8 @@
                 android:id="@+id/addresstitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address"
-                android:textSize="16sp"
+                android:text="@string/addressTitleRestaurant"
+                android:textSize="18sp"
                 android:fontFamily="@font/lato_regular"
                 android:layout_below="@+id/phonenumbertitle"
                 android:textColor="@color/lightwhite"
@@ -214,7 +261,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/buyertitlelayout"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="10dp">
@@ -223,7 +270,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="#2321312"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:fontFamily="@font/lato_regular"
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/lightwhite"
@@ -234,7 +281,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Truong Gia Man"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:fontFamily="@font/lato_regular"
                 android:layout_marginBottom="5dp"
                 android:layout_below="@+id/order"
@@ -246,7 +293,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0123456789"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:fontFamily="@font/lato_regular"
                 android:layout_marginBottom="5dp"
                 android:layout_below="@+id/name"
@@ -258,7 +305,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="KTX Khu A DHQG THPHCM"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:fontFamily="@font/lato_regular"
                 android:layout_below="@+id/phonenumber"
                 android:textColor="@color/lightwhite"
@@ -290,6 +337,7 @@
             android:id="@+id/shipperInfor"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/shipperAvatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -299,8 +347,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold"
-                android:text="Shipper information"
-                android:textSize="18sp" />
+                android:text="@string/msg_shipper_information"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/nameShipper"
@@ -311,7 +359,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/lato_bold"
                 android:textColor="@color/lightwhite"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 />
 
             <TextView
@@ -323,14 +371,14 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/lato_regular"
                 android:textColor="@color/lightwhite"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/shipperVehicle"
             android:layout_centerVertical="true"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="12dp"
             android:layout_toEndOf="@+id/shipperInfor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">

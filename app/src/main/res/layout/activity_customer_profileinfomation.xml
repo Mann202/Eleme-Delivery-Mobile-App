@@ -29,18 +29,18 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/lato_bold"
-            android:text="Profile"
+            android:text="@string/msg_profile"
             android:textColor="@color/lightdark"
             android:textSize="35sp" />
 
         <ImageView
             android:id="@+id/ProfilePicture"
-            android:layout_width="141.58dp"
-            android:layout_height="141.58dp"
             android:layout_below="@+id/ProfileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_large"
-            android:src="@drawable/profile_picture" />
+            android:src="@drawable/img_avata"/>
 
         <TextView
             android:id="@+id/NameTitle"
@@ -50,7 +50,7 @@
             android:layout_marginStart="@dimen/margin_standard"
             android:layout_marginTop="@dimen/margin_large"
             android:layout_marginEnd="@dimen/margin_standard"
-            android:text="Name"
+            android:text="@string/msg_name"
             android:textColor="#828282"
             android:fontFamily="@font/lato_regular"
             android:textSize="18sp" />
@@ -70,20 +70,20 @@
                 android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/EditTextLogin"
                     android:id="@+id/nameField"
+                    style="@style/EditTextLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:drawableEnd="@drawable/edit_button"
                     android:drawablePadding="10dp"
                     android:drawableTint="#C2CECE"
-                    android:paddingRight="@dimen/padding_small"
                     android:fontFamily="@font/lato_regular"
-                    android:textSize="20sp"
+                    android:paddingRight="@dimen/padding_small"
                     android:textColorHighlight="@color/primary"
                     android:textColorHint="@color/whiteedt"
-                    android:textColorLink="@color/primary" />
+                    android:textColorLink="@color/primary"
+                    android:textSize="20sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
 
@@ -95,7 +95,7 @@
             android:layout_marginStart="@dimen/margin_standard"
             android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginEnd="@dimen/margin_standard"
-            android:text="Phone number"
+            android:text="@string/msg_phone_number"
             android:textColor="#828282"
             android:fontFamily="@font/lato_regular"
             android:textSize="18sp" />
@@ -141,7 +141,7 @@
             android:layout_marginStart="@dimen/margin_standard"
             android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginEnd="@dimen/margin_standard"
-            android:text="Email"
+            android:text="@string/msg_email"
             android:textColor="#828282"
             android:fontFamily="@font/lato_regular"
             android:textSize="18sp" />
@@ -188,7 +188,7 @@
             android:layout_marginStart="@dimen/margin_standard"
             android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginEnd="@dimen/margin_standard"
-            android:text="Language"
+            android:text="@string/msg_language"
             android:textColor="#828282"
             android:fontFamily="@font/lato_regular"
             android:textSize="18sp"/>
@@ -215,7 +215,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/lato_bold"
-            android:text="Change password"
+            android:text="@string/msg_change_password"
             android:textSize="21sp"
             android:textColor="@color/black" />
 
@@ -229,7 +229,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/lato_bold"
-            android:text="Logout"
+            android:text="@string/msg_logout"
             android:textSize="21sp"
             android:layout_marginBottom="20dp"
             android:textColor="@color/red" />

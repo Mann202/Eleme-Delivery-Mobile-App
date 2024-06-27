@@ -30,7 +30,7 @@
             android:id="@+id/titleMyorder"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
-            android:text="My Orders"
+            android:text="@string/msg_my_orders"
             android:fontFamily="@font/lato_bold"
             android:textColor="@color/black"
             android:textFontWeight="900"

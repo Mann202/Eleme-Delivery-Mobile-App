@@ -1,91 +1,90 @@
 package com.example.fududelivery.Restaurant.RestaurantMenu;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CategoryDetail extends AppCompatActivity {
 
-    private ListView menuListView;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> categories;
-
-    private ActivityResultLauncher<Intent> startForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == AppCompatActivity.RESULT_OK) {
-                        Intent data = result.getData();
-                        if (data != null) {
-                            String nameMenu = data.getStringExtra("nameMenu");
-                            String priceMenu = data.getStringExtra("priceMenu");
-                            categories.add(nameMenu);
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-                }
-            }
-    );
+    FirebaseFirestore firebaseFirestore;
+    UserSessionManager userSessionManager;
+    ArrayList<Menu> item;
+    MenuItemAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categorydetail);
-
         Intent intent = getIntent();
-        String categoryName = intent.getStringExtra("categoryName");
+        String nameMenu = intent.getStringExtra("nameMenu");
+        String cateID = intent.getStringExtra("cateID");
 
-        TextView itemCategoryView = findViewById(R.id.CategoryTitle);
-        itemCategoryView.setText(categoryName);
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        userSessionManager = new UserSessionManager(this);
 
-        AppCompatButton addBtn = findViewById(R.id.addMenu);
+        ListView listView = findViewById(R.id.menuListView);
+        AppCompatButton addMenu = findViewById(R.id.addMenu);
 
-        addBtn.setOnClickListener(new View.OnClickListener() {
+        item = new ArrayList<>();
+        adapter = new MenuItemAdapter(this, R.layout.list_item_menu, item);
+        listView.setAdapter(adapter);
+
+        firebaseFirestore.collection("Food")
+                .whereEqualTo("CateID", cateID)
+                .whereEqualTo("ResID", userSessionManager.getUserInformation()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                            item.add(new Menu(documentSnapshot.getString("FoodName")));
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+        TextView CategoryTitle = findViewById(R.id.CategoryTitle);
+        CategoryTitle.setText(nameMenu);
+
+        addMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentMenu = new Intent(v.getContext(), NewMenu.class);
-                startForResult.launch(intentMenu);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                item.add(new Menu("New Menu."));
+                adapter.notifyDataSetChanged();
+                Map<String, Object> data = new HashMap<>();
+                data.put("FoodName", "New Menu.");
+                data.put("ResID", userSessionManager.getUserInformation());
+                data.put("Price", 0);
+                data.put("CateID", cateID);
+                firebaseFirestore.collection("Food").add(data).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        Intent menuDetailItent = new Intent(getApplicationContext(), MenuDetail.class);
+                        String menuID = task.getResult().getId();
+                        menuDetailItent.putExtra("menuID", menuID);
+                        startActivity(menuDetailItent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
+                });
             }
         });
-
-        categories = new ArrayList<>();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, categories)
-        {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                if (convertView == null) {
-                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_menu, parent, false);
-                }
-
-                TextView textView = convertView.findViewById(R.id.text1);
-                textView.setText(categories.get(position));
-
-                return convertView;
-            }
-        };
-
-        menuListView = findViewById(R.id.menuListView);
-        menuListView.setAdapter(adapter);
     }
 }

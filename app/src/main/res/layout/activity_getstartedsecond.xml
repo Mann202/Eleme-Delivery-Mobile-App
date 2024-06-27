@@ -46,7 +46,7 @@
             android:id="@+id/sub_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Happy Meals!"
+            android:text="@string/msg_happy_meals"
             android:gravity="start"
             android:textColor="@color/lightdark"
             android:textSize="40dp"
@@ -62,7 +62,7 @@
             android:textColor="@color/darkbg"
             android:textSize="20sp"
             android:layout_marginTop="15dp"
-            android:text="Order from your favourite restaurants and takeaways within the matter of seconds."
+            android:text="@string/msg_order_from_your_favourite_restaurants_and_takeaways_within_the_matter_of_seconds"
             android:layout_below="@+id/sub_title"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Get Started"
+            android:text="@string/msg_get_started"
             android:layout_below="@+id/descripsion"
             style="@style/PrimaryButton"/>
     </RelativeLayout>

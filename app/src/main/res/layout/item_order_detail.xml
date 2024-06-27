@@ -87,7 +87,7 @@
             android:minHeight="0dp"
             android:minWidth="0dp"
             android:textSize="20sp"
-            android:text="Cancel" />
+            android:text="@string/msg_cancel" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/detailBtn"
@@ -97,7 +97,7 @@
             android:textColor="@color/white"
             android:layout_marginStart="10dp"
             android:paddingHorizontal="30dp"
-            android:text="Detail"
+            android:text="@string/msg_detail"
             android:textSize="20sp"
             android:textAllCaps="false"
             android:minHeight="0dp"

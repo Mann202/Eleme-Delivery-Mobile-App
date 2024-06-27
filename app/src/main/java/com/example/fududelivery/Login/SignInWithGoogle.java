@@ -27,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class SignInWithGoogle {
     private FirebaseAuth mAuth;
@@ -102,6 +103,22 @@ public class SignInWithGoogle {
                                                 userSessionManager.loginUserRole(roleId);
                                                 userSessionManager.loginUserState();
                                                 userSessionManager.loginUserInformation(userUid);
+
+                                                String name = document.getString("name");
+                                                String email = document.getString("email");
+                                                String phone = document.getString("phone");
+
+                                                userSessionManager.loginUserGmail(email);
+                                                userSessionManager.loginUserName(name);
+                                                userSessionManager.loginUserPhone(phone);
+
+                                                if(Objects.equals(roleId, "2")) {
+                                                    String startingDate = document.getString("startingDate");
+                                                    String address = document.getString("address");
+
+                                                    userSessionManager.setStartingDate(startingDate);
+                                                    userSessionManager.setAddress(address);
+                                                }
                                                 mActivity.finishAffinity();
                                             } else {
                                                 //role-id don't exits, make toast.
