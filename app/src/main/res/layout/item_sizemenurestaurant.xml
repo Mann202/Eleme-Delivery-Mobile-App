@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SizenAdditionPattern"
+    >
+
+    <RelativeLayout
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/nameTitleSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:text="Name"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:id="@+id/priceTitleSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="18sp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/nameTitleSize" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/editText"
+            android:layout_toEndOf="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/nameEditTextSize"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SizeNAddtionEditText"
+                android:inputType="text"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/priceEditTextSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SizeNAddtionEditText"
+                android:inputType="number"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

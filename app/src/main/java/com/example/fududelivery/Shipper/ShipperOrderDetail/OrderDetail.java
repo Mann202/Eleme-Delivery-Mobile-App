@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Shipper.ChangeCurrency;
 import com.example.fududelivery.Shipper.Model.Order;
@@ -49,6 +50,8 @@ public class OrderDetail extends AppCompatActivity {
     FirebaseFirestore firestoreInstance;
     Button StartButton;
     String orderID, resID, shippingStatus;
+
+    UserSessionManager userSessionManager;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class OrderDetail extends AppCompatActivity {
         setContentView(R.layout.activity_orderdetail);
 
         firestoreInstance = FirebaseFirestore.getInstance();
+        userSessionManager = new UserSessionManager(this);
 
         ListView listView = findViewById(R.id.rv_order_item);
 
@@ -218,6 +222,9 @@ public class OrderDetail extends AppCompatActivity {
             public void onClick(View v) {
                 DocumentReference documentRef = firestoreInstance.collection("Orders").document(orderID);
 
+                documentRef.update("ShipperID", userSessionManager.getUserInformation());
+                documentRef.update("ResStatus", "Prepare");
+
                 documentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -228,11 +235,6 @@ public class OrderDetail extends AppCompatActivity {
                         } else if (currentStatus.equals("Start")) {
                             updateShippingStatus(documentRef, "Finish", null);
                         }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Xử lý khi có lỗi xảy ra
                     }
                 });
             }

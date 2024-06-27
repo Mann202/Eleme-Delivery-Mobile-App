@@ -26,7 +26,7 @@
             android:textColorHint="@color/lightwhite" />
 
         <TextView
-            android:id="@+id/text1"
+            android:id="@+id/categoryNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/categoryItemText"

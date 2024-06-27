@@ -77,7 +77,7 @@
     </RelativeLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refreshLayoutDoneRestaurant"
+            android:id="@+id/refreshLayoutShipperOrder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/neworder_notify"

@@ -2,34 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AddAddressActivity">
-        <State />
-      </entry>
-      <entry key="EditAddress">
-        <State />
-      </entry>
-      <entry key="MainOrder">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\Admin\.android\avd\Pixel_Edited_API_34.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-05-20T14:21:20.388132900Z" />
-        </State>
-      </entry>
-      <entry key="MainRestaurant">
-        <State />
-      </entry>
-      <entry key="UpdateAddAddressActivity">
-        <State />
-      </entry>
       <entry key="app">
         <State />
       </entry>

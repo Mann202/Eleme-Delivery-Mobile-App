@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="75dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="15dp"
         android:layout_height="75dp"
         android:layout_centerVertical="true"
         android:src="@drawable/starbucks_corporation_logo_2011"/>
@@ -26,6 +26,7 @@
         <TextView
             android:textColor="@color/lightwhite"
             android:id="@+id/dateText"
+            android:textSize="15sp"
             android:fontFamily="@font/lato_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/dateText"
             android:layout_marginStart="20dp"
+            android:textSize="15sp"
             android:text="3 items"/>
 
         <TextView
@@ -46,6 +48,7 @@
             android:fontFamily="@font/lato_bold"
             android:id="@+id/nameText"
             android:layout_marginTop="5dp"
+            android:textSize="20sp"
             android:layout_below="@+id/dateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,6 +60,7 @@
             android:textColor="@color/lightdark"
             android:fontFamily="@font/lato_bold"
             android:layout_marginTop="5dp"
+            android:textSize="17sp"
             android:text="KTX khu A Đại học QG TP Hồ Chí Minh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -83,6 +87,7 @@
             android:paddingHorizontal="30dp"
             android:minHeight="0dp"
             android:minWidth="0dp"
+            android:textSize="20sp"
             android:text="Cancel" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -94,6 +99,7 @@
             android:layout_marginStart="10dp"
             android:paddingHorizontal="30dp"
             android:text="Detail"
+            android:textSize="20sp"
             android:textAllCaps="false"
             android:minHeight="0dp"
             android:minWidth="0dp"
@@ -105,9 +111,9 @@
 
     <ImageView
         android:id="@+id/navigateNextBtn"
-        android:layout_toEndOf="@+id/layoutMainItem"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

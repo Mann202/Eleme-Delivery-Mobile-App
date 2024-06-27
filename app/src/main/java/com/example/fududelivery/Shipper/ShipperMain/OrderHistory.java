@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Shipper.Model.Order;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,6 +46,7 @@ public class OrderHistory extends Fragment {
     final ArrayList<Order> orders = new ArrayList<Order>();
     private OrderAdapter adapter;
     RecyclerView recyclerView;
+    UserSessionManager userSessionManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     static FirebaseFirestore firestoreInstance;
     RelativeLayout NoOrder;
@@ -84,19 +86,17 @@ public class OrderHistory extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_order_history, container, false);
+        userSessionManager = new UserSessionManager(getActivity().getApplicationContext());
 
         CollectionReference orderCollection = firestoreInstance.collection("Orders");
-//        List<String> statusList = Arrays.asList("Ready", "Start");
         orderCollection
                 .whereEqualTo("ShippingStatus", "Finish")
+                .whereEqualTo("ShipperID", userSessionManager.getUserInformation())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        System.out.println("Query Orders History Success ");
-                        System.out.println(queryDocumentSnapshots.isEmpty());
                         NoOrder = rootView.findViewById(R.id.no_orders);
                         if (queryDocumentSnapshots.isEmpty()){
                             rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
@@ -104,18 +104,14 @@ public class OrderHistory extends Fragment {
                             swipeRefreshLayout.setRefreshing(false);
                             NoOrder.setVisibility(View.VISIBLE);
                         }
-                        // Xử lý dữ liệu trả về
+
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            // Lấy dữ liệu từ mỗi tài liệu Order
+
                             Order order = documentSnapshot.toObject(Order.class);
                             String documentId = documentSnapshot.getId();
-//                            SimpleDateFormat format = new SimpleDateFormat("d MMM, HH:mm");
-//                            String formatDate = format.format(order.getDate());
-//                            Order saveOrder = new Order(documentId, order.getName(), order.getAddress(), order.getDate(), order.getTotalQuantity(), order.getOrderTotal());
                             order.setOrderID(documentId);
                             System.out.println("Query Order: " + order);
 
-                            // TODO: Xử lý dữ liệu Order ở đây
                             orders.add(order);
 
                             recyclerView = rootView.findViewById(R.id.rv_orders);

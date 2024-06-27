@@ -1,21 +1,29 @@
-package com.example.fududelivery.Shipper.ShipperMain;
+package com.example.fududelivery.Shipper;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
+
+import org.w3c.dom.Text;
+
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +41,16 @@ public class ShipperAccount extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_shipper_account, container, false);
         UserSessionManager userSessionManager = new UserSessionManager(requireContext());
+
+        TextView nameText = rootView.findViewById(R.id.txt_shipper_name);
+        nameText.setText(userSessionManager.getUserName());
+
+        AppCompatTextView vehicleInformationField = rootView.findViewById(R.id.vehicleInformationField);
+        vehicleInformationField.setText(userSessionManager.getUserVehicle());
+
+        AppCompatTextView phoneNumberField = rootView.findViewById(R.id.phoneNumberField);
+        phoneNumberField.setText(userSessionManager.getUserPhone());
+        phoneNumberField.setEnabled(false);
 
         // Spinner language
         String[] languages = {"English", "Vietnamese"};
