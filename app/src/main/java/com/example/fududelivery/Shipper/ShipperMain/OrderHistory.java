@@ -1,6 +1,10 @@
 package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -8,11 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
+import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Shipper.Model.Order;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,8 +23,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +46,8 @@ public class OrderHistory extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     static FirebaseFirestore firestoreInstance;
     RelativeLayout NoOrder;
+    private UserSessionManager userSessionManager;
+
     public OrderHistory() {
         // Required empty public constructor
     }
@@ -74,6 +74,7 @@ public class OrderHistory extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         firestoreInstance = FirebaseFirestore.getInstance();
+        userSessionManager = new UserSessionManager(requireContext());
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -91,6 +92,7 @@ public class OrderHistory extends Fragment {
 //        List<String> statusList = Arrays.asList("Ready", "Start");
         orderCollection
                 .whereEqualTo("ShippingStatus", "Finish")
+                .whereEqualTo("ShipperId", userSessionManager.getUserInformation())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -98,7 +100,7 @@ public class OrderHistory extends Fragment {
                         System.out.println("Query Orders History Success ");
                         System.out.println(queryDocumentSnapshots.isEmpty());
                         NoOrder = rootView.findViewById(R.id.no_orders);
-                        if (queryDocumentSnapshots.isEmpty()){
+                        if (queryDocumentSnapshots.isEmpty()) {
                             rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
                             swipeRefreshLayout.setVisibility(View.GONE);
                             swipeRefreshLayout.setRefreshing(false);
@@ -137,7 +139,7 @@ public class OrderHistory extends Fragment {
                     }
                 });
 
-        for(Order order : orders){
+        for (Order order : orders) {
             System.out.println("Order:" + order);
         }
 
@@ -152,7 +154,7 @@ public class OrderHistory extends Fragment {
         );
 
         NoOrder = rootView.findViewById(R.id.no_orders);
-        if (orders.isEmpty()){
+        if (orders.isEmpty()) {
             NoOrder.setVisibility(View.GONE);
         }
 
