@@ -5,7 +5,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center_horizontal"
-    android:padding="2dp">
+    android:padding="5dp">
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -31,15 +32,16 @@
                 android:id="@+id/product_image_container">
 
                 <ImageView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="70dp"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/dishes_01"
                     android:id="@+id/product_image"/>
 
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/food_name"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginStart="10dp"
@@ -48,22 +50,19 @@
                 <TextView
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/lato_bold"
-                    android:textFontWeight="500"
-                    android:text="Food name"
+                    android:text="Shaking Beef Tri..."
                     android:layout_marginTop="0dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:id="@+id/product_name"/>
 
                 <TextView
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="abcabc"
-                    android:layout_marginTop="2dp"
-                    android:textSize="12sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Pepper Plus, Size M"
+                    android:layout_marginTop="3dp"
+                    android:textSize="12dp"
                     android:id="@+id/product_info"/>
 
                 <TextView
@@ -72,7 +71,7 @@
                     android:textColor="@color/primary"
                     android:fontFamily="@font/lato_bold"
                     android:text="100.000 VNĐ"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:textSize="16sp"
                     android:id="@+id/product_price"/>
 
@@ -88,47 +87,40 @@
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="5dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
+            <RelativeLayout
+                android:layout_width="67dp"
+                android:layout_height="23dp"
+                android:background="@drawable/cart_input_bg"
+                android:layout_toEndOf="@+id/food_name"
+                android:layout_centerVertical="true"
+                android:paddingHorizontal="10dp">
+                <TextView
+                    android:id="@+id/tv_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="-"
-                    style="@style/Widget.AppCompat.ActionButton"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:background="@drawable/rounded_button_left"
-                    android:layout_marginBottom="10dp"
-                    android:id="@+id/subtract"/>
+                    android:layout_alignParentStart="true"/>
 
-                <Button
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:text="1"
-                    style="@style/Widget.AppCompat.ActionButton"
-                    android:textSize="12sp"
-                    android:background="@drawable/normal_button"
-                    android:layout_marginBottom="10dp"
-                    android:id="@+id/product_amount"/>
+                <TextView
+                    android:id="@+id/tv_foodquantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:layout_toEndOf="@+id/tv_minus"
+                    android:layout_toStartOf="@+id/tv_plus"
+                    android:textAlignment="center"
+                    android:text="0"
+                    />
 
-                <Button
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
+                <TextView
+                    android:id="@+id/tv_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary"
                     android:text="+"
-                    style="@style/Widget.AppCompat.ActionButton"
-                    android:textSize="12sp"
-                    android:background="@drawable/rounded_button_right"
-                    android:layout_marginBottom="10dp"
-                    android:id="@+id/add"/>
-
-            </LinearLayout>
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
 
         </RelativeLayout>
 
