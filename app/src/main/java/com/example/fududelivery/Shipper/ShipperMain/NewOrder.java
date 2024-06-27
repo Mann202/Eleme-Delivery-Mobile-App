@@ -41,34 +41,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NewOrder#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NewOrder extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    final ArrayList<Order> orders = new ArrayList<Order>();
+    final ArrayList<Order> orders = new ArrayList<>();
     private OrderAdapter adapter;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
     static FirebaseFirestore firestoreInstance;
-    RelativeLayout NoOrder;
+    private RelativeLayout NoOrder;
     private LocationHelper locationHelper;
 
-    double latitude;
-    double longitude;
+    private double latitude;
+    private double longitude;
 
     public NewOrder() {
     }
+
     public static NewOrder newInstance(String param1, String param2) {
         NewOrder fragment = new NewOrder();
         Bundle args = new Bundle();
@@ -90,63 +83,8 @@ public class NewOrder extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_new_order, container, false);
-
-        Intent serviceIntent = new Intent(getContext(), RestaurantNotificationService.class);
-        rootView.getContext().startService(serviceIntent);
-
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
-            locationHelper = new LocationHelper(getContext());
-            locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    latitude = location.getLatitude();
-                    longitude = location.getLongitude();
-                    Log.v("Debug", "Location changed: " + latitude + " " + longitude);
-                }
-            });
-        } else {
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-
-
-        CollectionReference orderCollection = firestoreInstance.collection("Orders");
-        List<String> statusList = Arrays.asList("Ready", "Start", "Wait");
-        orderCollection
-                .whereIn("ShippingStatus", statusList)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        NoOrder = rootView.findViewById(R.id.no_orders);
-                        if (queryDocumentSnapshots.isEmpty()){
-                            rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
-                            swipeRefreshLayout.setVisibility(View.GONE);
-                            swipeRefreshLayout.setRefreshing(false);
-                            NoOrder.setVisibility(View.VISIBLE);
-                        }
-
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            Order order = documentSnapshot.toObject(Order.class);
-                            String documentId = documentSnapshot.getId();
-                            order.setOrderID(documentId);
-
-                            processOrder(order, new double[]{latitude, longitude});
-
-                            recyclerView = rootView.findViewById(R.id.rv_orders);
-                            adapter = new OrderAdapter(requireActivity(), orders);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-                            recyclerView.setAdapter(adapter);
-
-                            rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
-                            swipeRefreshLayout.setVisibility(View.VISIBLE);
-                            swipeRefreshLayout.setRefreshing(false);
-                        }
-                    }
-                });
 
         recyclerView = rootView.findViewById(R.id.rv_orders);
         adapter = new OrderAdapter(requireActivity(), orders);
@@ -154,28 +92,66 @@ public class NewOrder extends Fragment {
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = rootView.findViewById(R.id.refreshLayoutShipperOrder);
-        swipeRefreshLayout.setColorSchemeColors(
-                getResources().getColor(R.color.primary)
-        );
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primary));
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //Them code
+                fetchOrders(rootView);
             }
         });
 
         NoOrder = rootView.findViewById(R.id.no_orders);
-        if (orders.isEmpty()){
-            NoOrder.setVisibility(View.GONE);
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            startLocationUpdates();
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
         }
+
+        fetchOrders(rootView);
 
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void fetchOrders(View rootView) {
+        CollectionReference orderCollection = firestoreInstance.collection("Orders");
+        List<String> statusList = Arrays.asList("Ready", "Start", "Wait");
+        orderCollection.whereIn("ShippingStatus", statusList).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                NoOrder = rootView.findViewById(R.id.no_orders);
+                orders.clear();
+                adapter.notifyDataSetChanged(); // Xóa dữ liệu cũ
+
+                if (queryDocumentSnapshots.isEmpty()) {
+                    rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
+                    swipeRefreshLayout.setVisibility(View.GONE);
+                    swipeRefreshLayout.setRefreshing(false);
+                    NoOrder.setVisibility(View.VISIBLE);
+                } else {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        Order order = documentSnapshot.toObject(Order.class);
+                        String documentId = documentSnapshot.getId();
+                        order.setOrderID(documentId);
+
+                        processOrder(order, new double[]{latitude, longitude});
+                    }
+
+                    adapter.notifyDataSetChanged();
+
+                    rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
+                    swipeRefreshLayout.setVisibility(View.VISIBLE);
+                    swipeRefreshLayout.setRefreshing(false);
+
+                    NoOrder.setVisibility(orders.isEmpty() ? View.VISIBLE : View.GONE);
+                }
+            }
+        });
+    }
+
+    private void startLocationUpdates() {
+        locationHelper = new LocationHelper(getContext());
         locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -186,25 +162,24 @@ public class NewOrder extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        startLocationUpdates();
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         locationHelper.stopLocationUpdates();
     }
 
-    private ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
-                        @Override
-                        public void onLocationChanged(Location location) {
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
-                        }
-                    });
-                } else {
-                    Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
-                }
-            });
+    private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+        if (isGranted) {
+            startLocationUpdates();
+        } else {
+            Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
+        }
+    });
 
     public void processOrder(final Order order, final double[] shipperLocation) {
         String restaurantAddress = order.getResAddress();

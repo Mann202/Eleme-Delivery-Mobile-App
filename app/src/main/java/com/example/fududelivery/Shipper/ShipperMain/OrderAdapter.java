@@ -15,7 +15,7 @@ import com.example.fududelivery.Shipper.ShipperOrderDetail.OrderDetail;
 
 import java.util.ArrayList;
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder>{
+public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     Activity context;
     ArrayList<Order> orders = new ArrayList<>();
     private OnItemClickListener itemClickListener;
@@ -24,14 +24,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder>{
         this.context = context;
         this.orders = orders;
     }
+
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new OrderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card, parent, false));
     }
+
     public interface OnItemClickListener {
         void onItemClick(Order order);
     }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.itemClickListener = listener;
     }
@@ -43,7 +46,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =  new Intent(context, OrderDetail.class);
+                Intent intent = new Intent(context, OrderDetail.class);
 
 //                System.out.println("Order Adapter: Order:" + order.getSubTotal());
 
@@ -63,6 +66,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder>{
                 context.startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
+
             private void overridePendingTransition(int slideInRight, int slideOutLeft) {
                 ((Activity) context).overridePendingTransition(slideInRight, slideOutLeft);
             }

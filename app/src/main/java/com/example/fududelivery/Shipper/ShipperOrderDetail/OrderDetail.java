@@ -1,7 +1,12 @@
 package com.example.fududelivery.Shipper.ShipperOrderDetail;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,17 +14,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Shipper.ChangeCurrency;
-import com.example.fududelivery.Shipper.Model.Order;
 import com.example.fududelivery.Shipper.ShipperMain.ShipperMain;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -50,8 +55,11 @@ public class OrderDetail extends AppCompatActivity {
     FirebaseFirestore firestoreInstance;
     Button StartButton;
     String orderID, resID, shippingStatus;
+    ImageView phone;
+    String phoneNumber;
 
     UserSessionManager userSessionManager;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +71,6 @@ public class OrderDetail extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.rv_order_item);
 
-        // Initialize ArrayList and Adapter
         item = new ArrayList<>();
         adapter = new RestaurantItemAdapter(this, R.layout.item_res_detail, item);
         listView.setAdapter(adapter);
@@ -80,6 +87,7 @@ public class OrderDetail extends AppCompatActivity {
         RestaurantAddress = findViewById(R.id.tv_restaurant_address);
         Quantity = findViewById(R.id.txt_subtotal_item);
         StartButton = findViewById(R.id.start_button);
+        phone = findViewById(R.id.call_icon);
 
         navback = findViewById(R.id.nav_back);
 
@@ -96,127 +104,90 @@ public class OrderDetail extends AppCompatActivity {
             DeliveryFee.setText(ChangeCurrency.formatPrice(bundle.getFloat("ShippingFee")));
             Total.setText(ChangeCurrency.formatPrice(bundle.getFloat("OrderTotal")));
             Quantity.setText(String.format("(%s item)", bundle.getString("TotalQuantity")));
-//            shippingStatus = bundle.getString("ShippingStatus");
-            firestoreInstance.collection("Orders")
-                    .document(orderID)
-                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()) {
-                                System.out.println("OrderDetail: ship status: " + documentSnapshot.getString("ShippingStatus"));
-                                shippingStatus = documentSnapshot.getString("ShippingStatus");
-                                if (shippingStatus.equals("Ready")) {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            StartButton.setText("Start delivery");
-                                            StartButton.setVisibility(View.VISIBLE);
-                                        }
-                                    });
-                                } else if (shippingStatus.equals("Start")) {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            StartButton.setText("Finish");
-                                            StartButton.setVisibility(View.VISIBLE);
-                                        }
-                                    });
-                                } else if (shippingStatus.equals("Finish")) {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            StartButton.setVisibility(View.GONE);
-                                        }
-                                    });
+            firestoreInstance.collection("Orders").document(orderID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        System.out.println("OrderDetail: ship status: " + documentSnapshot.getString("ShippingStatus"));
+                        shippingStatus = documentSnapshot.getString("ShippingStatus");
+                        if (shippingStatus.equals("Ready")) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    StartButton.setText("Start delivery");
+                                    StartButton.setVisibility(View.VISIBLE);
                                 }
-                            } else {
-                                // Không tìm thấy tài liệu với ID cụ thể
-                            }
+                            });
+                        } else if (shippingStatus.equals("Start")) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    StartButton.setText("Finish");
+                                    StartButton.setVisibility(View.VISIBLE);
+                                }
+                            });
+                        } else if (shippingStatus.equals("Finish")) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    StartButton.setVisibility(View.GONE);
+                                }
+                            });
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Xử lý khi có lỗi xảy ra
-                        }
-                    });
+                    }
+                }
+            });
         }
-        firestoreInstance.collection("OrderDetail")
-                .whereEqualTo("OrderID", orderID)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            ItemRestaurantOrder orderDetail = new ItemRestaurantOrder(
-                                    document.getString("ItemQuantity") + "x",
-                                    document.getString("FoodName"),
-                                    ChangeCurrency.formatPrice(document.getDouble("TotalPrice")),
-                                    document.getString("Description"));
-                            System.out.println("Order Detail:" + orderDetail);
+        firestoreInstance.collection("OrderDetail").whereEqualTo("OrderID", orderID).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                    ItemRestaurantOrder orderDetail = new ItemRestaurantOrder(document.getString("ItemQuantity") + "x", document.getString("FoodName"), ChangeCurrency.formatPrice(document.getDouble("TotalPrice")), document.getString("Description"));
+                    item.add(orderDetail);
+                    phoneNumber = document.getString("Phone");
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
 
-                            item.add(orderDetail);
-                        }
-                        // Notify adapter that the data set has changed
-                        adapter.notifyDataSetChanged();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Debug", "Error getting Orders documents.", e);
-                    }
-                });
+        firestoreInstance.collection("Restaurant").document(resID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    RestaurantAddress.setText(documentSnapshot.getString("Address"));
+                    RestaurantName.setText(documentSnapshot.getString("ResName"));
+                }
+            }
+        });
 
-        firestoreInstance.collection("Restaurant")
-                .document(resID)
-                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            RestaurantAddress.setText(documentSnapshot.getString("Address"));
-                            RestaurantName.setText(documentSnapshot.getString("ResName"));
-                        } else {
-                            // Không tìm thấy tài liệu với ID cụ thể
-                        }
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String phoneNumber = bundle.getString("Phone");
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + phoneNumber));
+
+                if (ContextCompat.checkSelfPermission(OrderDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(OrderDetail.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+                } else {
+                    try {
+                        startActivity(callIntent);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(OrderDetail.this, "No app found to handle call intent", Toast.LENGTH_SHORT).show();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Xử lý khi có lỗi xảy ra
-                    }
-                });
+                }
+            }
+        });
+
+
 
         navback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ShipperMain.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
             }
         });
-//        StartButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DocumentReference documentRef = firestoreInstance.collection("Orders").document(orderID);
-//
-//                Map<String, Object> updates = new HashMap<>();
-//                updates.put("ShippingStatus", "Start");
-//
-//                documentRef.update(updates)
-//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void aVoid) {
-//                                StartButton.setText("Finish");
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                // Xử lý khi có lỗi xảy ra
-//                            }
-//                        });
-//            }
-//        });
         StartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -246,34 +217,25 @@ public class OrderDetail extends AppCompatActivity {
         Map<String, Object> updates = new HashMap<>();
         updates.put("ShippingStatus", newStatus);
 
-        documentRef.update(updates)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        if (buttonText != null) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    StartButton.setText(buttonText);
-                                }
-                            });
+        documentRef.update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                if (buttonText != null) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            StartButton.setText(buttonText);
                         }
-                        if (newStatus.equals("Finish")) {
-                            Intent intent = new Intent(OrderDetail.this, ShipperMain.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        }else{
-                            recreate(); // Hàm để tải lại chi tiết đơn hàng
-
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Xử lý khi có lỗi xảy ra
-                    }
-                });
+                    });
+                }
+                if (newStatus.equals("Finish")) {
+                    Intent intent = new Intent(OrderDetail.this, ShipperMain.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                } else {
+                    recreate();
+                }
+            }
+        });
     }
-
 }
