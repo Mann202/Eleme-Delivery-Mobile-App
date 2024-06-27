@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
@@ -88,22 +89,6 @@
             android:minWidth="0dp"
             android:text="Cancel" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/rateBtn"
-            android:layout_below="@+id/totalPriceText"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="@color/primary"
-            android:textColor="@color/white"
-            android:layout_marginStart="10dp"
-            android:paddingHorizontal="30dp"
-            android:text="Track-order"
-            android:textAllCaps="false"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:layout_toEndOf="@+id/reorderBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
     </RelativeLayout>
 
 </RelativeLayout>

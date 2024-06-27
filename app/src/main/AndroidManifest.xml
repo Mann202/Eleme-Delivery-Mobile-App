@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="31" >
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
 
         <activity
             android:name=".GetStarted.GetStarted"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,95 +25,79 @@
 
         <activity
             android:name=".Login.Login"
-            android:exported="true" />
+            android:exported="false" />
 
         <activity
             android:name=".GetStarted.GetStartedSecond"
-            android:exported="true"
-            >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".GetStarted.SplashScreen"
-            android:exported="true"
-            android:theme="@style/AppThemeWhite"
-            >
-        </activity>
+            android:exported="false"
+            android:theme="@style/AppThemeWhite"></activity>
 
         <activity
             android:name=".Restaurant.Profile.RestaurantProfile"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Login.ForgetPassword"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Login.NewPassword"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Login.SignUp"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Login.VerifyEmail"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Restaurant.MainRestaurant.MainRestaurant"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Restaurant.RestaurantDetail.RestaurantDetail"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Restaurant.RestaurantMenu.RestaurantMenu"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Restaurant.RestaurantMenu.CategoryDetail"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Restaurant.RestaurantMenu.NewMenu"
-            android:exported="true" >
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Shipper.NewOrderHomepage"
-            android:exported="true"
+            android:exported="false"
             android:label="NewOrderHomepage" />
 
         <activity
             android:name=".Shipper.ShipperMain"
-            android:exported="true"
+            android:exported="false"
             android:label="ShipperMain" />
 
         <activity
             android:name=".Shipper.ShipperProfile"
-            android:exported="true"
+            android:exported="false"
             android:label="ShipperProfile" />
 
 
         <activity
             android:name=".Home.Customer"
-            android:exported="true">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Home.FastFood.FastFood"
-            android:exported="true">
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Customer.ChangeName"
@@ -126,32 +111,35 @@
 
         <activity
             android:name=".Customer.TermAndCondition"
-            android:exported="true">
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Customer.MyOrder.MainOrder"
-            android:exported="true">
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Customer.CustomerProfile"
-            android:exported="true">
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Customer.UpdateAddAddressActivity"
-            android:exported="true">
-        </activity>
+            android:exported="false"></activity>
 
         <activity
             android:name=".Customer.MyCart.Cart"
-            android:exported="true">
-        </activity>
+            android:exported="false"></activity>
 
+        <activity
+            android:name=".Customer.CancelOrderActivity"
+            android:exported="false"></activity>
+
+        <activity
+            android:name=".Customer.OrderDetail.OrderDetail"
+            android:exported="false" />
 
 
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

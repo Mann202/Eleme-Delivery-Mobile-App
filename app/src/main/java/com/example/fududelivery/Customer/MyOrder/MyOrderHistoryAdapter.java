@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.Customer.OrderDetail.OrderDetail;
 import com.example.fududelivery.R;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
@@ -24,24 +25,27 @@ public class MyOrderHistoryAdapter extends RecyclerView.Adapter<MyOrderViewHolde
         this.context = context;
         this.items = items;
     }
+
     @NonNull
     @Override
     public MyOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyOrderViewHolder(LayoutInflater.from(context).inflate(R.layout.item_customer_myorderhistory,parent,false));
+        return new MyOrderViewHolder(LayoutInflater.from(context).inflate(R.layout.item_customer_myorderhistory, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyOrderViewHolder holder, int position) {
+        Picasso.get().load(items.get(position).getImageView()).into(holder.imageView);
         holder.nameText.setText(items.get(position).getNameText());
         holder.itemCountText.setText(items.get(position).getItemCountText());
         holder.statusText.setText(items.get(position).getStatusText());
         holder.totalPriceText.setText(items.get(position).getTotalPriceText());
 
 
-        holder.navigateNextBtn.setOnClickListener(new View.OnClickListener() {
+        holder.rlContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =  new Intent(context, OrderDetail.class);
+                Intent intent = new Intent(context, OrderDetail.class);
+                intent.putExtra("orderId", items.get(position).getOrderId());
                 context.startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -51,6 +55,7 @@ public class MyOrderHistoryAdapter extends RecyclerView.Adapter<MyOrderViewHolde
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return items.size();
