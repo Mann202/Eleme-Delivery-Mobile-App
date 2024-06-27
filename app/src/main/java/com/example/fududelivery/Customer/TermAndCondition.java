@@ -11,11 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.fududelivery.Customer.MyCart.Cart;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Shipper.ShipperOrderDetail.OrderDetail;
-import com.example.fududelivery.Customer.UpdateAddAddressActivity;
+import com.example.fududelivery.Customer.CheckOutActivity;
+import com.example.fududelivery.Customer.MyAddressActivity;
+import com.example.fududelivery.Customer.AddAddressActivity;
 
 public class TermAndCondition extends AppCompatActivity {
     Button btnCart;
-    Button btnAddress;
+    Button btnCheckout;
+
+    public final static int MANAGE_ADDRESS =1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +27,7 @@ public class TermAndCondition extends AppCompatActivity {
         setContentView(R.layout.activity_termandcondition);
 
         btnCart = findViewById(R.id.btn_cart);
-        btnAddress = findViewById(R.id.btn_address);
+        btnCheckout = findViewById(R.id.btn_address);
 
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,10 +38,10 @@ public class TermAndCondition extends AppCompatActivity {
             }
         });
 
-        btnAddress.setOnClickListener(new View.OnClickListener() {
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(TermAndCondition.this, UpdateAddAddressActivity.class);
+                Intent intent =  new Intent(TermAndCondition.this, MyAddressActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

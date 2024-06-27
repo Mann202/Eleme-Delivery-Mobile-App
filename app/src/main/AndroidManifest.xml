@@ -89,20 +89,20 @@
             android:exported="true" >
         </activity>
 
-        <activity
-            android:name=".Shipper.NewOrderHomepage"
-            android:exported="true"
-            android:label="NewOrderHomepage" />
+<!--        <activity-->
+<!--            android:name=".Shipper.NewOrderHomepage"-->
+<!--            android:exported="true"-->
+<!--            android:label="NewOrderHomepage" />-->
 
-        <activity
-            android:name=".Shipper.ShipperMain"
-            android:exported="true"
-            android:label="ShipperMain" />
+<!--        <activity-->
+<!--            android:name=".Shipper.ShipperMain"-->
+<!--            android:exported="true"-->
+<!--            android:label="ShipperMain" />-->
 
-        <activity
-            android:name=".Shipper.ShipperProfile"
-            android:exported="true"
-            android:label="ShipperProfile" />
+<!--        <activity-->
+<!--            android:name=".Shipper.ShipperProfile"-->
+<!--            android:exported="true"-->
+<!--            android:label="ShipperProfile" />-->
 
 
         <activity
@@ -119,10 +119,10 @@
             android:exported="true"
             android:label="ChangeName" />
 
-        <activity
-            android:name=".Customer.EditAddress"
-            android:exported="true"
-            android:label="EditAddress" />
+<!--        <activity-->
+<!--            android:name=".Customer.EditAddress"-->
+<!--            android:exported="true"-->
+<!--            android:label="EditAddress" />-->
 
         <activity
             android:name=".Customer.TermAndCondition"
@@ -139,10 +139,19 @@
             android:exported="true">
         </activity>
 
+<!--        <activity-->
+<!--            android:name=".Customer.UpdateAddAddressActivity"-->
+<!--            android:exported="true">-->
+<!--        </activity>-->
+
+        <activity android:name=".Customer.MyAddressActivity"
+            android:exported="true"/>
         <activity
-            android:name=".Customer.UpdateAddAddressActivity"
-            android:exported="true">
-        </activity>
+            android:name=".Customer.AddAddressActivity"
+            android:exported="true"
+        />
+        <activity android:name=".Customer.CheckOutActivity"
+            android:exported="true"/>
 
         <activity
             android:name=".Customer.MyCart.Cart"
