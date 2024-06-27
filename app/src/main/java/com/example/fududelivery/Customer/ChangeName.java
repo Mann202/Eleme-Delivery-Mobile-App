@@ -1,22 +1,20 @@
 package com.example.fududelivery.Customer;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.fududelivery.HelperFirebase.FirebaseHelper;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
-import com.google.firebase.Firebase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ChangeName extends AppCompatActivity {
-    private Button saveButton, cancelButton;
+    private Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetail;
 
-public class RestaurantDetailItem extends AppCompatActivity{
+public class RestaurantDetailItem extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

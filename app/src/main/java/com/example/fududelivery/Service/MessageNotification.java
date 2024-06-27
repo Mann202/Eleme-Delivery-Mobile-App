@@ -1,7 +1,5 @@
 package com.example.fududelivery.Service;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -24,11 +22,8 @@ import com.example.fududelivery.R;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.MetadataChanges;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class MessageNotification extends Service {
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();

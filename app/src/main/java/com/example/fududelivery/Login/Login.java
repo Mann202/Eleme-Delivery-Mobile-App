@@ -18,8 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
-import com.example.fududelivery.R;
 
+import com.example.fududelivery.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -35,9 +35,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -139,7 +139,7 @@ public class Login extends AppCompatActivity {
                                                 sessionManager.loginUserName(name);
                                                 sessionManager.loginUserPhone(phone);
 
-                                                if(Objects.equals(roleID, "2")) {
+                                                if (Objects.equals(roleID, "2")) {
                                                     String startingDate = document.getString("startingDate");
                                                     String address = document.getString("address");
                                                     Boolean isActive = document.getBoolean("isGettingNewOrder");
@@ -149,7 +149,7 @@ public class Login extends AppCompatActivity {
                                                     sessionManager.setAddress(address);
                                                 }
 
-                                                if(Objects.equals(roleID, "3")) {
+                                                if (Objects.equals(roleID, "3")) {
                                                     String vehicleInformation = document.getString("vehicleInformation");
                                                     Log.v("Debug", vehicleInformation);
 
@@ -310,7 +310,7 @@ public class Login extends AppCompatActivity {
             boolean isPasswordValid = passwordField.getText().toString().length() >= 8;
 
             loginButton.setEnabled(isEmailValid && isPasswordValid);
-            if(loginButton.isEnabled()) {
+            if (loginButton.isEnabled()) {
                 loginButton.setTextColor(ContextCompat.getColor(Login.this, R.color.white));
             }
         }

@@ -1,12 +1,9 @@
 package com.example.fududelivery.Shipper.ShipperMain;
 
-import static androidx.test.InstrumentationRegistry.getContext;
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -16,13 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.fududelivery.GetStarted.ViewAdapter;
 import com.example.fududelivery.R;
-import com.example.fududelivery.Service.Geocoding;
 import com.example.fududelivery.Service.LocationHelper;
-import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.example.fududelivery.Service.ShipperNotification;
-import com.example.fududelivery.Shipper.ShipperAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -66,10 +59,10 @@ public class ShipperMain extends AppCompatActivity {
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
-                         bottomNavigationView.setSelectedItemId(R.id.mnneworder);
-                         break;
+                        bottomNavigationView.setSelectedItemId(R.id.mnneworder);
+                        break;
                     case 1:
                         bottomNavigationView.setSelectedItemId(R.id.mnorderhistory);
                         break;
@@ -89,7 +82,7 @@ public class ShipperMain extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if (id == R.id.mnneworder){
+                if (id == R.id.mnneworder) {
                     viewPager.setCurrentItem(0);
                 } else if (id == R.id.mnorderhistory) {
                     viewPager.setCurrentItem(1);

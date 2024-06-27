@@ -18,7 +18,14 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
-import com.google.firebase.firestore.*;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.MetadataChanges;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class RestaurantNotificationService extends Service {
 

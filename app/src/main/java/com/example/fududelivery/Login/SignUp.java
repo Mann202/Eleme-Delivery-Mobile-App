@@ -67,17 +67,17 @@ public class SignUp extends AppCompatActivity {
                 TextInputEditText emailField = findViewById(R.id.emailField);
                 String email = emailField.getText().toString();
                 String password = ".......";
-                if(email.trim().equals("")) {
+                if (email.trim().equals("")) {
                     Toast.makeText(SignUp.this, "Please enter your email address", Toast.LENGTH_SHORT).show();
                 } else {
                     firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener((task -> {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             final FirebaseUser user = firebaseAuth.getCurrentUser();
                             Log.v("Debug", user.toString());
                             user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()) {
+                                    if (task.isSuccessful()) {
                                         findViewById(R.id.email).setVisibility(View.GONE);
                                         findViewById(R.id.confirmBtn).setVisibility(View.GONE);
 
@@ -106,7 +106,7 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View v) {
                 name = nameField.getText().toString();
 
-                if(name.trim().equals("")) {
+                if (name.trim().equals("")) {
                     Toast.makeText(SignUp.this, "Please enter your name!", Toast.LENGTH_SHORT).show();
                 } else {
                     findViewById(R.id.submitNameBtn).setVisibility(View.GONE);
@@ -131,47 +131,44 @@ public class SignUp extends AppCompatActivity {
                 String repassword = repasswordField.getText().toString();
                 String password = passwordField.getText().toString();
 
-                if(password.trim().equals("")) {
+                if (password.trim().equals("")) {
                     Toast.makeText(SignUp.this, "Please enter your password and re-enter your password", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(repassword.equals(password)) {
-                        user.updatePassword(password)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.d("Debug", "User password updated.");
+                    if (repassword.equals(password)) {
+                        user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d("Debug", "User password updated.");
 
-                                            String userUid = user.getUid();
+                                    String userUid = user.getUid();
 
-                                            Map<String, Object> userData = new HashMap<>();
-                                            userData.put("userUid", userUid);
-                                            userData.put("name", name);
-                                            userData.put("roleId", "1");
+                                    Map<String, Object> userData = new HashMap<>();
+                                    userData.put("userUid", userUid);
+                                    userData.put("name", name);
+                                    userData.put("roleId", "1");
 
-                                            firestoreInstance.collection("Users").add(userData)
-                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                        @Override
-                                                        public void onSuccess(DocumentReference documentReference) {
-                                                            Log.d("Debug", "DocumentSnapshot written with ID: " + documentReference.getId());
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Log.w("Debug", "Error adding document", e);
-                                                        }
-                                                    });
-
-
-                                            Intent intent = new Intent(SignUp.this, VerifyEmail.class);
-                                            startActivity(intent);
-                                            overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                                        } else {
-                                            Log.d("Debug", "Failed to reload user");
+                                    firestoreInstance.collection("Users").add(userData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Log.d("Debug", "DocumentSnapshot written with ID: " + documentReference.getId());
                                         }
-                                    }
-                                });
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w("Debug", "Error adding document", e);
+                                        }
+                                    });
+
+
+                                    Intent intent = new Intent(SignUp.this, VerifyEmail.class);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+                                } else {
+                                    Log.d("Debug", "Failed to reload user");
+                                }
+                            }
+                        });
                     } else {
                         Toast.makeText(SignUp.this, "Check your re-enter password!", Toast.LENGTH_LONG).show();
                     }

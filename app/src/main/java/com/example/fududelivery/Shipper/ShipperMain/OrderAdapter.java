@@ -48,7 +48,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(context, OrderDetail.class);
 
-//                System.out.println("Order Adapter: Order:" + order.getSubTotal());
 
                 intent.putExtra("OrderID", order.getOrderID());
                 intent.putExtra("OrderTotal", order.getOrderTotal());

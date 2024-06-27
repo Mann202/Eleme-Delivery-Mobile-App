@@ -11,7 +11,7 @@ import com.example.fududelivery.R;
 
 import java.util.ArrayList;
 
-public class RestaurantItemAdapter extends ArrayAdapter<ItemRestaurantOrder>{
+public class RestaurantItemAdapter extends ArrayAdapter<ItemRestaurantOrder> {
     private Context mContext;
     private int mResource;
 

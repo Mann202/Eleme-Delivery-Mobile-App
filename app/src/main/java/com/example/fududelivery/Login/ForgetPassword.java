@@ -1,19 +1,11 @@
 package com.example.fududelivery.Login;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.InputType;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,11 +17,7 @@ import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ForgetPassword extends AppCompatActivity {
 
@@ -65,7 +53,8 @@ public class ForgetPassword extends AppCompatActivity {
                                     forgetpassworddescription.setText("Your verification email has been sent to your email address. Please check your email and change your new password. If you don't receive any email from us. Please re-check again your email address submission.");
                                     sendEmailBtn.setText("Re-send email");
                                 }
-                            }});
+                            }
+                        });
             }
         });
 

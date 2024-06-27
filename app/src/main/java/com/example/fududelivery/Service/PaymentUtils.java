@@ -49,6 +49,7 @@ public class PaymentUtils {
                         )
                 );
     }
+
     private static JSONArray getAllowedCardAuthMethods() {
         return new JSONArray()
                 .put("PAN_ONLY")
@@ -61,9 +62,9 @@ public class PaymentUtils {
     }
 
     //public static PaymentsClient createPaymentsClient(Context context) {
-        //Wallet.WalletOptions walletOptions =
-                //new Wallet.WalletOptions.Builder().setEnvironment(Wallet.TEST).build();
-        //eturn Wallet.getPaymentsClient(context, walletOptions);
+    //Wallet.WalletOptions walletOptions =
+    //new Wallet.WalletOptions.Builder().setEnvironment(Wallet.TEST).build();
+    //eturn Wallet.getPaymentsClient(context, walletOptions);
     //}
 
     public static JSONObject getIsReadyToPayRequest() {

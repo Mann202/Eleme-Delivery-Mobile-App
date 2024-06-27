@@ -14,6 +14,7 @@ public class ChangeCurrency {
 
         return formattedPrice;
     }
+
     public static String formatPrice(float price) {
         NumberFormat formatter = NumberFormat.getInstance(Locale.getDefault());
         formatter.setMaximumFractionDigits(0);
