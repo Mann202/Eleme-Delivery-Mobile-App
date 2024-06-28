@@ -233,5 +233,22 @@
             android:textSize="21sp"
             android:layout_marginBottom="20dp"
             android:textColor="@color/red" />
+        
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="40dp"
+          android:layout_below="@+id/sn_language_customer"
+          android:backgroundTint="@color/gray"
+          android:background="@drawable/save_button"
+          android:layout_marginTop="20dp"
+          android:layout_centerHorizontal ="true"
+          android:text="View all address"
+          android:textColor="@color/white"
+          android:textAllCaps="false"
+          android:padding="10dp"
+          android:id="@+id/view_all_address_button"
+          />
+
+
     </RelativeLayout>
 </ScrollView>

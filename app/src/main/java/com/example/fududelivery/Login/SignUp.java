@@ -27,10 +27,13 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -154,6 +157,26 @@ public class SignUp extends AppCompatActivity {
                                                         @Override
                                                         public void onSuccess(DocumentReference documentReference) {
                                                             Log.d("Debug", "DocumentSnapshot written with ID: " + documentReference.getId());
+
+                                                            // Create USER_DATA collection reference
+                                                            CollectionReference userDataReference = firestoreInstance.collection("Users")
+                                                                    .document(userUid)
+                                                                    .collection("USER_DATA");
+
+                                                            Map<String,Object> myAddressesMap= new HashMap<>();
+                                                            myAddressesMap.put("list_size", (long) 0);
+                                                            List<String> documentNames = new ArrayList<>();
+                                                            documentNames.add("MY_ADDRESSES");
+
+                                                            final List<Map<String,Object>> documentFields = new ArrayList<>();
+                                                            documentFields.add(myAddressesMap);
+
+                                                            for (int i = 0; i < documentNames.size(); i++) {
+                                                                String docName = documentNames.get(i);
+                                                                Map<String, Object> fields = documentFields.get(i);
+                                                                userDataReference.document(docName).set(fields);
+                                                            }
+
                                                         }
                                                     })
                                                     .addOnFailureListener(new OnFailureListener() {

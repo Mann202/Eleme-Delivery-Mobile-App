@@ -2,6 +2,9 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="TermAndCondition">
+        <State />
+      </entry>
       <entry key="UpdateAddAddressActivity">
         <State />
       </entry>

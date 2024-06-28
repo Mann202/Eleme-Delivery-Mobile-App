@@ -1,4 +1,4 @@
-package com.example.fududelivery.Customer;
+package com.example.fududelivery.Customer.Address;
 
 import static com.example.fududelivery.Customer.CheckOutActivity.SELECT_ADDRESS;
 
@@ -18,6 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,9 +29,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MyAddressActivity extends AppCompatActivity {
 
@@ -53,7 +54,7 @@ public class MyAddressActivity extends AppCompatActivity {
         // Set up toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("My addresses");
+        getSupportActionBar().setTitle("My Address");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Initialize views
@@ -82,21 +83,53 @@ public class MyAddressActivity extends AppCompatActivity {
         deliverHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish(); // Just finish the activity without updating addresses
+                if (DBquerries.selectedAddress != previousAddress) {
+                    final int previousAddressIndex = previousAddress;
+                    loadingDialog.show();
+
+                    // Update selected address in Firestore
+                    Map<String, Object> updateSelection = new HashMap<>();
+                    updateSelection.put("selected_" + String.valueOf(previousAddress + 1), false);
+                    updateSelection.put("selected_" + String.valueOf(DBquerries.selectedAddress + 1), true);
+
+                    previousAddress = DBquerries.selectedAddress;
+
+                    FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_ADDRESSES")
+                            .update(updateSelection)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        finish();
+                                    } else {
+                                        previousAddress = previousAddressIndex;
+                                        String error = task.getException().getMessage();
+                                        Toast.makeText(MyAddressActivity.this, error, Toast.LENGTH_SHORT).show();
+                                    }
+                                    loadingDialog.dismiss();
+                                }
+                            });
+                } else {
+                    finish();
+                }
             }
         });
 
         // Initialize addressesAdapter with data from DBquerries
         addressesAdapter = new AddressAdapter(DBquerries.addressesModelList, mode, loadingDialog);
+        addressesAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(addressesAdapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-
 
         // Click listener for addNewAddressBtn
         addNewAddressBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MyAddressActivity.this, AddAddressActivity.class).putExtra("INTENT", "manage"));
+                if(mode != SELECT_ADDRESS){
+                    startActivity(new Intent(MyAddressActivity.this,AddAddressActivity.class).putExtra("INTENT","manage"));
+                }else {
+                    startActivity(new Intent(MyAddressActivity.this,AddAddressActivity.class).putExtra("INTENT","null"));
+                }
             }
         });
     }
@@ -110,17 +143,33 @@ public class MyAddressActivity extends AppCompatActivity {
     // Handle back button press
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         int id = item.getItemId();
-        if (id == android.R.id.home) {
+        if(id == android.R.id.home){
+            if(mode == SELECT_ADDRESS) {
+                if (DBquerries.selectedAddress != previousAddress) {
+                    DBquerries.addressesModelList.get(DBquerries.selectedAddress).setSelected(false);
+                    DBquerries.addressesModelList.get(previousAddress).setSelected(true);
+                    DBquerries.selectedAddress = previousAddress;
+
+                }
+            }
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    // Handle back button press
     @Override
     public void onBackPressed() {
+        if(mode == SELECT_ADDRESS) {
+            if (DBquerries.selectedAddress != previousAddress) {
+                DBquerries.addressesModelList.get(DBquerries.selectedAddress).setSelected(false);
+                DBquerries.addressesModelList.get(previousAddress).setSelected(true);
+                DBquerries.selectedAddress = previousAddress;
+
+            }
+        }
         super.onBackPressed();
     }
 }

@@ -1,5 +1,7 @@
 package com.example.fududelivery.Customer;
 
+import static androidx.test.InstrumentationRegistry.getContext;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -15,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import com.example.fududelivery.Customer.Address.MyAddressActivity;
 import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
@@ -27,7 +31,9 @@ public class CustomerProfile extends AppCompatActivity {
     AppCompatEditText nameField;
     AppCompatEditText phoneField;
     AppCompatEditText emailField;
+    Button viewAllAddressBtn;
     UserSessionManager userSessionManager;
+    public final static int MANAGE_ADDRESS =1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public class CustomerProfile extends AppCompatActivity {
         nameField = findViewById(R.id.nameField);
         phoneField = findViewById(R.id.phoneField);
         emailField = findViewById(R.id.emailField);
+        viewAllAddressBtn = findViewById(R.id.view_all_address_button);
 
         String userUid = userSessionManager.getUserInformation();
 
@@ -68,6 +75,19 @@ public class CustomerProfile extends AppCompatActivity {
             }
         });
 
+        viewAllAddressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentChangeName = new Intent(CustomerProfile.this, MyAddressActivity.class);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        viewAllAddressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getContext().startActivity(new Intent(getContext(), MyAddressActivity.class).putExtra("MODE",MANAGE_ADDRESS));
+            }
+        });
         nameField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

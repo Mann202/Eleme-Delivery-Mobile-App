@@ -1,4 +1,4 @@
-package com.example.fududelivery.Customer;
+package com.example.fududelivery.Customer.Address;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,11 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.fududelivery.Customer.CheckOutActivity;
 import com.example.fududelivery.Customer.Model.Address;
 import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class AddAddressActivity extends AppCompatActivity {
     private Button saveBtn;
     private EditText detailAddress, fullName, phoneNumber;
     private Dialog loadingDialog;
+    private String userId;
 
     private FirebaseFirestore firestore;
 
@@ -36,6 +39,8 @@ public class AddAddressActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_addnewaddress);
+
+        userId = getIntent().getStringExtra("userId");
 
         // Initialize views and loading dialog
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -67,15 +72,15 @@ public class AddAddressActivity extends AppCompatActivity {
 
                     loadingDialog.show();
 
+
                     Map<String, Object> addAddress = new HashMap<>();
-                    addAddress.put("mobile_no_" + (DBquerries.addressesModelList.size() + 1), phoneNumber.getText().toString());
-                    addAddress.put("name_" + (DBquerries.addressesModelList.size() + 1), fullName.getText().toString());
-                    addAddress.put("detail_address_" + (DBquerries.addressesModelList.size() + 1), detailAddress.getText().toString());
+                    addAddress.put("phoneNumer_" + (DBquerries.addressesModelList.size() + 1), phoneNumber.getText().toString());
+                    addAddress.put("fullName_" + (DBquerries.addressesModelList.size() + 1), fullName.getText().toString());
+                    addAddress.put("detailAddress_" + (DBquerries.addressesModelList.size() + 1), detailAddress.getText().toString());
                     addAddress.put("list_size", (long) (DBquerries.addressesModelList.size() + 1));
                     addAddress.put("selected_" + (DBquerries.addressesModelList.size() + 1), true);
 
-                    FirebaseFirestore.getInstance()
-                            .collection("UserAddress").document("Addresses")
+                    FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_ADDRESSES")
                             .update(addAddress)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
