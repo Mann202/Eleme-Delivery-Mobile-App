@@ -34,6 +34,13 @@ public class RestaurantNotificationService extends Service {
     Boolean firstTimeLaunchedService;
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+        createNotificationChannel();
+        startForeground(1, getSilentNotification());
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startFirestoreListener();
         return START_STICKY;
@@ -75,12 +82,7 @@ public class RestaurantNotificationService extends Service {
     }
 
     private void showNotification(String title, String content) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "ORDER_CHANNEL_ID")
-                .setSmallIcon(R.drawable.logo_eleme)
-                .setContentTitle(title)
-                .setContentText(content)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setAutoCancel(true);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "ORDER_CHANNEL_ID").setSmallIcon(R.drawable.logo_eleme).setContentTitle(title).setContentText(content).setPriority(NotificationCompat.PRIORITY_HIGH).setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -95,33 +97,21 @@ public class RestaurantNotificationService extends Service {
         return null;
     }
 
-    @SuppressLint("ForegroundServiceType")
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        createNotificationChannel();
-        startForeground(1, getSilentNotification());
-    }
-
     private Notification getSilentNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SHIPPING_CHANNEL_ID")
-                .setSmallIcon(R.drawable.logo_eleme)
-                .setPriority(NotificationCompat.PRIORITY_MIN)
-                .setSilent(true);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "ORDER_CHANNEL_ID").setSmallIcon(R.drawable.logo_eleme).setPriority(NotificationCompat.PRIORITY_MIN).setSilent(true);
 
         return builder.build();
     }
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "OrderChannel";
-            String description = "Channel for order notifications";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel("ORDER_CHANNEL_ID", name, importance);
-            channel.setDescription(description);
+            NotificationChannel serviceChannel = new NotificationChannel("ORDER_CHANNEL_ID", "Order Notifications", NotificationManager.IMPORTANCE_HIGH);
+            serviceChannel.setDescription("Channel for order notifications");
 
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            if (manager != null) {
+                manager.createNotificationChannel(serviceChannel);
+            }
         }
     }
 }

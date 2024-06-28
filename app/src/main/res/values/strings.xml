@@ -130,4 +130,5 @@
     <string name="msg_cancel">Cancel</string>
     <string name="msg_detail">Detail</string>
     <string name="msg_enter_category_name">Enter category name</string>
+    <string name="msg_load_again">Load again</string>
 </resources>

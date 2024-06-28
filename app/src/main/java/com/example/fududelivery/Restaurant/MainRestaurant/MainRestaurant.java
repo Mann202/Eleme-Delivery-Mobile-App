@@ -15,7 +15,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.fududelivery.Chat.ChatActivity;
 import com.example.fududelivery.Login.RestaurantSessionManager;
 import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.example.fududelivery.R;
@@ -61,9 +60,7 @@ public class MainRestaurant extends AppCompatActivity {
         viewPager.setAdapter(tabsAdapter);
 
 
-        new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText(tabsAdapter.getPageTitle(position))
-        ).attach();
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(tabsAdapter.getPageTitle(position))).attach();
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -78,7 +75,7 @@ public class MainRestaurant extends AppCompatActivity {
                     Intent profileIntent = new Intent(MainRestaurant.this, RestaurantProfile.class);
                     startActivity(profileIntent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                } else if(item.getItemId() == R.id.history) {
+                } else if (item.getItemId() == R.id.history) {
                     Intent historyIntent = new Intent(MainRestaurant.this, RestaurantHistory.class);
                     startActivity(historyIntent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -104,25 +101,21 @@ public class MainRestaurant extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 String userUid = mAuth.getUid();
 
-                db.collection("Users").whereEqualTo("userUid", userUid)
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
-                                    if (snapshot.exists()) {
-                                        db.collection("Users").document(snapshot.getId())
-                                                .update("isGettingNewOrder", isChecked)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        restaurantSessionManager.setIsActive(false);
-                                                    }
-                                                });
+                db.collection("Users").whereEqualTo("userUid", userUid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                            if (snapshot.exists()) {
+                                db.collection("Users").document(snapshot.getId()).update("isGettingNewOrder", isChecked).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        restaurantSessionManager.setIsActive(false);
                                     }
-                                }
+                                });
                             }
-                        });
+                        }
+                    }
+                });
             }
         });
 

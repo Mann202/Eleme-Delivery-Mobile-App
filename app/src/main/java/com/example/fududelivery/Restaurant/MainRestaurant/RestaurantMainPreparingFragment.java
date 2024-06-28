@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,18 +36,17 @@ public class RestaurantMainPreparingFragment extends Fragment {
     private UserSessionManager userSessionManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
+    private Boolean loadAgain = false;
+
     public RestaurantMainPreparingFragment() {
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_restaurantmainpreparing, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerViewPreparingRestaurant);
         swipeRefreshLayout = view.findViewById(R.id.refreshLayoutPreparingRestaurant);
-        swipeRefreshLayout.setColorSchemeColors(
-                getResources().getColor(R.color.primary)
-        );
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primary));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -57,8 +58,6 @@ public class RestaurantMainPreparingFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         loadData();
-
-
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -83,44 +82,48 @@ public class RestaurantMainPreparingFragment extends Fragment {
             }
         });
 
+        TextView loadBtn = view.findViewById(R.id.load_btn);
+        loadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadData();
+                loadAgain = true;
+            }
+        });
+
         return view;
     }
 
     private void loadData() {
-        firestoreInstance.collection("Orders")
-                .whereEqualTo("ResID", userSessionManager.getUserInformation())
-                .whereEqualTo("ResStatus", "Prepare")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            String orderId = document.getId();
-
-                            restaurantList.add(new ItemDetailRestaurant(
-                                    1,
-                                    document.getString("Date"),
-                                    document.getString("TotalQuantity") + " items",
-                                    document.getString("name"),
-                                    ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")),
-                                    document.getString("address"),
-                                    orderId,
-                                    document.getString("CusID"),
-                                    document.getString("ShipperID")
-                            ));
-
-                            adapter.notifyDataSetChanged();
-                            view.findViewById(R.id.loadingPreparingRestaurant).setVisibility(View.GONE);
-                            swipeRefreshLayout.setVisibility(View.VISIBLE);
-                            swipeRefreshLayout.setRefreshing(false);
+        firestoreInstance.collection("Orders").whereEqualTo("ResID", userSessionManager.getUserInformation()).whereEqualTo("ResStatus", "Prepare").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots.isEmpty()) {
+                    view.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.INVISIBLE);
+                    LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
+                    TextView noOrdersTextView = view.findViewById(R.id.noOrdersTextView);
+                    loadMoreContainer.setVisibility(View.VISIBLE);
+                    noOrdersTextView.setText("Don't have any order");
+                } else {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        String orderId = document.getId();
+                        restaurantList.add(new ItemDetailRestaurant(1, document.getString("Date"), document.getString("TotalQuantity") + " items", document.getString("name"), ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")), document.getString("address"), orderId, document.getString("CusID"), document.getString("ShipperID")));
+                        adapter.notifyDataSetChanged();
+                        view.findViewById(R.id.loadingPreparingRestaurant).setVisibility(View.GONE);
+                        if (loadAgain != null && loadAgain) {  // Kiểm tra loadAgain trước khi sử dụng
+                            LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
+                            loadMoreContainer.setVisibility(View.INVISIBLE);
                         }
+                        swipeRefreshLayout.setVisibility(View.VISIBLE);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Debug", "Error getting Orders documents.", e);
-                    }
-                });
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Debug", "Error getting Orders documents.", e);
+            }
+        });
     }
 }

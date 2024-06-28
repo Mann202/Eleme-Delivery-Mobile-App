@@ -7,12 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.fududelivery.R;
-import com.example.fududelivery.Service.MessageNotification;
-import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,8 +39,6 @@ public class GetStarted extends AppCompatActivity {
             editor.apply();
         } else {
             startActivity(new Intent(GetStarted.this, SplashScreen.class));
-            Intent messageService = new Intent(this, MessageNotification.class);
-            startService(messageService);
             finish();
         }
         //End splash screen

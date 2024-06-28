@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
@@ -45,10 +46,7 @@ public class ShipperNotification extends Service {
     }
 
     private Notification getSilentNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SHIPPING_CHANNEL_ID")
-                .setSmallIcon(R.drawable.logo_eleme)
-                .setPriority(NotificationCompat.PRIORITY_MIN)
-                .setSilent(true);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SHIPPING_CHANNEL_ID").setSmallIcon(R.drawable.logo_eleme).setPriority(NotificationCompat.PRIORITY_MIN).setSilent(true);
 
         return builder.build();
     }
@@ -93,14 +91,8 @@ public class ShipperNotification extends Service {
         });
     }
 
-
     private void showNotification(String title, String content) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "SHIPPING_CHANNEL_ID")
-                .setSmallIcon(R.drawable.logo_eleme)
-                .setContentTitle(title)
-                .setContentText(content)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setAutoCancel(true);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "SHIPPING_CHANNEL_ID").setSmallIcon(R.drawable.logo_eleme).setContentTitle(title).setContentText(content).setPriority(NotificationCompat.PRIORITY_HIGH).setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -110,13 +102,15 @@ public class ShipperNotification extends Service {
     }
 
     private void createNotificationChannel() {
-        CharSequence name = "OrderShippingChannel";
-        String description = "Channel for order shipping notifications";
-        int importance = NotificationManager.IMPORTANCE_HIGH;
-        NotificationChannel channel = new NotificationChannel("SHIPPING_CHANNEL_ID", name, importance);
-        channel.setDescription(description);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "OrderShippingChannel";
+            String description = "Channel for order shipping notifications";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("SHIPPING_CHANNEL_ID", name, importance);
+            channel.setDescription(description);
 
-        NotificationManager notificationManager = getSystemService(NotificationManager.class);
-        notificationManager.createNotificationChannel(channel);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }

@@ -131,25 +131,16 @@
             android:name=".Restaurant.History.RestaurantHistory"
             android:exported="true" />
 
-        <activity
-            android:name=".Chat.ChatActivity"
-            android:exported="true" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="hello" />
 
         <service
-            android:name=".Service.RestaurantNotificationService"
-            android:exported="false" />
-
-        <service
             android:name=".Service.ShipperNotification"
-            android:exported="false" />
-
-        <service
-            android:name=".Service.MessageNotification"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="location"
+            android:permission="android.permission.FOREGROUND_SERVICE" />
 
         <receiver
             android:name=".BroadcastReceiver.BootReceiver"
@@ -159,6 +150,12 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".Service.RestaurantNotificationService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync"
+            android:permission="android.permission.FOREGROUND_SERVICE" />
 
 
         <meta-data
@@ -176,9 +173,15 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
 
 
 </manifest>
