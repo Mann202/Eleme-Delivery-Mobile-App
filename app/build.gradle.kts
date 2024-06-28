@@ -30,6 +30,11 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -87,6 +92,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation ("com.google.firebase:firebase-database:20.0.5")
+    implementation ("com.google.firebase:firebase-analytics:19.0.0")
     implementation("com.google.android.gms:play-services-auth:21.1.1")
     implementation("com.facebook.android:facebook-android-sdk:[8,9)")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
@@ -96,5 +103,5 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("com.google.firebase:firebase-messaging:24.0.0")
-    implementation("com.google.firebase:firebase-database:20.0.0")
+
 }

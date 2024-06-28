@@ -35,7 +35,6 @@
         android:id="@+id/ProfileName"
         android:layout_height="wrap_content"
         android:layout_below="@id/NameTitle"
-        android:layout_marginTop="-5dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
@@ -47,11 +46,7 @@
             android:paddingRight="@dimen/padding_small"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="@string/nguyen_van_a"
-            android:inputType="text"
-            android:textColorHighlight="@color/primary"
-            android:textColorHint="@color/whiteedt"
-            android:textColorLink="@color/primary" />
+            android:hint="Name" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,6 +54,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_regular"
         android:id="@+id/PhoneTitle"
         android:layout_below="@id/ProfileName"
         android:layout_marginTop="10dp"
@@ -71,10 +67,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:id="@+id/ProfilePhone"
+        android:id="@+id/phone_input"
         android:layout_height="wrap_content"
-        android:layout_below="@id/PhoneTitle"
-        android:layout_marginTop="-5dp"
+        android:layout_below="@id/NameTitle"
+
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
@@ -83,15 +79,11 @@
             android:id="@+id/phone_number"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
+            android:paddingRight="@dimen/padding_small"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="@string/_0999"
-            android:inputType="phone"
-            android:paddingRight="@dimen/padding_small"
-            android:textColorHighlight="@color/primary"
-            android:textColorHint="@color/whiteedt"
-            android:textColorLink="@color/primary" />
+            android:hint="Phone number"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/phone_number"
         android:text="Detail address"
+        android:fontFamily="@font/lato_regular"
         android:textSize="16sp"
         android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
@@ -118,47 +111,18 @@
             style="@style/EditTextLogin"
             android:id="@+id/detail_address"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:layout_marginTop="30dp"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
             android:hint="Detail address"
             android:inputType="text"
             android:maxLines="4"
-            android:paddingRight="@dimen/padding_small"
-            android:textColorHighlight="@color/primary"
-            android:textColorHint="@color/whiteedt"
-            android:textColorLink="@color/primary" />
+            android:paddingRight="@dimen/padding_small" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/detail_address">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Set as default address"
-            android:textSize="18sp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"/>
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="25dp"
-            android:buttonTint="@color/primary"
-            android:id="@+id/set_default"/>
-
-    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_button"
@@ -169,8 +133,8 @@
         android:textColor="@color/white"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="bottom"
         style="@style/SaveButton"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

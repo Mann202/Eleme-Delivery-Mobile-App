@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -17,8 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
-
 import com.example.fududelivery.R;
+
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -41,9 +42,9 @@ import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-//import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
 
@@ -53,6 +54,8 @@ public class Login extends AppCompatActivity {
     TextInputEditText emailField;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
+    private String email;
+    private String password;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         UserSessionManager sessionManager = new UserSessionManager(getApplicationContext());
         LoginCaseManager loginCaseManager = new LoginCaseManager(getApplicationContext());
+        RestaurantSessionManager restaurantSessionManager = new RestaurantSessionManager(getApplicationContext());
 
         FacebookSdk.setApplicationId("283740247620840");
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -74,6 +78,7 @@ public class Login extends AppCompatActivity {
         ImageView facebookLogin = findViewById(R.id.facebookLogo);
         ImageView xLogin = findViewById(R.id.XLogo);
         ImageView phoneLogin = findViewById(R.id.phoneLogo);
+        CheckBox rememberMeBox = findViewById(R.id.checkbox_remember_me);
 
         passwordField = findViewById(R.id.passwordField);
         emailField = findViewById(R.id.emailField);
@@ -87,6 +92,7 @@ public class Login extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -102,10 +108,8 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextInputEditText passwordField = findViewById(R.id.passwordField);
-                TextInputEditText emailField = findViewById(R.id.emailField);
-                String password = passwordField.getText().toString();
-                String email = emailField.getText().toString();
+                password = passwordField.getText().toString();
+                email = emailField.getText().toString();
 
 
                 mAuth.signInWithEmailAndPassword(email, password)
@@ -134,6 +138,23 @@ public class Login extends AppCompatActivity {
                                                 sessionManager.loginUserGmail(email);
                                                 sessionManager.loginUserName(name);
                                                 sessionManager.loginUserPhone(phone);
+
+                                                if(Objects.equals(roleID, "2")) {
+                                                    String startingDate = document.getString("startingDate");
+                                                    String address = document.getString("address");
+                                                    Boolean isActive = document.getBoolean("isGettingNewOrder");
+
+                                                    restaurantSessionManager.setIsActive(isActive);
+                                                    sessionManager.setStartingDate(startingDate);
+                                                    sessionManager.setAddress(address);
+                                                }
+
+                                                if(Objects.equals(roleID, "3")) {
+                                                    String vehicleInformation = document.getString("vehicleInformation");
+                                                    Log.v("Debug", vehicleInformation);
+
+                                                    sessionManager.setVehicleInformation(vehicleInformation);
+                                                }
 
                                                 if (roleID != null) {
                                                     Log.d("Debug", "Role ID: " + roleID);

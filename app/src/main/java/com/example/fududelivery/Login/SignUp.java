@@ -147,7 +147,7 @@ public class SignUp extends AppCompatActivity {
                                             Map<String, Object> userData = new HashMap<>();
                                             userData.put("userUid", userUid);
                                             userData.put("name", name);
-                                            userData.put("roleID", "1");
+                                            userData.put("roleId", "1");
 
                                             firestoreInstance.collection("Users").add(userData)
                                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

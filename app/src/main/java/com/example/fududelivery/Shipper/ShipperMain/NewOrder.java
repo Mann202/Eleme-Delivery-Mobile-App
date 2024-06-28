@@ -1,19 +1,34 @@
 package com.example.fududelivery.Shipper.ShipperMain;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.fududelivery.R;
+import com.example.fududelivery.Service.GeocodeCallback;
+import com.example.fududelivery.Service.GeocodeTask;
+import com.example.fududelivery.Service.Geocoding;
+import com.example.fududelivery.Service.LocationHelper;
+import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.example.fududelivery.Shipper.Model.Order;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,22 +62,14 @@ public class NewOrder extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     static FirebaseFirestore firestoreInstance;
     RelativeLayout NoOrder;
+    private LocationHelper locationHelper;
+
+    double latitude;
+    double longitude;
 
     public NewOrder() {
-        // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NewOrder.
-     */
-    // TODO: Rename and change types and number of parameters
     public static NewOrder newInstance(String param1, String param2) {
-//        firestoreInstance = FirebaseFirestore.getInstance();
         NewOrder fragment = new NewOrder();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -87,16 +94,33 @@ public class NewOrder extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_new_order, container, false);
 
+        Intent serviceIntent = new Intent(getContext(), RestaurantNotificationService.class);
+        rootView.getContext().startService(serviceIntent);
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED) {
+            locationHelper = new LocationHelper(getContext());
+            locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    Log.v("Debug", "Location changed: " + latitude + " " + longitude);
+                }
+            });
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+
+
         CollectionReference orderCollection = firestoreInstance.collection("Orders");
-        List<String> statusList = Arrays.asList("Ready", "Start");
+        List<String> statusList = Arrays.asList("Ready", "Start", "Wait");
         orderCollection
                 .whereIn("ShippingStatus", statusList)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        System.out.println("Query Orders Success ");
-                        System.out.println(queryDocumentSnapshots.isEmpty());
                         NoOrder = rootView.findViewById(R.id.no_orders);
                         if (queryDocumentSnapshots.isEmpty()){
                             rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
@@ -104,19 +128,13 @@ public class NewOrder extends Fragment {
                             swipeRefreshLayout.setRefreshing(false);
                             NoOrder.setVisibility(View.VISIBLE);
                         }
-                        // Xử lý dữ liệu trả về
+
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            // Lấy dữ liệu từ mỗi tài liệu Order
                             Order order = documentSnapshot.toObject(Order.class);
                             String documentId = documentSnapshot.getId();
-//                            SimpleDateFormat format = new SimpleDateFormat("d MMM, HH:mm");
-//                            String formatDate = format.format(order.getDate());
-//                            Order saveOrder = new Order(documentId, order.getName(), order.getAddress(), order.getDate(), order.getTotalQuantity(), order.getOrderTotal());
                             order.setOrderID(documentId);
-                            System.out.println("Query Order: " + order);
 
-                            // TODO: Xử lý dữ liệu Order ở đây
-                            orders.add(order);
+                            processOrder(order, new double[]{latitude, longitude});
 
                             recyclerView = rootView.findViewById(R.id.rv_orders);
                             adapter = new OrderAdapter(requireActivity(), orders);
@@ -128,26 +146,24 @@ public class NewOrder extends Fragment {
                             swipeRefreshLayout.setRefreshing(false);
                         }
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Xử lý khi truy vấn thất bại
-                    }
                 });
-        for(Order order : orders){
-            System.out.println("Order:" + order);
-        }
 
         recyclerView = rootView.findViewById(R.id.rv_orders);
         adapter = new OrderAdapter(requireActivity(), orders);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
 
-        swipeRefreshLayout = rootView.findViewById(R.id.refreshLayoutDoneRestaurant);
+        swipeRefreshLayout = rootView.findViewById(R.id.refreshLayoutShipperOrder);
         swipeRefreshLayout.setColorSchemeColors(
                 getResources().getColor(R.color.primary)
         );
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Them code
+            }
+        });
 
         NoOrder = rootView.findViewById(R.id.no_orders);
         if (orders.isEmpty()){
@@ -155,5 +171,61 @@ public class NewOrder extends Fragment {
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        locationHelper.stopLocationUpdates();
+    }
+
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
+                        @Override
+                        public void onLocationChanged(Location location) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
+                    });
+                } else {
+                    Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+    public void processOrder(final Order order, final double[] shipperLocation) {
+        String restaurantAddress = order.getResAddress();
+        new GeocodeTask(new GeocodeCallback() {
+            @Override
+            public void onGeocodeResult(double[] coordinates) {
+                if (coordinates != null) {
+                    double latitude = coordinates[0];
+                    double longitude = coordinates[1];
+                    double distance = Geocoding.calculateDistance(shipperLocation[0], shipperLocation[1], latitude, longitude);
+                    Log.v("Debug", String.valueOf(distance));
+                    if (distance < 10.0) {
+                        orders.add(order);
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Log.v("Debug", "Order is too far");
+                    }
+                } else {
+                    Log.v("Debug", "Failed to get coordinates");
+                }
+            }
+        }).execute(restaurantAddress);
     }
 }

@@ -30,7 +30,7 @@
                 android:id="@+id/changeemailtitle"
                 android:layout_below="@id/backward"
                 android:layout_height="wrap_content"
-                android:text="@string/change_email"
+                android:text="Change email"
                 android:textStyle="bold"
                 android:textFontWeight="900"
                 android:textColor="@color/black"
@@ -42,38 +42,26 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/emailmessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/back_button_layout"
-            android:layout_marginTop="20dp"
-            android:textSize="18sp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="@string/you_will_receive_important_updates_or_reset_password_by_this_email"
-            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:id="@+id/emailField"
+            android:id="@+id/emailLayout"
             android:layout_height="wrap_content"
-            android:layout_below="@id/emailmessage"
+            android:layout_below="@id/back_button_layout"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/EditTextLogin"
-                android:id="@+id/emailInput"
+                android:id="@+id/changeEmailField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="10dp"
                 android:drawableTint="#C2CECE"
-                android:hint="@string/enter_email"
-                android:inputType="number"
+                android:inputType="text"
                 android:textColorHighlight="@color/primary"
                 android:textColorHint="@color/whiteedt"
                 android:textColorLink="@color/primary" />
@@ -84,13 +72,13 @@
             android:id="@+id/save_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/save"
+            android:text="Save"
             android:fontFamily="@font/lato_bold"
             android:textColor="@color/white"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="40dp"
             android:layout_alignParentBottom="true"
             style="@style/SaveButton"/>
 

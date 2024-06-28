@@ -1,158 +1,202 @@
 package com.example.fududelivery.Customer;
 
-import android.app.Activity;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.example.fududelivery.CustomMessageBox.CustomAlertDialog;
-import com.example.fududelivery.CustomMessageBox.FailToast;
-import com.example.fududelivery.CustomMessageBox.SuccessfulToast;
-import com.example.fududelivery.Customer.GlobalConfig.GlobalConfig;
-import com.example.fududelivery.Customer.Interfaces.IAddressAdapterListener;
 import com.example.fududelivery.Customer.Model.Address;
-import com.example.fududelivery.databinding.ItemAddressBinding;
+import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder>{
-    private Context mContext;
-    private List<Address> mAddresses;
-    private RadioButton checkedRadioButton;
-    private IAddressAdapterListener addressAdapterListener;
-    private String userId;
-    static private final int UPDATE_ADDRESS_REQUEST_CODE = 100;
+import static com.example.fududelivery.Customer.CheckOutActivity.SELECT_ADDRESS;
+import static com.example.fududelivery.Customer.MyAddressActivity.refreshItem;
+import static com.example.fududelivery.Customer.TermAndCondition.MANAGE_ADDRESS;
 
-    public AddressAdapter(Context mContext, List<Address> mAddresses, String id) {
-        this.mContext = mContext;
-        this.mAddresses = mAddresses;
-        this.userId = id;
+public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
+
+    private List<Address> addressesModelList;
+    private int MODE, preSelectedPos;
+    private Boolean refresh = false;
+    private Dialog loadingDialog;
+    String docID;
+
+    public AddressAdapter(List<Address> addressesModelList, int MODE, Dialog loadingDialog) {
+        this.addressesModelList = addressesModelList;
+        this.MODE = MODE;
+        preSelectedPos = DBquerries.selectedAddress;
+        this.loadingDialog = loadingDialog;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(ItemAddressBinding.inflate(LayoutInflater.from(mContext), parent, false));
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_customer_address, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Address address = mAddresses.get(position);
-
-        if (address.getAddressId().equals(GlobalConfig.choseAddressId) && address.getState().equals("default")) {
-            holder.binding.choose.setChecked(true);
-            holder.binding.defaultText.setVisibility(View.VISIBLE);
-            checkedRadioButton = holder.binding.choose;
-        }
-        else if (address.getAddressId().equals(GlobalConfig.choseAddressId)) {
-            holder.binding.choose.setChecked(true);
-            holder.binding.defaultText.setVisibility(View.INVISIBLE);
-            checkedRadioButton = holder.binding.choose;
-        }
-        else if (address.getState().equals("default")) {
-            holder.binding.defaultText.setVisibility(View.VISIBLE);
-            holder.binding.choose.setChecked(false);
-        }
-        else {
-            holder.binding.choose.setChecked(false);
-            holder.binding.defaultText.setVisibility(View.INVISIBLE);
-        }
-        holder.binding.receiverName.setText(address.getReceiverName());
-        holder.binding.receiverPhoneNumber.setText(address.getReceiverPhoneNumber());
-        holder.binding.detailAddress.setText(address.getDetailAddress());
-
-        holder.binding.choose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.binding.choose.isChecked()) {
-                    checkedRadioButton.setChecked(false);
-
-                    if (addressAdapterListener != null) {
-                        addressAdapterListener.onCheckedChanged(address);
-                    }
-
-                    checkedRadioButton = holder.binding.choose;
-                }
-            }
-        });
-
-        holder.binding.update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GlobalConfig.updateAddressId = address.getAddressId();
-                Intent intent = new Intent(mContext, UpdateAddAddressActivity.class);
-                intent.putExtra("mode", "update");
-                intent.putExtra("userId",userId);
-                ((Activity)mContext).startActivityForResult(intent, UPDATE_ADDRESS_REQUEST_CODE);
-            }
-        });
-
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                new CustomAlertDialog(mContext,"Delete this address?");
-                CustomAlertDialog.binding.btnYes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (address.getState().equals("default")) {
-                            new FailToast(mContext, "You cannot delete the default address!").showToast();
-                            CustomAlertDialog.alertDialog.dismiss();
-                        }
-                        else {
-                            FirebaseDatabase.getInstance().getReference().child("Address").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(address.getAddressId()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        new SuccessfulToast(mContext, "Delete address successfully!").showToast();
-                                        CustomAlertDialog.alertDialog.dismiss();
-                                        if (addressAdapterListener != null) {
-                                            addressAdapterListener.onDeleteAddress();
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
-                CustomAlertDialog.binding.btnNo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        CustomAlertDialog.alertDialog.dismiss();
-                    }
-                });
-                CustomAlertDialog.showAlertDialog();
-
-                return true;
-            }
-        });
+        String name = addressesModelList.get(position).getReceiverName();
+        String mobileNo = addressesModelList.get(position).getReceiverPhoneNumber();
+        String detailAddress = addressesModelList.get(position).getDetailAddress();
+        Boolean selected = addressesModelList.get(position).getSelected();
+        holder.setData(name, mobileNo, detailAddress, selected, position);
     }
 
     @Override
     public int getItemCount() {
-        return mAddresses == null ? 0 : mAddresses.size();
+        return addressesModelList.size();
     }
 
-    public void setAddressAdapterListener(IAddressAdapterListener addressAdapterListener) {
-        this.addressAdapterListener = addressAdapterListener;
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final ItemAddressBinding binding;
+        private TextView fullname, address, phonenumber;
+        private ImageView icon;
+        private LinearLayout optionContainer;
 
-        public ViewHolder(@NonNull ItemAddressBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            fullname = itemView.findViewById(R.id.name);
+            phonenumber = itemView.findViewById(R.id.phone_number);
+            address = itemView.findViewById(R.id.address);
+            icon = itemView.findViewById(R.id.icon_view);
+//            optionContainer = itemView.findViewById(R.id.option_container);
+        }
+
+        private void setData(String name, String mobileNo, String detailAddress, Boolean selected, final int position) {
+            fullname.setText(name);
+            phonenumber.setText(mobileNo);
+            address.setText(detailAddress);
+
+            if (MODE == SELECT_ADDRESS) {
+                icon.setImageResource(R.drawable.check);
+                if (selected) {
+                    icon.setVisibility(View.VISIBLE);
+                    preSelectedPos = position;
+                } else {
+                    icon.setVisibility(View.GONE);
+                }
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (preSelectedPos != position) {
+                            addressesModelList.get(position).setSelected(true);
+                            addressesModelList.get(preSelectedPos).setSelected(false);
+                            refreshItem(preSelectedPos, position);
+                            preSelectedPos = position;
+                            DBquerries.selectedAddress = position;
+                        }
+                    }
+                });
+//            } else if (MODE == MANAGE_ADDRESS) {
+//                optionContainer.setVisibility(View.GONE);
+//                optionContainer.getChildAt(0).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        itemView.getContext().startActivity(new Intent(itemView.getContext(), AddAddressActivity.class).putExtra("INTENT", "update_address").putExtra("Position", position));
+//                        refresh = false;
+//                    }
+//                });
+//                optionContainer.getChildAt(1).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        loadingDialog.show();
+//                        Map<String, Object> addresses = new HashMap<>();
+//                        int x = 0, selected = -1;
+//                        for (int i = 0; i < addressesModelList.size(); i++) {
+//                            if (i != position) {
+//                                x++;
+//                                addresses.put("detail_address_" + x, addressesModelList.get(i).getDetailAddress());
+//                                addresses.put("name_" + x, addressesModelList.get(i).getReceiverName());
+//                                addresses.put("mobile_no_" + x, addressesModelList.get(i).getReceiverPhoneNumber());
+//                                addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
+//                                if (addressesModelList.get(position).getSelected()) {
+//                                    if (position - 1 >= 0) {
+//                                        if (x == position) {
+//                                            addresses.put("selected_" + x, true);
+//                                            selected = x;
+//                                        } else {
+//                                            addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
+//                                        }
+//                                    } else {
+//                                        if (x == 1) {
+//                                            addresses.put("selected_" + x, true);
+//                                            selected = x;
+//                                        } else {
+//                                            addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
+//                                        }
+//                                    }
+//                                } else {
+//                                    addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
+//                                    if (addressesModelList.get(i).getSelected()) {
+//                                        selected = x;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        addresses.put("list_size", x);
+//                        final int finalSelected = selected;
+//                        FirebaseFirestore.getInstance().collection("UserAddress").document("Addresses")
+//                                .set(addresses).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<Void> task) {
+//                                        if (task.isSuccessful()) {
+//                                            DBquerries.addressesModelList.remove(position);
+//                                            if (finalSelected != -1) {
+//                                                DBquerries.selectedAddress = finalSelected - 1;
+//                                                DBquerries.addressesModelList.get(finalSelected - 1).setSelected(true);
+//                                            } else if (DBquerries.addressesModelList.size() == 0) {
+//                                                DBquerries.selectedAddress = -1;
+//                                            }
+//                                            notifyDataSetChanged();
+//                                        } else {
+//                                            String error = task.getException().getMessage();
+//                                            Toast.makeText(itemView.getContext(), error, Toast.LENGTH_SHORT).show();
+//                                        }
+//                                        loadingDialog.dismiss();
+//                                    }
+//                                });
+//                        refresh = false;
+//                    }
+//                });
+//                icon.setImageResource(R.drawable.menu);
+//                icon.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        optionContainer.setVisibility(View.VISIBLE);
+//                        if (refresh) {
+//                            refreshItem(preSelectedPos, preSelectedPos);
+//                        } else {
+//                            refresh = true;
+//                        }
+//                        preSelectedPos = position;
+//                    }
+//                });
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        refreshItem(preSelectedPos, preSelectedPos);
+                        preSelectedPos = -1;
+                    }
+                });
+            }
         }
     }
 }

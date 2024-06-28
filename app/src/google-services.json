@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "23209393665",
+    "firebase_url": "https://eleme-database-default-rtdb.firebaseio.com",
+    "project_id": "eleme-database",
+    "storage_bucket": "eleme-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23209393665:android:90ae19eacca7c7efe98a00",
+        "android_client_info": {
+          "package_name": "com.example.fududelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23209393665-2n9v3fs0enmt7sd9jlbk99he9jfjohts.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fududelivery",
+            "certificate_hash": "104c6bac04ee573222a47fb877c3b173a925a8a3"
+          }
+        },
+        {
+          "client_id": "23209393665-t7m18ti3irr64lv5m2vqb89nkuib1ain.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fududelivery",
+            "certificate_hash": "1ee151e1a4cfb21434abab8422cc22e1a007e2b4"
+          }
+        },
+        {
+          "client_id": "23209393665-9ml2662fsia935p4b0a2nkdu3ru4p9j3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj06TAPX7_Gsj776mfT1JZBZClxTQL1Sg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23209393665-9ml2662fsia935p4b0a2nkdu3ru4p9j3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

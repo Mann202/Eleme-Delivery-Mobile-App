@@ -1,6 +1,13 @@
 package com.example.fududelivery.Shipper.ShipperMain;
 
+import static androidx.test.InstrumentationRegistry.getContext;
+
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -11,6 +18,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.fududelivery.GetStarted.ViewAdapter;
 import com.example.fududelivery.R;
+import com.example.fududelivery.Service.Geocoding;
+import com.example.fududelivery.Service.LocationHelper;
+import com.example.fududelivery.Service.RestaurantNotificationService;
+import com.example.fududelivery.Service.ShipperNotification;
+import com.example.fududelivery.Shipper.ShipperAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -19,18 +31,29 @@ import java.util.ArrayList;
 public class ShipperMain extends AppCompatActivity {
 
     ViewPager2 viewPager;
-    ViewAdapter viewAdapter;
     ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
 
     BottomNavigationView bottomNavigationView;
+    private LocationHelper locationHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shippermain);
 
+        Intent serviceIntent = new Intent(this, ShipperNotification.class);
+        startService(serviceIntent);
+
+        locationHelper = new LocationHelper(this);
+        locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+            }
+        });
+
         bottomNavigationView = findViewById(R.id.menubar);
-//        replaceFragment(new NewOrder());
 
         viewPager = findViewById(R.id.view_pager_shipper);
         fragmentArrayList.add(new NewOrder());
@@ -58,7 +81,6 @@ public class ShipperMain extends AppCompatActivity {
                         break;
                 }
 
-//                bottomNavigationView.setSelectedItemId(R.id.neworder);
                 super.onPageSelected(position);
             }
         });
@@ -83,4 +105,39 @@ public class ShipperMain extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        locationHelper.stopLocationUpdates();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LocationHelper.LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
+
+                        Log.v("Debug", "Location changed" + latitude + " " + longitude);
+                    }
+                });
+            }
+        }
+    }
 }

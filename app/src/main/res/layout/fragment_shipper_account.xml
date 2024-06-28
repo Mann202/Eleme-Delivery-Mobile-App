@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/img_shipper_avatar"
         android:gravity="center"
-        android:text="Huỳnh Thế Vĩ"
+        android:text="Shipper name"
         android:textColor="@color/black"
         android:textFontWeight="500"
         android:textSize="32dp" />
@@ -53,10 +53,10 @@
         android:layout_marginEnd="20dp">
 
         <TextView
+            android:id="@+id/vehicleInformationField"
             style="@style/EditTextLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="60B6-70240 - Mercedes C300"
             android:inputType="number"
             android:textColor="@color/black"
             android:textColorHighlight="@color/primary"
@@ -90,9 +90,9 @@
 
         <TextView
             style="@style/EditTextLogin"
+            android:id="@+id/phoneNumberField"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="0123456789"
             android:inputType="number"
             android:textColor="@color/black"
             android:textColorHighlight="@color/primary"
