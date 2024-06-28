@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/whiteedt"
     android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".Shipper.NewOrder">
+    tools:context=".Shipper.ShipperMain.NewOrder">
 
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:id="@+id/neworder_notify"
         android:layout_width="match_parent"
@@ -55,42 +53,60 @@
             android:checked="true"/>
     </RelativeLayout>
 
-    <!--    <RelativeLayout-->
-    <!--        android:id="@+id/orders"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@+id/neworder_notify"-->
-    <!--        android:layout_above="@+id/menubar"-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:gravity="center">-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/txt_noorder"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:fontFamily="@font/lato_regular"-->
-    <!--            android:layout_marginEnd="14dp"-->
-    <!--            android:gravity="center"-->
-    <!--            android:text="There is no order here!"-->
-    <!--            android:textColor="@color/gray"-->
-    <!--            android:textFontWeight="900"-->
-    <!--            android:textSize="19dp" />-->
-
-    <!--    </RelativeLayout>-->
-
     <RelativeLayout
+        android:id="@+id/no_orders"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/neworder_notify"
-        android:background="@color/whiteedt">
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:gravity="center">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_orders"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txt_noorder"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
+            android:fontFamily="@font/lato_regular"
+            android:layout_marginEnd="14dp"
+            android:gravity="center"
+            android:text="There is no order here!"
+            android:textColor="@color/gray"
+            android:textFontWeight="900"
+            android:textSize="19dp" />
 
     </RelativeLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayoutDoneRestaurant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/neworder_notify"
+            android:background="@color/whiteedt"
+            android:visibility="gone"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/neworder_notify"
+                android:background="@color/whiteedt">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_orders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"/>
+            </RelativeLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/loadingDoneRestaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="500dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -30,7 +30,7 @@
             android:id="@+id/AdressTitle"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
-            android:text="Edit Address"
+            android:text="@string/txtEditAddress"
             android:fontFamily="@font/lato_bold"
             android:textColor="@color/black"
             android:textFontWeight="900"
@@ -47,7 +47,7 @@
         android:layout_marginTop="@dimen/margin_extra_small"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="Name"
+        android:text="@string/TxtViewName"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -68,7 +68,7 @@
             android:paddingRight="@dimen/padding_small"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="Nguyen Van A"
+            android:hint="@string/name_hint"
             android:inputType="text"
             android:drawableEnd="@drawable/edit_button"
             android:textColorHighlight="@color/primary"
@@ -86,7 +86,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="Phone number"
+        android:text="@string/txtPhoneNumber"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -106,7 +106,7 @@
             android:layout_marginTop="30dp"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="0999"
+            android:hint="@string/phonenumber_hint"
             android:inputType="text"
             android:drawableEnd="@drawable/edit_button"
             android:paddingRight="@dimen/padding_small"
@@ -124,7 +124,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="City"
+        android:text="@string/txtCity"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -150,7 +150,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="District"
+        android:text="@string/txtDistrict"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -176,7 +176,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="Ward"
+        android:text="@string/txtWard"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -201,7 +201,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="Street"
+        android:text="@string/txtStreet"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -221,7 +221,7 @@
             android:layout_marginTop="30dp"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="ABCXYZ"
+            android:hint="@string/edtStreet"
             android:inputType="text"
             android:drawableEnd="@drawable/edit_button"
             android:paddingRight="@dimen/padding_small"
@@ -240,7 +240,7 @@
         android:fontFamily="@font/lato_regular"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="12dp"
-        android:text="Set as Default Address"/>
+        android:text="@string/txtcheckbox"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_button"
@@ -252,7 +252,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         style="@style/SaveButton"/>
 </RelativeLayout>

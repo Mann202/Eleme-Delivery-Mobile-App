@@ -22,7 +22,7 @@
         android:id="@+id/changephonenumbertitle"
         android:layout_below="@id/backward"
         android:layout_height="wrap_content"
-        android:text="Change phone number"
+        android:text="@string/change_phone_number"
         android:textStyle="bold"
         android:textFontWeight="900"
         android:textColor="@color/black"
@@ -41,7 +41,7 @@
         android:textSize="18sp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Please enter your phone number to receive a verification code"
+        android:text="@string/please_enter_your_phone_number_to_receive_a_verification_code"
         />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -55,14 +55,14 @@
 
         <com.google.android.material.textfield.TextInputEditText
             style="@style/EditTextLogin"
-            android:id="@+id/phonenumbertextinput"
+            android:id="@+id/editPhoneText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:drawableStart="@drawable/baseline_phone_24"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
-            android:hint="Phone Number"
+            android:hint="@string/phone_number"
             android:inputType="number"
             android:textColorHighlight="@color/primary"
             android:textColorHint="@color/whiteedt"
@@ -164,7 +164,7 @@
         android:visibility="gone"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Resend verification code: "
+        android:text="@string/resend_verification_code"
         />
 
     <Button
@@ -174,7 +174,7 @@
         android:layout_below="@id/verificationCodeContainer"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:text="Resend"
+        android:text="@string/resend"
         android:layout_marginEnd="20dp"
         android:visibility="gone" />
 
@@ -183,12 +183,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Send"
+        android:text="@string/send"
         android:textColor="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         style="@style/SaveButton"/>
 
 </RelativeLayout>

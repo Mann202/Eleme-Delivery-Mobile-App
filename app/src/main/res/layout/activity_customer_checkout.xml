@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:gravity="start">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CBF6F6F6"
+        android:elevation="40dp"
+        android:id="@+id/toolbar"/>
+
+
+    <ImageView
+        android:id="@+id/img_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/toolbar"
+        android:src="@drawable/img_map" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/deliery_address"
+        android:layout_below="@+id/img_map"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pin_alt"
+                android:layout_marginStart="10dp" />
+
+            <TextView
+                android:id="@+id/delivery_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery to"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginStart="5dp" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit_button"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="Next" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your full name"
+            android:textColor="@color/lightwhite"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/receiver_name"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0xxxxxxxxx"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="15sp"
+            android:textColor="@color/lightwhite"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+
+            android:id="@+id/receiver_phone_number"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your detail address"
+            android:textColor="@color/lightwhite"
+            android:fontFamily="@font/lato_regular"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/detail_address" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/order_info_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/deliery_address"
+        android:background="@drawable/rounded_bg_white"
+        android:elevation="5dp"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
+        android:padding="20dp"
+        android:translationZ="3dp">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_order_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/txt_subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            android:layout_below="@+id/rv_order_item"/>
+
+        <TextView
+            android:id="@+id/txt_subtotal_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="90.000 VND"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="14dp"
+            android:layout_below="@+id/rv_order_item"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_subtotal_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/txt_subtotal"
+            android:layout_marginLeft="5dp"
+            android:text="(4 items)"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="14dp"
+            android:layout_below="@+id/rv_order_item"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_servicefees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_subtotal"
+            android:layout_marginTop="5dp"
+            android:text="Service fees:"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="14dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_servicefees_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/txt_subtotal_money"
+            android:text="5.000 VND"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="14dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_deliveryfees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/txt_servicefees"
+            android:text="Delivery fees:"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="14dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_deliveryfees_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txt_servicefees_money"
+            android:text="30.000 VND"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="14dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_deliveryfees"
+            android:layout_marginTop="15dp"
+            android:text="Total"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="14dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_total_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txt_deliveryfees_money"
+            android:text="125.000 VND"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="14dp"
+            android:textColor="@color/black" />
+
+    </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_info_card"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_payment"
+                android:contentDescription="Payment Icon"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment method"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose"
+                android:fontFamily="@font/lato_bold"
+                android:textSize="16sp"
+                android:textColor="@color/primary"
+                android:clickable="true"
+                android:layout_gravity="center_vertical"
+                android:onClick="onChoosePaymentMethodClicked"
+                android:layout_weight="1"
+                android:gravity="right"/>
+        </LinearLayout>
+
+</RelativeLayout>
