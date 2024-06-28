@@ -81,6 +81,9 @@ public class CheckOutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addOrder();
+                for(CartDetail cart : cartItem){
+                    deleteCartItem(cart);
+                }
                 Intent intent = new Intent(CheckOutActivity.this, Customer.class);
                 startActivity(intent);
             }
@@ -173,6 +176,23 @@ public class CheckOutActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(CheckOutActivity.this, "Error adding document", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    public void deleteCartItem(CartDetail food) {
+        String cartID = food.getCartID();
+        firestoreInstance.collection("CartDetail").document(cartID)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        cartItem.remove(food);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Xử lý khi thất bại
                     }
                 });
     }
