@@ -88,12 +88,7 @@ public class NewOrder extends Fragment {
         swipeRefreshLayout = rootView.findViewById(R.id.refreshLayoutShipperOrder);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primary));
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                fetchOrders(rootView);
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> fetchOrders(rootView));
 
         NoOrder = rootView.findViewById(R.id.no_orders);
 
@@ -110,48 +105,42 @@ public class NewOrder extends Fragment {
 
     private void fetchOrders(View rootView) {
         CollectionReference orderCollection = firestoreInstance.collection("Orders");
-        List<String> statusList = Arrays.asList("Ready", "Start", "Wait");
-        orderCollection.whereIn("ShippingStatus", statusList).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                NoOrder = rootView.findViewById(R.id.no_orders);
-                orders.clear();
-                adapter.notifyDataSetChanged(); // Xóa dữ liệu cũ
+        List<String> status = Arrays.asList("Ready", "Start");
 
-                if (queryDocumentSnapshots.isEmpty()) {
-                    rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
-                    swipeRefreshLayout.setVisibility(View.GONE);
-                    swipeRefreshLayout.setRefreshing(false);
-                    NoOrder.setVisibility(View.VISIBLE);
-                } else {
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        Order order = documentSnapshot.toObject(Order.class);
-                        String documentId = documentSnapshot.getId();
-                        order.setOrderID(documentId);
+        orderCollection.whereIn("ShippingStatus", status).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            NoOrder = rootView.findViewById(R.id.no_orders);
+            orders.clear();
 
-                        processOrder(order, new double[]{latitude, longitude});
-                    }
+            if (queryDocumentSnapshots.isEmpty()) {
+                rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
+                NoOrder.setVisibility(View.VISIBLE);
+            } else {
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    Order order = documentSnapshot.toObject(Order.class);
+                    String documentId = documentSnapshot.getId();
+                    order.setOrderID(documentId);
 
-                    adapter.notifyDataSetChanged();
-
-                    rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
-                    swipeRefreshLayout.setVisibility(View.VISIBLE);
-                    swipeRefreshLayout.setRefreshing(false);
-
-                    NoOrder.setVisibility(orders.isEmpty() ? View.VISIBLE : View.GONE);
+                    processOrder(order, new double[]{latitude, longitude});
                 }
+
+                adapter.notifyDataSetChanged();
+
+                rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                swipeRefreshLayout.setRefreshing(false);
+
+                NoOrder.setVisibility(orders.isEmpty() ? View.VISIBLE : View.GONE);
             }
         });
     }
 
     private void startLocationUpdates() {
-        locationHelper = new LocationHelper(getContext());
-        locationHelper.startLocationUpdates(new LocationHelper.LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-            }
+        locationHelper = new LocationHelper(requireContext());
+        locationHelper.startLocationUpdates(location -> {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
         });
     }
 
@@ -164,18 +153,20 @@ public class NewOrder extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        locationHelper.stopLocationUpdates();
+        if (locationHelper != null) {
+            locationHelper.stopLocationUpdates();
+        }
     }
 
     private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
         if (isGranted) {
             startLocationUpdates();
         } else {
-            Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
         }
     });
 
-    public void processOrder(final Order order, final double[] shipperLocation) {
+    private void processOrder(final Order order, final double[] shipperLocation) {
         String restaurantAddress = order.getResAddress();
         new GeocodeTask(new GeocodeCallback() {
             @Override
@@ -184,7 +175,7 @@ public class NewOrder extends Fragment {
                     double latitude = coordinates[0];
                     double longitude = coordinates[1];
                     double distance = Geocoding.calculateDistance(shipperLocation[0], shipperLocation[1], latitude, longitude);
-                    Log.v("Debug", String.valueOf(distance));
+                    Log.v("Debug", "Distance: " + distance);
                     if (distance < 10.0) {
                         orders.add(order);
                         adapter.notifyDataSetChanged();

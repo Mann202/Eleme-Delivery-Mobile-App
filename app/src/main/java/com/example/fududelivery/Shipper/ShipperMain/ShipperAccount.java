@@ -1,6 +1,8 @@
 package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 
+import java.util.Locale;
 
 public class ShipperAccount extends Fragment {
 
@@ -53,8 +56,16 @@ public class ShipperAccount extends Fragment {
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                // Xử lý khi một mục được chọn trong Spinner language
+                String selectedLanguage = parent.getItemAtPosition(position).toString();
+                switch (selectedLanguage) {
+                    case "Chinese":
+                        setLocale("zh");
+                        break;
+                    case "Vietnamese":
+                        setLocale("vi");
+                        break;
+                    // Thêm các case cho các ngôn ngữ khác nếu cần
+                }
             }
 
             @Override
@@ -94,5 +105,19 @@ public class ShipperAccount extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void setLocale(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Resources resources = getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        Intent intent = new Intent(requireContext(), requireActivity().getClass());
+        startActivity(intent);
+        requireActivity().finish();
     }
 }

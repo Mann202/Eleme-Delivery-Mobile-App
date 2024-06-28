@@ -68,9 +68,10 @@ public class RestaurantNotificationService extends Service {
                             case ADDED:
                                 DocumentSnapshot doc = dc.getDocument();
                                 String userUidInDoc = doc.getString("ResID");
+                                String shippingStatus = doc.getString("ShippingStatus");
                                 String userUid = userSessionManager.getUserInformation();
 
-                                if (userUidInDoc != null && userUidInDoc.equals(userUid)) {
+                                if (userUidInDoc != null && userUidInDoc.equals(userUid) && shippingStatus.equals("Ready")) {
                                     showNotification("New Order From Customer", "A new order has been add to your order list, please refresh your order app!");
                                 }
                                 break;

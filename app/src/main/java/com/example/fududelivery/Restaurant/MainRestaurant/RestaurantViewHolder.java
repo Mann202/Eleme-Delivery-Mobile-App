@@ -18,7 +18,6 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder {
     public TextView adressText;
     public TextView totalPriceText;
     public AppCompatButton detailBtn;
-    AppCompatButton cancelBtn;
 
     public RestaurantViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -30,7 +29,6 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder {
         adressText = itemView.findViewById(R.id.adressText);
         totalPriceText = itemView.findViewById(R.id.totalPriceText);
         detailBtn = itemView.findViewById(R.id.detailBtn);
-        cancelBtn = itemView.findViewById(R.id.cancelBtn);
     }
 
 }
