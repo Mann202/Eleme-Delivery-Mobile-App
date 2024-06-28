@@ -45,6 +45,17 @@ public class Food implements Serializable {
         this.imageId = imageId;
     }
 
+    @Override
+    public String toString() {
+        return "Food{" +
+                "CateID='" + CateID + '\'' +
+                ", FoodName='" + FoodName + '\'' +
+                ", Price=" + Price +
+                ", ResID='" + ResID + '\'' +
+                ", imageId='" + imageId + '\'' +
+                '}';
+    }
+
     public String getResID() {
         return ResID;
     }

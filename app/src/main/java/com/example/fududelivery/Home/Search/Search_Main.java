@@ -54,7 +54,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-import javax.annotation.Nonnull;
 
 public class Search_Main extends AppCompatActivity {
     AppCompatButton back_btn_search;

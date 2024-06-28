@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/tv_titleFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,23 +45,25 @@
                 android:textSize="15dp"
                 android:padding="5dp"
                 android:paddingEnd="0dp"
-                android:textColor="@color/black"
+                android:textColor="@color/primary"
                 android:fontFamily="@font/lato_bold"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="5dp">
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="28dp">
             </TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/add_food"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_below="@+id/tv_titleFood"
-                android:layout_toEndOf="@+id/price_food"
-                android:text="VND"
+                android:layout_alignParentEnd="true"
                 android:textSize="16dp"
+                android:src="@drawable/ic_plus_icon"
+                android:background="@color/primary"
+                android:layout_marginStart="140dp"
                 android:padding="5dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/lato_bold"
-                android:layout_marginTop="10dp">
-            </TextView>
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="28dp">
+            </ImageView>
         </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

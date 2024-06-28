@@ -2,6 +2,8 @@ package com.example.fududelivery.Restaurant_Home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -28,6 +30,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -36,7 +39,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class Restaurant_Home_Detail extends AppCompatActivity {
     TextView tv_restaurant_name;
@@ -48,6 +53,7 @@ public class Restaurant_Home_Detail extends AppCompatActivity {
     ArrayList<Food> foodItemList;
     ChipGroup chipGroup;
     FirebaseFirestore dbroot;
+    TextInputEditText txtSearch;
     String RestaurantID;
 
     @Override
@@ -62,6 +68,7 @@ public class Restaurant_Home_Detail extends AppCompatActivity {
         dbroot = FirebaseFirestore.getInstance();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rcvFood = findViewById(R.id.food_menu);
+        txtSearch = findViewById(R.id.finddishtextinput);
         RestaurantID = item.getResID();
         Log.e("Firestore error", RestaurantID);
         foodItemList = new ArrayList<>();
@@ -84,6 +91,25 @@ public class Restaurant_Home_Detail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        txtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String searchQuery = s.toString();
+
+                // Perform filtering based on the search query
+                filter(searchQuery);
+            }
+        });
     }
     private void loadRestaurantData() {
         CollectionReference FoodCollection = dbroot.collection("Food");
@@ -98,4 +124,14 @@ public class Restaurant_Home_Detail extends AppCompatActivity {
             }
         });
     }
+    private void filter(String text) {
+        ArrayList<Food> filteredList = new ArrayList<>();
+        for (Food item : foodItemList) {
+            if (item.getFoodName().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+        viewAdapter_Food.filterList(filteredList);
+    }
+
 }
