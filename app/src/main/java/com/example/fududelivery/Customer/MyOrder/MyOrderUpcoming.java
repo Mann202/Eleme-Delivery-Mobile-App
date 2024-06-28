@@ -68,7 +68,7 @@ public class MyOrderUpcoming extends Fragment {
 
                     String status;
 
-                    if (resStatus.equals("") && !shippingStatus.equals("Ready")) {
+                    if (resStatus.equals("") && shippingStatus.equals("Ready")) {
                         status = "Picking shipper...";
                     } else if (shippingStatus.equals("Start") && resStatus.equals("Prepare")) {
                         status = "Restaurant is preparing";
@@ -88,11 +88,12 @@ public class MyOrderUpcoming extends Fragment {
                     String totalAmountString = String.format("%.2f", totalAmount);
 
 
-                    firebaseFirestore.collection("Restaurant").document(documentSnapshot.getString("ResID")).get().addOnCompleteListener(task1 -> {
+                    firebaseFirestore.collection("Restaurant").whereEqualTo("ResID", documentSnapshot.getString("ResID")).get().addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
-                            DocumentSnapshot documentSnapshot1 = task1.getResult();
-                            upcommingList.add(new MyOrderInfor(documentSnapshot.getId(), documentSnapshot1.getString("ImageID"), documentSnapshot.getString("Date"), documentSnapshot.getString("TotalQuantity") + " items", documentSnapshot1.getString("ResName"), totalAmountString, status));
-                            adapter.notifyDataSetChanged();
+                            for (DocumentSnapshot documentSnapshot1 : task1.getResult()) {
+                                upcommingList.add(new MyOrderInfor(documentSnapshot.getId(), documentSnapshot1.getString("ImageID"), documentSnapshot.getString("Date"), documentSnapshot.getString("TotalQuantity") + " items", documentSnapshot1.getString("ResName"), totalAmountString, status));
+                                adapter.notifyDataSetChanged();
+                            }
                         }
                     });
                 }

@@ -152,35 +152,35 @@ public class Customer extends AppCompatActivity {
             chip.setId(random.nextInt());
             chipGroup.addView(chip);
         }
-            chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
-                @Override
-                public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
-                    if (checkedIds.isEmpty()) {
+        chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
+                if (checkedIds.isEmpty()) {
 
-                    } else {
-                        boolean isNearByChecked = false;
-                        for (int id : checkedIds) {
-                            Chip chip = findViewById(id);
-                            if (chip.getText().toString().equalsIgnoreCase("Near by")) {
-                                isNearByChecked = true;
-                                break;
-                            }
-                        }
-                        if (isNearByChecked) {
-                            // Set isNearbyChipChecked to true here
-                            isNearbyChipChecked = true;
-                            checkLocationPermission();
-                        } else {
-                            StringBuilder stringBuilder = new StringBuilder();
-                            for (int i : checkedIds) {
-                                Chip chip = findViewById(i);
-                                stringBuilder.append(chip.getText());
-                            }
-                            filter(stringBuilder.toString());
+                } else {
+                    boolean isNearByChecked = false;
+                    for (int id : checkedIds) {
+                        Chip chip = findViewById(id);
+                        if (chip.getText().toString().equalsIgnoreCase("Near by")) {
+                            isNearByChecked = true;
+                            break;
                         }
                     }
+                    if (isNearByChecked) {
+                        // Set isNearbyChipChecked to true here
+                        isNearbyChipChecked = true;
+                        checkLocationPermission();
+                    } else {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int i : checkedIds) {
+                            Chip chip = findViewById(i);
+                            stringBuilder.append(chip.getText());
+                        }
+                        filter(stringBuilder.toString());
+                    }
                 }
-            });
+            }
+        });
 
 //        DocumentReference document_Restaurant = dbroot.collection("Restaurant").document("uPprI6AnbvPqpby4TdtL");
 //        document_Restaurant.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -273,31 +273,30 @@ public class Customer extends AppCompatActivity {
     }
 
     private void EventChangeListener() {
-        dbroot.collection("Restaurant").orderBy("ResID", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (error != null) {
-                            Log.e("Firestore error", error.getMessage());
-                            return;
-                        }
+        dbroot.collection("Restaurant").orderBy("ResID", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Log.e("Firestore error", error.getMessage());
+                    return;
+                }
 
-                        // Tạo một danh sách tạm để lưu trữ các dữ liệu mới
-                        ArrayList<ItemSearch> tempItems = new ArrayList<>();
+                // Tạo một danh sách tạm để lưu trữ các dữ liệu mới
+                ArrayList<ItemSearch> tempItems = new ArrayList<>();
 
-                        for (DocumentChange dc : value.getDocumentChanges()) {
-                            if (dc.getType() == DocumentChange.Type.ADDED) {
-                                tempItems.add(dc.getDocument().toObject(ItemSearch.class));
-                            }
-                        }
-
-                        // Thêm tất cả các dữ liệu mới vào mRestaurant
-                        mRestaurant.addAll(tempItems);
-
-                        // Thông báo cho adapter cập nhật dữ liệu
-                        viewAdapter_Search1.notifyDataSetChanged();
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    if (dc.getType() == DocumentChange.Type.ADDED) {
+                        tempItems.add(dc.getDocument().toObject(ItemSearch.class));
                     }
-                });
+                }
+
+                // Thêm tất cả các dữ liệu mới vào mRestaurant
+                mRestaurant.addAll(tempItems);
+
+                // Thông báo cho adapter cập nhật dữ liệu
+                viewAdapter_Search1.notifyDataSetChanged();
+            }
+        });
     }
 
     private void setSingleEvent(GridLayout mainGrid) {
@@ -402,26 +401,24 @@ public class Customer extends AppCompatActivity {
 
     public void getDocumentIdFromUserId(String userId) {
         CollectionReference usersRef = dbroot.collection("Users");
-        usersRef.whereEqualTo("userUid", userId)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String documentId = document.getId();
-                                Log.d("document", "document found with userId: " + documentId);
+        usersRef.whereEqualTo("userUid", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String documentId = document.getId();
+                        Log.d("document", "document found with userId: " + documentId);
 
-                                // Sau khi có documentId, gọi hàm để lấy địa chỉ
-                                getUserAddressFromFirestore(documentId);
-                                break; // Dừng lại sau khi tìm thấy document đầu tiên
-                            }
-                        } else {
-                            Log.d("User Address", "No document found with userId: " + userId);
-                            Toast.makeText(Customer.this, "No user document found.", Toast.LENGTH_SHORT).show();
-                        }
+                        // Sau khi có documentId, gọi hàm để lấy địa chỉ
+                        getUserAddressFromFirestore(documentId);
+                        break; // Dừng lại sau khi tìm thấy document đầu tiên
                     }
-                });
+                } else {
+                    Log.d("User Address", "No document found with userId: " + userId);
+                    Toast.makeText(Customer.this, "No user document found.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 

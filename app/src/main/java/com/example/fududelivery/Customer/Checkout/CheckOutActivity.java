@@ -53,7 +53,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
         //Initialize user
         userSessionManager = new UserSessionManager(this);
-        System.out.println("Users: " + userSessionManager.getUserInformation());
+        System.out.println("Users: " + userSessionManager.getUserAddress());
 
         // Initialize views
         recyclerView = findViewById(R.id.rv_cart_product);

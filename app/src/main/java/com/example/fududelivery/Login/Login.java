@@ -112,75 +112,71 @@ public class Login extends AppCompatActivity {
                 email = emailField.getText().toString();
 
 
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUI(user);
-                                    String Uid = user.getUid();
-                                    Log.v("Debug", Uid);
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                            String Uid = user.getUid();
+                            Log.v("Debug", Uid);
 
-                                    sessionManager.loginUserState();
-                                    sessionManager.loginUserInformation(Uid);
+                            sessionManager.loginUserState();
+                            sessionManager.loginUserInformation(Uid);
 
-                                    firestoreInstance.collection("Users").whereEqualTo("userUid", Uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                                Log.v("Debug", document.toString());
-                                                String roleID = document.getString("roleId");
-                                                String name = document.getString("name");
-                                                String email = document.getString("email");
-                                                String phone = document.getString("phone");
+                            firestoreInstance.collection("Users").whereEqualTo("userUid", Uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                        String roleID = document.getString("roleId");
+                                        String name = document.getString("name");
+                                        String email = document.getString("email");
+                                        String phone = document.getString("phone");
+                                        String address = document.getString("address");
 
-                                                sessionManager.loginUserGmail(email);
-                                                sessionManager.loginUserName(name);
-                                                sessionManager.loginUserPhone(phone);
+                                        sessionManager.loginUserGmail(email);
+                                        sessionManager.loginUserName(name);
+                                        sessionManager.loginUserPhone(phone);
+                                        sessionManager.setAddress(address);
 
-                                                if (Objects.equals(roleID, "2")) {
-                                                    String startingDate = document.getString("startingDate");
-                                                    String address = document.getString("address");
-                                                    Boolean isActive = document.getBoolean("isGettingNewOrder");
+                                        if (Objects.equals(roleID, "2")) {
+                                            String startingDate = document.getString("startingDate");
+                                            Boolean isActive = document.getBoolean("isGettingNewOrder");
 
-                                                    restaurantSessionManager.setIsActive(isActive);
-                                                    sessionManager.setStartingDate(startingDate);
-                                                    sessionManager.setAddress(address);
-                                                }
-
-                                                if (Objects.equals(roleID, "3")) {
-                                                    String vehicleInformation = document.getString("vehicleInformation");
-                                                    Log.v("Debug", vehicleInformation);
-
-                                                    sessionManager.setVehicleInformation(vehicleInformation);
-                                                }
-
-                                                if (roleID != null) {
-                                                    Log.d("Debug", "Role ID: " + roleID);
-                                                    sessionManager.loginUserRole(roleID);
-                                                    loginCaseManager.loginWithRoleID(roleID);
-                                                } else {
-                                                    Log.d("Debug", "roleID is null");
-                                                }
-                                                Toast.makeText(Login.this, "Login successfully.",
-                                                        Toast.LENGTH_SHORT).show();
-                                            }
-                                            finishAffinity();
+                                            restaurantSessionManager.setIsActive(isActive);
+                                            sessionManager.setStartingDate(startingDate);
+                                            sessionManager.setAddress(address);
                                         }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w("Debug", "Error getting documents.", e);
+
+                                        if (Objects.equals(roleID, "3")) {
+                                            String vehicleInformation = document.getString("vehicleInformation");
+
+                                            sessionManager.setVehicleInformation(vehicleInformation);
                                         }
-                                    });
-                                } else {
-                                    Toast.makeText(Login.this, "Authentication failed. Please check your password or email again.",
-                                            Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
+
+                                        if (roleID != null) {
+                                            Log.d("Debug", "Role ID: " + roleID);
+                                            sessionManager.loginUserRole(roleID);
+                                            loginCaseManager.loginWithRoleID(roleID);
+                                        } else {
+                                            Log.d("Debug", "roleID is null");
+                                        }
+                                        Toast.makeText(Login.this, "Login successfully.", Toast.LENGTH_SHORT).show();
+                                    }
+                                    finishAffinity();
                                 }
-                            }
-                        });
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("Debug", "Error getting documents.", e);
+                                }
+                            });
+                        } else {
+                            Toast.makeText(Login.this, "Authentication failed. Please check your password or email again.", Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
             }
         });
 
@@ -207,23 +203,22 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile"));
-                LoginManager.getInstance().registerCallback(mCallbackManager,
-                        new FacebookCallback<LoginResult>() {
-                            @Override
-                            public void onSuccess(LoginResult loginResult) {
-                                handleFacebookAccessToken(loginResult.getAccessToken());
-                            }
+                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
 
-                            @Override
-                            public void onCancel() {
-                                Toast.makeText(Login.this, "Facebook login canceled.", Toast.LENGTH_SHORT).show();
-                            }
+                    @Override
+                    public void onCancel() {
+                        Toast.makeText(Login.this, "Facebook login canceled.", Toast.LENGTH_SHORT).show();
+                    }
 
-                            @Override
-                            public void onError(FacebookException exception) {
-                                Log.e("Facebook login error:", exception.getMessage());
-                            }
-                        });
+                    @Override
+                    public void onError(FacebookException exception) {
+                        Log.e("Facebook login error:", exception.getMessage());
+                    }
+                });
             }
         });
 
@@ -239,51 +234,42 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Task<AuthResult> pendingResultTask = mAuth.getPendingAuthResult();
                 if (pendingResultTask != null) {
-                    pendingResultTask
-                            .addOnSuccessListener(
-                                    new OnSuccessListener<AuthResult>() {
-                                        @Override
-                                        public void onSuccess(AuthResult authResult) {
-                                            // User is signed in.
-                                            // IdP data available in
-                                            // authResult.getAdditionalUserInfo().getProfile().
-                                            Log.v("Debug", authResult.getAdditionalUserInfo().getProfile().toString());
-                                            // The OAuth access token can also be retrieved:
-                                            // ((OAuthCredential)authResult.getCredential()).getAccessToken().
-                                            // The OAuth secret can be retrieved by calling:
-                                            // ((OAuthCredential)authResult.getCredential()).getSecret().
-                                        }
-                                    })
-                            .addOnFailureListener(
-                                    new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.v("Debug", "failed sign-in with X");
-                                        }
-                                    });
+                    pendingResultTask.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            // User is signed in.
+                            // IdP data available in
+                            // authResult.getAdditionalUserInfo().getProfile().
+                            Log.v("Debug", authResult.getAdditionalUserInfo().getProfile().toString());
+                            // The OAuth access token can also be retrieved:
+                            // ((OAuthCredential)authResult.getCredential()).getAccessToken().
+                            // The OAuth secret can be retrieved by calling:
+                            // ((OAuthCredential)authResult.getCredential()).getSecret().
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.v("Debug", "failed sign-in with X");
+                        }
+                    });
                 } else {
-                    mAuth
-                            .startActivityForSignInWithProvider(/* activity= */ Login.this, provider.build())
-                            .addOnSuccessListener(
-                                    new OnSuccessListener<AuthResult>() {
-                                        @Override
-                                        public void onSuccess(AuthResult authResult) {
-                                            // User is signed in.
-                                            // IdP data available in
-                                            Log.v("Debug", authResult.getAdditionalUserInfo().getProfile().toString());
-                                            // The OAuth access token can also be retrieved:
-                                            // ((OAuthCredential)authResult.getCredential()).getAccessToken().
-                                            // The OAuth secret can be retrieved by calling:
-                                            // ((OAuthCredential)authResult.getCredential()).getSecret().
-                                        }
-                                    })
-                            .addOnFailureListener(
-                                    new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.v("Debug", "Sign in X failed");
-                                        }
-                                    });
+                    mAuth.startActivityForSignInWithProvider(/* activity= */ Login.this, provider.build()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            // User is signed in.
+                            // IdP data available in
+                            Log.v("Debug", authResult.getAdditionalUserInfo().getProfile().toString());
+                            // The OAuth access token can also be retrieved:
+                            // ((OAuthCredential)authResult.getCredential()).getAccessToken().
+                            // The OAuth secret can be retrieved by calling:
+                            // ((OAuthCredential)authResult.getCredential()).getSecret().
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.v("Debug", "Sign in X failed");
+                        }
+                    });
                 }
             }
         });
@@ -324,22 +310,20 @@ public class Login extends AppCompatActivity {
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d("FacebookLogin", "handleFacebookAccessToken:" + token);
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("FacebookLogin", "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            Log.w("FacebookLogin", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(Login.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.d("FacebookLogin", "signInWithCredential:success");
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    updateUI(user);
+                } else {
+                    Log.w("FacebookLogin", "signInWithCredential:failure", task.getException());
+                    Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                    updateUI(null);
+                }
+            }
+        });
     }
 
     private void updateUI(FirebaseUser user) {

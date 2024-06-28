@@ -4,7 +4,6 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="31" >
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
 
         <activity
             android:name=".GetStarted.GetStarted"
@@ -105,7 +105,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".Customer.MainOrder"
+            android:name=".Customer.MyOrder.MainOrder"
             android:exported="true" />
 
         <activity
@@ -135,10 +135,22 @@
             android:name=".Restaurant.History.RestaurantHistory"
             android:exported="true" />
 
+        <activity
+            android:name=".Customer.OrderDetail.OrderDetail"
+            android:exported="false" />
+
 
         <activity
             android:name=".Restaurant_Home.Restaurant_Home_Detail"
             android:exported="true" />
+
+        <activity
+            android:name=".Customer.Checkout.CheckOutActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Customer.CancelOrderActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"

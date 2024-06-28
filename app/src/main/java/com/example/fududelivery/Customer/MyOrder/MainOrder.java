@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainOrder extends AppCompatActivity {
     private DrawerLayout drawer;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +31,7 @@ public class MainOrder extends AppCompatActivity {
 
         viewPager.setAdapter(tabsAdapter);
 
-        new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText(tabsAdapter.getPageTitle(position))
-        ).attach();
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(tabsAdapter.getPageTitle(position))).attach();
 
         findViewById(R.id.backIcon).setOnClickListener(new View.OnClickListener() {
             @Override
