@@ -159,25 +159,40 @@
                         android:id="@+id/dish_order_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Order type"
-                        android:textSize="18sp"
-                        android:textColor="@color/gray"
+                        android:text="Menu"
+                        android:textSize="23sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/lato_bold"
                         android:layout_below="@+id/middle_panel_dish"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginStart="20dp">
                     </TextView>
-                    <TextView
-                        android:id="@+id/dish_order_change"
-                        android:layout_width="wrap_content"
+                    <HorizontalScrollView
+                        android:id="@+id/scroll_menu"
+                        android:layout_below="@+id/dish_order_type"
+                        android:layout_width="match_parent"
+                        android:scrollbars="none"
+                        android:fadeScrollbars="true"
+                        android:layout_height="50dp">
+                        <com.google.android.material.chip.ChipGroup
+                            android:layout_width="match_parent"
+                            android:id="@+id/chip_group_menu"
+                            android:layout_marginStart="10dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="10dp"
+                            android:layout_below="@+id/explore_more_title"
+                            android:textColorHighlight="@color/primary"
+                            android:textColorHint="@color/whiteedt"
+                            android:textColorLink="@color/primary" >
+                        </com.google.android.material.chip.ChipGroup>
+                    </HorizontalScrollView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Change"
-                        android:textSize="18sp"
-                        android:layout_alignParentEnd="true"
-                        android:textColor="@color/primary"
-                        android:layout_below="@+id/middle_panel_dish"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp">
-                    </TextView>
+                        android:id="@+id/food_menu"
+                        android:layout_below="@+id/scroll_menu"
+                        android:paddingStart="20dp">
+                    </androidx.recyclerview.widget.RecyclerView>
                 </RelativeLayout>
             </RelativeLayout>
         </ScrollView>

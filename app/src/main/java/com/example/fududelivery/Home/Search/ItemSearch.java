@@ -8,6 +8,17 @@ public class ItemSearch implements Serializable {
     private String AddressID;
     private String ResID;
     private String ResName;
+    private String Address;
+    public float distance;
+    private String Description;
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
 
     public String getPhone() {
         return Phone;
@@ -25,10 +36,18 @@ public class ItemSearch implements Serializable {
         AddressID = addressID;
     }
 
-    private String Description;
     public ItemSearch() {
         // Constructor không đối số
     }
+
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
+
     public ItemSearch(String imageId, String ResID, String ResName, String Description) {
         this.ImageID = imageId;
         this.ResID=ResID;

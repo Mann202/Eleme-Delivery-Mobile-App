@@ -247,7 +247,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Vegetable"
+                                android:text="Healthy"
                                 android:textColor="@color/black"
                                 android:textSize="13sp"></TextView>
                         </LinearLayout>
@@ -354,7 +354,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Bakery"
+                                android:text="Korean"
                                 android:textColor="@color/black"
                                 android:textSize="13sp"></TextView>
                         </LinearLayout>
@@ -430,45 +430,9 @@
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </GridLayout>
-
-                <LinearLayout
-                    android:id="@+id/popular_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/category_list"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="Popular in your area"
-                        android:textColor="@color/black"
-                        android:textSize="22sp"></TextView>
-
-                    <TextView
-                        android:id="@+id/seemore_restaurant"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="-106dp"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="See more"
-                        android:textColor="@color/skyblue"
-                        android:textSize="18sp"></TextView>
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_foodlist"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/popular_title"
-                    android:paddingStart="20dp"
-                    android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
-
                 <TextView
                     android:id="@+id/explore_more_title"
-                    android:layout_below="@+id/rcv_foodlist"
+                    android:layout_below="@+id/category_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -478,26 +442,32 @@
                     android:textColor="@color/black"
                     android:textSize="22sp"></TextView>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_titlelist"
+                <HorizontalScrollView
+                    android:id="@+id/scroll_exp"
+                    android:layout_below="@+id/explore_more_title"
                     android:layout_width="match_parent"
+                    android:scrollbars="none"
+                    android:fadeScrollbars="true"
+                    android:layout_height="50dp">
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
+                    android:id="@+id/chip_group_main"
+                    android:layout_marginStart="10dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rcv_foodlist"
-                    android:layout_marginTop="35dp"></androidx.recyclerview.widget.RecyclerView>
-
+                    android:paddingStart="10dp"
+                    android:layout_below="@+id/explore_more_title"
+                    android:textColorHighlight="@color/primary"
+                    android:textColorHint="@color/whiteedt"
+                    android:textColorLink="@color/primary" >
+                </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcv_item_restaurant_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rcv_titlelist"></androidx.recyclerview.widget.RecyclerView>
-
-                <LinearLayout
-                    android:id="@+id/fragment_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/rcv_titlelist"
-                    android:orientation="vertical"></LinearLayout>
+                    android:paddingStart="20dp"
+                    android:layout_below="@+id/scroll_exp">
+                </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>

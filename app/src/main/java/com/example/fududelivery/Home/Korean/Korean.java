@@ -1,6 +1,5 @@
-package com.example.fududelivery.Home.FastFood;
+package com.example.fududelivery.Home.Korean;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,19 +28,22 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class FastFood extends AppCompatActivity {
+public class Korean extends AppCompatActivity {
     ViewAdapter_ItemSearch viewAdapterFilterbyList;
     private Button back_button;
     ArrayList<ItemSearch> mRes;
     RecyclerView rcvFFoodList;
     FirebaseFirestore dbroot;
     TextInputEditText txtEdit;
+    TextView txtTitle;
 
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_fastfood);
         rcvFFoodList = findViewById(R.id.rcv_fflist);
         txtEdit = findViewById(R.id.finddetailitem);
+        txtTitle = findViewById(R.id.title_res);
+        txtTitle.setText("Korean Food");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rcvFFoodList.setLayoutManager(linearLayoutManager);
         rcvFFoodList.setAdapter(viewAdapterFilterbyList);
@@ -54,7 +56,7 @@ public class FastFood extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FastFood.this, Customer.class);
+                Intent intent = new Intent(Korean.this, Customer.class);
                 startActivity(intent);
             }
         });
@@ -96,13 +98,12 @@ public class FastFood extends AppCompatActivity {
                             Log.e("Firestore error", error.getMessage());
                             return;
                         }
-
                         mRes.clear();
                         for (DocumentChange dc : value.getDocumentChanges()) {
                             if (dc.getType() == DocumentChange.Type.ADDED) {
                                 ItemSearch item = dc.getDocument().toObject(ItemSearch.class);
                                 // Kiểm tra nếu Description chứa từ "Burger"
-                                if (item.getDescription().contains("Fast food")) {
+                                if (item.getDescription().contains("Korean")) {
                                     mRes.add(item);
                                 }
                             }

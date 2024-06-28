@@ -47,22 +47,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginStart="65dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="15dp"
                             android:layout_marginEnd="20dp">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/finddetailtextinput"
-                                style="@style/EditTextLogin"
+                                style="@style/EditSearch"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="50dp"
+                                android:paddingTop="-10dp"
                                 android:background="@drawable/customer_border"
                                 android:drawableStart="@drawable/search_icon"
-                                android:hint="@string/seach_dish_name_restaurant"
                                 android:textColorHighlight="@color/primary"
                                 android:textColorHint="@color/whiteedt"
-                                android:textColorLink="@color/primary" />
+                                android:textColorLink="@color/primary"/>
                         </com.google.android.material.textfield.TextInputLayout>
                         <TextView
+                            android:id="@+id/tv_recent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="30dp"
@@ -72,6 +73,17 @@
                             android:text="Recent searches"
                             android:textColor="@color/black"
                             android:textSize="17sp" />
+                        <com.google.android.material.chip.ChipGroup
+                            android:layout_width="match_parent"
+                            android:id="@+id/chip_group"
+                            android:layout_marginStart="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_recent"
+                            android:layout_marginTop="10dp"
+                            android:textColorHighlight="@color/primary"
+                            android:textColorHint="@color/whiteedt"
+                            android:textColorLink="@color/primary" >
+                        </com.google.android.material.chip.ChipGroup>
                     </RelativeLayout>
                 </RelativeLayout>
                 <androidx.recyclerview.widget.RecyclerView

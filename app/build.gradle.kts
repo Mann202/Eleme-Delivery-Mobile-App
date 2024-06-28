@@ -57,9 +57,11 @@ android {
 
 dependencies {
     implementation("androidx.activity:activity:1.8.0")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
     val fragment_version = "1.6.2"
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
+    implementation ("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.9.0")
@@ -94,4 +96,5 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
+
 }
