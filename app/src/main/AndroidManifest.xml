@@ -31,85 +31,63 @@
         <activity
             android:name=".GetStarted.SplashScreen"
             android:exported="true"
-            android:theme="@style/AppThemeWhite">
-        </activity>
+            android:theme="@style/AppThemeWhite"></activity>
         <activity
             android:name=".Restaurant.Profile.RestaurantProfile"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Login.ForgetPassword"
-            android:exported="true" >
-        </activity>
+            android:exported="true"></activity>
 
         <activity
             android:name=".Login.NewPassword"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Login.SignUp"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Login.VerifyEmail"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Restaurant.MainRestaurant.MainRestaurant"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Restaurant.RestaurantDetail.RestaurantDetail"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Restaurant.RestaurantMenu.RestaurantMenu"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Restaurant.RestaurantMenu.CategoryDetail"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".Restaurant.RestaurantMenu.NewMenu"
-            android:exported="true" >
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Shipper.ShipperMain.ShipperMain"
             android:exported="true"
             android:label="ShipperMain" />
         <activity
             android:name=".Home.Customer"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Home.FastFood.FastFood"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Home.Drink.Drink"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Home.Vegetable.Vegetable"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Home.Noodle.Noodle"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Home.SeaFood.SeaFood"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Home.Korean.Korean"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Home.Fruit.Fruit"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Home.Dessert.Dessert"
             android:exported="true">
@@ -117,12 +95,10 @@
         </activity>
         <activity
             android:name=".Home.Seemore.Seemore_Main"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Home.Search.Search_Main"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Customer.ChangeName"
             android:exported="true"
@@ -132,14 +108,15 @@
             android:name=".Customer.TermAndCondition"
             android:exported="true"></activity>
 
-        <activity android:name=".Customer.MyAddressActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".Customer.MyAddressActivity"
+            android:exported="true" />
         <activity
             android:name=".Customer.AddAddressActivity"
-            android:exported="true"
-        />
-        <activity android:name=".Customer.Checkout.CheckOutActivity"
-            android:exported="true"/>
+            android:exported="true" />
+        <activity
+            android:name=".Customer.Checkout.CheckOutActivity"
+            android:exported="true" />
 
         <activity
             android:name=".Shipper.ShipperOrderDetail.OrderDetail"
@@ -168,7 +145,10 @@
             android:name=".Service.ShipperNotification"
             android:exported="false" />
 
-        <receiver android:name=".BroadcastReceiver.BootReceiver" android:enabled="true" android:exported="true">
+        <receiver
+            android:name=".BroadcastReceiver.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -179,11 +159,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 </manifest>
