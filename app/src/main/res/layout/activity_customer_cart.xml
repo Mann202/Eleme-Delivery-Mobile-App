@@ -7,11 +7,11 @@
     android:background="#CBF6F6F6">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#CBF6F6F6"
-        android:elevation="40dp"
-        android:id="@+id/toolbar">
+        android:elevation="40dp">
 
         <ImageView
             android:id="@+id/nav_back"
@@ -20,12 +20,12 @@
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/circle_background"
-            android:src="@drawable/baseline_arrow_back_ios_24"
+            android:paddingVertical="5dp"
             android:paddingStart="10dp"
             android:paddingEnd="5dp"
-            android:paddingVertical="5dp"
-            android:layout_marginEnd="20dp"
+            android:src="@drawable/baseline_arrow_back_ios_24"
             app:tint="@color/primary" />
 
         <TextView
@@ -33,9 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/lato_bold"
-            android:textSize="30sp"
+            android:text="My Cart"
             android:textColor="@color/black"
-            android:text="My Cart"/>
+            android:textSize="30sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -44,15 +44,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:visibility="gone"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/empty_cart"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:src="@drawable/empty_cart" />
 
         <TextView
             android:id="@+id/textview1"
@@ -63,8 +63,8 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/lato_bold"
             android:text="Your cart is empty"
-            android:textFontWeight="400"
             android:textColor="@color/black"
+            android:textFontWeight="400"
             android:textSize="28sp" />
 
         <TextView
@@ -74,8 +74,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/lato_regular"
-            android:textAlignment="center"
             android:text="Looks like you have not added anything to your cart.\nGo ahead and explore top categories food."
+            android:textAlignment="center"
             android:textColor="#828282"
             android:textSize="14sp" />
     </RelativeLayout>
@@ -105,70 +105,70 @@
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
+        android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:id="@+id/button_container"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="-10dp"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <CheckBox
             android:id="@+id/checkbox_select_all"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
             android:layout_marginStart="10dp"
-            android:text="Select all"
-            android:fontFamily="@font/lato_regular"
-            android:textColor="@color/darkgrey"
             android:layout_weight="1"
-            android:checked="true"/>
+            android:checked="true"
+            android:fontFamily="@font/lato_regular"
+            android:text="Select all"
+            android:textColor="@color/darkgrey" />
 
         <Button
             android:id="@+id/button_delete_all"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Delete all"
-            android:layout_weight="1"
-            android:fontFamily="@font/lato_bold"
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            android:background="@drawable/logout_button"
-            android:textAllCaps="false"
             android:layout_marginEnd="10dp"
-            android:elevation="20dp" />
+            android:layout_weight="1"
+            android:background="@drawable/logout_button"
+            android:elevation="20dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="Delete all"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/checkout_cart"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/save_button"
+            android:elevation="20dp"
+            android:fontFamily="@font/lato_bold"
             android:text="Checkout"
             android:textAllCaps="false"
-            android:layout_weight="1"
-            android:fontFamily="@font/lato_bold"
-            android:textSize="14sp"
             android:textColor="@color/white"
-            android:background="@drawable/save_button"
-            android:elevation="20dp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/text_container"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_above="@id/button_container"
         android:layout_alignParentStart="true"
         android:orientation="horizontal"
-        android:layout_above="@id/button_container"
-        android:paddingStart="30dp"
-        android:id="@+id/text_container">
+        android:paddingStart="30dp">
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="-50dp"
+            android:layout_marginEnd="30dp"
             android:foreground="#B1B1B1"
             app:cardElevation="0dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginTop="-50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -190,18 +190,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/lato_bold"
             android:text="0đ"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </RelativeLayout>
