@@ -1,26 +1,25 @@
 package com.example.fududelivery.Customer;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.fududelivery.Customer.MyCart.Cart;
-import com.example.fududelivery.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.fududelivery.Customer.Model.Address;
+import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,17 +27,17 @@ import java.util.Map;
 public class AddAddressActivity extends AppCompatActivity {
 
     private Button saveBtn;
-    private TextInputEditText detailAddress, fullName, phoneNumber;
+    private EditText detailAddress, fullName, phoneNumber;
     private Dialog loadingDialog;
-    private boolean updateAddress = false;
-    private Address addressesModel;
-    private int position;
+
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_addnewaddress);
 
+        // Initialize views and loading dialog
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add a new address");
@@ -58,116 +57,56 @@ public class AddAddressActivity extends AppCompatActivity {
         loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         //////////loading dialog
 
-        if (getIntent().getStringExtra("INTENT").equals("update_address")) {
-            updateAddress = true;
-            position = getIntent().getIntExtra("Position", -1);
-            addressesModel = DBquerries.addressesModelList.get(position);
-
-            detailAddress.setText(addressesModel.getDetailAddress());
-            fullName.setText(addressesModel.getReceiverName());
-            phoneNumber.setText(addressesModel.getReceiverPhoneNumber());
-
-            saveBtn.setText("Update");
-        } else {
-            position = DBquerries.addressesModelList.size();
-        }
-
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!TextUtils.isEmpty(detailAddress.getText())) {
-                    if (!TextUtils.isEmpty(fullName.getText())) {
-                        if (!TextUtils.isEmpty(phoneNumber.getText()) && phoneNumber.getText().length() == 10) {
-                            loadingDialog.show();
+                if (!TextUtils.isEmpty(detailAddress.getText())
+                        && !TextUtils.isEmpty(fullName.getText())
+                        && !TextUtils.isEmpty(phoneNumber.getText())
+                        && phoneNumber.getText().length() == 10) {
 
-                            Map<String, Object> addAddress = new HashMap<>();
-                            addAddress.put("mobile_no_" + (position + 1), phoneNumber.getText().toString());
-                            addAddress.put("name_" + (position + 1), fullName.getText().toString());
-                            addAddress.put("detail_address_" + (position + 1), detailAddress.getText().toString());
+                    loadingDialog.show();
 
-                            if (!updateAddress) {
-                                addAddress.put("list_size", (long) DBquerries.addressesModelList.size() + 1);
-                                if (getIntent().getStringExtra("INTENT").equals("manage")) {
-                                    if (DBquerries.addressesModelList.size() == 0) {
-                                        addAddress.put("selected_" + (position + 1), true);
-                                    } else {
-                                        addAddress.put("selected_" + (position + 1), false);
-                                    }
-                                } else {
-                                    addAddress.put("selected_" + (position + 1), true);
-                                }
+                    Map<String, Object> addAddress = new HashMap<>();
+                    addAddress.put("mobile_no_" + (DBquerries.addressesModelList.size() + 1), phoneNumber.getText().toString());
+                    addAddress.put("name_" + (DBquerries.addressesModelList.size() + 1), fullName.getText().toString());
+                    addAddress.put("detail_address_" + (DBquerries.addressesModelList.size() + 1), detailAddress.getText().toString());
+                    addAddress.put("list_size", (long) (DBquerries.addressesModelList.size() + 1));
+                    addAddress.put("selected_" + (DBquerries.addressesModelList.size() + 1), true);
 
-                                if (DBquerries.addressesModelList.size() > 0) {
-                                    addAddress.put("selected_" + (DBquerries.selectedAddress + 1), false);
-                                }
-                            }
+                    FirebaseFirestore.getInstance()
+                            .collection("UserAddress").document("Addresses")
+                            .update(addAddress)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        DBquerries.addressesModelList.add(new Address(
+                                                detailAddress.getText().toString(),
+                                                fullName.getText().toString(),
+                                                phoneNumber.getText().toString(),
+                                                true
+                                        ));
+                                        DBquerries.selectedAddress = DBquerries.addressesModelList.size() - 1;
 
-                            FirebaseFirestore.getInstance().collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_ADDRESSES")
-                                    .update(addAddress)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                if (!updateAddress) {
-                                                    if (DBquerries.addressesModelList.size() > 0) {
-                                                        DBquerries.addressesModelList.get(DBquerries.selectedAddress).setSelected(false);
-                                                    }
-                                                    DBquerries.addressesModelList.add(new Address(
-                                                            detailAddress.getText().toString(),
-                                                            fullName.getText().toString(),
-                                                            phoneNumber.getText().toString(),
-                                                            true
-                                                    ));
-                                                    if (getIntent().getStringExtra("INTENT").equals("manage")) {
-                                                        if (DBquerries.addressesModelList.size() == 0) {
-                                                            DBquerries.selectedAddress = DBquerries.addressesModelList.size() - 1;
-                                                        }
-                                                    } else {
-                                                        DBquerries.selectedAddress = DBquerries.addressesModelList.size() - 1;
-                                                    }
-                                                } else {
-                                                    DBquerries.addressesModelList.set(position, new Address(
-                                                            detailAddress.getText().toString(),
-                                                            fullName.getText().toString(),
-                                                            phoneNumber.getText().toString(),
-                                                            true
-                                                    ));
-                                                }
-                                                if (getIntent().getStringExtra("INTENT").equals("deliveryIntent")) {
-                                                    Intent deliveryIntent = new Intent(AddAddressActivity.this, CheckOutActivity.class);
-                                                    startActivity(deliveryIntent);
-                                                } else {
-                                                    MyAddressActivity.refreshItem(DBquerries.selectedAddress, DBquerries.addressesModelList.size() - 1);
-                                                }
-                                                finish();
-                                            } else {
-                                                String error = task.getException().getMessage();
-                                                Toast.makeText(AddAddressActivity.this, error, Toast.LENGTH_SHORT).show();
-                                            }
-                                            loadingDialog.dismiss();
+                                        if (getIntent().getStringExtra("INTENT").equals("deliveryIntent")) {
+                                            Intent deliveryIntent = new Intent(AddAddressActivity.this, CheckOutActivity.class);
+                                            startActivity(deliveryIntent);
+                                        } else {
+                                            MyAddressActivity.refreshItem(DBquerries.selectedAddress, DBquerries.addressesModelList.size() - 1);
                                         }
-                                    });
-                        } else {
-                            phoneNumber.requestFocus();
-                            Toast.makeText(AddAddressActivity.this, "Please provide a valid mobile number.", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        fullName.requestFocus();
-                    }
+                                        finish();
+                                    } else {
+                                        String error = task.getException().getMessage();
+                                        Toast.makeText(AddAddressActivity.this, error, Toast.LENGTH_SHORT).show();
+                                    }
+                                    loadingDialog.dismiss();
+                                }
+                            });
                 } else {
-                    detailAddress.requestFocus();
+                    Toast.makeText(AddAddressActivity.this, "Please provide valid details", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

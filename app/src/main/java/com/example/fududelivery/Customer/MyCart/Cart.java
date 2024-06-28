@@ -1,5 +1,7 @@
 package com.example.fududelivery.Customer.MyCart;
 
+import static com.example.fududelivery.Customer.CheckOutActivity.loadingDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fududelivery.Customer.CheckOutActivity;
+import com.example.fududelivery.Customer.DBquerries;
 import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
@@ -40,8 +44,10 @@ public class Cart extends AppCompatActivity {
     ImageView btnNavBack;
     CheckBox checkboxSelectAll;
     Button btnDeleteAll;
+    Button btnCheckout;
     UserSessionManager userSessionManager;
     String MyCartID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +68,7 @@ public class Cart extends AppCompatActivity {
         btnNavBack = findViewById(R.id.nav_back);
         checkboxSelectAll = findViewById(R.id.checkbox_select_all);
         btnDeleteAll = findViewById(R.id.button_delete_all);
+        btnCheckout = findViewById(R.id.checkout_cart);
 //        swipeRefreshLayout = findViewById(R.id.refreshLayoutDoneRestaurant);
 
         // Setup RecyclerView
@@ -85,6 +92,14 @@ public class Cart extends AppCompatActivity {
             }
         });
 
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Cart.this, CheckOutActivity.class);
+                intent.putExtra("cartItems", cartItem);
+                startActivity(intent);
+            }
+        });
         checkboxSelectAll.setOnClickListener(v -> {
             boolean isChecked = checkboxSelectAll.isChecked();
             adapter.selectAll(isChecked);

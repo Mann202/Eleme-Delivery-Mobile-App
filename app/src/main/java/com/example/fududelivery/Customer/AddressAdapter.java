@@ -32,8 +32,9 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
 
     private List<Address> addressesModelList;
     private int MODE, preSelectedPos;
-    private boolean refresh = false;
+    private Boolean refresh = false;
     private Dialog loadingDialog;
+    String docID;
 
     public AddressAdapter(List<Address> addressesModelList, int MODE, Dialog loadingDialog) {
         this.addressesModelList = addressesModelList;
@@ -54,7 +55,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
         String name = addressesModelList.get(position).getReceiverName();
         String mobileNo = addressesModelList.get(position).getReceiverPhoneNumber();
         String detailAddress = addressesModelList.get(position).getDetailAddress();
-        boolean selected = addressesModelList.get(position).getSelected();
+        Boolean selected = addressesModelList.get(position).getSelected();
         holder.setData(name, mobileNo, detailAddress, selected, position);
     }
 
@@ -75,10 +76,10 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             phonenumber = itemView.findViewById(R.id.phone_number);
             address = itemView.findViewById(R.id.address);
             icon = itemView.findViewById(R.id.icon_view);
-            optionContainer = itemView.findViewById(R.id.option_container);
+//            optionContainer = itemView.findViewById(R.id.option_container);
         }
 
-        private void setData(String name, String mobileNo, String detailAddress, boolean selected, final int position) {
+        private void setData(String name, String mobileNo, String detailAddress, Boolean selected, final int position) {
             fullname.setText(name);
             phonenumber.setText(mobileNo);
             address.setText(detailAddress);
@@ -104,90 +105,90 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
                         }
                     }
                 });
-            } else if (MODE == MANAGE_ADDRESS) {
-                optionContainer.setVisibility(View.GONE);
-                optionContainer.getChildAt(0).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        itemView.getContext().startActivity(new Intent(itemView.getContext(), AddAddressActivity.class).putExtra("INTENT", "update_address").putExtra("Position", position));
-                        refresh = false;
-                    }
-                });
-                optionContainer.getChildAt(1).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        loadingDialog.show();
-                        Map<String, Object> addresses = new HashMap<>();
-                        int x = 0, selected = -1;
-                        for (int i = 0; i < addressesModelList.size(); i++) {
-                            if (i != position) {
-                                x++;
-                                addresses.put("detail_address_" + x, addressesModelList.get(i).getDetailAddress());
-                                addresses.put("name_" + x, addressesModelList.get(i).getReceiverName());
-                                addresses.put("mobile_no_" + x, addressesModelList.get(i).getReceiverPhoneNumber());
-                                addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
-                                if (addressesModelList.get(position).getSelected()) {
-                                    if (position - 1 >= 0) {
-                                        if (x == position) {
-                                            addresses.put("selected_" + x, true);
-                                            selected = x;
-                                        } else {
-                                            addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
-                                        }
-                                    } else {
-                                        if (x == 1) {
-                                            addresses.put("selected_" + x, true);
-                                            selected = x;
-                                        } else {
-                                            addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
-                                        }
-                                    }
-                                } else {
-                                    addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
-                                    if (addressesModelList.get(i).getSelected()) {
-                                        selected = x;
-                                    }
-                                }
-                            }
-                        }
-                        addresses.put("list_size", x);
-                        final int finalSelected = selected;
-                        FirebaseFirestore.getInstance().collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_ADDRESSES")
-                                .set(addresses).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            DBquerries.addressesModelList.remove(position);
-                                            if (finalSelected != -1) {
-                                                DBquerries.selectedAddress = finalSelected - 1;
-                                                DBquerries.addressesModelList.get(finalSelected - 1).setSelected(true);
-                                            } else if (DBquerries.addressesModelList.size() == 0) {
-                                                DBquerries.selectedAddress = -1;
-                                            }
-                                            notifyDataSetChanged();
-                                        } else {
-                                            String error = task.getException().getMessage();
-                                            Toast.makeText(itemView.getContext(), error, Toast.LENGTH_SHORT).show();
-                                        }
-                                        loadingDialog.dismiss();
-                                    }
-                                });
-                        refresh = false;
-                    }
-                });
-                icon.setImageResource(R.drawable.menu);
-                icon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        optionContainer.setVisibility(View.VISIBLE);
-                        if (refresh) {
-                            refreshItem(preSelectedPos, preSelectedPos);
-                        } else {
-                            refresh = true;
-                        }
-                        preSelectedPos = position;
-                    }
-                });
+//            } else if (MODE == MANAGE_ADDRESS) {
+//                optionContainer.setVisibility(View.GONE);
+//                optionContainer.getChildAt(0).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        itemView.getContext().startActivity(new Intent(itemView.getContext(), AddAddressActivity.class).putExtra("INTENT", "update_address").putExtra("Position", position));
+//                        refresh = false;
+//                    }
+//                });
+//                optionContainer.getChildAt(1).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        loadingDialog.show();
+//                        Map<String, Object> addresses = new HashMap<>();
+//                        int x = 0, selected = -1;
+//                        for (int i = 0; i < addressesModelList.size(); i++) {
+//                            if (i != position) {
+//                                x++;
+//                                addresses.put("detail_address_" + x, addressesModelList.get(i).getDetailAddress());
+//                                addresses.put("name_" + x, addressesModelList.get(i).getReceiverName());
+//                                addresses.put("mobile_no_" + x, addressesModelList.get(i).getReceiverPhoneNumber());
+//                                addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
+//                                if (addressesModelList.get(position).getSelected()) {
+//                                    if (position - 1 >= 0) {
+//                                        if (x == position) {
+//                                            addresses.put("selected_" + x, true);
+//                                            selected = x;
+//                                        } else {
+//                                            addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
+//                                        }
+//                                    } else {
+//                                        if (x == 1) {
+//                                            addresses.put("selected_" + x, true);
+//                                            selected = x;
+//                                        } else {
+//                                            addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
+//                                        }
+//                                    }
+//                                } else {
+//                                    addresses.put("selected_" + x, addressesModelList.get(i).getSelected());
+//                                    if (addressesModelList.get(i).getSelected()) {
+//                                        selected = x;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        addresses.put("list_size", x);
+//                        final int finalSelected = selected;
+//                        FirebaseFirestore.getInstance().collection("UserAddress").document("Addresses")
+//                                .set(addresses).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<Void> task) {
+//                                        if (task.isSuccessful()) {
+//                                            DBquerries.addressesModelList.remove(position);
+//                                            if (finalSelected != -1) {
+//                                                DBquerries.selectedAddress = finalSelected - 1;
+//                                                DBquerries.addressesModelList.get(finalSelected - 1).setSelected(true);
+//                                            } else if (DBquerries.addressesModelList.size() == 0) {
+//                                                DBquerries.selectedAddress = -1;
+//                                            }
+//                                            notifyDataSetChanged();
+//                                        } else {
+//                                            String error = task.getException().getMessage();
+//                                            Toast.makeText(itemView.getContext(), error, Toast.LENGTH_SHORT).show();
+//                                        }
+//                                        loadingDialog.dismiss();
+//                                    }
+//                                });
+//                        refresh = false;
+//                    }
+//                });
+//                icon.setImageResource(R.drawable.menu);
+//                icon.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        optionContainer.setVisibility(View.VISIBLE);
+//                        if (refresh) {
+//                            refreshItem(preSelectedPos, preSelectedPos);
+//                        } else {
+//                            refresh = true;
+//                        }
+//                        preSelectedPos = position;
+//                    }
+//                });
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
