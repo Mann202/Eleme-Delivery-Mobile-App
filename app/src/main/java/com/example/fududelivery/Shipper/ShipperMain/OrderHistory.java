@@ -1,6 +1,10 @@
 package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -8,30 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Shipper.Model.Order;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrderHistory#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OrderHistory extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -39,7 +31,6 @@ public class OrderHistory extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -50,19 +41,10 @@ public class OrderHistory extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     static FirebaseFirestore firestoreInstance;
     RelativeLayout NoOrder;
+
     public OrderHistory() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OrderHistory.
-     */
-    // TODO: Rename and change types and number of parameters
     public static OrderHistory newInstance(String param1, String param2) {
         OrderHistory fragment = new OrderHistory();
         Bundle args = new Bundle();
@@ -76,6 +58,7 @@ public class OrderHistory extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         firestoreInstance = FirebaseFirestore.getInstance();
+        userSessionManager = new UserSessionManager(requireContext());
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -98,17 +81,19 @@ public class OrderHistory extends Fragment {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         NoOrder = rootView.findViewById(R.id.no_orders);
-                        if (queryDocumentSnapshots.isEmpty()){
+                        if (queryDocumentSnapshots.isEmpty()) {
                             rootView.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
                             swipeRefreshLayout.setVisibility(View.GONE);
                             swipeRefreshLayout.setRefreshing(false);
                             NoOrder.setVisibility(View.VISIBLE);
                         }
 
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             Order order = documentSnapshot.toObject(Order.class);
                             String documentId = documentSnapshot.getId();
+//                            SimpleDateFormat format = new SimpleDateFormat("d MMM, HH:mm");
+//                            String formatDate = format.format(order.getDate());
+//                            Order saveOrder = new Order(documentId, order.getName(), order.getAddress(), order.getDate(), order.getTotalQuantity(), order.getOrderTotal());
                             order.setOrderID(documentId);
                             System.out.println("Query Order: " + order);
 
@@ -129,11 +114,10 @@ public class OrderHistory extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Xử lý khi truy vấn thất bại
                     }
                 });
 
-        for(Order order : orders){
+        for (Order order : orders) {
             System.out.println("Order:" + order);
         }
 
@@ -148,11 +132,10 @@ public class OrderHistory extends Fragment {
         );
 
         NoOrder = rootView.findViewById(R.id.no_orders);
-        if (orders.isEmpty()){
+        if (orders.isEmpty()) {
             NoOrder.setVisibility(View.GONE);
         }
 
         return rootView;
-//        return inflater.inflate(R.layout.fragment_order_history, container, false);
     }
 }

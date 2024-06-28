@@ -24,28 +24,24 @@ public class LoginManager {
     public void signInWithEmailAndPassword(String email, String password) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(mActivity, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("Debug", "signInWithEmail:success");
-                            Toast.makeText(mActivity, "Login with google successfully", Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            Log.w("Debug", "signInWithEmail:failure", task.getException());
-                            if (task.getException() instanceof FirebaseAuthInvalidUserException) {
-                                Toast.makeText(mActivity, "Email not registered.",
-                                        Toast.LENGTH_SHORT).show();
-                            } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                Toast.makeText(mActivity, "Password incorrect, double-check again your password.",
-                                        Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(mActivity, "Login failed. Please try again later.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(mActivity, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.d("Debug", "signInWithEmail:success");
+                    Toast.makeText(mActivity, "Login with google successfully", Toast.LENGTH_SHORT).show();
+                    FirebaseUser user = mAuth.getCurrentUser();
+                } else {
+                    Log.w("Debug", "signInWithEmail:failure", task.getException());
+                    if (task.getException() instanceof FirebaseAuthInvalidUserException) {
+                        Toast.makeText(mActivity, "Email not registered.", Toast.LENGTH_SHORT).show();
+                    } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                        Toast.makeText(mActivity, "Password incorrect, double-check again your password.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mActivity, "Login failed. Please try again later.", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
+            }
+        });
     }
 }

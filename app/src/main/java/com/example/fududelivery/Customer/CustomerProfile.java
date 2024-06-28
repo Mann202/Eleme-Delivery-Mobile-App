@@ -2,15 +2,12 @@ package com.example.fududelivery.Customer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -18,8 +15,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CustomerProfile extends AppCompatActivity {

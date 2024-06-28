@@ -20,7 +20,7 @@
         android:id="@+id/MenuTittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menu"
+        android:text="@string/msg_menu"
         style="@style/headerText"
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
@@ -58,7 +58,7 @@
         android:layout_centerHorizontal="true"
         android:drawablePadding="15dp"
         style="@style/newCategoryBtn"
-        android:text="Add new Category" />
+        android:text="@string/msg_add_new_category" />
 
     <ListView
         android:id="@+id/categoryListView"

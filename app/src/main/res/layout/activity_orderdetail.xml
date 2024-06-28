@@ -332,6 +332,13 @@
                     android:layout_toEndOf="@+id/tv_orderid_label"
                     android:textColor="@color/gray" />
 
+                <ImageView
+                    android:id="@+id/call_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/tv_orderaddress"
+                    android:src="@drawable/baseline_phone_24"/>
+
             </RelativeLayout>
 
             <RelativeLayout

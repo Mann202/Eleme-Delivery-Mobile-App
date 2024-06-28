@@ -1,35 +1,27 @@
-package com.example.fududelivery.Shipper;
+package com.example.fududelivery.Shipper.ShipperMain;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.fragment.app.Fragment;
 
 import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 
-import org.w3c.dom.Text;
+import java.util.Locale;
 
-import java.util.Date;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShipperAccount#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShipperAccount extends Fragment {
 
     public ShipperAccount() {
@@ -64,8 +56,16 @@ public class ShipperAccount extends Fragment {
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                // Xử lý khi một mục được chọn trong Spinner language
+                String selectedLanguage = parent.getItemAtPosition(position).toString();
+                switch (selectedLanguage) {
+                    case "Chinese":
+                        setLocale("zh");
+                        break;
+                    case "Vietnamese":
+                        setLocale("vi");
+                        break;
+                    // Thêm các case cho các ngôn ngữ khác nếu cần
+                }
             }
 
             @Override
@@ -105,5 +105,19 @@ public class ShipperAccount extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void setLocale(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Resources resources = getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        Intent intent = new Intent(requireContext(), requireActivity().getClass());
+        startActivity(intent);
+        requireActivity().finish();
     }
 }

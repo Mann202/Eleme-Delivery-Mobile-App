@@ -21,8 +21,25 @@
             android:textColor="@color/darkbg"
             android:fontFamily="@font/lato_bold"
             android:textSize="20sp"
-            android:hint="Enter category name"
+            android:hint="@string/msg_enter_category_name"
             android:padding="8dp"
+            android:imeOptions="actionDone"
+            android:inputType="text|textNoSuggestions"
+            android:textColorHint="@color/lightwhite" />
+
+        <EditText
+            android:id="@+id/newCategoryEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/deleteImageView"
+            android:background="@null"
+            android:textColor="@color/darkbg"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="20sp"
+            android:hint="@string/msg_enter_category_name"
+            android:padding="8dp"
+            android:imeOptions="actionDone"
+            android:inputType="text|textNoSuggestions"
             android:textColorHint="@color/lightwhite" />
 
         <TextView

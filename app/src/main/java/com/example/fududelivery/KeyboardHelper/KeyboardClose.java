@@ -20,14 +20,14 @@ public class KeyboardClose {
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    if(event.getAction() == KeyEvent.ACTION_UP) {
+                if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
                         closeKeyboard(v);
                         return true;
                     }
                     return false;
                 }
-                if(actionId == EditorInfo.IME_ACTION_DONE) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
                     closeKeyboard(v);
                     return true;
                 }

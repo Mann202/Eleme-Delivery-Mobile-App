@@ -14,7 +14,6 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.MainRestaurant.MainRestaurant;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

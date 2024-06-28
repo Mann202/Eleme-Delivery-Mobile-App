@@ -9,7 +9,7 @@
         android:id="@+id/tv_expmore"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Explore more"
+        android:text="@string/msg_explore_more"
         android:layout_marginStart="20dp"
         android:textSize="22sp"
         android:textFontWeight="900"

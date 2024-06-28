@@ -1,10 +1,5 @@
 package com.example.fududelivery.Shipper.Model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 public class Order {
     String OrderID;
     String name;
@@ -61,9 +56,11 @@ public class Order {
     public String getOrderID() {
         return OrderID;
     }
+
     public String getResAddress() {
         return ResAddress;
     }
+
     public void setResAddress(String resAddress) {
         ResAddress = resAddress;
     }

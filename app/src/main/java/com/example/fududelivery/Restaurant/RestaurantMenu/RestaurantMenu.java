@@ -3,6 +3,7 @@ package com.example.fududelivery.Restaurant.RestaurantMenu;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -18,8 +19,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class RestaurantMenu extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
@@ -37,47 +36,44 @@ public class RestaurantMenu extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.categoryListView);
         AppCompatButton addMenu = findViewById(R.id.addCategoryButton);
+        ImageView backward = findViewById(R.id.backwardButton);
+
+        backward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         item = new ArrayList<>();
         adapter = new CategoryItemAdapter(this, R.layout.list_item_category, item);
         listView.setAdapter(adapter);
 
-        firebaseFirestore.collection("Catelogy")
-                .whereEqualTo("userUid", userSessionManager.getUserInformation())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot queryDocumentSnapshots = task.getResult();
-                            if (queryDocumentSnapshots != null && !queryDocumentSnapshots.isEmpty()) {
-                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                    item.add(new Category(documentSnapshot.getString("CateName")));
-                                    Log.d("CategoryDetail", "Category: " + documentSnapshot.getString("CateName"));
-                                }
-                                adapter.notifyDataSetChanged();
-                            } else {
-                                Log.d("CategoryDetail", "No categories found");
-                            }
-                        } else {
-                            Log.e("CategoryDetail", "Error getting documents: ", task.getException());
+        firebaseFirestore.collection("Catelogy").whereEqualTo("userUid", userSessionManager.getUserInformation()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    QuerySnapshot queryDocumentSnapshots = task.getResult();
+                    if (queryDocumentSnapshots != null && !queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            item.add(new Category(documentSnapshot.getString("CateName")));
                         }
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Log.d("CategoryDetail", "No categories found");
                     }
-                });
+                } else {
+                    Log.e("CategoryDetail", "Error getting documents: ", task.getException());
+                }
+            }
+        });
 
         addMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                item.add(new Category("New Category."));
+                item.add(new Category(""));
                 adapter.notifyDataSetChanged();
-
-                Map<String, Object> data = new HashMap<>();
-                data.put("CateName", "New Catelogy.");
-                data.put("userUid", userSessionManager.getUserInformation());
-                firebaseFirestore.collection("Catelogy").add(data);
             }
         });
     }
-
-
 }

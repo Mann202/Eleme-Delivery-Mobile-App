@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.fududelivery.R;
@@ -36,11 +35,9 @@ public class GetStarted extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         if (isFirstTime) {
-            Log.i("debug:", "firstRunApp = true");
             editor.putBoolean("isFirstTime", false);
             editor.apply();
         } else {
-            Log.i("debug:", "firstRunApp = false");
             startActivity(new Intent(GetStarted.this, SplashScreen.class));
             finish();
         }

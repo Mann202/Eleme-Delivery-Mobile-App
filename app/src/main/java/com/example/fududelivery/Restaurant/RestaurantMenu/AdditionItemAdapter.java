@@ -28,12 +28,12 @@ public class AdditionItemAdapter extends ArrayAdapter<Addition> {
 
         Addition currentItem = getItem(position);
 
-        if(convertView == null) {
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResources, parent, false);
         }
 
-        if(currentItem == null) {
+        if (currentItem == null) {
             return convertView;
         }
 

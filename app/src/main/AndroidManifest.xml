@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="31" >
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
 
         <activity
             android:name=".GetStarted.GetStarted"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,66 +29,52 @@
 
         <activity
             android:name=".GetStarted.GetStartedSecond"
-            android:exported="true"
-            >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".GetStarted.SplashScreen"
             android:exported="true"
-            android:theme="@style/AppThemeWhite"
-            >
-        </activity>
+            android:theme="@style/AppThemeWhite" />
 
         <activity
             android:name=".Restaurant.Profile.RestaurantProfile"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Login.ForgetPassword"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Login.NewPassword"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Login.SignUp"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Login.VerifyEmail"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Restaurant.MainRestaurant.MainRestaurant"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Restaurant.RestaurantDetail.RestaurantDetail"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Restaurant.RestaurantMenu.RestaurantMenu"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Restaurant.RestaurantMenu.CategoryDetail"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Restaurant.RestaurantMenu.MenuDetail"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Shipper.ShipperMain.ShipperMain"
@@ -96,12 +83,10 @@
 
         <activity
             android:name=".Home.Customer"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".Home.FastFood.FastFood"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Customer.ChangeName"
@@ -115,33 +100,27 @@
 
         <activity
             android:name=".Customer.TermAndCondition"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Customer.MainOrder"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Customer.CustomerProfile"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Customer.ChangeEmail"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Customer.ChangePassword"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Customer.ChangePhonenumber"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <activity
             android:name=".Shipper.ShipperOrderDetail.OrderDetail"
@@ -152,33 +131,57 @@
             android:name=".Restaurant.History.RestaurantHistory"
             android:exported="true" />
 
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="hello" />
 
         <service
-            android:name=".Service.RestaurantNotificationService"
-            android:exported="false" />
-
-        <service
             android:name=".Service.ShipperNotification"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="location"
+            android:permission="android.permission.FOREGROUND_SERVICE" />
 
-        <receiver android:name=".BroadcastReceiver.BootReceiver" android:enabled="true" android:exported="true">
+        <receiver
+            android:name=".BroadcastReceiver.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
+        <service
+            android:name=".Service.RestaurantNotificationService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync"
+            android:permission="android.permission.FOREGROUND_SERVICE" />
+
+
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
 
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
 
 </manifest>

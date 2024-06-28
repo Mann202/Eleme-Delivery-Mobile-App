@@ -3,16 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/img_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/order_info_card"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
         android:src="@drawable/img_map" />
 
     <RelativeLayout
@@ -20,12 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_above="@+id/money"
-        android:background="@drawable/rounded_bg_white"
-        android:elevation="5dp"
-        android:orientation="vertical"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_bg_white"
+        android:elevation="5dp"
+        android:orientation="vertical"
         android:padding="20dp"
         android:translationZ="3dp">
 
@@ -33,10 +33,10 @@
             android:id="@+id/txt_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/orderTitleAcceptOrder"
             android:fontFamily="@font/lato_regular"
-            android:textSize="12dp"
-            android:textColor="@color/gray" />
+            android:text="@string/orderTitleAcceptOrder"
+            android:textColor="@color/gray"
+            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/txt_orderid"
@@ -44,10 +44,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/txt_order"
-            android:text="#2321312"
             android:fontFamily="@font/lato_regular"
-            android:textSize="12dp"
-            android:textColor="@color/gray" />
+            android:text="#2321312"
+            android:textColor="@color/gray"
+            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/txt_cusname"
@@ -56,11 +56,11 @@
             android:layout_below="@+id/txt_orderid"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="8dp"
-            android:text="PHUONG UYEN"
             android:fontFamily="@font/lato_bold"
+            android:text="PHUONG UYEN"
+            android:textColor="@color/black"
             android:textFontWeight="900"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/txt_cusaddress"
@@ -75,8 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_cusname"
-            android:layout_toRightOf="@id/txt_cusaddress"
             android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/txt_cusaddress"
             android:drawableStart="@drawable/icon_location15"
             android:text="1.3 km"
             android:textColor="@color/gray" />
@@ -85,9 +85,9 @@
 
     <RelativeLayout
         android:id="@+id/money"
-        android:layout_above="@+id/accept_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/accept_button"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
@@ -101,31 +101,31 @@
             android:id="@+id/txt_subtotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subtotal"
             android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="@string/msg_subtotal"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_subtotal_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="90.000 VND"
             android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="90.000 VND"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_subtotal_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/txt_subtotal"
             android:layout_marginLeft="5dp"
-            android:text="(4 items)"
+            android:layout_toRightOf="@+id/txt_subtotal"
             android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="(4 items)"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_servicefees"
@@ -133,58 +133,58 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_subtotal"
             android:layout_marginTop="5dp"
-            android:text="Service fees:"
             android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="@string/msg_service_fees"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_servicefees_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_subtotal_money"
             android:layout_alignParentRight="true"
             android:layout_marginTop="5dp"
-            android:layout_below="@+id/txt_subtotal_money"
-            android:text="5.000 VND"
             android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="5.000 VND"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_deliveryfees"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_below="@+id/txt_servicefees"
-            android:text="Delivery fees:"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="@string/msg_delivery_fees"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_deliveryfees_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_servicefees"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/txt_deliveryfees"
-            android:layout_marginLeft="5dp"
-            android:text="2.3km"
             android:fontFamily="@font/lato_bold"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="2.3km"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_deliveryfees_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_below="@+id/txt_servicefees_money"
-            android:text="30.000 VND"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/lato_regular"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="30.000 VND"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_total"
@@ -192,37 +192,37 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_deliveryfees"
             android:layout_marginTop="15dp"
-            android:text="Total"
             android:fontFamily="@font/lato_bold"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="@string/msg_total"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/txt_total_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_below="@+id/txt_deliveryfees_money"
-            android:text="125.000 VND"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/lato_bold"
-            android:textSize="14dp"
-            android:textColor="@color/black" />
+            android:text="125.000 VND"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
 
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/accept_button"
+        style="@style/PrimaryButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Accept this order"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
-        style="@style/PrimaryButton"/>
+        android:text="@string/msg_accept_this_order" />
 
 
 </RelativeLayout>

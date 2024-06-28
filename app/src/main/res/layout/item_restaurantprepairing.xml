@@ -77,20 +77,6 @@
             android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/cancelBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/totalPriceText"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/lato_bold"
-            android:textAllCaps="false"
-            android:paddingHorizontal="30dp"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:textSize="20sp"
-            android:text="Cancel" />
-
-        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/detailBtn"
             android:layout_below="@+id/totalPriceText"
             android:layout_marginTop="5dp"
@@ -98,12 +84,11 @@
             android:textColor="@color/white"
             android:layout_marginStart="10dp"
             android:paddingHorizontal="30dp"
-            android:text="Detail"
+            android:text="@string/msg_done"
             android:textSize="20sp"
             android:textAllCaps="false"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:layout_toEndOf="@+id/cancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />

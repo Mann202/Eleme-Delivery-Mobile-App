@@ -30,11 +30,13 @@ public class UserSessionManager {
         editor.putBoolean(KEY_IS_LOGGED_IN, true);
         editor.commit();
     }
+
     // Method to save user's uid
     public void loginUserInformation(String Uid) {
         editor.putString(USER_INFOR, Uid);
         editor.commit();
     }
+
     //Method to save user's role
     public void loginUserRole(String roleID) {
         editor.putString(USER_ROLE, roleID);
@@ -103,8 +105,13 @@ public class UserSessionManager {
         return pref.getString(USER_PHONE, "");
     }
 
-    public String getUserAddress() { return pref.getString(USER_ADDRESS, ""); }
-    public String getUserStartingDate() { return pref.getString(USER_STARTING_DATE, ""); }
+    public String getUserAddress() {
+        return pref.getString(USER_ADDRESS, "");
+    }
+
+    public String getUserStartingDate() {
+        return pref.getString(USER_STARTING_DATE, "");
+    }
 
     // Method logout
     public void logoutUser() {

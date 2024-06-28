@@ -47,7 +47,7 @@
             android:id="@+id/sub_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Verify your email!"
+            android:text="@string/msg_verify_your_email"
             android:gravity="start"
             android:textColor="@color/lightdark"
             android:textSize="40dp"
@@ -63,7 +63,7 @@
             android:textColor="@color/darkbg"
             android:textSize="21sp"
             android:layout_marginTop="15dp"
-            android:text="Please check your email for a confirmation link. Click the link in your email to active your account."
+            android:text="@string/msg_please_check_your_email_for_a_confirmation_link_click_the_link_in_your_email_to_active_your_account"
             android:layout_below="@+id/sub_title"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Re-send email cofirmation"
+            android:text="@string/msg_re_send_email_cofirmation"
             android:layout_below="@+id/descripsion"
             style="@style/PrimaryButton"/>
 
@@ -81,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Continue"
+            android:text="@string/msg_continue"
             android:layout_below="@+id/descripsion"
             style="@style/PrimaryButton"/>
     </RelativeLayout>

@@ -101,5 +101,6 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("com.google.firebase:firebase-messaging:24.0.0")
+    implementation("com.google.android.gms:play-services-wallet:19.3.0")
 
 }

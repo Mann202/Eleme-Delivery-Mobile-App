@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +19,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<RestaurantViewHolder> {
 
@@ -35,7 +39,7 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
     @NonNull
     @Override
     public RestaurantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RestaurantViewHolder(LayoutInflater.from(context).inflate(R.layout.item_restaurantprepairing,parent,false));
+        return new RestaurantViewHolder(LayoutInflater.from(context).inflate(R.layout.item_restaurantprepairing, parent, false));
     }
 
     public interface OnItemClickListener {
@@ -56,13 +60,17 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
         holder.detailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =  new Intent(context, RestaurantDetail.class);
-                context.startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
+                Map<String, Object> updateData = new HashMap<>();
+                updateData.put("ResStatus", "Done");
 
-            private void overridePendingTransition(int slideInRight, int slideOutLeft) {
-                ((Activity) context).overridePendingTransition(slideInRight, slideOutLeft);
+                firestoreInstance.collection("Orders").document(items.get(position).orderID).update(updateData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        items.remove(position);
+                        notifyDataSetChanged();
+                        Toast.makeText(view.getContext(), "Order completed", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -74,13 +82,6 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
                 }
             }
         });
-
-        holder.cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showCancelDialog(position, items.get(position).getOrderID());
-            }
-        });
     }
 
     @Override
@@ -90,31 +91,22 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
 
     private void showCancelDialog(int position, String orderID) {
 
-        new AlertDialog.Builder(context)
-                .setTitle("Cancel")
-                .setMessage("Do you really want to cancel?")
-                .setPositiveButton("OK", (dialog, which) -> {
-                    // Code to execute when OK is clicked
-                    // For example, finish the activity or close the fragment
-                    firestoreInstance.collection("Orders").document(orderID)
-                            .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d("Debug", "DocumentSnapshot successfully deleted!");
-                                    removeItem(position);
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("Debug", "Error deleting document", e);
-                                }
-                            });
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                .create()
-                .show();
+        new AlertDialog.Builder(context).setTitle("Cancel").setMessage("Do you really want to cancel?").setPositiveButton("OK", (dialog, which) -> {
+            // Code to execute when OK is clicked
+            // For example, finish the activity or close the fragment
+            firestoreInstance.collection("Orders").document(orderID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d("Debug", "DocumentSnapshot successfully deleted!");
+                    removeItem(position);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w("Debug", "Error deleting document", e);
+                }
+            });
+        }).setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()).create().show();
     }
 
     private void removeItem(int position) {

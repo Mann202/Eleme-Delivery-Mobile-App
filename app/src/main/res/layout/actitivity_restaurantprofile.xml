@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/whiteedt"
     android:gravity="start"
-    android:layout_height="match_parent"
     tools:context=".Restaurant.Profile.RestaurantProfile">
 
     <ImageView
@@ -20,13 +18,13 @@
         android:src="@drawable/baseline_arrow_back_ios_24" />
 
     <TextView
-        android:layout_width="wrap_content"
         android:id="@+id/informationTitle"
+        style="@style/headerText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/InformationHeader"
         android:layout_marginTop="45dp"
-        style="@style/headerText"/>
+        android:text="@string/InformationHeader" />
 
     <ImageView
         android:id="@+id/informationProfilePicture"
@@ -35,8 +33,7 @@
         android:layout_below="@+id/informationTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:src="@drawable/baseline_person_24"
-        />
+        android:src="@drawable/baseline_person_24" />
 
     <TextView
         android:id="@+id/NameTitle"
@@ -46,22 +43,22 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="@dimen/margin_standard"
+        android:fontFamily="@font/lato_regular"
         android:text="@string/nameTitleRestaurantProfile"
         android:textColor="#828282"
-        android:fontFamily="@font/lato_regular"
         android:textSize="18sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
         android:id="@+id/nameRestaurant"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/NameTitle"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            style="@style/EditTextLogin"
             android:id="@+id/nameFieldRestaurant"
+            style="@style/EditTextLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
@@ -82,22 +79,22 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
+        android:fontFamily="@font/lato_regular"
         android:text="@string/startting_date_title"
         android:textColor="#828282"
-        android:fontFamily="@font/lato_regular"
         android:textSize="18sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
         android:id="@+id/startingDate"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/startingDateTitle"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            style="@style/EditTextLogin"
             android:id="@+id/startingDateField"
+            style="@style/EditTextLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
@@ -119,22 +116,22 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
+        android:fontFamily="@font/lato_regular"
         android:text="@string/addressRestaurantProfile"
         android:textColor="#828282"
-        android:fontFamily="@font/lato_regular"
         android:textSize="18sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
         android:id="@+id/address"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/addressTitle"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            style="@style/EditTextLogin"
             android:id="@+id/addressField"
+            style="@style/EditTextLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
@@ -156,29 +153,29 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
+        android:fontFamily="@font/lato_regular"
         android:text="@string/email_title"
         android:textColor="#828282"
-        android:fontFamily="@font/lato_regular"
         android:textSize="18sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
         android:id="@+id/emailLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/emailTitle"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            style="@style/EditTextLogin"
             android:id="@+id/emailFieldRestaurant"
+            style="@style/EditTextLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:inputType="text"
             android:drawableEnd="@drawable/edit_button"
             android:drawablePadding="10dp"
             android:drawableTint="#C2CECE"
+            android:inputType="text"
             android:textColorHighlight="@color/primary"
             android:textColorHint="@color/whiteedt"
             android:textColorLink="@color/primary" />
@@ -193,52 +190,52 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
+        android:fontFamily="@font/lato_regular"
         android:text="@string/language_title"
         android:textColor="#828282"
-        android:fontFamily="@font/lato_regular"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/sn_language_customer"
         style="@style/SpinnerStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/edit_button"
-        android:drawablePadding="10dp"
-        android:drawableTint="#C2CECE"
         android:layout_below="@+id/LanguageTitle"
         android:layout_marginStart="20dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="20dp"
+        android:drawableEnd="@drawable/edit_button"
+        android:drawablePadding="10dp"
+        android:drawableTint="#C2CECE"
         android:popupBackground="@drawable/spinner_background"
         android:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        >
+        android:layout_alignParentBottom="true">
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirmRestaurantBtn"
+            style="@style/PrimaryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/confirmRestaurantProfile"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            style="@style/PrimaryButton"/>
+            android:text="@string/confirmRestaurantProfile" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/logoutBtn"
-            android:layout_alignParentEnd="true"
+            style="@style/LogoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/logOutRestaurantProfile"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            style="@style/LogoutButton"/>
+            android:text="@string/logOutRestaurantProfile" />
     </RelativeLayout>
 </RelativeLayout>

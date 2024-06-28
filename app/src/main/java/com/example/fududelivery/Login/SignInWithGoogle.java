@@ -40,10 +40,7 @@ public class SignInWithGoogle {
         mAuth = FirebaseAuth.getInstance();
         mActivity = activity;
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(activity.getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(activity.getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
         Log.d("Debug", "Sign in with google");
     }
@@ -81,81 +78,76 @@ public class SignInWithGoogle {
         FirebaseFirestore firestoreInstance = getFirestoreInstance(mActivity);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
 
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(mActivity, "Sign in with Google successful", Toast.LENGTH_SHORT).show();
+        mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                FirebaseUser user = mAuth.getCurrentUser();
+                Toast.makeText(mActivity, "Sign in with Google successful", Toast.LENGTH_SHORT).show();
 
-                        String userUid = user.getUid();
-                        firestoreInstance.collection("Users").whereEqualTo("userUid", userUid).get()
-                                .addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful()) {
-                                        QuerySnapshot querySnapshot = task1.getResult();
-                                        //If document exits, continue to get roleId.
-                                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                                            Log.v("Debug", "Document exists");
-                                            DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-                                            String roleId = document.getString("roleId");
-                                            //role-id exits, continue to app.
-                                            if (roleId != null && !roleId.isEmpty()) {
-                                                loginCaseManager.loginWithRoleID(roleId);
-                                                userSessionManager.loginUserRole(roleId);
-                                                userSessionManager.loginUserState();
-                                                userSessionManager.loginUserInformation(userUid);
+                String userUid = user.getUid();
+                firestoreInstance.collection("Users").whereEqualTo("userUid", userUid).get().addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task1.getResult();
+                        //If document exits, continue to get roleId.
+                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                            Log.v("Debug", "Document exists");
+                            DocumentSnapshot document = querySnapshot.getDocuments().get(0);
+                            String roleId = document.getString("roleId");
+                            //role-id exits, continue to app.
+                            if (roleId != null && !roleId.isEmpty()) {
+                                loginCaseManager.loginWithRoleID(roleId);
+                                userSessionManager.loginUserRole(roleId);
+                                userSessionManager.loginUserState();
+                                userSessionManager.loginUserInformation(userUid);
 
-                                                String name = document.getString("name");
-                                                String email = document.getString("email");
-                                                String phone = document.getString("phone");
+                                String name = document.getString("name");
+                                String email = document.getString("email");
+                                String phone = document.getString("phone");
 
-                                                userSessionManager.loginUserGmail(email);
-                                                userSessionManager.loginUserName(name);
-                                                userSessionManager.loginUserPhone(phone);
+                                userSessionManager.loginUserGmail(email);
+                                userSessionManager.loginUserName(name);
+                                userSessionManager.loginUserPhone(phone);
 
-                                                if(Objects.equals(roleId, "2")) {
-                                                    String startingDate = document.getString("startingDate");
-                                                    String address = document.getString("address");
+                                if (Objects.equals(roleId, "2")) {
+                                    String startingDate = document.getString("startingDate");
+                                    String address = document.getString("address");
 
-                                                    userSessionManager.setStartingDate(startingDate);
-                                                    userSessionManager.setAddress(address);
-                                                }
-                                                mActivity.finishAffinity();
-                                            } else {
-                                                //role-id don't exits, make toast.
-                                                Toast.makeText(mActivity, "Error log-in with Google. Please contact us for further information!", Toast.LENGTH_SHORT).show();
-                                            }
-                                        } else {
-                                            //If document don't exits, create new document with new user.
-                                            Log.v("Debug", "Document does not exist");
-                                            Map<String, Object> userData = new HashMap<>();
-                                            userData.put("userUid", userUid);
-                                            userData.put("name", name);
-                                            userData.put("roleId", "1");
+                                    userSessionManager.setStartingDate(startingDate);
+                                    userSessionManager.setAddress(address);
+                                }
+                                mActivity.finishAffinity();
+                            } else {
+                                //role-id don't exits, make toast.
+                                Toast.makeText(mActivity, "Error log-in with Google. Please contact us for further information!", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            //If document don't exits, create new document with new user.
+                            Log.v("Debug", "Document does not exist");
+                            Map<String, Object> userData = new HashMap<>();
+                            userData.put("userUid", userUid);
+                            userData.put("name", name);
+                            userData.put("roleId", "1");
 
-                                            firestoreInstance.collection("Users").add(userData)
-                                                    .addOnSuccessListener(documentReference -> {
-                                                        Log.d("Debug", "DocumentSnapshot written with ID: " + documentReference.getId());
-                                                        loginCaseManager.loginWithRoleID("1");
-                                                        userSessionManager.loginUserRole("1");
-                                                        userSessionManager.loginUserState();
-                                                        userSessionManager.loginUserInformation(userUid);
-                                                    })
-                                                    .addOnFailureListener(e1 -> {
-                                                        Log.w("Debug", "Error adding document", e1);
-                                                    });
-                                        }
-                                    } else {
-                                        Log.d("Debug", "Error getting documents: ", task1.getException());
-                                    }
-                                })
-                                .addOnFailureListener(e -> {
-                                    Log.v("Debug", e.toString());
-                                });
+                            firestoreInstance.collection("Users").add(userData).addOnSuccessListener(documentReference -> {
+                                Log.d("Debug", "DocumentSnapshot written with ID: " + documentReference.getId());
+                                loginCaseManager.loginWithRoleID("1");
+                                userSessionManager.loginUserRole("1");
+                                userSessionManager.loginUserState();
+                                userSessionManager.loginUserInformation(userUid);
+                            }).addOnFailureListener(e1 -> {
+                                Log.w("Debug", "Error adding document", e1);
+                            });
+                        }
                     } else {
-                        Log.d("Debug", "signInWithCredential:failure", task.getException());
-                        Toast.makeText(mActivity, "Sign in with Google failed", Toast.LENGTH_SHORT).show();
+                        Log.d("Debug", "Error getting documents: ", task1.getException());
                     }
+                }).addOnFailureListener(e -> {
+                    Log.v("Debug", e.toString());
                 });
+            } else {
+                Log.d("Debug", "signInWithCredential:failure", task.getException());
+                Toast.makeText(mActivity, "Sign in with Google failed", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }

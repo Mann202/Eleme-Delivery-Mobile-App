@@ -30,7 +30,7 @@
             android:id="@+id/AdressTitle"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
-            android:text="New Address"
+            android:text="@string/msg_new_address"
             android:fontFamily="@font/lato_bold"
             android:textColor="@color/black"
             android:textFontWeight="900"
@@ -47,7 +47,7 @@
         android:layout_marginTop="@dimen/margin_extra_small"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="Name"
+        android:text="@string/msg_name"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -87,7 +87,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="Phone number"
+        android:text="@string/msg_phone_number"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -126,7 +126,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="City"
+        android:text="@string/msg_city"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -152,7 +152,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="District"
+        android:text="@string/msg_district"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -178,7 +178,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="Ward"
+        android:text="@string/msg_ward"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -203,7 +203,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="Street"
+        android:text="@string/msg_street"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />
@@ -243,13 +243,13 @@
         android:fontFamily="@font/lato_regular"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="12dp"
-        android:text="Set as Default Address"/>
+        android:text="@string/msg_set_as_default_address"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/msg_save"
         android:fontFamily="@font/lato_bold"
         android:textColor="@color/white"
         android:layout_marginStart="20dp"

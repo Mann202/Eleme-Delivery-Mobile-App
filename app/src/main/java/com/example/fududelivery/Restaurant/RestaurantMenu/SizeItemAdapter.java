@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.example.fududelivery.Login.UserSessionManager;
@@ -32,7 +31,7 @@ public class SizeItemAdapter extends ArrayAdapter<Size> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Size currentItem = getItem(position);
 
-        if(currentItem == null) {
+        if (currentItem == null) {
             return convertView;
         }
 

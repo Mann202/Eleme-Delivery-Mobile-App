@@ -1,14 +1,18 @@
 package com.example.fududelivery.Restaurant.MainRestaurant;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +38,7 @@ public class RestaurantMainDoneFragment extends Fragment {
     FirebaseFirestore firestoreInstance;
     UserSessionManager userSessionManager;
     View view;
+    private Boolean loadAgain = false;
 
     public RestaurantMainDoneFragment() {
     }
@@ -48,9 +53,7 @@ public class RestaurantMainDoneFragment extends Fragment {
         restaurantList = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         swipeRefreshLayout = view.findViewById(R.id.refreshLayoutDoneRestaurant);
-        swipeRefreshLayout.setColorSchemeColors(
-                getResources().getColor(R.color.primary)
-        );
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primary));
 
         firestoreInstance = FirebaseFirestore.getInstance();
 
@@ -68,6 +71,15 @@ public class RestaurantMainDoneFragment extends Fragment {
                 restaurantList.clear();
                 adapter.notifyDataSetChanged();
                 loadData();
+            }
+        });
+
+        TextView loadBtn = view.findViewById(R.id.load_btn);
+        loadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadData();
+                loadAgain = true;
             }
         });
 
@@ -90,40 +102,33 @@ public class RestaurantMainDoneFragment extends Fragment {
 
 
     private void loadData() {
-        firestoreInstance.collection("Orders")
-                .whereEqualTo("ResID", userSessionManager.getUserInformation())
-                .whereEqualTo("DeliveryStatus", "Done")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            String orderId = document.getId();
+        firestoreInstance.collection("Orders").whereEqualTo("ResID", userSessionManager.getUserInformation()).whereEqualTo("ResStatus", "Done").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots.isEmpty()) {
+                    view.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.INVISIBLE);
+                    LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
+                    TextView noOrdersTextView = view.findViewById(R.id.noOrdersTextView);
+                    loadMoreContainer.setVisibility(View.VISIBLE);
+                    noOrdersTextView.setText("Don't have any order");
+                } else {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        String orderId = document.getId();
 
-                            restaurantList.add(new ItemDetailRestaurant(
-                                    1,
-                                    document.getString("Date"),
-                                    document.getString("TotalQuantity") + " items",
-                                    document.getString("name"),
-                                    ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")),
-                                    document.getString("address"),
-                                    orderId,
-                                    document.getString("CusID"),
-                                    document.getString("ShipperID")
-                            ));
+                        restaurantList.add(new ItemDetailRestaurant(1, document.getString("Date"), document.getString("TotalQuantity") + " items", document.getString("name"), ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")), document.getString("address"), orderId, document.getString("CusID"), document.getString("ShipperID")));
 
-                            adapter.notifyDataSetChanged();
-                            view.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
-                            swipeRefreshLayout.setVisibility(View.VISIBLE);
-                            swipeRefreshLayout.setRefreshing(false);
+                        if (loadAgain != null && loadAgain) {
+                            LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
+                            loadMoreContainer.setVisibility(View.INVISIBLE);
                         }
+                        adapter.notifyDataSetChanged();
+                        view.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
+                        swipeRefreshLayout.setVisibility(View.VISIBLE);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Debug", "Error getting Orders documents.", e);
-                    }
-                });
+                }
+            }
+        });
     }
 }

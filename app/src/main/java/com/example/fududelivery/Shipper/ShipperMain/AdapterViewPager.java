@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class AdapterViewPager extends FragmentStateAdapter {
     ArrayList<Fragment> arr;
+
     public AdapterViewPager(@NonNull FragmentActivity fragmentActivity, ArrayList<Fragment> arr) {
         super(fragmentActivity);
         this.arr = arr;
