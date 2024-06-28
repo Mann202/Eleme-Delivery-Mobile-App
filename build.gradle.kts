@@ -9,3 +9,4 @@ buildscript { repositories { mavenCentral() }
         classpath("com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3")
     }
 }
+

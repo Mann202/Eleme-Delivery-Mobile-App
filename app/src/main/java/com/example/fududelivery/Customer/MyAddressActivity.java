@@ -1,7 +1,5 @@
 package com.example.fududelivery.Customer;
 
-import static com.example.fududelivery.Customer.CheckOutActivity.SELECT_ADDRESS;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,22 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.example.fududelivery.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MyAddressActivity extends AppCompatActivity {
 
     private int previousAddress, mode;
     private RecyclerView recyclerView;
     private Button addNewAddressBtn;
-    private static AddressAdapter addressesAdapter;
+//    private static AddressAdapter addressesAdapter;
     private Button deliverHere;
     private Dialog loadingDialog;
 
@@ -71,11 +59,11 @@ public class MyAddressActivity extends AppCompatActivity {
 
         // Get mode from intent
         mode = getIntent().getIntExtra("MODE", -1);
-        if (mode == SELECT_ADDRESS) {
-            deliverHere.setVisibility(View.VISIBLE);
-        } else {
-            deliverHere.setVisibility(View.GONE);
-        }
+//        if (mode == SELECT_ADDRESS) {
+//            deliverHere.setVisibility(View.VISIBLE);
+//        } else {
+//            deliverHere.setVisibility(View.GONE);
+//        }
 
 
         // Click listener for deliverHere button
@@ -87,8 +75,8 @@ public class MyAddressActivity extends AppCompatActivity {
         });
 
         // Initialize addressesAdapter with data from DBquerries
-        addressesAdapter = new AddressAdapter(DBquerries.addressesModelList, mode, loadingDialog);
-        recyclerView.setAdapter(addressesAdapter);
+//        addressesAdapter = new AddressAdapter(DBquerries.addressesModelList, mode, loadingDialog);
+//        recyclerView.setAdapter(addressesAdapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
 
 
@@ -103,8 +91,8 @@ public class MyAddressActivity extends AppCompatActivity {
 
     // Method to refresh item in addressesAdapter
     public static void refreshItem(int deselect, int select) {
-        addressesAdapter.notifyItemChanged(deselect);
-        addressesAdapter.notifyItemChanged(select);
+//        addressesAdapter.notifyItemChanged(deselect);
+//        addressesAdapter.notifyItemChanged(select);
     }
 
     // Handle back button press

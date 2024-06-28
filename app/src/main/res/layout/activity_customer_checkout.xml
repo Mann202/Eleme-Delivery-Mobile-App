@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -11,7 +12,32 @@
         android:layout_height="wrap_content"
         android:background="#CBF6F6F6"
         android:elevation="40dp"
-        android:id="@+id/toolbar"/>
+        android:id="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/nav_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/circle_background"
+            android:paddingVertical="5dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:tint="@color/primary" />
+
+        <TextView
+            android:id="@+id/tv_mycart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/lato_bold"
+            android:text="Checkout"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+    </androidx.appcompat.widget.Toolbar>
 
 
     <ImageView
@@ -102,21 +128,21 @@
             android:layout_marginBottom="10dp"
             android:id="@+id/detail_address" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/save_button"
-            android:text="Change or add a new address"
-            android:backgroundTint="@color/skyblue"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:fontFamily="@font/lato_bold"
-            android:textSize="14sp"
-            android:id="@+id/change_or_add_address_btn"
-            android:visibility="visible" />
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:background="@drawable/save_button"-->
+<!--            android:text="Change or add a new address"-->
+<!--            android:backgroundTint="@color/skyblue"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:fontFamily="@font/lato_bold"-->
+<!--            android:textSize="14sp"-->
+<!--            android:id="@+id/change_or_add_address_btn"-->
+<!--            android:visibility="visible" />-->
 
     </LinearLayout>
 
@@ -136,7 +162,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_order_item"
+            android:id="@+id/rv_cart_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"/>
@@ -149,7 +175,7 @@
             android:fontFamily="@font/lato_regular"
             android:textSize="14dp"
             android:textColor="@color/black"
-            android:layout_below="@+id/rv_order_item"/>
+            android:layout_below="@+id/rv_cart_product"/>
 
         <TextView
             android:id="@+id/txt_subtotal_money"
@@ -159,7 +185,7 @@
             android:text="90.000 VND"
             android:fontFamily="@font/lato_regular"
             android:textSize="14dp"
-            android:layout_below="@+id/rv_order_item"
+            android:layout_below="@+id/rv_cart_product"
             android:textColor="@color/black" />
 
         <TextView
@@ -171,7 +197,7 @@
             android:text="(4 items)"
             android:fontFamily="@font/lato_regular"
             android:textSize="14dp"
-            android:layout_below="@+id/rv_order_item"
+            android:layout_below="@+id/rv_cart_product"
             android:textColor="@color/black" />
 
         <TextView
@@ -246,10 +272,10 @@
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/place_order_btn"
+        android:id="@+id/btn_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Place order"
+        android:text="Finish"
         android:fontFamily="@font/lato_bold"
         android:textColor="@color/white"
         android:layout_marginStart="20dp"

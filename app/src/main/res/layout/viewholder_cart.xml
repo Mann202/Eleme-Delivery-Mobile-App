@@ -33,17 +33,17 @@
         android:layout_toEndOf="@+id/img_food"
         android:fontFamily="@font/lato_bold"
         android:textSize="16.55dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/tv_foodcate"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Pepper Plus, Size M"
-        android:layout_below="@+id/tv_foodname"
-        android:layout_toEndOf="@+id/img_food"
-        android:fontFamily="@font/lato_regular"
-        android:textSize="11dp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tv_foodcate"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Pepper Plus, Size M"-->
+<!--        android:layout_below="@+id/tv_foodname"-->
+<!--        android:layout_toEndOf="@+id/img_food"-->
+<!--        android:fontFamily="@font/lato_regular"-->
+<!--        android:textSize="11dp"/>-->
 
     <TextView
         android:id="@+id/tv_foodprice"
@@ -55,7 +55,7 @@
         android:layout_alignParentBottom="true"
         android:textColor="@color/primary"
         android:textSize="13.75dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="20dp"/>
     
     <RelativeLayout
         android:layout_width="67dp"

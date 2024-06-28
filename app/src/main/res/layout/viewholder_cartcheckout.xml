@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical"
+    android:paddingHorizontal="5dp"
+    android:paddingVertical="5dp">
+
+    <ImageView
+        android:id="@+id/img_food"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/dishes_01"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_foodname"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Shaking Beef Tri..."
+        android:layout_toEndOf="@+id/img_food"
+        android:fontFamily="@font/lato_bold"
+        android:textSize="16.55dp"
+        android:layout_marginTop="20dp"/>
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_foodcate"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Pepper Plus, Size M"-->
+<!--        android:layout_below="@+id/tv_foodname"-->
+<!--        android:layout_toEndOf="@+id/img_food"-->
+<!--        android:fontFamily="@font/lato_regular"-->
+<!--        android:textSize="11dp"/>-->
+
+    <TextView
+        android:id="@+id/tv_foodprice"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="250.000 VNĐ"
+        android:layout_toEndOf="@+id/img_food"
+        android:fontFamily="@font/lato_bold"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/primary"
+        android:textSize="13.75dp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_foodquantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="x1"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="20dp"/>
+
+
+</RelativeLayout>

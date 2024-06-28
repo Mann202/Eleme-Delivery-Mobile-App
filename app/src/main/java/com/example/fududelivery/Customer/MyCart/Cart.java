@@ -1,7 +1,5 @@
 package com.example.fududelivery.Customer.MyCart;
 
-import static com.example.fududelivery.Customer.CheckOutActivity.loadingDialog;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fududelivery.Customer.CheckOutActivity;
-import com.example.fududelivery.Customer.DBquerries;
+import com.example.fududelivery.Customer.Checkout.CheckOutActivity;
 import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
@@ -96,7 +93,6 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Cart.this, CheckOutActivity.class);
-                intent.putExtra("cartItems", cartItem);
                 startActivity(intent);
             }
         });
@@ -136,14 +132,10 @@ public class Cart extends AppCompatActivity {
         // Show refresh indicator
 //        swipeRefreshLayout.setRefreshing(true);
 
-        //Get CartID
-        getMyCart();
-        System.out.println("CartID :" + MyCartID);
-
         // Get cart items from Firestore
         CollectionReference cartCollection = firestoreInstance.collection("CartDetail");
         cartCollection
-                .whereEqualTo("CartID", MyCartID)
+                .whereEqualTo("UserID", userSessionManager.getUserInformation())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -194,7 +186,7 @@ public class Cart extends AppCompatActivity {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             CartModel cart = documentSnapshot.toObject(CartModel.class);
                             MyCartID = cart.getCartID();
-//                            System.out.println("CartID :" + MyCartID);
+                            System.out.println("getMyCart: CartID :" + MyCartID);
                         }
                     }
                 })

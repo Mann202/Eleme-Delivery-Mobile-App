@@ -150,7 +150,7 @@
             android:name=".Customer.AddAddressActivity"
             android:exported="true"
         />
-        <activity android:name=".Customer.CheckOutActivity"
+        <activity android:name=".Customer.Checkout.CheckOutActivity"
             android:exported="true"/>
 
         <activity

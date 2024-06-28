@@ -1,6 +1,5 @@
 package com.example.fududelivery.Customer;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fududelivery.Customer.MyCart.Cart;
 import com.example.fududelivery.R;
-import com.example.fududelivery.Shipper.ShipperOrderDetail.OrderDetail;
-import com.example.fududelivery.Customer.CheckOutActivity;
-import com.example.fududelivery.Customer.MyAddressActivity;
-import com.example.fududelivery.Customer.AddAddressActivity;
 
 public class TermAndCondition extends AppCompatActivity {
     Button btnCart;

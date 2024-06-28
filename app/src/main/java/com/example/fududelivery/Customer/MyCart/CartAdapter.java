@@ -135,7 +135,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
     public class Viewholder extends RecyclerView.ViewHolder {
         ImageView imgFood;
         TextView tvFoodName;
-        TextView tvFoodCate;
         TextView tvFoodPrice;
         TextView tvFoodQuantity;
         TextView btnMinus;
@@ -147,7 +146,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
             super(itemView);
             imgFood = itemView.findViewById(R.id.img_food);
             tvFoodName = itemView.findViewById(R.id.tv_foodname);
-            tvFoodCate = itemView.findViewById(R.id.tv_foodcate);
             tvFoodPrice = itemView.findViewById(R.id.tv_foodprice);
             tvFoodQuantity = itemView.findViewById(R.id.tv_foodquantity);
             btnMinus = itemView.findViewById(R.id.tv_minus);
@@ -167,10 +165,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
             } else {
                 tvFoodName.setText("");
             }
-
-            if (food.getFoodCate()!=null) {
-                tvFoodCate.setText(food.getFoodCate());
-            }  else tvFoodCate.setText("");
             if (food.getQuantity()!=null) {
                 tvFoodQuantity.setText(food.getQuantity());
             }  else tvFoodQuantity.setText("");
