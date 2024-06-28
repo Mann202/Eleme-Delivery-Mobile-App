@@ -25,6 +25,7 @@
                 android:padding="11dp">
             </androidx.appcompat.widget.AppCompatButton>
             <TextView
+                android:id="@+id/title_res"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/msg_fast_food"
@@ -34,48 +35,42 @@
                 android:textSize="25sp"
                 android:textFontWeight="900"
                 android:textColor="@color/black"
-                android:fontFamily="@font/lato_regular"
-                >
+                android:fontFamily="@font/lato_regular">
             </TextView>
-        </RelativeLayout>
-        <LinearLayout
-            android:id="@+id/middle_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/pannel_top">
-            <TextView
-                android:background="@drawable/spinner_style"
-                android:id="@+id/spinner_tab"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:text="@string/msg_sort_by"
-                android:textAlignment="center"
-                android:paddingTop="8dp"
-                android:textFontWeight="900"
-                android:textSize="18sp"
-                android:textColor="@color/primary"
-                android:fontFamily="@font/lato_regular"
-                android:paddingStart="-17dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="12dp">
-            </TextView>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_filterlist"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/find_item"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp">
-            </androidx.recyclerview.widget.RecyclerView>
-        </LinearLayout>
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_below="@+id/title_res">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/finddetailitem"
+                    style="@style/EditSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingTop="-10dp"
+                    android:background="@drawable/customer_border"
+                    android:drawableStart="@drawable/search_icon"
+                    android:textColorHighlight="@color/primary"
+                    android:textColorHint="@color/whiteedt"
+                    android:textColorLink="@color/primary"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
         <ScrollView
             android:id="@+id/scv_FFitems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/middle_layout">
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/pannel_top">
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rcv_fflist"
+            android:paddingStart="20dp"
             android:layout_below="@+id/middle_layout">
         </androidx.recyclerview.widget.RecyclerView>
         </ScrollView>

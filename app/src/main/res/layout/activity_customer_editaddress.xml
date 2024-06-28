@@ -150,7 +150,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:text="@string/msg_district"
+        android:text="District"
         android:textSize="@dimen/text_h5"
         android:textColor="#828282"
         />

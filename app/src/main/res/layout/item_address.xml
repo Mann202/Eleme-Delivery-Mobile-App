@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="15dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+    <RadioButton
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@color/primary"
+        android:buttonTint="@color/primary"
+        android:id="@+id/choose"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edit_button"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/update"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nguyen Dai Duong"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/lato_bold"
+        android:ellipsize="end"
+        android:textColor="@color/black"
+        android:layout_toEndOf="@id/choose"
+        android:layout_toStartOf="@+id/default_text"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:id="@+id/receiver_name"/>
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toStartOf="@+id/update"
+            android:background="@drawable/border_textview"
+            android:text="Default"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            android:id="@+id/default_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_regular"
+            android:text="0824670790"
+            android:layout_toEndOf="@+id/choose"
+            android:layout_below="@+id/receiver_name"
+            android:textSize="14sp"
+            android:textColor="#717171"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/receiver_phone_number"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/lato_regular"
+        android:text="Khu pho 6, Linh Trung, Thu Duc"
+        android:textSize="14sp"
+        android:maxLines="2"
+        android:layout_below="@id/receiver_phone_number"
+        android:layout_toEndOf="@id/choose"
+        android:layout_toStartOf="@id/update"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="5dp"
+        android:id="@+id/detail_address"/>
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
