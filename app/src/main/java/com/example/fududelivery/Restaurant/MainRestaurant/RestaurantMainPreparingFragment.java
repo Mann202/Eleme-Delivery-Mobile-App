@@ -1,14 +1,13 @@
 package com.example.fududelivery.Restaurant.MainRestaurant;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,14 +18,13 @@ import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Reference.ChangeCurrency;
 import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetail;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RestaurantMainPreparingFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -60,6 +58,7 @@ public class RestaurantMainPreparingFragment extends Fragment {
         loadData();
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onRefresh() {
                 restaurantList.clear();
@@ -96,6 +95,7 @@ public class RestaurantMainPreparingFragment extends Fragment {
 
     private void loadData() {
         firestoreInstance.collection("Orders").whereEqualTo("ResID", userSessionManager.getUserInformation()).whereEqualTo("ResStatus", "Prepare").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.isEmpty()) {
@@ -107,22 +107,24 @@ public class RestaurantMainPreparingFragment extends Fragment {
                 } else {
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         String orderId = document.getId();
-                        restaurantList.add(new ItemDetailRestaurant(1, document.getString("Date"), document.getString("TotalQuantity") + " items", document.getString("name"), ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")), document.getString("address"), orderId, document.getString("CusID"), document.getString("ShipperID")));
-                        adapter.notifyDataSetChanged();
-                        view.findViewById(R.id.loadingPreparingRestaurant).setVisibility(View.GONE);
-                        if (loadAgain != null && loadAgain) {  // Kiểm tra loadAgain trước khi sử dụng
-                            LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
-                            loadMoreContainer.setVisibility(View.INVISIBLE);
-                        }
-                        swipeRefreshLayout.setVisibility(View.VISIBLE);
-                        swipeRefreshLayout.setRefreshing(false);
+                        firestoreInstance.collection("Restaurant").whereEqualTo("ResID", userSessionManager.getUserInformation()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for (DocumentSnapshot documentSnapshot1 : queryDocumentSnapshots.getDocuments()) {
+                                    restaurantList.add(new ItemDetailRestaurant(documentSnapshot1.getString("ImageID"), document.getString("Date"), document.getString("TotalQuantity") + " items", document.getString("name"), ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")), document.getString("address"), orderId, document.getString("CusID"), document.getString("ShipperID")));
+                                    adapter.notifyDataSetChanged();
+                                    view.findViewById(R.id.loadingPreparingRestaurant).setVisibility(View.GONE);
+                                    if (loadAgain != null && loadAgain) {
+                                        LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
+                                        loadMoreContainer.setVisibility(View.INVISIBLE);
+                                    }
+                                    swipeRefreshLayout.setVisibility(View.VISIBLE);
+                                    swipeRefreshLayout.setRefreshing(false);
+                                }
+                            }
+                        });
                     }
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w("Debug", "Error getting Orders documents.", e);
             }
         });
     }

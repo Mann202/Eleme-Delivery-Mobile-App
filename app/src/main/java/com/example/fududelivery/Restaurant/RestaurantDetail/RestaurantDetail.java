@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,7 @@ public class RestaurantDetail extends AppCompatActivity {
     FirebaseFirestore firestoreInstance;
     ArrayList<ItemRestaurantOrder> item;
     RestaurantItemAdapter adapter;
+    ImageView imageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,31 +75,29 @@ public class RestaurantDetail extends AppCompatActivity {
         phoneShipperText = findViewById(R.id.phoneShipper);
         vehiclePlatesText = findViewById(R.id.vehiclePlates);
         vehicleLicensesText = findViewById(R.id.vehicleLicense);
+        imageView = findViewById(R.id.shipperAvatar);
 
         orderIdText.setText("#" + orderID);
         addressText.setText(address);
         nameText.setText(name);
 
-        firestoreInstance.collection("Users")
-                .whereEqualTo("userUid", shipperID)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            nameShipperText.setText(document.getString("name"));
-                            phoneShipperText.setText(document.getString("phone"));
-                            vehiclePlatesText.setText(document.getString("vehiclePlate"));
-                            vehicleLicensesText.setText(document.getString("vehicleLicense"));
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Debug", "Error getting Orders documents.", e);
-                    }
-                });
+        firestoreInstance.collection("Users").whereEqualTo("userUid", shipperID).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                    nameShipperText.setText(document.getString("name"));
+                    phoneShipperText.setText(document.getString("phone"));
+                    vehiclePlatesText.setText(document.getString("vehiclePlate"));
+                    vehicleLicensesText.setText(document.getString("vehicleLicense"));
+                    Picasso.get().load(document.getString("imageId")).into(imageView);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Debug", "Error getting Orders documents.", e);
+            }
+        });
 
         firestoreInstance.collection("Orders").document(orderID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -108,25 +109,15 @@ public class RestaurantDetail extends AppCompatActivity {
             }
         });
 
-        firestoreInstance.collection("OrderDetail")
-                .whereEqualTo("OrderID", orderID)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            item.add(new ItemRestaurantOrder(document.getString("ItemQuantity") + "x", document.getString("FoodName"), ChangeCurrency.formatPrice(document.getDouble("TotalPrice")), document.getString("Description")));
-                        }
-                        // Notify adapter that the data set has changed
-                        adapter.notifyDataSetChanged();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Debug", "Error getting Orders documents.", e);
-                    }
-                });
+        firestoreInstance.collection("OrderDetail").whereEqualTo("OrderID", orderID).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                    item.add(new ItemRestaurantOrder(document.getString("ItemQuantity") + "x", document.getString("FoodName"), ChangeCurrency.formatPrice(document.getDouble("TotalPrice")), document.getString("Description")));
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         findViewById(R.id.backwardButton).setOnClickListener(new View.OnClickListener() {
             @Override

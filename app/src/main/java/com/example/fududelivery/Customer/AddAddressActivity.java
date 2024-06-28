@@ -40,7 +40,7 @@ public class AddAddressActivity extends AppCompatActivity {
         // Initialize views and loading dialog
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Add a new address");
+        getSupportActionBar().setTitle(getString(R.string.msg_add_new_address));
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

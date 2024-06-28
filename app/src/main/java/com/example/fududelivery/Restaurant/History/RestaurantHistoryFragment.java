@@ -19,8 +19,11 @@ import com.example.fududelivery.R;
 import com.example.fududelivery.Reference.ChangeCurrency;
 import com.example.fududelivery.Restaurant.MainRestaurant.ItemDetailRestaurant;
 import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetail;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -49,9 +52,7 @@ public class RestaurantHistoryFragment extends Fragment {
         restaurantList = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         swipeRefreshLayout = view.findViewById(R.id.refreshLayoutHistoryRestaurant);
-        swipeRefreshLayout.setColorSchemeColors(
-                getResources().getColor(R.color.primary)
-        );
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primary));
 
         firestoreInstance = FirebaseFirestore.getInstance();
 
@@ -92,40 +93,32 @@ public class RestaurantHistoryFragment extends Fragment {
 
     private void loadData() {
         Log.v("Debug", "load data.");
-        firestoreInstance.collection("Orders")
-                .whereEqualTo("ResID", userSessionManager.getUserInformation())
-                .whereEqualTo("DeliveryStatus", "Done")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            String orderId = document.getId();
+        firestoreInstance.collection("Orders").whereEqualTo("ResID", userSessionManager.getUserInformation()).whereEqualTo("DeliveryStatus", "Done").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                    String orderId = document.getId();
 
-                            restaurantList.add(new ItemDetailRestaurant(
-                                    1,
-                                    document.getString("Date"),
-                                    document.getString("TotalQuantity") + " items",
-                                    document.getString("name"),
-                                    ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")),
-                                    document.getString("address"),
-                                    orderId,
-                                    document.getString("CusID"),
-                                    document.getString("ShipperID")
-                            ));
-
-                            adapter.notifyDataSetChanged();
-                            view.findViewById(R.id.loadingHistory).setVisibility(View.GONE);
-                            swipeRefreshLayout.setVisibility(View.VISIBLE);
-                            swipeRefreshLayout.setRefreshing(false);
+                    firestoreInstance.collection("Restaurant").whereEqualTo("ResID", userSessionManager.getUserInformation()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                restaurantList.add(new ItemDetailRestaurant(documentSnapshot.getString("ImageID"), document.getString("Date"), document.getString("TotalQuantity") + " items", document.getString("name"), ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")), document.getString("address"), orderId, document.getString("CusID"), document.getString("ShipperID")));
+                            }
                         }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Debug", "Error getting Orders documents.", e);
-                    }
-                });
+                    });
+
+                    adapter.notifyDataSetChanged();
+                    view.findViewById(R.id.loadingHistory).setVisibility(View.GONE);
+                    swipeRefreshLayout.setVisibility(View.VISIBLE);
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Debug", "Error getting Orders documents.", e);
+            }
+        });
     }
 }

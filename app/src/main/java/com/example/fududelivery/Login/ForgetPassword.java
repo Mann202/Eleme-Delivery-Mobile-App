@@ -3,7 +3,6 @@ package com.example.fududelivery.Login;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,17 +43,15 @@ public class ForgetPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = emailField.getText().toString();
-                FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d("Debug", "Email sent.");
-                                    forgetpassworddescription.setText("Your verification email has been sent to your email address. Please check your email and change your new password. If you don't receive any email from us. Please re-check again your email address submission.");
-                                    sendEmailBtn.setText("Re-send email");
-                                }
-                            }
-                        });
+                FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            forgetpassworddescription.setText(R.string.msg_your_verification_email_has_been_sent_to_your_email_address_please_check_your_email_and_change_your_new_password_if_you_don_t_receive_any_email_from_us_please_re_check_again_your_email_address_submission);
+                            sendEmailBtn.setText(R.string.msg_re_send_email);
+                        }
+                    }
+                });
             }
         });
 
@@ -65,7 +62,7 @@ public class ForgetPassword extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                sendEmailBtn.setText("Send");
+                sendEmailBtn.setText(getString(R.string.msg_send));
             }
 
             @Override

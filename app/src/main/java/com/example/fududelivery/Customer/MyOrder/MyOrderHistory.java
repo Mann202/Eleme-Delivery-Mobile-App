@@ -1,6 +1,5 @@
 package com.example.fududelivery.Customer.MyOrder;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,12 +66,10 @@ public class MyOrderHistory extends Fragment {
                         double totalAmount = subTotal + serviceFee + shippingFee;
                         String totalAmountString = String.format("%.2f", totalAmount);
 
-                        firebaseFirestore.collection("Restaurant").document(documentSnapshot.getString("ResID")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @SuppressLint("NotifyDataSetChanged")
+                        firebaseFirestore.collection("Restaurant").whereEqualTo("ResID", documentSnapshot.getString("ResID")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task1) {
-                                if (task1.isSuccessful()) {
-                                    DocumentSnapshot documentSnapshot1 = task1.getResult();
+                            public void onComplete(@NonNull Task<QuerySnapshot> task1) {
+                                for (DocumentSnapshot documentSnapshot1 : task1.getResult()) {
                                     historyorderList.add(new MyOrderInfor(documentSnapshot.getId(), documentSnapshot1.getString("ImageID"), documentSnapshot.getString("Date"), documentSnapshot.getString("TotalQuantity") + " items", documentSnapshot1.getString("ResName"), totalAmountString, documentSnapshot.getString("ShippingStatus")));
                                     adapter.notifyDataSetChanged();
                                 }

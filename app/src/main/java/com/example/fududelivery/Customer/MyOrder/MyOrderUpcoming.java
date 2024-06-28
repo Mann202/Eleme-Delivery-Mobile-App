@@ -1,25 +1,19 @@
 package com.example.fududelivery.Customer.MyOrder;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.MainRestaurant.RestaurantInforPreparingAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,15 +63,15 @@ public class MyOrderUpcoming extends Fragment {
                     String status;
 
                     if (resStatus.equals("") && shippingStatus.equals("Ready")) {
-                        status = "Picking shipper...";
+                        status = getString(R.string.msg_pickings_shipper___);
                     } else if (shippingStatus.equals("Start") && resStatus.equals("Prepare")) {
-                        status = "Restaurant is preparing";
+                        status = getString(R.string.msg_restaurant_is_preparing);
                     } else if (resStatus.equals("Done") && shippingStatus.equals("Start")) {
-                        status = "By the way";
+                        status = getString(R.string.msg_by_the_way);
                     } else if (resStatus.equals("Done") && shippingStatus.equals("Cancel")) {
-                        status = "Cancel";
+                        status = getString(R.string.msg_cancel);
                     } else {
-                        status = "Finish";
+                        status = getString(R.string.msg_finish);
                     }
 
 

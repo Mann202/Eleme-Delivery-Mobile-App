@@ -14,7 +14,7 @@ public class TermAndCondition extends AppCompatActivity {
     Button btnCart;
     Button btnCheckout;
 
-    public final static int MANAGE_ADDRESS =1;
+    public final static int MANAGE_ADDRESS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class TermAndCondition extends AppCompatActivity {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(TermAndCondition.this, Cart.class);
+                Intent intent = new Intent(TermAndCondition.this, Cart.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -36,17 +36,17 @@ public class TermAndCondition extends AppCompatActivity {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(TermAndCondition.this, MyAddressActivity.class);
+                Intent intent = new Intent(TermAndCondition.this, MyAddressActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
+
     @Override
     public void overridePendingTransition(int enterAnim, int exitAnim) {
         super.overridePendingTransition(enterAnim, exitAnim);
     }
-
 
 
 }

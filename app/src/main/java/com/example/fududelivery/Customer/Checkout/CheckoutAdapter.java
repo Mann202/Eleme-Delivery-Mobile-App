@@ -5,16 +5,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fududelivery.Customer.MyCart.Cart;
-import com.example.fududelivery.Customer.MyCart.CartAdapter;
 import com.example.fududelivery.Customer.MyCart.CartDetail;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Shipper.ChangeCurrency;
@@ -74,12 +70,12 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.Viewho
             } else {
                 tvFoodName.setText("");
             }
-            if (food.getQuantity()!=null) {
+            if (food.getQuantity() != null) {
                 tvFoodQuantity.setText("x" + food.getQuantity());
-            }  else tvFoodQuantity.setText("");
-            if (food.getTotalPrice()!=0.0f) {
+            } else tvFoodQuantity.setText("");
+            if (food.getTotalPrice() != 0.0f) {
                 tvFoodPrice.setText(ChangeCurrency.formatPrice(food.getTotalPrice()));
-            }  else tvFoodPrice.setText("0 VND");
+            } else tvFoodPrice.setText("0 VND");
 
             Picasso.get().load(food.getImageID()).into(imgFood);
         }

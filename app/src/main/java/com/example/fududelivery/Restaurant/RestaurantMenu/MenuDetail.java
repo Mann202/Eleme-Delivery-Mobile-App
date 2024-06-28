@@ -136,12 +136,12 @@ public class MenuDetail extends AppCompatActivity {
         findViewById(R.id.backwardButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(MenuDetail.this).setTitle("Discard").setMessage("Do you really want to cancel? All your change will be discard.").setPositiveButton("OK", (dialog, which) -> {
+                new AlertDialog.Builder(MenuDetail.this).setTitle("Discard").setMessage(getString(R.string.msg_do_you_really_want_to_delete_this_category_folder_and_all_the_menu_inside_it)).setPositiveButton("OK", (dialog, which) -> {
                     // Code to execute when OK is clicked
                     // For example, finish the activity or close the fragment
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }).setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()).create().show();
+                }).setNegativeButton(getString(R.string.msg_cancel), (dialog, which) -> dialog.dismiss()).create().show();
             }
         });
 
@@ -180,24 +180,24 @@ public class MenuDetail extends AppCompatActivity {
             firebaseFirestore.collection("Food").document(menuID).update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(MenuDetail.this, "Update menu's details successfully.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MenuDetail.this, getString(R.string.msg_update_menu_s_details_successfully), Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(MenuDetail.this, "Update menu's details failed. Please try again!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MenuDetail.this, getString(R.string.msg_update_menu_s_details_failed_please_try_again), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
             firebaseFirestore.collection("Food").add(data).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentReference> task) {
-                    Toast.makeText(MenuDetail.this, "Update menu's details for new menu successfully.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MenuDetail.this, getString(R.string.msg_update_menu_s_details_successfully), Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(MenuDetail.this, "Update menu's details for new menu failed. Please try again later!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MenuDetail.this, getString(R.string.msg_update_menu_s_details_failed_please_try_again), Toast.LENGTH_SHORT).show();
                 }
             });
         }

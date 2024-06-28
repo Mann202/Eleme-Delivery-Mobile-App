@@ -1,7 +1,5 @@
 package com.example.fududelivery.Restaurant_Home;
 
-import static java.sql.DriverManager.println;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.fududelivery.Customer.MyCart.CartDetail;
-import com.example.fududelivery.Home.Search.ItemSearch;
-import com.example.fududelivery.Home.Search.ViewAdapter_ItemSearch;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,7 +23,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class ViewAdapter_Food extends RecyclerView.Adapter<ViewAdapter_Food.ItemFoodHolder>{
@@ -93,7 +87,7 @@ public class ViewAdapter_Food extends RecyclerView.Adapter<ViewAdapter_Food.Item
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(mContext, "Add to cart Successfully!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, mContext.getString(R.string.msg_add_to_cart_successfully), Toast.LENGTH_SHORT).show();
                         // Reload the cart items to reflect the new addition
                     }
                 })

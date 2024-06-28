@@ -48,7 +48,7 @@ public class VerifyEmail extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(VerifyEmail.this, "Confirmation email has been sent! Please check your email.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(VerifyEmail.this, R.string.msg_confirmation_email_has_been_sent_please_check_your_email, Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(VerifyEmail.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 Log.v("Debug", task.getException().toString());

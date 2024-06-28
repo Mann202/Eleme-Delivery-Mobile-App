@@ -1,9 +1,7 @@
 package com.example.fududelivery.Restaurant.MainRestaurant;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.R;
-import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetail;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<RestaurantViewHolder> {
 
@@ -52,6 +49,7 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
+        Picasso.get().load(items.get(position).getImageView()).into(holder.imageView);
         holder.nameText.setText(items.get(position).getNameText());
         holder.itemCountText.setText(items.get(position).getItemCountText());
         holder.adressText.setText(items.get(position).getAdressText());
@@ -68,7 +66,7 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
                     public void onSuccess(Void aVoid) {
                         items.remove(position);
                         notifyDataSetChanged();
-                        Toast.makeText(view.getContext(), "Order completed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), R.string.msg_order_completed, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -91,7 +89,7 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
 
     private void showCancelDialog(int position, String orderID) {
 
-        new AlertDialog.Builder(context).setTitle("Cancel").setMessage("Do you really want to cancel?").setPositiveButton("OK", (dialog, which) -> {
+        new AlertDialog.Builder(context).setTitle("Cancel").setMessage(R.string.msg_do_you_really_want_to_cancel).setPositiveButton(context.getString(R.string.msg_ok), (dialog, which) -> {
             // Code to execute when OK is clicked
             // For example, finish the activity or close the fragment
             firestoreInstance.collection("Orders").document(orderID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -106,7 +104,7 @@ public class RestaurantInforPreparingAdapter extends RecyclerView.Adapter<Restau
                     Log.w("Debug", "Error deleting document", e);
                 }
             });
-        }).setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()).create().show();
+        }).setNegativeButton(context.getString(R.string.msg_cancel), (dialog, which) -> dialog.dismiss()).create().show();
     }
 
     private void removeItem(int position) {

@@ -119,7 +119,6 @@ public class Login extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                             String Uid = user.getUid();
-                            Log.v("Debug", Uid);
 
                             sessionManager.loginUserState();
                             sessionManager.loginUserInformation(Uid);
@@ -161,7 +160,7 @@ public class Login extends AppCompatActivity {
                                         } else {
                                             Log.d("Debug", "roleID is null");
                                         }
-                                        Toast.makeText(Login.this, "Login successfully.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, getString(R.string.msg_login_successfully), Toast.LENGTH_SHORT).show();
                                     }
                                     finishAffinity();
                                 }
@@ -172,7 +171,7 @@ public class Login extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            Toast.makeText(Login.this, "Authentication failed. Please check your password or email again.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, R.string.msg_authentication_failed_please_check_your_password_or_email_again, Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
                     }
@@ -211,7 +210,7 @@ public class Login extends AppCompatActivity {
 
                     @Override
                     public void onCancel() {
-                        Toast.makeText(Login.this, "Facebook login canceled.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, getString(R.string.msg_facebook_login_canceled), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

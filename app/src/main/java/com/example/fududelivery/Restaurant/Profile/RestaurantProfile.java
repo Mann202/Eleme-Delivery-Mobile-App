@@ -1,9 +1,7 @@
 package com.example.fududelivery.Restaurant.Profile;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,13 +10,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 
-import com.example.fududelivery.Customer.ChangeName;
-import com.example.fududelivery.Customer.CustomerProfile;
 import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
@@ -89,14 +84,14 @@ public class RestaurantProfile extends AppCompatActivity {
                                 queryDocumentSnapshots.getDocuments().get(0).getReference()
                                         .update("name", newName)
                                         .addOnSuccessListener(aVoid -> {
-                                            Toast.makeText(RestaurantProfile.this, "Name saved: " + newName, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RestaurantProfile.this, getString(R.string.msg_name_saved) + newName, Toast.LENGTH_SHORT).show();
                                             userSessionManager.loginUserName(newName);
                                             setResult(RESULT_OK);
                                             finish();
                                         })
-                                        .addOnFailureListener(e -> Toast.makeText(RestaurantProfile.this, "Failed to update name", Toast.LENGTH_SHORT).show());
+                                        .addOnFailureListener(e -> Toast.makeText(RestaurantProfile.this, getString(R.string.msg_failed_to_update_name), Toast.LENGTH_SHORT).show());
                             } else {
-                                Toast.makeText(RestaurantProfile.this, "User not found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RestaurantProfile.this, R.string.msg_user_not_found, Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(e -> Toast.makeText(RestaurantProfile.this, e.toString(), Toast.LENGTH_SHORT).show());

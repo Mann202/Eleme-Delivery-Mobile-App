@@ -14,8 +14,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fududelivery.Customer.MyCart.Cart;
-import com.example.fududelivery.Customer.MyCart.CartAdapter;
 import com.example.fududelivery.Customer.MyCart.CartDetail;
 import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.Login.UserSessionManager;
@@ -81,7 +79,7 @@ public class CheckOutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addOrder();
-                for(CartDetail cart : cartItem){
+                for (CartDetail cart : cartItem) {
                     deleteCartItem(cart);
                 }
                 Intent intent = new Intent(CheckOutActivity.this, Customer.class);
@@ -89,58 +87,57 @@ public class CheckOutActivity extends AppCompatActivity {
             }
         });
     }
+
     private void loadCartItems() {
         // Show refresh indicator
 //        swipeRefreshLayout.setRefreshing(true);
 
         // Get cart items from Firestore
         CollectionReference cartCollection = firestoreInstance.collection("CartDetail");
-        cartCollection
-                .whereEqualTo("UserID", userSessionManager.getUserInformation())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        // Hide refresh indicator
+        cartCollection.whereEqualTo("UserID", userSessionManager.getUserInformation()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                // Hide refresh indicator
 //                        swipeRefreshLayout.setRefreshing(false);
 
-                        // Clear the current cart items
-                        cartItem.clear();
+                // Clear the current cart items
+                cartItem.clear();
 
-                        // Add the new cart items
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            CartDetail cart = documentSnapshot.toObject(CartDetail.class);
-                            cart.setCartID(documentSnapshot.getId());
-                            System.out.println("Checkout: " + cart);
-                            cartItem.add(cart);
-                        }
+                // Add the new cart items
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    CartDetail cart = documentSnapshot.toObject(CartDetail.class);
+                    cart.setCartID(documentSnapshot.getId());
+                    System.out.println("Checkout: " + cart);
+                    cartItem.add(cart);
+                }
 
-                        // Notify the adapter of data changes
-                        adapter.notifyDataSetChanged();
-                        calculateMoney(cartItem);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Hide refresh indicator
+                // Notify the adapter of data changes
+                adapter.notifyDataSetChanged();
+                calculateMoney(cartItem);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Hide refresh indicator
 //                        swipeRefreshLayout.setRefreshing(false);
-                        // Handle the failure
-                    }
-                });
+                // Handle the failure
+            }
+        });
     }
+
     private float calculateMoney(ArrayList<CartDetail> cartItems) {
         float subtotal = 0;
         for (CartDetail item : cartItems) {
             subtotal += item.getTotalPrice();
         }
         tvSubtotal.setText(ChangeCurrency.formatPrice(subtotal));
-        tvTotal.setText(ChangeCurrency.formatPrice(subtotal+35000));
+        tvTotal.setText(ChangeCurrency.formatPrice(subtotal + 35000));
 
         return subtotal;
 
     }
+
     private void addOrder() {
         CollectionReference orderCollection = firestoreInstance.collection("Orders");
 
@@ -162,38 +159,23 @@ public class CheckOutActivity extends AppCompatActivity {
         newDocument.put("subTotal", calculateMoney(cartItem));
 
 
-        orderCollection
-                .add(newDocument)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(CheckOutActivity.this, "Order Successfully!!!", Toast.LENGTH_SHORT).show();
-                        // Reload the cart items to reflect the new addition
-                        loadCartItems();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CheckOutActivity.this, "Error adding document", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        orderCollection.add(newDocument).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(CheckOutActivity.this, getString(R.string.msg_order_sucessfully), Toast.LENGTH_SHORT).show();
+                // Reload the cart items to reflect the new addition
+                loadCartItems();
+            }
+        });
     }
+
     public void deleteCartItem(CartDetail food) {
         String cartID = food.getCartID();
-        firestoreInstance.collection("CartDetail").document(cartID)
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        cartItem.remove(food);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Xử lý khi thất bại
-                    }
-                });
+        firestoreInstance.collection("CartDetail").document(cartID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                cartItem.remove(food);
+            }
+        });
     }
 }

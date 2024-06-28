@@ -106,7 +106,6 @@ public class OrderDetail extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     if (documentSnapshot.exists()) {
-                        System.out.println("OrderDetail: ship status: " + documentSnapshot.getString("ShippingStatus"));
                         shippingStatus = documentSnapshot.getString("ShippingStatus");
                         if (shippingStatus.equals("Ready")) {
                             runOnUiThread(new Runnable() {
@@ -172,7 +171,7 @@ public class OrderDetail extends AppCompatActivity {
                     try {
                         startActivity(callIntent);
                     } catch (ActivityNotFoundException e) {
-                        Toast.makeText(OrderDetail.this, "No app found to handle call intent", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderDetail.this, getString(R.string.msg_no_app_found_to_handle_call_intent), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

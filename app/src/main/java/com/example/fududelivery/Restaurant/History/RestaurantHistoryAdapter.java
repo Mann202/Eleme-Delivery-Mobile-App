@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.MainRestaurant.ItemDetailRestaurant;
-import com.example.fududelivery.Restaurant.RestaurantDetail.ItemRestaurantOrder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class RestaurantHistoryAdapter extends RecyclerView.Adapter<RestaurantHis
     @Override
     public void onBindViewHolder(@NonNull RestaurantHistoryViewHolder holder, int position) {
         ItemDetailRestaurant item = items.get(position);
+        Picasso.get().load(item.getImageView()).into(holder.logo);
         holder.nameTextView.setText(item.getNameText());
         holder.addressText.setText(item.getAdressText());
         holder.dateTextHistory.setText(item.getDateText());
@@ -70,6 +72,7 @@ public class RestaurantHistoryAdapter extends RecyclerView.Adapter<RestaurantHis
     public static class RestaurantHistoryViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView addressText;
+        ImageView logo;
 
         TextView totalPriceTextHistory;
         TextView dateTextHistory;
@@ -77,6 +80,7 @@ public class RestaurantHistoryAdapter extends RecyclerView.Adapter<RestaurantHis
 
         public RestaurantHistoryViewHolder(View itemView) {
             super(itemView);
+            logo = itemView.findViewById(R.id.logo);
             nameTextView = itemView.findViewById(R.id.nameTextHistory);
             addressText = itemView.findViewById(R.id.adressTextHistory);
             totalPriceTextHistory = itemView.findViewById(R.id.totalPriceTextHistory);

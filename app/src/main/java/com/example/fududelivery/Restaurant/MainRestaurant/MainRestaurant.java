@@ -16,11 +16,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.fududelivery.Login.RestaurantSessionManager;
-import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.History.RestaurantHistory;
 import com.example.fududelivery.Restaurant.Profile.RestaurantProfile;
 import com.example.fududelivery.Restaurant.RestaurantMenu.RestaurantMenu;
+import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -54,8 +54,8 @@ public class MainRestaurant extends AppCompatActivity {
         startService(serviceIntent);
 
         TabsAdapter tabsAdapter = new TabsAdapter(this);
-        tabsAdapter.addFragment(new RestaurantMainPreparingFragment(), "Prepairing");
-        tabsAdapter.addFragment(new RestaurantMainDoneFragment(), "Done");
+        tabsAdapter.addFragment(new RestaurantMainPreparingFragment(), getString(R.string.msg_prepairing));
+        tabsAdapter.addFragment(new RestaurantMainDoneFragment(), getString(R.string.msg_done));
 
         viewPager.setAdapter(tabsAdapter);
 

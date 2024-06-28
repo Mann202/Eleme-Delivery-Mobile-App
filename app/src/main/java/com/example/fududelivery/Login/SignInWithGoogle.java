@@ -42,7 +42,6 @@ public class SignInWithGoogle {
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(activity.getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
-        Log.d("Debug", "Sign in with google");
     }
 
     public void signInWithGoogle() {
@@ -51,7 +50,6 @@ public class SignInWithGoogle {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("Debug", "onActivityResult");
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             task.addOnCompleteListener(new OnCompleteListener<GoogleSignInAccount>() {
@@ -62,8 +60,7 @@ public class SignInWithGoogle {
                         firebaseAuthWithGoogle(account.getIdToken());
                         name = account.getDisplayName();
                     } catch (ApiException e) {
-                        Log.d("Debug", "Google sign in failed", e);
-                        Toast.makeText(mActivity, "Google sign in failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity, R.string.msg_google_sign_in_failed, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -81,7 +78,7 @@ public class SignInWithGoogle {
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 FirebaseUser user = mAuth.getCurrentUser();
-                Toast.makeText(mActivity, "Sign in with Google successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, R.string.msg_sign_in_with_google_successful, Toast.LENGTH_SHORT).show();
 
                 String userUid = user.getUid();
                 firestoreInstance.collection("Users").whereEqualTo("userUid", userUid).get().addOnCompleteListener(task1 -> {
@@ -89,7 +86,6 @@ public class SignInWithGoogle {
                         QuerySnapshot querySnapshot = task1.getResult();
                         //If document exits, continue to get roleId.
                         if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                            Log.v("Debug", "Document exists");
                             DocumentSnapshot document = querySnapshot.getDocuments().get(0);
                             String roleId = document.getString("roleId");
                             //role-id exits, continue to app.
@@ -117,11 +113,10 @@ public class SignInWithGoogle {
                                 mActivity.finishAffinity();
                             } else {
                                 //role-id don't exits, make toast.
-                                Toast.makeText(mActivity, "Error log-in with Google. Please contact us for further information!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mActivity, R.string.msg_error_log_in_with_google_please_contact_us_for_further_information, Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             //If document don't exits, create new document with new user.
-                            Log.v("Debug", "Document does not exist");
                             Map<String, Object> userData = new HashMap<>();
                             userData.put("userUid", userUid);
                             userData.put("name", name);
@@ -133,8 +128,6 @@ public class SignInWithGoogle {
                                 userSessionManager.loginUserRole("1");
                                 userSessionManager.loginUserState();
                                 userSessionManager.loginUserInformation(userUid);
-                            }).addOnFailureListener(e1 -> {
-                                Log.w("Debug", "Error adding document", e1);
                             });
                         }
                     } else {
@@ -145,7 +138,7 @@ public class SignInWithGoogle {
                 });
             } else {
                 Log.d("Debug", "signInWithCredential:failure", task.getException());
-                Toast.makeText(mActivity, "Sign in with Google failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, R.string.msg_google_sign_in_failed, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class RestaurantInforDoneAdapter extends RecyclerView.Adapter<RestaurantV
     @NonNull
     @Override
     public RestaurantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RestaurantViewHolder(LayoutInflater.from(context).inflate(R.layout.item_restaurantdone,parent,false));
+        return new RestaurantViewHolder(LayoutInflater.from(context).inflate(R.layout.item_restaurantdone, parent, false));
     }
 
     public interface OnItemClickListener {
@@ -39,6 +40,7 @@ public class RestaurantInforDoneAdapter extends RecyclerView.Adapter<RestaurantV
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
+        Picasso.get().load(items.get(position).getImageView()).into(holder.imageView);
         holder.nameText.setText(items.get(position).getNameText());
         holder.itemCountText.setText(items.get(position).getItemCountText());
         holder.adressText.setText(items.get(position).getAdressText());

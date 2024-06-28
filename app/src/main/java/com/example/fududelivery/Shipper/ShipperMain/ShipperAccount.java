@@ -29,8 +29,7 @@ public class ShipperAccount extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_shipper_account, container, false);
         UserSessionManager userSessionManager = new UserSessionManager(requireContext());
 
@@ -45,7 +44,10 @@ public class ShipperAccount extends Fragment {
         phoneNumberField.setEnabled(false);
 
         // Spinner language
-        String[] languages = {"English", "Vietnamese"};
+        String englishText = getString(R.string.english);
+        String chineseText = getString(R.string.chinese);
+        String vietnameseText = getString(R.string.vietnamese);
+        String[] languages = {englishText, chineseText, vietnameseText};
 
         AppCompatButton logoutBtn = rootView.findViewById(R.id.logout_button);
         Spinner spinnerLanguage = rootView.findViewById(R.id.sn_language_shipper);
@@ -62,9 +64,8 @@ public class ShipperAccount extends Fragment {
                         setLocale("zh");
                         break;
                     case "Vietnamese":
-                        setLocale("vi");
+                        setLocale("vn");
                         break;
-                    // Thêm các case cho các ngôn ngữ khác nếu cần
                 }
             }
 
@@ -74,7 +75,9 @@ public class ShipperAccount extends Fragment {
         });
 
         // Spinner theme
-        String[] themes = {"Light", "Dark"};
+        String lightText = getString(R.string.light);
+        String darkText = getString(R.string.dark);
+        String[] themes = {lightText, darkText};
         Spinner spinnerTheme = rootView.findViewById(R.id.sn_theme_shipper);
         ArrayAdapter<String> themeAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, themes);
         themeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,7 +87,6 @@ public class ShipperAccount extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-                // Xử lý khi một mục được chọn trong Spinner theme
             }
 
             @Override

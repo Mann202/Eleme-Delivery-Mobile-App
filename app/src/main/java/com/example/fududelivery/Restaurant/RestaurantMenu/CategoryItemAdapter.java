@@ -177,7 +177,7 @@ public class CategoryItemAdapter extends ArrayAdapter<Category> {
     }
 
     private void showDeleteDialog(String cateID, Category currentItem) {
-        new AlertDialog.Builder(getContext()).setTitle("Cancel").setMessage("Do you really want to delete this category folder and all the menu inside it?").setPositiveButton("OK", (dialog, which) -> {
+        new AlertDialog.Builder(getContext()).setTitle("Cancel").setMessage(getContext().getString(R.string.msg_do_you_really_want_to_delete_this_category_folder_and_all_the_menu_inside_it)).setPositiveButton("OK", (dialog, which) -> {
             firebaseFirestore.collection("Catelogy").document(cateID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {

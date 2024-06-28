@@ -3,11 +3,9 @@ package com.example.fududelivery.Restaurant.MainRestaurant;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,8 +20,9 @@ import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.example.fududelivery.Reference.ChangeCurrency;
 import com.example.fududelivery.Restaurant.RestaurantDetail.RestaurantDetail;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -113,20 +112,30 @@ public class RestaurantMainDoneFragment extends Fragment {
                     loadMoreContainer.setVisibility(View.VISIBLE);
                     noOrdersTextView.setText("Don't have any order");
                 } else {
+                    restaurantList.clear(); // Clear the list before adding new items
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         String orderId = document.getId();
-
-                        restaurantList.add(new ItemDetailRestaurant(1, document.getString("Date"), document.getString("TotalQuantity") + " items", document.getString("name"), ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")), document.getString("address"), orderId, document.getString("CusID"), document.getString("ShipperID")));
-
-                        if (loadAgain != null && loadAgain) {
-                            LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
-                            loadMoreContainer.setVisibility(View.INVISIBLE);
-                        }
-                        adapter.notifyDataSetChanged();
-                        view.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
-                        swipeRefreshLayout.setVisibility(View.VISIBLE);
-                        swipeRefreshLayout.setRefreshing(false);
+                        firestoreInstance.collection("Restaurant").whereEqualTo("ResID", userSessionManager.getUserInformation()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot documentSnapshot1 : task.getResult()) {
+                                        restaurantList.add(new ItemDetailRestaurant(documentSnapshot1.getString("ImageID"), document.getString("Date"), document.getString("TotalQuantity") + " items", document.getString("name"), ChangeCurrency.formatPrice(document.getDouble("ShippingFee") + document.getDouble("serviceFee") + document.getDouble("subTotal")), document.getString("address"), orderId, document.getString("CusID"), document.getString("ShipperID")));
+                                    }
+                                    adapter.notifyDataSetChanged(); // Notify adapter here
+                                }
+                            }
+                        });
                     }
+
+                    if (loadAgain != null && loadAgain) {
+                        LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
+                        loadMoreContainer.setVisibility(View.INVISIBLE);
+                    }
+
+                    view.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.GONE);
+                    swipeRefreshLayout.setVisibility(View.VISIBLE);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
         });

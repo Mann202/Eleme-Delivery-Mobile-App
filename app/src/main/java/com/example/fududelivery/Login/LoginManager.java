@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,16 +30,16 @@ public class LoginManager {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Log.d("Debug", "signInWithEmail:success");
-                    Toast.makeText(mActivity, "Login with google successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity, R.string.msg_login_with_google_successfully, Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                 } else {
                     Log.w("Debug", "signInWithEmail:failure", task.getException());
                     if (task.getException() instanceof FirebaseAuthInvalidUserException) {
-                        Toast.makeText(mActivity, "Email not registered.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity, R.string.msg_email_not_registered, Toast.LENGTH_SHORT).show();
                     } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(mActivity, "Password incorrect, double-check again your password.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity, R.string.msg_password_incorrect_double_check_again_your_password, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(mActivity, "Login failed. Please try again later.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity, R.string.msg_login_failed_please_try_again_later, Toast.LENGTH_SHORT).show();
                     }
                 }
             }

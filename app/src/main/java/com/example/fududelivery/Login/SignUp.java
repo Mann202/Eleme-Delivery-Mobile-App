@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +21,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -32,7 +28,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class SignUp extends AppCompatActivity {
     private static final String TAG = "SignUp";
@@ -68,7 +63,7 @@ public class SignUp extends AppCompatActivity {
                 String email = emailField.getText().toString();
                 String password = ".......";
                 if (email.trim().equals("")) {
-                    Toast.makeText(SignUp.this, "Please enter your email address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, R.string.msg_please_enter_your_email_address, Toast.LENGTH_SHORT).show();
                 } else {
                     firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener((task -> {
                         if (task.isSuccessful()) {
@@ -85,7 +80,7 @@ public class SignUp extends AppCompatActivity {
                                         findViewById(R.id.submitNameBtn).setVisibility(View.VISIBLE);
 
                                         TextView textView = (TextView) findViewById(R.id.signupdescription);
-                                        textView.setText("Hello! What is your name?");
+                                        textView.setText(R.string.msg_hello_what_is_your_name);
                                     } else {
                                         Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                         Log.v("Debug", task.getException().toString());
@@ -107,12 +102,12 @@ public class SignUp extends AppCompatActivity {
                 name = nameField.getText().toString();
 
                 if (name.trim().equals("")) {
-                    Toast.makeText(SignUp.this, "Please enter your name!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, R.string.msg_please_enter_your_name, Toast.LENGTH_SHORT).show();
                 } else {
                     findViewById(R.id.submitNameBtn).setVisibility(View.GONE);
                     findViewById(R.id.submitPassword).setVisibility(View.VISIBLE);
                     TextView textView = (TextView) findViewById(R.id.signupdescription);
-                    textView.setText("Password length is at least 6 characters");
+                    textView.setText(R.string.msg_password_length_is_at_least_6_characters);
                     findViewById(R.id.password).setVisibility(View.VISIBLE);
                     findViewById(R.id.repassword).setVisibility(View.VISIBLE);
                     findViewById(R.id.name).setVisibility(View.GONE);
@@ -132,14 +127,14 @@ public class SignUp extends AppCompatActivity {
                 String password = passwordField.getText().toString();
 
                 if (password.trim().equals("")) {
-                    Toast.makeText(SignUp.this, "Please enter your password and re-enter your password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, R.string.msg_please_enter_your_password_and_re_enter_your_password, Toast.LENGTH_SHORT).show();
                 } else {
                     if (repassword.equals(password)) {
                         user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Log.d("Debug", "User password updated.");
+                                    Log.d("Debug", getString(R.string.msg_user_password_updated));
 
                                     String userUid = user.getUid();
 
@@ -170,7 +165,7 @@ public class SignUp extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Toast.makeText(SignUp.this, "Check your re-enter password!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUp.this, R.string.msg_check_your_re_enter_password, Toast.LENGTH_LONG).show();
                     }
                 }
             }

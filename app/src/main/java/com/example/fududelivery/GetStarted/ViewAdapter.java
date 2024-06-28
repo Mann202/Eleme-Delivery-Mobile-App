@@ -17,14 +17,18 @@ public class ViewAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer[] images={R.drawable.food_delivery_restaurant_review_stars,R.drawable.shipping_truck_fast,R.drawable.ic_certificate,R.drawable.streamlinehq_money_cash_bill_1____________line_48_ico_yfoicjymrxa88emm};
+    private Integer[] images = {R.drawable.food_delivery_restaurant_review_stars, R.drawable.shipping_truck_fast, R.drawable.ic_certificate, R.drawable.streamlinehq_money_cash_bill_1____________line_48_ico_yfoicjymrxa88emm};
 
-    private String[] quotes = {"Delicious Food", "Fast Shipping", "Certificate Food", "Payment Online"};
+    String delicious = context.getString(R.string.msg_delicious_food);
+    String fastFood = context.getString(R.string.msg_fast_shipping);
+    String certificateFood = context.getString(R.string.msg_certificate_food);
+    String paymentOnline = context.getString(R.string.msg_payment_online);
+    private String[] quotes = {delicious, fastFood, certificateFood, paymentOnline};
 
-    public ViewAdapter(Context context)
-    {
-        this.context=context;
+    public ViewAdapter(Context context) {
+        this.context = context;
     }
+
     @Override
     public int getCount() {
         return images.length;
@@ -32,7 +36,7 @@ public class ViewAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view==object;
+        return view == object;
     }
 
     @NonNull
@@ -55,8 +59,8 @@ public class ViewAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        ViewPager viewPager=(ViewPager) container;
-        View view=(View) object;
+        ViewPager viewPager = (ViewPager) container;
+        View view = (View) object;
         viewPager.removeView(view);
     }
 }
