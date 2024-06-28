@@ -1,0 +1,12 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="180dp" android:layout_height="210dp" android:layout_marginTop="20dp" app:cardCornerRadius="10dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+        <ImageView android:id="@+id/img_food_sm" android:layout_width="match_parent" android:layout_height="145dp" android:scaleType="centerCrop" android:src="@drawable/dishes_01"/>
+        <TextView android:id="@+id/tv_title_sm" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/shaking_beef_tri_tip" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/black" android:background="@drawable/rounded_background_white" android:padding="5dp"/>
+        <LinearLayout android:id="@+id/rate_distance_sm" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginBottom="10dp" android:background="@drawable/rounded_background_white" android:orientation="horizontal">
+            <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/img_14" android:layout_marginTop="5dp" android:layout_marginStart="5dp"> </ImageView>
+            <TextView android:id="@+id/star_rate_sm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4.5(113)" android:textSize="10dp" android:fontFamily="@font/lato_regular" android:layout_marginTop="11dp" android:layout_marginEnd="38dp" android:layout_marginStart="6dp"> </TextView>
+            <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/img_15" android:layout_marginTop="5dp" android:layout_marginStart="15dp"> </ImageView>
+            <TextView android:id="@+id/distance_sm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1.3 km" android:textSize="10dp" android:fontFamily="@font/lato_regular" android:layout_marginTop="11dp" android:layout_marginStart="6dp"> </TextView>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
