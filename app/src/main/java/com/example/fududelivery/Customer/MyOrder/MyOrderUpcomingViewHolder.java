@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fududelivery.R;
 
-public class MyOrderViewHolder extends RecyclerView.ViewHolder {
+public class MyOrderUpcomingViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;
     TextView dateText, itemCountText,nameText, statusText, totalPriceText;
     AppCompatButton reorderBtn, rateBtn;
     RelativeLayout rlContainer;
 
-    public MyOrderViewHolder(@NonNull View itemView) {
+    public MyOrderUpcomingViewHolder(@NonNull View itemView) {
         super(itemView);
         rlContainer = itemView.findViewById(R.id.rl_container);
         imageView = itemView.findViewById(R.id.logo);
@@ -30,4 +30,3 @@ public class MyOrderViewHolder extends RecyclerView.ViewHolder {
         rateBtn = itemView.findViewById(R.id.rateBtn);
     }
 }
-

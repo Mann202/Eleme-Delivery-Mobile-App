@@ -3,42 +3,48 @@ package com.example.fududelivery.Customer.MyOrder;
 import androidx.appcompat.widget.AppCompatButton;
 
 public class MyOrderInfor {
-    int imageView;
     String dateText;
     String itemCountText;
     String nameText;
     String totalPriceText;
     String statusText;
+    String imageLink;
+    String orderId;
 
     AppCompatButton reorderBtn, rateBtn;
 
-    public MyOrderInfor(int imageView, String dateText, String itemCountText, String nameText, String totalPriceText, String statusText) {
-        this.imageView = imageView;
+    public MyOrderInfor(String orderId, String imageLink, String dateText, String itemCountText, String nameText, String totalPriceText, String statusText) {
+        this.orderId = orderId;
+        this.imageLink = imageLink;
         this.dateText = dateText;
         this.itemCountText = itemCountText;
         this.nameText = nameText;
         this.totalPriceText = totalPriceText;
         this.statusText = statusText;
     }
-    public int getImageView() {
-        return imageView;
+
+    public String getImageView() {
+        return imageLink;
     }
 
     public AppCompatButton getReorderBtn() {
         return reorderBtn;
     }
+
     public void setReorderBtn(AppCompatButton reorderBtn) {
         this.reorderBtn = reorderBtn;
     }
+
     public AppCompatButton getRateBtn() {
         return rateBtn;
     }
+
     public void setRateBtn(AppCompatButton rateBtn) {
         this.rateBtn = rateBtn;
     }
 
-    public void setImageView(int imageView) {
-        this.imageView = imageView;
+    public void setImageView(String imageView) {
+        this.imageLink = imageView;
     }
 
     public String getDateText() {
@@ -79,5 +85,13 @@ public class MyOrderInfor {
 
     public void setStatusText(String statusText) {
         this.statusText = statusText;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

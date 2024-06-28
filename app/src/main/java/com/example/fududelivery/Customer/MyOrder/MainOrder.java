@@ -3,6 +3,7 @@ package com.example.fududelivery.Customer.MyOrder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,12 @@ public class MainOrder extends AppCompatActivity {
                 (tab, position) -> tab.setText(tabsAdapter.getPageTitle(position))
         ).attach();
 
-    }
+        findViewById(R.id.backIcon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
+    }
 }
