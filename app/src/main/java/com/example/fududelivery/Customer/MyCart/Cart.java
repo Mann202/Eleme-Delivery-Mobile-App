@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,20 +28,22 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cart extends AppCompatActivity {
 
     private ArrayList<CartDetail> cartItem = new ArrayList<>();
     private CartAdapter adapter;
     private RecyclerView recyclerView;
-//    private SwipeRefreshLayout swipeRefreshLayout;
+    //    private SwipeRefreshLayout swipeRefreshLayout;
     private RelativeLayout emptyCart;
 
     private FirebaseFirestore firestoreInstance;
     private TextView totalPrice;
     ImageView btnNavBack;
     CheckBox checkboxSelectAll;
-    Button btnDeleteAll;
+    AppCompatButton btnDeleteAll;
     Button btnCheckout;
     UserSessionManager userSessionManager;
     String MyCartID;
@@ -92,8 +95,7 @@ public class Cart extends AppCompatActivity {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Cart.this, CheckOutActivity.class);
-                startActivity(intent);
+                updateCartList();
             }
         });
         checkboxSelectAll.setOnClickListener(v -> {
@@ -106,97 +108,89 @@ public class Cart extends AppCompatActivity {
             public void onClick(View v) {
                 for (CartDetail item : cartItem) {
                     String cartID = item.getCartID();
-                    firestoreInstance.collection("CartDetail").document(cartID)
-                            .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    // Xóa thành công trong Firebase, giờ xóa khỏi danh sách local
-                                    cartItem.remove(item);
-                                    adapter.notifyDataSetChanged();
-                                    calculateTotalPrice(cartItem);
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Xử lý khi thất bại
-                                }
-                            });
+                    firestoreInstance.collection("CartDetail").document(cartID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Xóa thành công trong Firebase, giờ xóa khỏi danh sách local
+                            cartItem.remove(item);
+                            adapter.notifyDataSetChanged();
+                            calculateTotalPrice(cartItem);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Xử lý khi thất bại
+                        }
+                    });
                 }
             }
         });
 
     }
+
     private void loadCartItems() {
         // Show refresh indicator
 //        swipeRefreshLayout.setRefreshing(true);
 
         // Get cart items from Firestore
         CollectionReference cartCollection = firestoreInstance.collection("CartDetail");
-        cartCollection
-                .whereEqualTo("UserID", userSessionManager.getUserInformation())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        // Hide refresh indicator
+        cartCollection.whereEqualTo("UserID", userSessionManager.getUserInformation()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                // Hide refresh indicator
 //                        swipeRefreshLayout.setRefreshing(false);
 
-                        if (queryDocumentSnapshots.isEmpty()) {
-                            emptyCart.setVisibility(View.VISIBLE);
-                            recyclerView.setVisibility(View.GONE);
-                        } else {
-                            emptyCart.setVisibility(View.GONE);
-                            recyclerView.setVisibility(View.VISIBLE);
-                        }
+                if (queryDocumentSnapshots.isEmpty()) {
+                    emptyCart.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                } else {
+                    emptyCart.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
 
-                        // Clear the current cart items
-                        cartItem.clear();
+                // Clear the current cart items
+                cartItem.clear();
 
-                        // Add the new cart items
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            CartDetail cart = documentSnapshot.toObject(CartDetail.class);
-                            cart.setCartID(documentSnapshot.getId());
-                            cartItem.add(cart);
-                        }
+                // Add the new cart items
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    CartDetail cart = documentSnapshot.toObject(CartDetail.class);
+                    cart.setCartID(documentSnapshot.getId());
+                    cartItem.add(cart);
+                }
 
-                        // Notify the adapter of data changes
-                        adapter.notifyDataSetChanged();
-                        calculateTotalPrice(cartItem);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Hide refresh indicator
+                // Notify the adapter of data changes
+                adapter.notifyDataSetChanged();
+                calculateTotalPrice(cartItem);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Hide refresh indicator
 //                        swipeRefreshLayout.setRefreshing(false);
-                        // Handle the failure
-                    }
-                });
+                // Handle the failure
+            }
+        });
     }
-    private void getMyCart(){
+
+    private void getMyCart() {
         CollectionReference cartCollection = firestoreInstance.collection("Cart");
-        cartCollection
-                .whereEqualTo("UserID", userSessionManager.getUserInformation())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            CartModel cart = documentSnapshot.toObject(CartModel.class);
-                            MyCartID = cart.getCartID();
-                            System.out.println("getMyCart: CartID :" + MyCartID);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+        cartCollection.whereEqualTo("UserID", userSessionManager.getUserInformation()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    CartModel cart = documentSnapshot.toObject(CartModel.class);
+                    MyCartID = cart.getCartID();
+                    System.out.println("getMyCart: CartID :" + MyCartID);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
 
-                    }
-                });
+            }
+        });
     }
+
     public void calculateTotalPrice(ArrayList<CartDetail> cart) {
         float total = 0;
         for (CartDetail food : cart) {
@@ -206,26 +200,25 @@ public class Cart extends AppCompatActivity {
         }
         totalPrice.setText(ChangeCurrency.formatPrice(total));
     }
+
     public void deleteCartItem(CartDetail food) {
         String cartID = food.getCartID();
-        firestoreInstance.collection("CartDetail").document(cartID)
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Xóa món ăn khỏi danh sách
-                        cartItem.remove(food);
-                        adapter.notifyDataSetChanged(); // Thông báo cho adapter về sự thay đổi dữ liệu
-                        calculateTotalPrice(cartItem); // Cập nhật tổng giá trị sau khi xóa
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Xử lý khi thất bại
-                    }
-                });
+        firestoreInstance.collection("CartDetail").document(cartID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // Xóa món ăn khỏi danh sách
+                cartItem.remove(food);
+                adapter.notifyDataSetChanged(); // Thông báo cho adapter về sự thay đổi dữ liệu
+                calculateTotalPrice(cartItem); // Cập nhật tổng giá trị sau khi xóa
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý khi thất bại
+            }
+        });
     }
+
     public void updateSelectAllCheckbox(boolean isChecked) {
         // Cập nhật trạng thái checkbox "select all" dựa vào isChecked
         // isChecked = true khi tất cả các mục đều được chọn
@@ -233,6 +226,34 @@ public class Cart extends AppCompatActivity {
 
         // Ví dụ:
         checkboxSelectAll.setChecked(isChecked);
+    }
+
+    private void updateCartList() {
+        CollectionReference cartListCollection = firestoreInstance.collection("CartDetail");
+
+        for (CartDetail item : cartItem) {
+            Map<String, Object> mapItem = new HashMap<>();
+            mapItem.put("CartID", item.getCartID());
+            mapItem.put("FoodName", item.getFoodName());
+            mapItem.put("UserID", item.getUserID());
+            mapItem.put("Quantity", item.getQuantity());
+            mapItem.put("TotalPrice", item.getTotalPrice());
+            mapItem.put("Price", item.getPrice());
+            mapItem.put("imageID", item.getImageID());
+            mapItem.put("Selected", item.isSelected());
+            cartListCollection.document(item.getCartID()).set(mapItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Intent intent = new Intent(Cart.this, CheckOutActivity.class);
+                    startActivity(intent);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+//                    Toast.makeText(Cart.this, "Error updating cart item in CartList", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 }

@@ -45,7 +45,7 @@
 
                         <TextView
                             android:id="@+id/deliveraddress_text"
-                            android:layout_width="wrap_content"
+                            android:layout_width="160dp"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/deliveraddress_lb"
                             android:layout_marginStart="20dp"
@@ -58,13 +58,14 @@
                             android:textStyle="normal" />
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/notificationButton"
+                            android:id="@+id/btn_cart"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_marginTop="20dp"
                             android:layout_toStartOf="@+id/settingButton"
                             android:background="@android:color/transparent"
-                            android:drawableStart="@drawable/baseline_notifications_24"
+                            android:drawableTint="@color/white"
+                            android:drawableStart="@drawable/ic_shopping_cart"
                             android:gravity="center"
                             android:padding="11dp" />
 

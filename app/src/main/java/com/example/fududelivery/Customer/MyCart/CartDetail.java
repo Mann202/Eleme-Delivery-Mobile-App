@@ -2,9 +2,8 @@ package com.example.fududelivery.Customer.MyCart;
 
 public class CartDetail {
     String CartID;
-    String FoodID;
     String FoodName;
-    String FoodCate;
+    String UserID;
     String Quantity;
     Float TotalPrice;
     Float Price;
@@ -14,12 +13,10 @@ public class CartDetail {
     public CartDetail() {
     }
 
-    public CartDetail(String cartID, String foodID, String foodName, String foodCate,
-                      String quantity, Float totalPrice, Float price, String imageID, boolean selected) {
+    public CartDetail(String cartID, String foodName, String userID, String quantity, Float totalPrice, Float price, String imageID, boolean selected) {
         CartID = cartID;
-        FoodID = foodID;
         FoodName = foodName;
-        FoodCate = foodCate;
+        UserID = userID;
         Quantity = quantity;
         TotalPrice = totalPrice;
         Price = price;
@@ -29,17 +26,7 @@ public class CartDetail {
 
     @Override
     public String toString() {
-        return "CartModel{" +
-                "CartID='" + CartID + '\'' +
-                ", FoodID='" + FoodID + '\'' +
-                ", FoodName='" + FoodName + '\'' +
-                ", FoodCate='" + FoodCate + '\'' +
-                ", Quantity='" + Quantity + '\'' +
-                ", TotalPrice=" + TotalPrice +
-                ", Price=" + Price +
-                ", imageID='" + imageID + '\'' +
-                ", Selected=" + Selected +
-                '}';
+        return "CartDetail{" + "CartID='" + CartID + '\'' + ", FoodName='" + FoodName + '\'' + ", UserID='" + UserID + '\'' + ", Quantity='" + Quantity + '\'' + ", TotalPrice=" + TotalPrice + ", Price=" + Price + ", imageID='" + imageID + '\'' + ", Selected=" + Selected + '}';
     }
 
     public String getCartID() {
@@ -50,12 +37,12 @@ public class CartDetail {
         CartID = cartID;
     }
 
-    public String getFoodID() {
-        return FoodID;
+    public String getUserID() {
+        return UserID;
     }
 
-    public void setFoodID(String foodID) {
-        FoodID = foodID;
+    public void setUserID(String userID) {
+        UserID = userID;
     }
 
     public String getFoodName() {
@@ -64,14 +51,6 @@ public class CartDetail {
 
     public void setFoodName(String foodName) {
         FoodName = foodName;
-    }
-
-    public String getFoodCate() {
-        return FoodCate;
-    }
-
-    public void setFoodCate(String foodCate) {
-        FoodCate = foodCate;
     }
 
     public String getQuantity() {

@@ -88,6 +88,13 @@ public class CheckOutActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnNavBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CheckOutActivity.this, Cart.class);
+                startActivity(intent);
+            }
+        });
     }
     private void loadCartItems() {
         // Show refresh indicator
@@ -144,6 +151,16 @@ public class CheckOutActivity extends AppCompatActivity {
     private void addOrder() {
         CollectionReference orderCollection = firestoreInstance.collection("Orders");
 
+        ArrayList<String> arrFoodName = new ArrayList<String>();
+        ArrayList<String> arrQuantity = new ArrayList<String>();
+        ArrayList<Float> arrTotalPrice = new ArrayList<Float>();
+
+        for(CartDetail item : cartItem) {
+            arrFoodName.add(item.getFoodName());
+            arrQuantity.add(item.getQuantity());
+            arrTotalPrice.add(item.getTotalPrice());
+        }
+
         // Create a sample document
         Map<String, Object> newDocument = new HashMap<>();
         newDocument.put("UserID", userSessionManager.getUserInformation());
@@ -154,13 +171,16 @@ public class CheckOutActivity extends AppCompatActivity {
         newDocument.put("ResAddress", "Ngã Tư Thủ Đức, TPHCM");
         newDocument.put("OrderTotal", calculateMoney(cartItem) + 35000);
         newDocument.put("Date", "01/07/2024");
-        newDocument.put("ShippingFee", 0);
+        newDocument.put("ShippingFee", 5000);
         newDocument.put("TotalQuantity", String.valueOf(cartItem.size()));
         newDocument.put("address", userSessionManager.getUserAddress());
         newDocument.put("name", userSessionManager.getUserName());
-        newDocument.put("serviceFee", 10000);
+        newDocument.put("serviceFee", 30000);
         newDocument.put("subTotal", calculateMoney(cartItem));
-
+        newDocument.put("Phone", userSessionManager.getUserPhone());
+        newDocument.put("FoodName", arrFoodName);
+        newDocument.put("Quantity", arrQuantity);
+        newDocument.put("TotalPrice", arrTotalPrice);
 
         orderCollection
                 .add(newDocument)

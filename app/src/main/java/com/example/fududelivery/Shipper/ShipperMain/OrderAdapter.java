@@ -61,7 +61,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
                 intent.putExtra("ResID", order.getResID());
                 intent.putExtra("ShippingStatus", order.getShippingStatus());
 
-
                 context.startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
