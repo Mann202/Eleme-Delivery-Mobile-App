@@ -145,30 +145,7 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/LanguageTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/card_view_profile"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="@dimen/margin_standard"
-        android:text="@string/msg_language"
-        android:textColor="#828282"
-        android:fontFamily="@font/lato_bold"
-        android:textSize="18sp"/>
 
-    <Spinner
-        android:id="@+id/sn_language_customer"
-        style="@style/SpinnerStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/LanguageTitle"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:popupBackground="@drawable/spinner_background"
-        android:popupTheme="@style/AppTheme.PopupOverlay" />
 
 
     <androidx.appcompat.widget.AppCompatButton

@@ -32,6 +32,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.fududelivery.Customer.MyOrder.MainOrder;
 import com.example.fududelivery.Customer.TermAndCondition;
+import com.example.fududelivery.Customer.UpdateProfile.CustomerProfile;
 import com.example.fududelivery.ExploreTitle.Title;
 import com.example.fududelivery.Home.Korean.Korean;
 import com.example.fududelivery.Home.Search.ItemSearch;
@@ -236,7 +237,7 @@ public class Customer extends AppCompatActivity {
                 } else if (itemId == R.id.paymentManagement) {
                     intent = new Intent(Customer.this, MainOrder.class);
                 } else if (itemId == R.id.myAccount) {
-//                    intent = new Intent(Customer.this, CustomerProfile.class);
+                    intent = new Intent(Customer.this, CustomerProfile.class);
                 }
 
                 if (intent != null) {

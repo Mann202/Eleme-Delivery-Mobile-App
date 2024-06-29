@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 
+import com.example.fududelivery.Customer.UpdateProfile.CustomerProfile;
 import com.example.fududelivery.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -133,6 +134,20 @@ public class Login extends AppCompatActivity {
                                         String email = document.getString("email");
                                         String phone = document.getString("phone");
                                         String address = document.getString("address");
+
+                                        //pass data to Customer profile using intent
+                                        String userName = sessionManager.getUserName();
+                                        String userPhone = sessionManager.getUserPhone();
+                                        String userGmail = sessionManager.getUserGmail();
+
+                                        Intent intentProfile = new Intent(Login.this, CustomerProfile.class);
+
+                                        intentProfile.putExtra("userName", userName);
+                                        intentProfile.putExtra("userGmail", userGmail);
+                                        intentProfile.putExtra("userPhone", userPhone);
+
+
+                                        startActivity(intentProfile);
 
                                         sessionManager.loginUserGmail(email);
                                         sessionManager.loginUserName(name);

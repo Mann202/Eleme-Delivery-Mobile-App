@@ -3,7 +3,9 @@ package com.example.fududelivery.Customer.UpdateProfile;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -18,11 +20,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import com.bumptech.glide.Glide;
 import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.Login.Login;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,14 +36,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class CustomerProfile extends AppCompatActivity {
     FirebaseFirestore firestoreInstance;
     UserSessionManager userSessionManager;
 
-    TextView nameField;
-    TextView phoneField;
-    TextView emailField;
+    TextView profileName, profilePhoneNumber, profileEmail;
+
+    ImageView profileAvatar;
 
     private ActivityResultLauncher<Intent> editProfileLauncher;
 
@@ -50,29 +56,24 @@ public class CustomerProfile extends AppCompatActivity {
         // Initialize Firebase Firestore and session manager
         firestoreInstance = FirebaseFirestore.getInstance();
         userSessionManager = new UserSessionManager(getApplicationContext());
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         AppCompatButton logoutBtn = findViewById(R.id.logout_button);
         ImageView iv_change = findViewById(R.id.change);
         ImageView iv_back = findViewById(R.id.backIcon);
 
-        nameField = findViewById(R.id.user_name);
-        phoneField = findViewById(R.id.user_phone_number);
-        emailField = findViewById(R.id.user_email);
+        profileName = findViewById(R.id.user_name);
+        profilePhoneNumber = findViewById(R.id.user_phone_number);
+        profileEmail = findViewById(R.id.user_email);
+        profileAvatar = findViewById(R.id.user_avatar);
 
-        // Load user information
+        String userUid = userSessionManager.getUserInformation();
+
+        // Load user information from intent
         loadUserInfo();
-
-        nameField.setFocusable(false);
-        phoneField.setFocusable(false);
-        emailField.setFocusable(false);
 
         // Initialize the ActivityResultLauncher
         initEditProfileLauncher();
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.language, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = findViewById(R.id.sn_language_customer);
-        spinner.setAdapter(adapter);
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,15 +84,17 @@ public class CustomerProfile extends AppCompatActivity {
             }
         });
 
+        //after edit profile
+        loadUserInfoFromEditActivity();
+
         //edit profile click
-//        iv_change.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(CustomerProfile.this, EditProfileActivity.class);
-//                editProfileLauncher.launch(intent);
-//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//            }
-//        });
+        iv_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                passUserData();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
 
         findViewById(R.id.changepassword_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,15 +119,69 @@ public class CustomerProfile extends AppCompatActivity {
     }
 
     //load User info
-    private void loadUserInfo() {
-        String userUid = userSessionManager.getUserInformation();
+    public void loadUserInfo() {
+        Intent intent = getIntent();
 
-        nameField.setText(userSessionManager.getUserName());
-        phoneField.setText(userSessionManager.getUserPhone());
-        emailField.setText(userSessionManager.getUserGmail());
+        String nameUser = intent.getStringExtra("userName");
+        String phoneUser = intent.getStringExtra("userPhone");
+        String emailUser = intent.getStringExtra("userGmail");
 
+        profileName.setText(nameUser);
+        profilePhoneNumber.setText(phoneUser);
+        profileEmail.setText(emailUser);
     }
 
+    public void loadUserInfoFromEditActivity() {
+        Intent intent2 = getIntent();
+
+        String nameUser = intent2.getStringExtra("userName");
+        String phoneUser = intent2.getStringExtra("userPhone");
+        String emailUser = intent2.getStringExtra("userGmail");
+        String avatarUser = intent2.getStringExtra("userPhoto");
+        profileName.setText(nameUser);
+        profilePhoneNumber.setText(phoneUser);
+        profileEmail.setText(emailUser);
+        if (avatarUser != null && !avatarUser.isEmpty()) {
+            // Use a library like Glide to load the image
+            Glide.with(this).load(avatarUser).into(profileAvatar);
+        }
+    }
+
+    public void passUserData() {
+        String UID = userSessionManager.getUserInformation();
+
+        firestoreInstance.collection("Users")
+                .whereEqualTo("userUid", UID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            DocumentSnapshot document = task.getResult().getDocuments().get(0);
+
+                            String nameFromDB = document.getString("userName");
+                            String phoneFromDB = document.getString("userPhone");
+                            String emailFromDB = document.getString("userGmail");
+
+                            Intent intent = new Intent(CustomerProfile.this, EditProfileActivity.class);
+
+                            intent.putExtra("userName", nameFromDB);
+                            intent.putExtra("userPhone", phoneFromDB);
+                            intent.putExtra("userGmail", emailFromDB);
+
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(CustomerProfile.this, "User not found", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CustomerProfile.this, "Failed to fetch user data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
     // Edit information Result launcher
     private void initEditProfileLauncher() {
         editProfileLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -134,4 +191,5 @@ public class CustomerProfile extends AppCompatActivity {
             }
         });
     }
+
 }
