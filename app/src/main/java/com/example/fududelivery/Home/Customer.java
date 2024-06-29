@@ -1,8 +1,6 @@
 package com.example.fududelivery.Home;
 
 
-import static java.lang.System.exit;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -33,26 +31,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.fududelivery.Customer.CustomerProfile;
+import com.example.fududelivery.Customer.MyCart.Cart;
 import com.example.fududelivery.Customer.MyOrder.MainOrder;
 import com.example.fududelivery.Customer.TermAndCondition;
 import com.example.fududelivery.ExploreTitle.Title;
-import com.example.fududelivery.Home.Korean.Korean;
-import com.example.fududelivery.Home.Search.ItemSearch;
-import com.example.fududelivery.Home.Search.ViewAdapter_ItemSearch;
-import com.example.fududelivery.Restaurant_Home.Restaurant_Home;
-import com.example.fududelivery.Restaurant_Home.ViewAdapter_Food;
-import com.example.fududelivery.Restaurant_Home.ViewAdapter_RestaurantHome;
 import com.example.fududelivery.Home.Dessert.Dessert;
 import com.example.fududelivery.Home.Drink.Drink;
 import com.example.fududelivery.Home.FastFood.FastFood;
 import com.example.fududelivery.Home.Fruit.Fruit;
+import com.example.fududelivery.Home.Korean.Korean;
 import com.example.fududelivery.Home.Noodle.Noodle;
 import com.example.fududelivery.Home.SeaFood.SeaFood;
+import com.example.fududelivery.Home.Search.ItemSearch;
 import com.example.fududelivery.Home.Search.Search_Main;
-import com.example.fududelivery.Home.Seemore.Seemore_Main;
+import com.example.fududelivery.Home.Search.ViewAdapter_ItemSearch;
 import com.example.fududelivery.Home.Vegetable.Vegetable;
+import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
+import com.example.fududelivery.Restaurant_Home.Restaurant_Home;
+import com.example.fududelivery.Restaurant_Home.ViewAdapter_RestaurantHome;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -83,7 +80,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Customer extends AppCompatActivity {
     private static final String SHARED_PREF_KEY = "isNearbyChipChecked";
@@ -105,18 +101,24 @@ public class Customer extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean isNearbyChipChecked = false;
+    UserSessionManager userSessionManager;
+    AppCompatButton btnCart;
+    TextView tv_delivery;
 
-    @SuppressLint("CutPasteId")
+    @SuppressLint({"CutPasteId", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainhome);
         AppCompatButton settingButton = findViewById(R.id.settingButton);
+        tv_delivery = findViewById(R.id.deliveraddress_text);
+        //tv_delivery.setText(userSessionManager.getUserAddress());
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         TextInputEditText searchEditText = findViewById(R.id.findrestauranttextinput);
         mAuth = FirebaseAuth.getInstance();
         chipGroup = findViewById(R.id.chip_group_main);
         rcvExplore = findViewById(R.id.rcv_item_restaurant_list);
+        userSessionManager = new UserSessionManager(this);
         viewPager = findViewById(R.id.banner);
         viewAdapter = new ViewAdapter_Customer(this);
         viewPager.setAdapter(viewAdapter);
@@ -133,6 +135,7 @@ public class Customer extends AppCompatActivity {
         rcvExplore.setAdapter(viewAdapter_Search1);
         mainGrid = findViewById(R.id.category_list);
         dbroot = FirebaseFirestore.getInstance();
+        btnCart = findViewById(R.id.btn_cart);
         getCurrentUserAddress();
         EventChangeListener();
         ArrayList<String> arrayList = new ArrayList<>();
@@ -255,6 +258,14 @@ public class Customer extends AppCompatActivity {
                 return true;
             }
 
+        });
+
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Customer.this, Cart.class);
+                startActivity(intent);
+            }
         });
     }
 
@@ -379,7 +390,7 @@ public class Customer extends AppCompatActivity {
                 if (documentSnapshot.exists()) {
                     String userAddress = documentSnapshot.getString("address");
                     Log.d("User Address", "Address: " + userAddress);
-
+                    tv_delivery.setText(userAddress);
                     // Chuyển đổi địa chỉ thành tọa độ
                     Pair<Double, Double> userLatLong = getLatLongFromAddress(userAddress);
                     if (userLatLong != null) {

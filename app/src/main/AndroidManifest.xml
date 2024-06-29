@@ -144,6 +144,9 @@
         <activity
             android:name=".Restaurant_Home.Restaurant_Home_Detail"
             android:exported="true" />
+        <activity
+            android:name=".Home.Search.Search_Main"
+            android:exported="true" />
 
         <activity
             android:name=".Customer.Checkout.CheckOutActivity"
