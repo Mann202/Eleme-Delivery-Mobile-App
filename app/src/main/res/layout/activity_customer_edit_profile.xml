@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -15,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="47dp"
             android:scaleX="1.2"
             android:scaleY="1.2"
             android:src="@drawable/baseline_arrow_back_ios_24" />
@@ -26,29 +27,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@+id/backIcon"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/lato_bold"
-            android:text="@string/msg_profile"
+            android:text="Edit profile"
             android:textColor="@color/lightdark"
-            android:textSize="35sp" />
+            android:textSize="30sp" />
 
-        <ImageView
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ProfilePicture"
-            android:layout_below="@+id/ProfileTitle"
+            android:onClick="onImageViewClick"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="0dp"
+            android:src="@drawable/profile_picture"
+            android:layout_centerHorizontal="true"
+            app:civ_border_color="@color/secondary"
+            app:civ_border_overlay="true"
+            app:civ_border_width="5dp"/>
+
+        <Button
+            android:id="@+id/change_pic_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/img_avata"/>
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_alignStart="@id/ProfilePicture"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/ProfilePicture"
+            android:text="Change photo" />
+
+        <Button
+            android:id="@+id/remove_pic_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:background="@android:color/transparent"
+            android:text="Remove"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_below="@id/change_pic_btn"
+            android:layout_centerInParent="true"/>
 
         <TextView
             android:id="@+id/NameTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ProfilePicture"
+            android:layout_below="@id/remove_pic_btn"
             android:layout_marginStart="@dimen/margin_standard"
-            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="@dimen/margin_standard"
             android:text="@string/msg_name"
             android:textColor="#828282"
@@ -74,15 +109,12 @@
                     style="@style/EditTextLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:drawableEnd="@drawable/edit_button"
+                    android:layout_marginTop="5dp"
+                    
                     android:drawablePadding="10dp"
                     android:drawableTint="#C2CECE"
                     android:fontFamily="@font/lato_regular"
                     android:paddingRight="@dimen/padding_small"
-                    android:textColorHighlight="@color/primary"
-                    android:textColorHint="@color/whiteedt"
-                    android:textColorLink="@color/primary"
                     android:textSize="20sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
@@ -93,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/nameLayout"
             android:layout_marginStart="@dimen/margin_standard"
-            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="@dimen/margin_standard"
             android:text="@string/msg_phone_number"
             android:textColor="#828282"
@@ -119,16 +151,13 @@
                     style="@style/EditTextLogin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="30dp"
-                    android:drawableEnd="@drawable/edit_button"
+                    android:layout_marginTop="5dp"
+                    
                     android:drawablePadding="10dp"
                     android:drawableTint="#C2CECE"
                     android:fontFamily="@font/lato_regular"
-                    android:inputType="none"
+                    android:inputType="phone"
                     android:paddingRight="@dimen/padding_small"
-                    android:textColorHighlight="@color/primary"
-                    android:textColorHint="@color/whiteedt"
-                    android:textColorLink="@color/primary"
                     android:textSize="20sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
@@ -139,7 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/phoneLayout"
             android:layout_marginStart="@dimen/margin_standard"
-            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="@dimen/margin_standard"
             android:text="@string/msg_email"
             android:textColor="#828282"
@@ -165,73 +194,27 @@
                     android:id="@+id/emailField"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableEnd="@drawable/edit_button"
                     android:drawablePadding="10dp"
                     android:drawableTint="#C2CECE"
-                    android:inputType="none"
                     android:paddingRight="@dimen/padding_small"
                     android:fontFamily="@font/lato_regular"
-                    android:textSize="20sp"
-                    android:textColorHighlight="@color/primary"
-                    android:textColorHint="@color/whiteedt"
-                    android:textColorLink="@color/primary" />
+                    android:textSize="20sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
 
 
-        <TextView
-            android:id="@+id/LanguageTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/emailLayout"
-            android:layout_marginStart="@dimen/margin_standard"
-            android:layout_marginTop="@dimen/margin_standard"
-            android:layout_marginEnd="@dimen/margin_standard"
-            android:text="@string/msg_language"
-            android:textColor="#828282"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="18sp"/>
-
-        <Spinner
-            android:id="@+id/sn_language_customer"
-            style="@style/SpinnerStyle"
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LanguageTitle"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="20dp"
-            android:popupBackground="@drawable/spinner_background"
-            android:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/changepassword_button"
-            style="@style/WhiteLogoutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/logout_button"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/lato_bold"
-            android:text="@string/msg_change_password"
-            android:textSize="21sp"
-            android:textColor="@color/black" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/logout_button"
-            style="@style/WhiteLogoutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_gravity="center"
+            android:text="Update"
+            android:textColor="@color/white"
+            android:background="@drawable/save_button"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/lato_bold"
-            android:text="@string/msg_logout"
-            android:textSize="21sp"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/red" />
+            android:id="@+id/update"
+            android:elevation="20dp"/>
+
     </RelativeLayout>
 </ScrollView>

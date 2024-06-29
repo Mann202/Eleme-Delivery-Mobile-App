@@ -1,4 +1,4 @@
-package com.example.fududelivery.Customer;
+package com.example.fududelivery.Customer.Address;
 
 import android.app.Dialog;
 import android.content.Intent;

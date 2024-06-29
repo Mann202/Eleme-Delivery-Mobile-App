@@ -1,8 +1,6 @@
 package com.example.fududelivery.Home;
 
 
-import static java.lang.System.exit;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,7 +30,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.fududelivery.Customer.CustomerProfile;
 import com.example.fududelivery.Customer.MyOrder.MainOrder;
 import com.example.fududelivery.Customer.TermAndCondition;
 import com.example.fududelivery.ExploreTitle.Title;
@@ -41,7 +37,6 @@ import com.example.fududelivery.Home.Korean.Korean;
 import com.example.fududelivery.Home.Search.ItemSearch;
 import com.example.fududelivery.Home.Search.ViewAdapter_ItemSearch;
 import com.example.fududelivery.Restaurant_Home.Restaurant_Home;
-import com.example.fududelivery.Restaurant_Home.ViewAdapter_Food;
 import com.example.fududelivery.Restaurant_Home.ViewAdapter_RestaurantHome;
 import com.example.fududelivery.Home.Dessert.Dessert;
 import com.example.fududelivery.Home.Drink.Drink;
@@ -50,7 +45,6 @@ import com.example.fududelivery.Home.Fruit.Fruit;
 import com.example.fududelivery.Home.Noodle.Noodle;
 import com.example.fududelivery.Home.SeaFood.SeaFood;
 import com.example.fududelivery.Home.Search.Search_Main;
-import com.example.fududelivery.Home.Seemore.Seemore_Main;
 import com.example.fududelivery.Home.Vegetable.Vegetable;
 import com.example.fududelivery.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -83,7 +77,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Customer extends AppCompatActivity {
     private static final String SHARED_PREF_KEY = "isNearbyChipChecked";

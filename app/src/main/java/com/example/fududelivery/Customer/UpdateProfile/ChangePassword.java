@@ -1,4 +1,4 @@
-package com.example.fududelivery.Customer;
+package com.example.fududelivery.Customer.UpdateProfile;
 
 import android.os.Bundle;
 
