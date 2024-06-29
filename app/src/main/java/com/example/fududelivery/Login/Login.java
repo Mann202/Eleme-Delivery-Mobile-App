@@ -136,15 +136,15 @@ public class Login extends AppCompatActivity {
                                         String address = document.getString("address");
 
                                         //pass data to Customer profile using intent
-                                        String userName = sessionManager.getUserName();
-                                        String userPhone = sessionManager.getUserPhone();
-                                        String userGmail = sessionManager.getUserGmail();
+//                                        String userName = sessionManager.getUserName();
+//                                        String userPhone = sessionManager.getUserPhone();
+//                                        String userGmail = sessionManager.getUserGmail();
 
                                         Intent intentProfile = new Intent(Login.this, CustomerProfile.class);
 
-                                        intentProfile.putExtra("userName", userName);
-                                        intentProfile.putExtra("userGmail", userGmail);
-                                        intentProfile.putExtra("userPhone", userPhone);
+                                        intentProfile.putExtra("userName", name);
+                                        intentProfile.putExtra("userGmail", email);
+                                        intentProfile.putExtra("userPhone", phone);
 
 
                                         startActivity(intentProfile);
