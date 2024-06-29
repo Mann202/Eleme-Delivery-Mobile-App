@@ -233,6 +233,6 @@
     <string name="chinese">Chinese</string>
     <string name="vietnamese">Vietnamese</string>
     <string name="light">Light</string>
-    <string name="dark">msg_dark\n</string>
+    <string name="dark">Dark</string>
     <string name="msg_no_app_found_to_handle_call_intent">No app found to handle call intent</string>
 </resources>
