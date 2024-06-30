@@ -110,19 +110,23 @@
             android:exported="true" />
 
         <activity
-            android:name=".Customer.CustomerProfile"
+            android:name=".Customer.UpdateProfile.CustomerProfile"
             android:exported="true" />
 
         <activity
-            android:name=".Customer.ChangeEmail"
+            android:name=".Customer.UpdateProfile.ChangeEmail"
             android:exported="true" />
 
         <activity
-            android:name=".Customer.ChangePassword"
+            android:name=".Customer.UpdateProfile.ChangePassword"
             android:exported="true" />
 
         <activity
-            android:name=".Customer.ChangePhonenumber"
+            android:name=".Customer.UpdateProfile.ChangePhonenumber"
+            android:exported="true" />
+
+        <activity
+            android:name=".Customer.UpdateProfile.EditProfileActivity"
             android:exported="true" />
 
         <activity

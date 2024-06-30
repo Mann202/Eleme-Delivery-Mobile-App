@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,10 +30,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.fududelivery.Customer.MyCart.Cart;
 import com.example.fududelivery.Customer.MyOrder.MainOrder;
 import com.example.fududelivery.Customer.TermAndCondition;
+import com.example.fududelivery.Customer.UpdateProfile.CustomerProfile;
 import com.example.fududelivery.ExploreTitle.Title;
+import com.example.fududelivery.Home.Korean.Korean;
+import com.example.fududelivery.Home.Search.ItemSearch;
+import com.example.fududelivery.Home.Search.ViewAdapter_ItemSearch;
+import com.example.fududelivery.Restaurant_Home.Restaurant_Home;
+import com.example.fududelivery.Restaurant_Home.ViewAdapter_RestaurantHome;
 import com.example.fududelivery.Home.Dessert.Dessert;
 import com.example.fududelivery.Home.Drink.Drink;
 import com.example.fududelivery.Home.FastFood.FastFood;
@@ -44,7 +48,6 @@ import com.example.fududelivery.Home.Noodle.Noodle;
 import com.example.fududelivery.Home.SeaFood.SeaFood;
 import com.example.fududelivery.Home.Search.ItemSearch;
 import com.example.fududelivery.Home.Search.Search_Main;
-import com.example.fududelivery.Home.Search.ViewAdapter_ItemSearch;
 import com.example.fududelivery.Home.Vegetable.Vegetable;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
@@ -246,7 +249,7 @@ public class Customer extends AppCompatActivity {
                 } else if (itemId == R.id.paymentManagement) {
                     intent = new Intent(Customer.this, MainOrder.class);
                 } else if (itemId == R.id.myAccount) {
-//                    intent = new Intent(Customer.this, CustomerProfile.class);
+                    intent = new Intent(Customer.this, CustomerProfile.class);
                 }
 
                 if (intent != null) {

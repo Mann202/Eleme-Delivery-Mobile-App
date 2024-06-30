@@ -1,4 +1,4 @@
-package com.example.fududelivery.Customer;
+package com.example.fududelivery.Customer.Address;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import com.example.fududelivery.Customer.Model.Address;
 import com.example.fududelivery.Customer.MyCart.Cart;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
