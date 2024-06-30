@@ -19,14 +19,19 @@ public class ViewAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
     private Integer[] images = {R.drawable.food_delivery_restaurant_review_stars, R.drawable.shipping_truck_fast, R.drawable.ic_certificate, R.drawable.streamlinehq_money_cash_bill_1____________line_48_ico_yfoicjymrxa88emm};
 
-    String delicious = context.getString(R.string.msg_delicious_food);
-    String fastFood = context.getString(R.string.msg_fast_shipping);
-    String certificateFood = context.getString(R.string.msg_certificate_food);
-    String paymentOnline = context.getString(R.string.msg_payment_online);
-    private String[] quotes = {delicious, fastFood, certificateFood, paymentOnline};
+    private String[] quotes;
 
     public ViewAdapter(Context context) {
         this.context = context;
+        initializeQuotes();
+    }
+
+    private void initializeQuotes() {
+        String delicious = context.getString(R.string.msg_delicious_food);
+        String fastFood = context.getString(R.string.msg_fast_shipping);
+        String certificateFood = context.getString(R.string.msg_certificate_food);
+        String paymentOnline = context.getString(R.string.msg_payment_online);
+        quotes = new String[]{delicious, fastFood, certificateFood, paymentOnline};
     }
 
     @Override
@@ -42,7 +47,7 @@ public class ViewAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.item_getstarted, container, false);
 
         ImageView imageView = view.findViewById(R.id.image_view);
@@ -55,7 +60,6 @@ public class ViewAdapter extends PagerAdapter {
 
         return view;
     }
-
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
