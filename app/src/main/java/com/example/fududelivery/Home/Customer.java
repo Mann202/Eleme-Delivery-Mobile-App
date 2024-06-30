@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.fududelivery.Customer.CustomerProfile;
 import com.example.fududelivery.Customer.MyCart.Cart;
 import com.example.fududelivery.Customer.MyOrder.MainOrder;
 import com.example.fududelivery.Customer.TermAndCondition;
@@ -246,7 +247,7 @@ public class Customer extends AppCompatActivity {
                 } else if (itemId == R.id.paymentManagement) {
                     intent = new Intent(Customer.this, MainOrder.class);
                 } else if (itemId == R.id.myAccount) {
-//                    intent = new Intent(Customer.this, CustomerProfile.class);
+                    intent = new Intent(Customer.this, CustomerProfile.class);
                 }
 
                 if (intent != null) {
