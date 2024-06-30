@@ -108,16 +108,15 @@
 
 
         <TextView
+            android:id="@+id/receiver_phone_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0xxxxxxxxx"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="15sp"
-            android:textColor="@color/lightwhite"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
-
-            android:id="@+id/receiver_phone_number"/>
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/lato_regular"
+            android:text="0xxxxxxxxx"
+            android:textColor="@color/lightwhite"
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"

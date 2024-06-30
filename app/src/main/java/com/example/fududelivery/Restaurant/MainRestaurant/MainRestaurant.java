@@ -20,6 +20,7 @@ import com.example.fududelivery.R;
 import com.example.fududelivery.Restaurant.History.RestaurantHistory;
 import com.example.fududelivery.Restaurant.Profile.RestaurantProfile;
 import com.example.fududelivery.Restaurant.RestaurantMenu.RestaurantMenu;
+import com.example.fududelivery.Restaurant.RestaurantStatistic.RestaurantStatistic;
 import com.example.fududelivery.Service.RestaurantNotificationService;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
@@ -79,7 +80,12 @@ public class MainRestaurant extends AppCompatActivity {
                     Intent historyIntent = new Intent(MainRestaurant.this, RestaurantHistory.class);
                     startActivity(historyIntent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                } else if (item.getItemId() == R.id.statistic) {
+                    Intent historyIntent = new Intent(MainRestaurant.this, RestaurantStatistic.class);
+                    startActivity(historyIntent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
+
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
             }

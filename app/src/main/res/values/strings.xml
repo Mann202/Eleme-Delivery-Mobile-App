@@ -165,6 +165,7 @@
     <string name="msg_see_more">See more</string>
     <string name="msg_shipper_information">Shipper information</string>
     <string name="mgs_history">History</string>
+    <string name="mgs_statistic"> Statistic </string>
     <string name="msg_add_new_category">Add new Category</string>
     <string name="msg_menu">Menu</string>
     <string name="msg_please_enter_your_email_address_to_register_a_new_account">Please enter your email address to register a new account</string>

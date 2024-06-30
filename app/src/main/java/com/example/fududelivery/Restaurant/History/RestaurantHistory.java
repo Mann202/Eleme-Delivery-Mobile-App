@@ -3,6 +3,7 @@ package com.example.fududelivery.Restaurant.History;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,7 +42,13 @@ public class RestaurantHistory extends AppCompatActivity {
         userSessionManager = new UserSessionManager(getApplicationContext());
 
         swipeRefreshLayout = findViewById(R.id.refreshLayoutHistoryRestaurant);
-
+        ImageView backwardHistory = findViewById(R.id.backwardButton);
+        backwardHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         recyclerView = findViewById(R.id.recyclerViewHistoryRestaurant);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

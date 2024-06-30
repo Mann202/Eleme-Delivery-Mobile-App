@@ -40,8 +40,7 @@ public class CheckOutActivity extends AppCompatActivity {
     private FirebaseFirestore firestoreInstance;
     ImageView btnNavBack;
     AppCompatButton btnFinish;
-    TextView tvSubtotal, tvServiceFee, tvDelivery, tvTotal;
-
+    TextView tvSubtotal, tvServiceFee, tvDelivery, tvTotal, tvAddress, tvPhone, tvName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +56,12 @@ public class CheckOutActivity extends AppCompatActivity {
         // Initialize views
         recyclerView = findViewById(R.id.rv_cart_product);
         tvTotal = findViewById(R.id.txt_total_money);
+        tvAddress = findViewById(R.id.detail_address);
+        tvPhone = findViewById(R.id.receiver_phone_number);
+        tvName = findViewById(R.id.receiver_name);
+        tvName.setText(userSessionManager.getUserName());
+        tvAddress.setText(userSessionManager.getUserAddress());
+        tvPhone.setText(userSessionManager.getUserPhone());
         tvDelivery = findViewById(R.id.txt_deliveryfees_money);
         tvSubtotal = findViewById(R.id.txt_subtotal_money);
         tvServiceFee = findViewById(R.id.txt_servicefees_money);

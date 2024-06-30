@@ -77,7 +77,7 @@ public class ViewAdapter_Food extends RecyclerView.Adapter<ViewAdapter_Food.Item
         newDocument.put("FoodName", cart.getFoodName());
         newDocument.put("Price",cart.getPrice());
         newDocument.put("Quantity", "1");
-        newDocument.put("ResID", "65J8YO0kKOcxFNMLh0p95nlxlgv1");
+        newDocument.put("ResID", cart.getResID());
         newDocument.put("Selected", true);
         newDocument.put("TotalPrice", cart.getPrice());
         newDocument.put("UserID", userSessionManager.getUserInformation());
