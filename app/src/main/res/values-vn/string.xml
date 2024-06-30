@@ -181,7 +181,6 @@
     <string name="please_enter_your_new_password">Vui lòng nhập mật khẩu mới của bạn</string>
     <string name="confirm_password">Xác nhận lại mật khẩu</string>
     <string name="profile">Thông tin cá nhân</string>
-    <string name="email">Email</string>
     <string name="shaking_beef_tri_tip">Shaking Beef Tri-tip</string>
     <string name="seach_dish_name_restaurant">Tìm kiếm tên món ăn, nhà hàng</string>
     <string name="see_reviews">Xem đánh giá</string>
@@ -189,7 +188,7 @@
     <string name="language">Ngôn ngữ</string>
     <string name="change_password">Thay đổi mật khẩu</string>
     <string name="logout">Đăng xuất</string>
-    <string name="terms_of_use_text">Điều khoản sử dụng</string>
+<!--    <string name="terms_of_use_text">Điều khoản sử dụng</string>-->
     <string name="order_detail">Chi tiết đơn hàng</string>
     <string name="msg_load_again">Đăng nhập lại</string>
     <string name="msg_done">Hoàn thành</string>

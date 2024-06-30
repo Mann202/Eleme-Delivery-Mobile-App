@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.fududelivery.Customer.MyCart.Cart;
 import com.example.fududelivery.Customer.MyOrder.MainOrder;
 import com.example.fududelivery.Customer.TermAndCondition;
 import com.example.fududelivery.Customer.UpdateProfile.CustomerProfile;
