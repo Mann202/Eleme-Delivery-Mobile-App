@@ -84,9 +84,6 @@ public class CustomerProfile extends AppCompatActivity {
             }
         });
 
-        //after edit profile
-        loadUserInfoFromEditActivity();
-
         //edit profile click
         iv_change.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,24 +122,13 @@ public class CustomerProfile extends AppCompatActivity {
         String nameUser = intent.getStringExtra("userName");
         String phoneUser = intent.getStringExtra("userPhone");
         String emailUser = intent.getStringExtra("userGmail");
+        String avatarUser = intent.getStringExtra("userPhoto");
 
         profileName.setText(nameUser);
         profilePhoneNumber.setText(phoneUser);
         profileEmail.setText(emailUser);
-    }
 
-    public void loadUserInfoFromEditActivity() {
-        Intent intent2 = getIntent();
-
-        String nameUser = intent2.getStringExtra("userName");
-        String phoneUser = intent2.getStringExtra("userPhone");
-        String emailUser = intent2.getStringExtra("userGmail");
-        String avatarUser = intent2.getStringExtra("userPhoto");
-        profileName.setText(nameUser);
-        profilePhoneNumber.setText(phoneUser);
-        profileEmail.setText(emailUser);
         if (avatarUser != null && !avatarUser.isEmpty()) {
-            // Use a library like Glide to load the image
             Glide.with(this).load(avatarUser).into(profileAvatar);
         }
     }
@@ -162,12 +148,14 @@ public class CustomerProfile extends AppCompatActivity {
                             String nameFromDB = document.getString("userName");
                             String phoneFromDB = document.getString("userPhone");
                             String emailFromDB = document.getString("userGmail");
+                            String avatarfromDB = document.getString("userPhoto");
 
                             Intent intent = new Intent(CustomerProfile.this, EditProfileActivity.class);
 
                             intent.putExtra("userName", nameFromDB);
                             intent.putExtra("userPhone", phoneFromDB);
                             intent.putExtra("userGmail", emailFromDB);
+                            intent.putExtra("userPhoto", avatarfromDB);
 
                             startActivity(intent);
                         } else {

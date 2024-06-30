@@ -107,7 +107,13 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-
+        profileImage.setOnClickListener(view -> {
+            if (ContextCompat.checkSelfPermission(EditProfileActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(EditProfileActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+            } else {
+                selectImage();
+            }
+        });
 
         btn_changePic.setOnClickListener(view -> {
             if (ContextCompat.checkSelfPermission(EditProfileActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -116,7 +122,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 selectImage();
             }
         });
-
 
 
         btn_update.setOnClickListener(new View.OnClickListener() {
