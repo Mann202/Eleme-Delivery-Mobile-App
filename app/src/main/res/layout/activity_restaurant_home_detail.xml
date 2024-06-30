@@ -91,6 +91,7 @@
                                 android:layout_height="match_parent"
                                 android:background="@drawable/customer_border"
                                 android:drawableStart="@drawable/baseline_search_24"
+                                android:paddingBottom="22dp"
                                 android:drawableTint="#C2CECE"
                                 android:paddingStart="5dp"
                                 android:hint="Search dish name"

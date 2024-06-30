@@ -12,8 +12,9 @@ public class ItemDetailRestaurant {
     String orderID;
     String cusID;
     String shipperID;
-
     AppCompatButton detailBtn;
+    public ItemDetailRestaurant() {
+    }
 
     public ItemDetailRestaurant(String imageView, String dateText, String itemCountText, String nameText, String totalPriceText, String adressText, String orderID, String cusID, String shipperID) {
         this.imageView = imageView;

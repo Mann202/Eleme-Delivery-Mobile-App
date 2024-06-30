@@ -140,7 +140,9 @@
             android:name=".Customer.OrderDetail.OrderDetail"
             android:exported="false" />
 
-
+        <activity
+            android:name=".Restaurant.RestaurantStatistic.RestaurantStatistic"
+            android:exported="true" />
         <activity
             android:name=".Restaurant_Home.Restaurant_Home_Detail"
             android:exported="true" />

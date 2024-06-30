@@ -196,6 +196,7 @@
     <string name="msg_restaurant_is_preparing">Nhà hàng đang chuẩn bị...</string>
     <string name="msg_by_the_way">Tiện lợi</string>
     <string name="msg_delicious_food">Đồ ăn ngon</string>
+    <string name="mgs_statistic"> Thống kê </string>
     <string name="msg_fast_shipping">Giao hàng nhanh</string>
     <string name="msg_certificate_food">An toàn thực phẩm</string>
     <string name="msg_payment_online">Thanh toán trực tuyến</string>

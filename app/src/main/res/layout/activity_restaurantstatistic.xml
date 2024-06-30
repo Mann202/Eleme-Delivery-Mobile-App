@@ -21,7 +21,7 @@
         android:id="@+id/historyTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mgs_history"
+        android:text="@string/mgs_statistic"
         android:fontFamily="@font/lato_bold"
         android:textSize="28sp"
         android:textColor="@color/black"
@@ -30,20 +30,20 @@
         />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayoutHistoryRestaurant"
+        android:id="@+id/refreshLayoutStatistcRestaurant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/historyTitle"
         android:layout_marginTop="30dp"
         >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewHistoryRestaurant"
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/statisticRestaurant"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
-        android:id="@+id/loadingHistory"
+        android:id="@+id/loadingStatistic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

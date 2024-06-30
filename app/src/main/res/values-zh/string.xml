@@ -193,6 +193,7 @@
     <string name="msg_done">完成</string>
     <string name="msg_order_sucessfully">"订单已完成!!!"</string>
     <string name="msg_pickings_shipper...">Đ等待送货员...</string>
+    <string name="mgs_statistic"> 统计 </string>
     <string name="msg_restaurant_is_preparing">餐厅正在准备...</string>
     <string name="msg_by_the_way">方便快捷</string>
     <string name="msg_delicious_food">美味佳肴</string>
