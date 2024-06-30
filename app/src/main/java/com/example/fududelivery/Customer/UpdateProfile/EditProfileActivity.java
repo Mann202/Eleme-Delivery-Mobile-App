@@ -68,8 +68,6 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_edit_profile);
-
-
         // Initialize views
         profileImage = findViewById(R.id.ProfilePicture);
         editName = findViewById(R.id.nameField);

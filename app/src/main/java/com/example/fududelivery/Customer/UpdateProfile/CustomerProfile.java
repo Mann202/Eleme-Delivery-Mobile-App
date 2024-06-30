@@ -127,7 +127,6 @@ public class CustomerProfile extends AppCompatActivity {
         profileName.setText(nameUser);
         profilePhoneNumber.setText(phoneUser);
         profileEmail.setText(emailUser);
-
         if (avatarUser != null && !avatarUser.isEmpty()) {
             Glide.with(this).load(avatarUser).into(profileAvatar);
         }
