@@ -122,7 +122,7 @@
     <string name="msg_please_check_your_email_for_a_confirmation_link_click_the_link_in_your_email_to_active_your_account">Vui lỏng kiểm tra liên kết xác nhận trong email của bạn. Nhấp vào liên kết trong email để kích hoạt tài khoản.</string>
     <string name="msg_re_send_email_cofirmation">Gửi lại email xác nhận</string>
     <string name="msg_sort_by">Sắp xếp theo:</string>
-    <string name="msg_fast_food">Thức ăn nhanh</string>
+    <string name="msg_fast_food">TA nhanh</string>
     <string name="msg_shipper_name">Tên tài xế</string>
     <string name="msg_vehicle_information">Thông tin xe</string>
     <string name="msg_theme">Chủ đề</string>
@@ -264,4 +264,5 @@
     <string name="msg_income">Thu nhập</string>
     <string name="msg_account">Tài khoản</string>
     <string name="msg_don_t_have_any_order">Không có đơn hàng?</string>
+    <string name="msg_near_by">Gần đây</string>
 </resources>

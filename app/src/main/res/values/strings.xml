@@ -263,4 +263,5 @@
     <string name="msg_income">Income</string>
     <string name="msg_account">Account</string>
     <string name="msg_don_t_have_any_order">Don\'t have any order?</string>
+    <string name="msg_near_by">Near by</string>
 </resources>
