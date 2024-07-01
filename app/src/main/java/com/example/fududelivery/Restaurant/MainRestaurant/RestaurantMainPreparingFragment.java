@@ -99,7 +99,7 @@ public class RestaurantMainPreparingFragment extends Fragment {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.isEmpty()) {
-                    view.findViewById(R.id.loadingDoneRestaurant).setVisibility(View.INVISIBLE);
+                    view.findViewById(R.id.loadingPreparingRestaurant).setVisibility(View.INVISIBLE);
                     LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
                     TextView noOrdersTextView = view.findViewById(R.id.noOrdersTextView);
                     loadMoreContainer.setVisibility(View.VISIBLE);

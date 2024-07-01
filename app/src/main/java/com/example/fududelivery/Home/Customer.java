@@ -31,17 +31,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.fududelivery.Customer.CustomerProfile;
 import com.example.fududelivery.Customer.MyCart.Cart;
 import com.example.fududelivery.Customer.MyOrder.MainOrder;
 import com.example.fududelivery.Customer.TermAndCondition;
 import com.example.fududelivery.Customer.UpdateProfile.CustomerProfile;
 import com.example.fududelivery.ExploreTitle.Title;
-import com.example.fududelivery.Home.Korean.Korean;
-import com.example.fududelivery.Home.Search.ItemSearch;
-import com.example.fududelivery.Home.Search.ViewAdapter_ItemSearch;
-import com.example.fududelivery.Restaurant_Home.Restaurant_Home;
-import com.example.fududelivery.Restaurant_Home.ViewAdapter_RestaurantHome;
 import com.example.fududelivery.Home.Dessert.Dessert;
 import com.example.fududelivery.Home.Drink.Drink;
 import com.example.fududelivery.Home.FastFood.FastFood;
@@ -51,6 +45,7 @@ import com.example.fududelivery.Home.Noodle.Noodle;
 import com.example.fududelivery.Home.SeaFood.SeaFood;
 import com.example.fududelivery.Home.Search.ItemSearch;
 import com.example.fududelivery.Home.Search.Search_Main;
+import com.example.fududelivery.Home.Search.ViewAdapter_ItemSearch;
 import com.example.fududelivery.Home.Vegetable.Vegetable;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
@@ -298,7 +293,6 @@ public class Customer extends AppCompatActivity {
                     return;
                 }
 
-                // Tạo một danh sách tạm để lưu trữ các dữ liệu mới
                 ArrayList<ItemSearch> tempItems = new ArrayList<>();
 
                 for (DocumentChange dc : value.getDocumentChanges()) {
@@ -307,10 +301,8 @@ public class Customer extends AppCompatActivity {
                     }
                 }
 
-                // Thêm tất cả các dữ liệu mới vào mRestaurant
                 mRestaurant.addAll(tempItems);
 
-                // Thông báo cho adapter cập nhật dữ liệu
                 viewAdapter_Search1.notifyDataSetChanged();
             }
         });
