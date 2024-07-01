@@ -103,7 +103,7 @@ public class RestaurantMainPreparingFragment extends Fragment {
                     LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
                     TextView noOrdersTextView = view.findViewById(R.id.noOrdersTextView);
                     loadMoreContainer.setVisibility(View.VISIBLE);
-                    noOrdersTextView.setText("Don't have any order");
+                    noOrdersTextView.setText(R.string.msg_don_t_have_any_order);
                 } else {
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         String orderId = document.getId();

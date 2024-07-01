@@ -1,47 +1,41 @@
 package com.example.fududelivery.Customer.UpdateProfile;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.Button;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.fududelivery.Customer.Address.AddAddressActivity;
+import com.example.fududelivery.Home.Customer;
 import com.example.fududelivery.Login.UserSessionManager;
 import com.example.fududelivery.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.util.HashMap;
+import java.util.Locale;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -68,6 +62,7 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_edit_profile);
+        userSessionManager = new UserSessionManager(getApplicationContext());
 
 
         // Initialize views
@@ -75,6 +70,10 @@ public class EditProfileActivity extends AppCompatActivity {
         editName = findViewById(R.id.nameField);
         editPhoneNumber = findViewById(R.id.phoneField);
         editEmail = findViewById(R.id.emailField);
+
+        nameUser = userSessionManager.getUserName();
+        emailUser = userSessionManager.getUserGmail();
+        phoneUser = userSessionManager.getUserPhone();
 
         //button
         btn_update = findViewById(R.id.update);
@@ -85,7 +84,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         // Initialize Firebase Firestore, Storage and session manager
         firestoreInstance = FirebaseFirestore.getInstance();
-        userSessionManager = new UserSessionManager(getApplicationContext());
         userUid = userSessionManager.getUserInformation();
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
@@ -99,6 +97,25 @@ public class EditProfileActivity extends AppCompatActivity {
         Spinner spinner = findViewById(R.id.sn_language_customer);
         spinner.setAdapter(adapter);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedLanguage = parent.getItemAtPosition(position).toString();
+                switch (selectedLanguage) {
+                    case "Chinese":
+                        setLocale("zh");
+                        break;
+                    case "Vietnamese":
+                        setLocale("vn");
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         backwardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +125,6 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
 
-
         btn_changePic.setOnClickListener(view -> {
             if (ContextCompat.checkSelfPermission(EditProfileActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(EditProfileActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
@@ -116,7 +132,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 selectImage();
             }
         });
-
 
 
         btn_update.setOnClickListener(new View.OnClickListener() {
@@ -140,57 +155,49 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
 
                 // Update Firestore
-                firestoreInstance.collection("Users")
-                        .whereEqualTo("userUid", userSessionManager.getUserInformation())
-                        .get()
-                        .addOnSuccessListener(queryDocumentSnapshots -> {
-                            if (!queryDocumentSnapshots.isEmpty()) {
-                                queryDocumentSnapshots.getDocuments().get(0).getReference()
-                                        .update("userName", newName, "userGmail", newEmail, "userPhone", newPhone, "userPhoto", imageUrl)
-                                        .addOnSuccessListener(aVoid -> {
-                                            // Update email in Firebase Authentication
-                                            if (user != null) {
-                                                user.updateEmail(newEmail)
-                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    // Update session manager
-                                                                    userSessionManager.loginUserName(newName);
-                                                                    userSessionManager.loginUserGmail(newEmail);
-                                                                    userSessionManager.loginUserPhone(newPhone);
+                firestoreInstance.collection("Users").whereEqualTo("userUid", userSessionManager.getUserInformation()).get().addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        queryDocumentSnapshots.getDocuments().get(0).getReference().update("userName", newName, "userGmail", newEmail, "userPhone", newPhone, "userPhoto", imageUrl).addOnSuccessListener(aVoid -> {
+                            // Update email in Firebase Authentication
+                            if (user != null) {
+                                user.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            // Update session manager
+                                            userSessionManager.loginUserName(newName);
+                                            userSessionManager.loginUserGmail(newEmail);
+                                            userSessionManager.loginUserPhone(newPhone);
 
-                                                                    //pass data to Customer profile using intent
-                                                                    Intent intentProfile = new Intent(EditProfileActivity.this, CustomerProfile.class);
+                                            //pass data to Customer profile using intent
+                                            Intent intentProfile = new Intent(EditProfileActivity.this, CustomerProfile.class);
 
-                                                                    intentProfile.putExtra("userName", newName);
-                                                                    intentProfile.putExtra("userGmail", newEmail);
-                                                                    intentProfile.putExtra("userPhone", newPhone);
-                                                                    intentProfile.putExtra("userPhoto", imageUrl);
+                                            intentProfile.putExtra("userName", newName);
+                                            intentProfile.putExtra("userGmail", newEmail);
+                                            intentProfile.putExtra("userPhone", newPhone);
+                                            intentProfile.putExtra("userPhoto", imageUrl);
 
-                                                                    startActivity(intentProfile);
+                                            startActivity(intentProfile);
 
 
-                                                                    Toast.makeText(EditProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
-                                                                    setResult(RESULT_OK);
-                                                                    finish();
-                                                                } else {
-                                                                    Toast.makeText(EditProfileActivity.this, "Failed to update email in authentication", Toast.LENGTH_SHORT).show();
-                                                                }
-                                                            }
-                                                        });
-                                            }
-                                        })
-                                        .addOnFailureListener(e -> {
-                                            Toast.makeText(EditProfileActivity.this, "Failed to update profile in Firestore", Toast.LENGTH_SHORT).show();
-                                        });
-                            } else {
-                                Toast.makeText(EditProfileActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(EditProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                                            setResult(RESULT_OK);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(EditProfileActivity.this, "Failed to update email in authentication", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(EditProfileActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(EditProfileActivity.this, "Failed to update profile in Firestore", Toast.LENGTH_SHORT).show();
                         });
+                    } else {
+                        Toast.makeText(EditProfileActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(EditProfileActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                });
             }
         });
 
@@ -218,22 +225,17 @@ public class EditProfileActivity extends AppCompatActivity {
     private void uploadImageToFirebase() {
         if (selectedImageUri != null) {
             StorageReference imageReference = storageReference.child("profileImages/" + userUid + ".jpg");
-            imageReference.putFile(selectedImageUri)
-                    .addOnSuccessListener(taskSnapshot -> imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                        imageUrl = uri.toString();
-                        Toast.makeText(EditProfileActivity.this, "Profile photo updated", Toast.LENGTH_SHORT).show();
-                    }))
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(EditProfileActivity.this, "Failed to upload profile photo", Toast.LENGTH_SHORT).show();
-                    });
+            imageReference.putFile(selectedImageUri).addOnSuccessListener(taskSnapshot -> imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                imageUrl = uri.toString();
+                Toast.makeText(EditProfileActivity.this, "Profile photo updated", Toast.LENGTH_SHORT).show();
+            })).addOnFailureListener(e -> {
+                Toast.makeText(EditProfileActivity.this, "Failed to upload profile photo", Toast.LENGTH_SHORT).show();
+            });
         }
     }
-    public void showData(){
-        Intent intent = getIntent();
 
-        nameUser = intent.getStringExtra("userName");
-        emailUser = intent.getStringExtra("userGmail");
-        phoneUser = intent.getStringExtra("userPhone");
+    public void showData() {
+        Intent intent = getIntent();
         String photoUrl = intent.getStringExtra("userPhoto");
 
         editName.setText(nameUser);
@@ -242,5 +244,19 @@ public class EditProfileActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(photoUrl)) {
             Glide.with(this).load(photoUrl).into(profileImage);
         }
+    }
+
+    private void setLocale(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Resources resources = getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        Intent intent = new Intent(this, Customer.class);
+        startActivity(intent);
+        this.finish();
     }
 }

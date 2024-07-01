@@ -38,7 +38,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="12dp"
                             android:fontFamily="@font/lato_light"
-                            android:text="Delivery address:"
+                            android:text="@string/msg_delivery_address"
                             android:textColor="@color/white"
                             android:textFontWeight="1000"
                             android:textStyle="normal" />
@@ -124,9 +124,9 @@
                     android:layout_marginTop="-70dp"
                     android:layout_marginEnd="20dp"
                     android:fontFamily="@font/lato_bold"
-                    android:text="Category"
+                    android:text="@string/msg_category"
                     android:textColor="@color/black"
-                    android:textSize="22sp"></TextView>
+                    android:textSize="22sp" />
 
                 <GridLayout
                     android:id="@+id/category_list"
@@ -166,17 +166,16 @@
                                 android:layout_height="50dp"
                                 android:layout_gravity="center_horizontal"
                                 android:paddingTop="5dp"
-                                android:src="@drawable/img_1"></ImageView>
+                                android:src="@drawable/img_1" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:fontFamily="@font/lato_regular"
-                                android:text="Fast food"
+                                android:text="@string/msg_fast_food"
                                 android:textColor="@color/black"
-                                android:textSize="13sp"
-                                tools:ignore="HardcodedText"></TextView>
+                                android:textSize="13sp" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -211,10 +210,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Drink"
+                                android:text="@string/msg_drink"
                                 android:textColor="@color/black"
-                                android:textSize="13sp"
-                                tools:ignore="HardcodedText"></TextView>
+                                android:textSize="13sp" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -249,9 +247,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Healthy"
+                                android:text="@string/msg_healthy"
                                 android:textColor="@color/black"
-                                android:textSize="13sp"></TextView>
+                                android:textSize="13sp"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -286,9 +284,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Noodle"
+                                android:text="@string/msg_noodle"
                                 android:textColor="@color/black"
-                                android:textSize="13sp"></TextView>
+                                android:textSize="13sp" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -321,9 +319,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Seafood"
+                                android:text="@string/msg_seafood"
                                 android:textColor="@color/black"
-                                android:textSize="13sp"></TextView>
+                                android:textSize="13sp" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -356,9 +354,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Korean"
+                                android:text="@string/msg_korean"
                                 android:textColor="@color/black"
-                                android:textSize="13sp"></TextView>
+                                android:textSize="13sp" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -391,9 +389,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Fruits"
+                                android:text="@string/msg_fruits"
                                 android:textColor="@color/black"
-                                android:textSize="13sp"></TextView>
+                                android:textSize="13sp"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -426,9 +424,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Desserts"
+                                android:text="@string/msg_desserts"
                                 android:textColor="@color/black"
-                                android:textSize="13sp"></TextView>
+                                android:textSize="13sp" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </GridLayout>
@@ -440,9 +438,9 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/lato_bold"
-                    android:text="Explore more"
+                    android:text="@string/msg_explore_more"
                     android:textColor="@color/black"
-                    android:textSize="22sp"></TextView>
+                    android:textSize="22sp" />
 
                 <HorizontalScrollView
                     android:id="@+id/scroll_exp"

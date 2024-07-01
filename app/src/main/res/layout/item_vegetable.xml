@@ -39,7 +39,7 @@
                 android:id="@+id/tv_type_vg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Break"
+                android:text="@string/msg_break"
                 android:textSize="14sp"
                 android:textColor="@color/darkgrey"
                 android:layout_marginStart="5dp"

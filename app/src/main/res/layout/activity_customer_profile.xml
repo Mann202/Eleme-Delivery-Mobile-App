@@ -32,7 +32,7 @@
             android:id="@+id/my_profile"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
-            android:text="My profile"
+            android:text="@string/msg_my_profile"
             android:textStyle="bold"
             android:fontFamily="@font/lato_regular"
             android:textColor="@color/black"
@@ -45,7 +45,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Personal details"
+        android:text="@string/msg_personal_details"
         android:textSize="18sp"
         android:textColor="@color/black"
         android:fontFamily="@font/lato_regular"

@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/history"
         android:icon="@drawable/baseline_history_24"
-        android:title="History" />
+        android:title="@string/msg_history" />
 
     <item android:id="@+id/menu"
         android:icon="@drawable/baseline_menu_24"
-        android:title="Menu"/>
+        android:title="@string/msg_menu"/>
 
     <item android:id="@+id/statistic"
         android:icon="@drawable/baseline_bar_chart_24"
-        android:title="Statistic"/>
+        android:title="@string/msg_statistic"/>
 
     <item android:id="@+id/profile"
         android:icon="@drawable/baseline_person_24"
-        android:title="Profile"/>
+        android:title="@string/msg_profile"/>
 </menu>

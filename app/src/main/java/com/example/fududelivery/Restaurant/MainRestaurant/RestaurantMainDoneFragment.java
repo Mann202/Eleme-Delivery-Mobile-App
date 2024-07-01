@@ -102,7 +102,7 @@ public class RestaurantMainDoneFragment extends Fragment {
 
     private void loadData() {
         firestoreInstance.collection("Orders").whereEqualTo("ResID", userSessionManager.getUserInformation()).whereEqualTo("ResStatus", "Done").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
+            @SuppressLint({"NotifyDataSetChanged"})
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.isEmpty()) {
@@ -110,7 +110,7 @@ public class RestaurantMainDoneFragment extends Fragment {
                     LinearLayoutCompat loadMoreContainer = view.findViewById(R.id.ll_load_again);
                     TextView noOrdersTextView = view.findViewById(R.id.noOrdersTextView);
                     loadMoreContainer.setVisibility(View.VISIBLE);
-                    noOrdersTextView.setText("Don't have any order");
+                    noOrdersTextView.setText(R.string.msg_don_t_have_any_order);
                 } else {
                     restaurantList.clear(); // Clear the list before adding new items
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
