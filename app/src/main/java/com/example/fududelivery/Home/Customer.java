@@ -140,15 +140,15 @@ public class Customer extends AppCompatActivity {
         getCurrentUserAddress();
         EventChangeListener();
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getString(R.string.msg_near_by));
-        arrayList.add(getString(R.string.msg_fast_food));
-        arrayList.add(getString(R.string.msg_seafood));
-        arrayList.add(getString(R.string.msg_healthy));
-        arrayList.add(getString(R.string.msg_fruits));
-        arrayList.add(getString(R.string.msg_desserts));
-        arrayList.add(getString(R.string.msg_korean));
-        arrayList.add(getString(R.string.msg_noodle));
-        arrayList.add(getString(R.string.msg_drink));
+        arrayList.add("Fast Food");
+        arrayList.add("Fast food");
+        arrayList.add("Seafood");
+        arrayList.add("Healthy");
+        arrayList.add("Fruits");
+        arrayList.add("Desserts");
+        arrayList.add("Korean");
+        arrayList.add("Noodle");
+        arrayList.add("Drink");
         Random random = new Random();
         for (String option : arrayList) {
             Chip chip = (Chip) LayoutInflater.from(Customer.this).inflate(R.layout.chip_layout, null);
